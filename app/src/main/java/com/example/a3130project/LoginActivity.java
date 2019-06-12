@@ -2,6 +2,8 @@ package com.example.a3130project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -17,7 +19,7 @@ public class LoginActivity extends AppCompatActivity
 	private              FirebaseAuth mAuth;
 
 	public EditText logEmail, logPassword;
-	public Button signIn;
+	public Button signIn, newUser;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -27,8 +29,29 @@ public class LoginActivity extends AppCompatActivity
 
 		logEmail = findViewById(R.id.email);
 		logPassword = findViewById(R.id.password);
-		signIn = findViewById(R.id.button);
+		signIn = findViewById(R.id.signIn);
+		newUser = findViewById(R.id.newUser);
+
+		newUser.setOnClickListener(new onClicker());
+
+
 		mAuth = FirebaseAuth.getInstance();
+	}
+
+	public class onClicker implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			launchRegistration();
+		}
+	}
+
+	public void launchRegistration()
+	{
+
+		Intent intent = new Intent(this, RegistrationActivity.class);
+		startActivity(intent);
 	}
 
 	@Override
@@ -43,6 +66,10 @@ public class LoginActivity extends AppCompatActivity
 
 	}
 
+	private void validation(String email, String password)
+	{
+
+	}
 	private void updateUI(FirebaseUser user)
 	{
 		/*hideProgressDialog();
