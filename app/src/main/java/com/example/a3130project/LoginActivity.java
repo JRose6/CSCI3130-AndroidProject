@@ -54,6 +54,13 @@ public class LoginActivity extends AppCompatActivity
 		startActivity(intent);
 	}
 
+
+
+
+
+
+
+
 	@Override
 	public void onStart()
 	{
