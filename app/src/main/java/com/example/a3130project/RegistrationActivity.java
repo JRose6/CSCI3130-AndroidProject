@@ -4,11 +4,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -22,12 +24,18 @@ public class RegistrationActivity extends AppCompatActivity
 	private Button       register;
 	private FirebaseAuth firebaseAuth;
 
+	public TextView passValidator, emailValidator;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		UIViews();
+
+		passValidator = findViewById(R.id.passwordValid);
+		emailValidator = findViewById(R.id.emailValid);
 
 		firebaseAuth = firebaseAuth.getInstance();
 
@@ -36,6 +44,35 @@ public class RegistrationActivity extends AppCompatActivity
 			@Override
 			public void onClick(View v)
 			{
+				String passw = pass.getText().toString();
+				String em = email.getText().toString();
+				int passRules = PasswordValidator.validPassword(passw);
+				int emailRules = EmailValidator.getEmail(em);
+				if(passRules==0){
+					passValidator.setText("NOT STRONG");
+					passValidator.setTextColor(Color.RED);
+				}
+				if(emailRules==0){
+					emailValidator.setText("Invalid email format");
+					emailValidator.setTextColor(Color.RED);
+
+				}
+				if (passRules < 5 && passRules>0) {
+
+					passValidator.setText("NOT STRONG");
+					passValidator.setTextColor(Color.RED);
+
+				}
+				if (passRules == 5) {
+					passValidator.setText("STRONG");
+					passValidator.setTextColor(Color.GREEN);
+
+				}
+				if (emailRules==1){
+					emailValidator.setText("VALID EMAIL");
+					emailValidator.setTextColor(Color.GREEN);
+
+				}
 				if (validateCheck())
 				{
 					String emailInput = email.getText().toString();

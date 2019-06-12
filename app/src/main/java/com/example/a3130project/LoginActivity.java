@@ -25,7 +25,6 @@ public class LoginActivity extends AppCompatActivity
 
 //=======
 	public TextView passValidator, emailValidator;
-//>>>>>>> Stashed changes
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -55,21 +54,26 @@ public class LoginActivity extends AppCompatActivity
 			int emailRules = EmailValidator.getEmail(email);
 			if(passRules==0){
 				passValidator.setText("NOT STRONG");
+				passValidator.setTextColor(Color.RED);
 			}
 			if(emailRules==0){
 				emailValidator.setText("Invalid email format");
+				emailValidator.setTextColor(Color.RED);
+
 			}
 			if (passRules < 5 && passRules>0) {
 
 				passValidator.setText("NOT STRONG");
-			}
+                passValidator.setTextColor(Color.RED);
+
+            }
 			if (passRules == 5) {
 				passValidator.setText("STRONG");
 				passValidator.setTextColor(Color.GREEN);
 
 			}
 			if (emailRules==1){
-				emailValidator.setText("Valid email!");
+				emailValidator.setText("VALID EMAIL");
 				emailValidator.setTextColor(Color.GREEN);
 
 			}
