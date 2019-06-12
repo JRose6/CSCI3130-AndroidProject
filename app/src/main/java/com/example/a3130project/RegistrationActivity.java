@@ -95,7 +95,6 @@ public class RegistrationActivity extends AppCompatActivity
 			Intent intent = new Intent(this, LoginActivity.class);
 			Toast.makeText(this, "new user created", Toast.LENGTH_LONG).show();
 			startActivity(intent);
-
 		}
 		return result;
 	}
