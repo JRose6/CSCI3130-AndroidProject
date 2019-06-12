@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import android.os.Bundle;
 
 public class LoginActivity extends AppCompatActivity
@@ -31,20 +28,38 @@ public class LoginActivity extends AppCompatActivity
 		signIn = findViewById(R.id.signIn);
 		newUser = findViewById(R.id.newUser);
 
+		signIn.setOnClickListener(new onClicker());
 		newUser.setOnClickListener(new onClicker());
 
 
 	}
+
+
+
+
 
 	public class onClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			launchRegistration();
+			switch(v.getId())
+			{
+			case R.id.newUser:
+				launchRegistration();
+				break;
+			case R.id.signIn:
+				profileLoggingIn();
+			}
+
 		}
 	}
 
+	public void profileLoggingIn()
+	{
+		Intent intent = new Intent(this, MainProfileLoadActivity.class);
+		startActivity(intent);
+	}
 	public void launchRegistration()
 	{
 
