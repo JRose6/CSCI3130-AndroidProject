@@ -1,16 +1,21 @@
 package com.example.a3130project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.PopupMenu;
+import android.widget.Toast;
 
 import com.example.a3130project.model.Profile;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -21,8 +26,10 @@ public class EditProfileActivity extends AppCompatActivity
 	private Intent            intent;
 	private Profile           profile;
 
+	private Button update;
+
 	private DocumentReference profileRef;
-	//private FirebaseAuth      mAuth;
+	private FirebaseAuth      mAuth;
 
 
 
@@ -38,8 +45,11 @@ public class EditProfileActivity extends AppCompatActivity
 		firstName = findViewById(R.id.firstName);
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);
-
+		update = findViewById(R.id.update);
 		database = FirebaseFirestore.getInstance();
+
+		mAuth = FirebaseAuth.getInstance();
+
 
 
 
@@ -50,12 +60,38 @@ public class EditProfileActivity extends AppCompatActivity
 		lastName.setText(profile.lastName);
 		age.setText(profile.age);
 
+		update.setOnClickListener(new OnClicker());
+
 
 
 	}
 
-	public void loadProfile(View view)
+	public class OnClicker implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			updateProfile();
+		}
+	}
+
+	public void updateProfile()
 	{
 
+		profileRef = database.collection("profiles").document(mAuth.getUid());
+
+		profile.firstName = firstName.getText().toString();
+		profile.lastName = lastName.getText().toString();
+		profile.age = age.getText().toString();
+
+		profileRef.set(profile)
+				.addOnFailureListener(new OnFailureListener()
+				{
+					@Override
+					public void onFailure(@NonNull Exception e)
+					{
+						Toast.makeText(EditProfileActivity.this, "Failed to update fields", Toast.LENGTH_SHORT).show();
+					}
+				});
 	}
 }
