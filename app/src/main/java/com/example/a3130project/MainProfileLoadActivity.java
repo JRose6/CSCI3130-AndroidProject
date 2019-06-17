@@ -73,7 +73,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			    if(snap.exists())
 			    {
 				    profile = snap.toObject(Profile.class);
-				    Toast.makeText(MainProfileLoadActivity.this, profile.toString(), Toast.LENGTH_SHORT).show();
+				    //Toast.makeText(MainProfileLoadActivity.this, profile.toString(), Toast.LENGTH_SHORT).show();
 			    }
 			    else{
 				    Toast.makeText(MainProfileLoadActivity.this, "This profile doesn't fucking exist", Toast.LENGTH_SHORT).show();

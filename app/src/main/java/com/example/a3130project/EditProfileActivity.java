@@ -46,6 +46,10 @@ public class EditProfileActivity extends AppCompatActivity
 		intent = getIntent();
 		profile = (Profile) intent.getSerializableExtra("userProfile");
 
+		firstName.setText(profile.firstName);
+		lastName.setText(profile.lastName);
+		age.setText(profile.age);
+
 
 
 	}
