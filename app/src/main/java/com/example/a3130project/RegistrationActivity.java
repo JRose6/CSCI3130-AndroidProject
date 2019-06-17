@@ -19,6 +19,9 @@ import com.google.android.gms.tasks.Task;
 import com.example.a3130project.MainActivity;
 
 import com.example.a3130project.model.Profile;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -29,6 +32,7 @@ public class RegistrationActivity extends AppCompatActivity
 {
 	private EditText firstName, lastName, email, pass, age, allergies, medication;
 	private Button register;
+	private FirebaseAuth mAuth;
 
 	FirebaseFirestore database;
 
@@ -46,11 +50,8 @@ public class RegistrationActivity extends AppCompatActivity
 		age = findViewById(R.id.age);
 		//allergies = findViewById(R.id.allergies);
 		//medication = findViewById(R.id.medication);
-
-
-
+		mAuth = FirebaseAuth.getInstance();
 		database = FirebaseFirestore.getInstance();
-
 		register.setOnClickListener(new OnClicker());
 
 
@@ -60,28 +61,50 @@ public class RegistrationActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
+			mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+					.addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>()
+					{
+						@Override
+						public void onComplete(@NonNull Task<AuthResult> task)
+						{
+							if (task.isSuccessful())
+							{
 
-			// TODO: error check same email isn't used twice
+								FirebaseUser user = mAuth.getCurrentUser();
 
-			Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText().toString(),email.getText().toString());
+								Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText()
+										.toString(), email.getText().toString());
 
-			DocumentReference ref = database.collection("profiles").document(email.getText().toString());
+								DocumentReference ref = database.collection("profiles").document(user.getUid());
 
-			//creates an auto ID
-			prof.id = ref.getId();
+								//creates an auto ID
+								prof.id = ref.getId();
 
-			ref.set(prof).addOnFailureListener(new OnFailureListener() {
-				@Override
-				public void onFailure(@NonNull Exception e) {
-					Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT)
-							.show();
-				}
-			});
+								ref.set(prof).addOnFailureListener(new OnFailureListener()
+								{
+									@Override
+									public void onFailure(@NonNull Exception e)
+									{
+										Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT)
+												.show();
+									}
+								});
+							}
+							else
+							{
+								// If sign in fails, display a message to the user.
+								Toast.makeText(RegistrationActivity.this, "Authentication failed."
+										+ task.getException(), Toast.LENGTH_SHORT).show();
+							}
 
-			//Finishes the activity and return to the parent one.
-			finish();
-		}
 
+							// TODO: error check same email isn't used twice
+
+							//Finishes the activity and return to the parent one.
+							finish();
+						}
+						});
+					}
 	}
 
 	private Boolean validateCheck()

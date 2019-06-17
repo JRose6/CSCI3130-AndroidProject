@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -31,6 +32,8 @@ public class LoginActivity extends AppCompatActivity
 
 	public EditText logEmail, logPassword;
 	public Button signIn, newUser;
+
+	private FirebaseAuth mAuth;
 
 	private FirebaseFirestore database;
 	private FirestoreRecyclerAdapter adapter;
@@ -47,11 +50,8 @@ public class LoginActivity extends AppCompatActivity
 		newUser = findViewById(R.id.newUser);
 
 		database = FirebaseFirestore.getInstance();
+		mAuth = FirebaseAuth.getInstance();
 
-		Map<String, Object> profileMap = new HashMap<>();
-
-
-		database.collection("profiles");
 
 		signIn.setOnClickListener(new onClicker());
 		newUser.setOnClickListener(new onClicker());
