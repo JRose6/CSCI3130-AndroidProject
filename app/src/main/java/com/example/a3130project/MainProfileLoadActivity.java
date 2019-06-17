@@ -1,64 +1,94 @@
 package com.example.a3130project;
 
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
-import com.example.a3130project.model.Profile;
+import com.example.a3130project.model.Medication;
+import com.example.a3130project.viewholder.MedicationViewHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
+import static com.example.a3130project.MainActivity.logg;
+
 public class MainProfileLoadActivity extends AppCompatActivity
 {
+	private RecyclerView             recyclerViewMedication;
+	private FirebaseFirestore        database;
+	private FirestoreRecyclerAdapter adapterBusiness;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
+
+		recyclerViewMedication = findViewById(R.id.medicationList);
+		database = FirebaseFirestore.getInstance();
+		logg("onCreate()", "Database...");
+		adapterBusiness = setUpMedicationAdapter(database);
+		setUpRecyclerView(recyclerViewMedication, adapterBusiness);
 	}
 
-	// Creates a Firestore adapter to be used with a Recycler view.
-	// We will see adapter in more details after the midterm
-	// More info on this: https://github.com/firebase/FirebaseUI-Android/blob/master/firestore/README.md
-	private FirestoreRecyclerAdapter setUpProfileAdapter(FirebaseFirestore db) {
-		Query query = db.collection("profiles").orderBy("name").limit(50);
-		FirestoreRecyclerOptions<Profile> options = new FirestoreRecyclerOptions.Builder<Profile>()
-				.setQuery(query, Profile.class)
+	// Connect the recycler view to the medication view holder & the FireStore adapter
+	private void setUpRecyclerView(RecyclerView rv, FirestoreRecyclerAdapter adapter)
+	{
+		RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
+		rv.setLayoutManager(manager);
+		rv.setItemAnimator(new DefaultItemAnimator());
+		rv.setAdapter(adapter);
+	}
+
+	// Creates a Firestore adapter to populate a Recycler view.
+	private FirestoreRecyclerAdapter setUpMedicationAdapter(FirebaseFirestore db)
+	{
+		// TODO: Query the Database for only the 'medications' that are listed in the user's profile
+		Query query = db.collection("medications").orderBy("name").limit(50);
+		FirestoreRecyclerOptions<Medication> options
+				= new FirestoreRecyclerOptions.Builder<Medication>().setQuery(query, Medication.class)
 				.build();
 
-		FirestoreRecyclerAdapter adapter = new FirestoreRecyclerAdapter<Profile, ProfileViewHolder>(options) {
-			//For each item in the database connect it to the view
+		FirestoreRecyclerAdapter adapter
+				= new FirestoreRecyclerAdapter<Medication, MedicationViewHolder>(options)
+		{
+			// Connect each medication item in the database to the view
 			@Override
-			public void onBindViewHolder(ProfileViewHolder holder, int position, final Profile model) {
+			public void onBindViewHolder(MedicationViewHolder holder,
+			                             int position,
+			                             final Medication model)
+			{
 				holder.name.setText(model.name);
-				holder.email.setText(model.email);
+				holder.info.setText(model.info);
 
-				//Set the on click for the button
-				//I find this ugly :) but it is how you will see in most examples
-				// You CAN use lambadas for the listeners
-				// e.g. setOnClickListener ((View v) -> ....
-				holder.detailsButton.setOnClickListener(new View.OnClickListener() {
+				holder.buttonDetails.setOnClickListener(new View.OnClickListener()
+				{
 					@Override
-					public void onClick(View v) {
-						Intent intent = new Intent(MainActivity.this, ProfileDetail.class);
+					public void onClick(View v)
+					{
+						/* TODO: Make a 'details' activity for the selected medication
+						Intent intent = new Intent(MainProfileLoadActivity.this, MedicationDetail.class);
 						intent.putExtra("business", model);
-						startActivity(intent);
+						startActivity(intent);*/
 					}
 				});
 			}
 
 			@Override
-			public ProfileViewHolder onCreateViewHolder(ViewGroup group, int i) {
+			public MedicationViewHolder onCreateViewHolder(ViewGroup group, int i)
+			{
 				View view = LayoutInflater.from(group.getContext())
-						.inflate(R.layout.business_entry, group, false);
-				return new ProfileViewHolder(view);
+						.inflate(R.layout.medication_entry, group, false);
+				logg("xxxxxxxxxx MedicationViewHolder()", "GROUP: " + group);
+				return new MedicationViewHolder(view);
 			}
 		};
 		return adapter;

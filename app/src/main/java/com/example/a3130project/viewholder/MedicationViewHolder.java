@@ -1,6 +1,5 @@
 package com.example.a3130project.viewholder;
 
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -9,17 +8,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3130project.R;
 
-public class MedicationViewHolder extends RecyclerView.ViewHolder  {
+public class MedicationViewHolder extends RecyclerView.ViewHolder
+{
 
 	public TextView name;
-	public TextView email;
-	public Button detailsButton;
+	public TextView info;
+	public Button   buttonDetails;
 
-	public BusinessViewHolder(View view)
+	public MedicationViewHolder(View view)
 	{
 		super(view);
-		name          = view.findViewById(R.id.businessName);
-		email         = view.findViewById(R.id.businessEmail);
-		detailsButton = view.findViewById(R.id.goDetails);
+		name = view.findViewById(R.id.medicationName);
+		info = view.findViewById(R.id.medicationInfo);
+		buttonDetails= view.findViewById(R.id.buttonDetails);
 	}
 }

@@ -7,14 +7,46 @@
     tools:context=".MainProfileLoadActivity">
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewWeclome"
         android:layout_width="165dp"
         android:layout_height="43dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="Welcome to your profile!"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFirstName"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewFirstName"
+        android:layout_width="299dp"
+        android:layout_height="32dp"
+        android:editable="false"
+        android:text="~You shouldn't see this ever~"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLastName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewWeclome" />
+
+    <TextView
+        android:id="@+id/textViewLastName"
+        android:layout_width="298dp"
+        android:layout_height="28dp"
+        android:text="~You shouldn't see this ever~"
+        app:layout_constraintBottom_toTopOf="@+id/medicationList"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFirstName" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/medicationList"
+        android:layout_width="380dp"
+        android:layout_height="513dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLastName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

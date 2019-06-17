@@ -13,10 +13,8 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity
 {
 
-
 	public EditText logEmail, logPassword;
 	public Button signIn, newUser;
-
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -31,17 +29,13 @@ public class LoginActivity extends AppCompatActivity
 
 		signIn.setOnClickListener(new onClicker());
 		newUser.setOnClickListener(new onClicker());
-
-
 	}
 
 
 	private Boolean fieldIsEmpty()
 	{
-
-		String email = logEmail.getText().toString();
+		String email    = logEmail.getText().toString();
 		String password = logPassword.getText().toString();
-
 
 		if (email.isEmpty() || password.isEmpty())
 		{
@@ -51,40 +45,46 @@ public class LoginActivity extends AppCompatActivity
 		return false;
 	}
 
+
 	public class onClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			switch(v.getId())
+			switch (v.getId())
 			{
 			case R.id.newUser:
 				launchRegistration();
 				break;
 			case R.id.signIn:
-				if(fieldIsEmpty() == false)
+				if (fieldIsEmpty())
 				{
+					Toast.makeText(LoginActivity.this, "You are missing email and/or password", Toast.LENGTH_SHORT)
+							.show();
+				}
+				else
+				{
+					// TODO: validate the email & password with FireBase, and get the userID
 					profileLoggingIn();
 				}
-				else{
-					Toast.makeText(LoginActivity.this, "You are missing email and/or password", Toast.LENGTH_SHORT).show();
-				}
 			}
-
 		}
 	}
 
+
 	public void profileLoggingIn()
 	{
+		// TODO: Use the userID to get their profile object from FireBase, serialize it and pass
 		Intent intent = new Intent(this, MainProfileLoadActivity.class);
+		// intent.putExtra("profile", usersProfileObject);
 		startActivity(intent);
 	}
+
+
 	public void launchRegistration()
 	{
-
 		Intent intent = new Intent(this, RegistrationActivity.class);
 		startActivity(intent);
 	}
-
-}
+} // end class
 
