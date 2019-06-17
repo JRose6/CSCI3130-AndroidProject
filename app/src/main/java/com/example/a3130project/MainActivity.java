@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+
 public class MainActivity extends AppCompatActivity
 {
 	private Button welcome;
@@ -20,6 +21,7 @@ public class MainActivity extends AppCompatActivity
 		setContentView(R.layout.activity_main);
 		welcome = findViewById(R.id.buttonWelcome);
 		welcome.setOnClickListener(new onClicker());
+
 	}
 
 	public class onClicker implements View.OnClickListener
