@@ -1,5 +1,6 @@
 package com.example.a3130project;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.viewholder.MedicationViewHolder;
@@ -25,6 +27,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private RecyclerView             recyclerViewMedication;
 	private FirebaseFirestore        database;
 	private FirestoreRecyclerAdapter adapter;
+	private Button                   EditProfile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -32,12 +35,32 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
 
+		EditProfile = findViewById(R.id.editprofile);
+
 		recyclerViewMedication = findViewById(R.id.medicationList);
 		database = FirebaseFirestore.getInstance();
 		logg("onCreate()", "Database...");
 		adapter = setUpMedicationAdapter(database);
 		setUpRecyclerView(recyclerViewMedication, adapter);
+
+		EditProfile.setOnClickListener(new OnClicker());
 	}
+
+	public class OnClicker implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			launchEditProfile();
+		}
+	}
+
+	public void launchEditProfile()
+	{
+		Intent intent = new Intent(this, EditProfileActivity.class);
+		startActivity(intent);
+	}
+
 
 	// Connect the recycler view to the medication view holder & the FireStore adapter
 	private void setUpRecyclerView(RecyclerView rv, FirestoreRecyclerAdapter adapter)
