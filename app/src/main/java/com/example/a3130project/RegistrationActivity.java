@@ -34,6 +34,8 @@ public class RegistrationActivity extends AppCompatActivity
 	private Button register;
 	private FirebaseAuth mAuth;
 
+	private Profile profile;
+
 	FirebaseFirestore database;
 
 	@Override
@@ -50,8 +52,12 @@ public class RegistrationActivity extends AppCompatActivity
 		age = findViewById(R.id.age);
 		//allergies = findViewById(R.id.allergies);
 		//medication = findViewById(R.id.medication);
+
+
 		mAuth = FirebaseAuth.getInstance();
 		database = FirebaseFirestore.getInstance();
+
+
 		register.setOnClickListener(new OnClicker());
 
 
@@ -72,6 +78,8 @@ public class RegistrationActivity extends AppCompatActivity
 
 								FirebaseUser user = mAuth.getCurrentUser();
 								createUserProfile(user);
+
+
 
 							}
 							else
@@ -94,12 +102,12 @@ public class RegistrationActivity extends AppCompatActivity
 	private void createUserProfile(FirebaseUser user)
 	{
 
-		Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText()
+		profile = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText()
 				.toString(), email.getText().toString());
 
 		DocumentReference ref = database.collection("profiles").document(user.getUid());
 
-		ref.set(prof).addOnFailureListener(new OnFailureListener()
+		ref.set(profile).addOnFailureListener(new OnFailureListener()
 		{
 			@Override
 			public void onFailure(@NonNull Exception e)

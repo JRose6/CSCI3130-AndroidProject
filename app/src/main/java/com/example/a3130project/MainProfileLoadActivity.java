@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -12,13 +13,23 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.a3130project.model.Medication;
+import com.example.a3130project.model.Profile;
 import com.example.a3130project.viewholder.MedicationViewHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import com.google.firebase.firestore.DocumentReference;
 
 import static com.example.a3130project.MainActivity.logg;
 
@@ -28,6 +39,13 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private FirebaseFirestore        database;
 	private FirestoreRecyclerAdapter adapter;
 	private Button                   EditProfile;
+	private Profile profile;
+	private DocumentReference profileRef;
+
+
+	private Intent intent;
+	private FirebaseAuth mAuth;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -38,7 +56,29 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		EditProfile = findViewById(R.id.editprofile);
 
 		recyclerViewMedication = findViewById(R.id.medicationList);
+
 		database = FirebaseFirestore.getInstance();
+
+		mAuth = FirebaseAuth.getInstance();
+
+	    profileRef = database.collection("profiles").document(mAuth.getUid());
+
+	    profileRef.get()
+	    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+	    {
+		    @Override
+		    public void onSuccess(DocumentSnapshot documentSnapshot)
+		    {
+		    	profile = documentSnapshot.toObject(Profile.class);
+		    }
+	    });
+
+
+
+
+
+
+
 		logg("onCreate()", "Database...");
 		adapter = setUpMedicationAdapter(database);
 		setUpRecyclerView(recyclerViewMedication, adapter);
@@ -58,7 +98,10 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	public void launchEditProfile()
 	{
 		Intent intent = new Intent(this, EditProfileActivity.class);
+		intent.putExtra("profile", profile);
 		startActivity(intent);
+
+
 	}
 
 
