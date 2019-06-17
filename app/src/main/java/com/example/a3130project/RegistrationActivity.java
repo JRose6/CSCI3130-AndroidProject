@@ -61,32 +61,23 @@ public class RegistrationActivity extends AppCompatActivity
 		public void onClick(View v)
 		{
 
+			// TODO: error check same email isn't used twice
 
 			Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText().toString(),email.getText().toString());
-			database.collection("profiles").add(prof)
 
-					.addOnFailureListener(new OnFailureListener() {
-						@Override
-						public void onFailure(@NonNull Exception e) {
-							MainActivity.logg("OnFailure", e.toString());
-							Toast.makeText(RegistrationActivity.this, "Fail", Toast.LENGTH_SHORT)
-									.show();
-						}
-					});
-			//Here instead of adding directly we are first getting a reference so we save the ID;
-			// this is not necessary but it will make life easier latter when editing/deleting.
-			/*
 			DocumentReference ref = database.collection("profiles").document();
 
 			//creates an auto ID
 			prof.id = ref.getId();
-			/*
 
-			Toast.makeText(RegistrationActivity.this, prof.id, Toast.LENGTH_SHORT)
-					.show();
+			ref.set(prof).addOnFailureListener(new OnFailureListener() {
+				@Override
+				public void onFailure(@NonNull Exception e) {
+					Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT)
+							.show();
+				}
+			});
 
-			ref.set(prof);
-			*/
 			//Finishes the activity and return to the parent one.
 			finish();
 		}
