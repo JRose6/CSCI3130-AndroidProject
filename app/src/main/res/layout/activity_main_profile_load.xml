@@ -10,10 +10,9 @@
         android:id="@+id/textViewWeclome"
         android:layout_width="165dp"
         android:layout_height="43dp"
+        android:layout_marginTop="128dp"
         android:text="Welcome to your profile!"
-        app:layout_constraintBottom_toTopOf="@+id/textViewFirstName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -42,8 +41,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/medicationList"
-        android:layout_width="380dp"
-        android:layout_height="513dp"
+        android:layout_width="375dp"
+        android:layout_height="406dp"
         android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

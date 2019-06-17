@@ -99,9 +99,6 @@ public class RegistrationActivity extends AppCompatActivity
 
 		DocumentReference ref = database.collection("profiles").document(user.getUid());
 
-		//creates an auto ID
-		prof.id = ref.getId();
-
 		ref.set(prof).addOnFailureListener(new OnFailureListener()
 		{
 			@Override

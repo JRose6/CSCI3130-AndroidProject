@@ -8,7 +8,6 @@ import java.io.Serializable;
 public class Profile implements Serializable
 {
 
-	public String   id;
 	public String   firstName;
 	public String   lastName;
 	public String   age;
@@ -22,7 +21,6 @@ public class Profile implements Serializable
 	/**
 	 * Constructs a Profile Object
 	 *
-	 //* @param id          - Profile id (9-digit number)
 	 * @param firstName   - User's first name (2-48 characters)
 	 * @param lastName    - User's last  name (2-48 characters)
 	 * @param age         - User's age
@@ -38,7 +36,6 @@ public class Profile implements Serializable
 	               //String[] medications,
 	               //String[] allergies)
 	{
-		//this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.age = age;
