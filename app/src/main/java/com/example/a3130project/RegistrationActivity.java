@@ -9,27 +9,26 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 
+import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 
-import com.example.a3130project.model.Profile;
+import com.example.a3130project.MainActivity;
 
+import com.example.a3130project.model.Profile;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
 
-import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class RegistrationActivity extends AppCompatActivity
 {
 	private EditText firstName, lastName, email, pass, age, allergies, medication;
 	private Button register;
-	//private FirebaseAuth firebaseAuth;
 
 	FirebaseFirestore database;
 
@@ -54,6 +53,7 @@ public class RegistrationActivity extends AppCompatActivity
 
 		register.setOnClickListener(new OnClicker());
 
+
 	}
 	public class OnClicker implements View.OnClickListener
 	{
@@ -63,12 +63,30 @@ public class RegistrationActivity extends AppCompatActivity
 
 
 			Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText().toString(),email.getText().toString());
+			database.collection("profiles").add(prof)
 
+					.addOnFailureListener(new OnFailureListener() {
+						@Override
+						public void onFailure(@NonNull Exception e) {
+							MainActivity.logg("OnFailure", e.toString());
+							Toast.makeText(RegistrationActivity.this, "Fail", Toast.LENGTH_SHORT)
+									.show();
+						}
+					});
 			//Here instead of adding directly we are first getting a reference so we save the ID;
 			// this is not necessary but it will make life easier latter when editing/deleting.
+			/*
 			DocumentReference ref = database.collection("profiles").document();
+
+			//creates an auto ID
 			prof.id = ref.getId();
+			/*
+
+			Toast.makeText(RegistrationActivity.this, prof.id, Toast.LENGTH_SHORT)
+					.show();
+
 			ref.set(prof);
+			*/
 			//Finishes the activity and return to the parent one.
 			finish();
 		}

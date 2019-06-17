@@ -24,7 +24,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 {
 	private RecyclerView             recyclerViewMedication;
 	private FirebaseFirestore        database;
-	private FirestoreRecyclerAdapter adapterBusiness;
+	private FirestoreRecyclerAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -35,8 +35,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		recyclerViewMedication = findViewById(R.id.medicationList);
 		database = FirebaseFirestore.getInstance();
 		logg("onCreate()", "Database...");
-		adapterBusiness = setUpMedicationAdapter(database);
-		setUpRecyclerView(recyclerViewMedication, adapterBusiness);
+		adapter = setUpMedicationAdapter(database);
+		setUpRecyclerView(recyclerViewMedication, adapter);
 	}
 
 	// Connect the recycler view to the medication view holder & the FireStore adapter

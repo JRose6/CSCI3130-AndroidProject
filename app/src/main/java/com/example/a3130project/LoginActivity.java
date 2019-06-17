@@ -7,14 +7,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+
 import android.os.Bundle;
 import android.widget.Toast;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity
 {
 
 	public EditText logEmail, logPassword;
 	public Button signIn, newUser;
+
+	private FirebaseFirestore database;
+	private FirestoreRecyclerAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -26,6 +45,13 @@ public class LoginActivity extends AppCompatActivity
 		logPassword = findViewById(R.id.password);
 		signIn = findViewById(R.id.signIn);
 		newUser = findViewById(R.id.newUser);
+
+		database = FirebaseFirestore.getInstance();
+
+		Map<String, Object> profileMap = new HashMap<>();
+
+
+		database.collection("profiles");
 
 		signIn.setOnClickListener(new onClicker());
 		newUser.setOnClickListener(new onClicker());
