@@ -65,7 +65,7 @@ public class RegistrationActivity extends AppCompatActivity
 
 			Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText().toString(),email.getText().toString());
 
-			DocumentReference ref = database.collection("profiles").document();
+			DocumentReference ref = database.collection("profiles").document(email.getText().toString());
 
 			//creates an auto ID
 			prof.id = ref.getId();
