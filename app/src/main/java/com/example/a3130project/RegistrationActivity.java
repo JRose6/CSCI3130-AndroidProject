@@ -16,7 +16,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
 
-import com.example.a3130project.MainActivity;
+
 
 import com.example.a3130project.model.Profile;
 import com.google.firebase.auth.AuthResult;
@@ -71,24 +71,8 @@ public class RegistrationActivity extends AppCompatActivity
 							{
 
 								FirebaseUser user = mAuth.getCurrentUser();
+								createUserProfile(user);
 
-								Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText()
-										.toString(), email.getText().toString());
-
-								DocumentReference ref = database.collection("profiles").document(user.getUid());
-
-								//creates an auto ID
-								prof.id = ref.getId();
-
-								ref.set(prof).addOnFailureListener(new OnFailureListener()
-								{
-									@Override
-									public void onFailure(@NonNull Exception e)
-									{
-										Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT)
-												.show();
-									}
-								});
 							}
 							else
 							{
@@ -105,6 +89,28 @@ public class RegistrationActivity extends AppCompatActivity
 						}
 						});
 					}
+	}
+
+	private void createUserProfile(FirebaseUser user)
+	{
+
+		Profile prof = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText()
+				.toString(), email.getText().toString());
+
+		DocumentReference ref = database.collection("profiles").document(user.getUid());
+
+		//creates an auto ID
+		prof.id = ref.getId();
+
+		ref.set(prof).addOnFailureListener(new OnFailureListener()
+		{
+			@Override
+			public void onFailure(@NonNull Exception e)
+			{
+				Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
 	}
 
 	private Boolean validateCheck()
