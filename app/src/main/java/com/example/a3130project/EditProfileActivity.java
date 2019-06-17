@@ -41,7 +41,10 @@ public class EditProfileActivity extends AppCompatActivity
 
 		database = FirebaseFirestore.getInstance();
 
-		profile = (Profile) intent.getSerializableExtra("profile");
+
+
+		intent = getIntent();
+		profile = (Profile) intent.getSerializableExtra("userProfile");
 
 
 

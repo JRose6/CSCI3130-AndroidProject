@@ -64,14 +64,23 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	    profileRef = database.collection("profiles").document(mAuth.getUid());
 
 	    profileRef.get()
-	    .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+	    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
 	    {
 		    @Override
-		    public void onSuccess(DocumentSnapshot documentSnapshot)
+		    public void onComplete(@NonNull Task<DocumentSnapshot> task)
 		    {
-		    	profile = documentSnapshot.toObject(Profile.class);
+		    	DocumentSnapshot snap = task.getResult();
+			    if(snap.exists())
+			    {
+				    profile = snap.toObject(Profile.class);
+				    Toast.makeText(MainProfileLoadActivity.this, profile.toString(), Toast.LENGTH_SHORT).show();
+			    }
+			    else{
+				    Toast.makeText(MainProfileLoadActivity.this, "This profile doesn't fucking exist", Toast.LENGTH_SHORT).show();
+			    }
 		    }
 	    });
+
 
 
 
@@ -98,7 +107,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	public void launchEditProfile()
 	{
 		Intent intent = new Intent(this, EditProfileActivity.class);
-		intent.putExtra("profile", profile);
+		intent.putExtra("userProfile", profile);
 		startActivity(intent);
 
 
