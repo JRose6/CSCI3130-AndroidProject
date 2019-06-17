@@ -59,6 +59,7 @@ public class Refill_Activity extends AppCompatActivity
 				Refill_Alarm.show();
 				Success.setText("You take " + take + " medication! You have " + amount + " left ");
 			}
+
 			else {
 				Success.setText("You take " + take + " medication! You have " + amount + " left ");
 			}
