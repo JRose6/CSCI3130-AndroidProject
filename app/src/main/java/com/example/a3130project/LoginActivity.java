@@ -5,24 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.util.Log;
-import android.graphics.Color;
 
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.a3130project.model.Profile;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -32,91 +20,44 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import android.os.Bundle;
 import android.widget.Toast;
 
-import java.util.HashMap;
-import java.util.Map;
-import android.widget.TextView;
 
 public class LoginActivity extends AppCompatActivity
 {
-
-	public EditText logEmail, logPassword;
-	public Button signIn, newUser;
+	public EditText editEmail, editPassword;
+	public Button buttonSignIn, buttonNewUser;
 
 	private FirebaseAuth mAuth;
 
-	private FirebaseFirestore        database;
-	private FirestoreRecyclerAdapter adapter;
-	private Profile                  profile;
+	private FirebaseFirestore database;
+	private Profile           profile;
 
-	public TextView passValidator, emailValidator;
-    
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
 
-		logEmail = findViewById(R.id.email);
-		logPassword = findViewById(R.id.password);
-		signIn = findViewById(R.id.signIn);
-		newUser = findViewById(R.id.newUser);
-		passValidator = findViewById(R.id.passwordValid);
-		emailValidator = findViewById(R.id.emailValid);
-
+		editEmail = findViewById(R.id.email);
+		editPassword = findViewById(R.id.password);
+		buttonSignIn = findViewById(R.id.signIn);
+		buttonNewUser = findViewById(R.id.newUser);
 
 		database = FirebaseFirestore.getInstance();
 		mAuth = FirebaseAuth.getInstance();
 
-		signIn.setOnClickListener(new onClicker());
-		newUser.setOnClickListener(new onClicker());
-		signIn.setOnClickListener(new onClicker1());
-	}
-
-
-	public class onClicker1 implements View.OnClickListener{
-		public void onClick(View v){
-			String pass = logPassword.getText().toString();
-			String email = logEmail.getText().toString();
-			int passRules = PasswordValidator.validPassword(pass);
-			int emailRules = EmailValidator.getEmail(email);
-			if(passRules==0){
-				passValidator.setText("NOT STRONG");
-				passValidator.setTextColor(Color.RED);
-			}
-			if(emailRules==0){
-				emailValidator.setText("Invalid email format");
-				emailValidator.setTextColor(Color.RED);
-
-			}
-			if (passRules < 5 && passRules>0) {
-				passValidator.setText("NOT STRONG");
-                passValidator.setTextColor(Color.RED);
-
-            }
-			if (passRules == 5) {
-				passValidator.setText("STRONG");
-				passValidator.setTextColor(Color.GREEN);
-
-			}
-			if (emailRules==1){
-				emailValidator.setText("VALID EMAIL");
-				emailValidator.setTextColor(Color.GREEN);
-
-			}
-
-			}
+		buttonSignIn.setOnClickListener(new onClicker());
+		buttonNewUser.setOnClickListener(new onClicker());
 	}
 
 
 	private Boolean fieldIsEmpty()
 	{
-		String email    = logEmail.getText().toString();
-		String password = logPassword.getText().toString();
+		String email    = editEmail.getText().toString();
+		String password = editPassword.getText().toString();
 
 		if (email.isEmpty() || password.isEmpty())
 		{
@@ -139,26 +80,25 @@ public class LoginActivity extends AppCompatActivity
 			case R.id.signIn:
 				if (fieldIsEmpty())
 				{
-					Toast.makeText(LoginActivity.this, "You are missing email and/or password", Toast.LENGTH_SHORT)
-							.show();
+					toastSh("You are missing e-mail and/or password");
 				}
 				else
 				{
-					signIn(); // If this fails... only a toast appears.
+					signIn();
 				}
 			}
 		}
 	}
 
 	/**
-	 * Attempts to authenticate with FireBase using the current contents of the logEmail and
-	 * logPassword textEdits. If the sign-in was successful, it will switch to the
+	 * Attempts to authenticate with FireBase using the current contents of the editEmail and
+	 * editPassword textEdits. If the sign-in was successful, it will switch to the
 	 * 'MainProfileLoadActivity'
 	 */
 	public void signIn()
 	{
-		String email = logEmail.getText().toString();
-		String pass  = logPassword.getText().toString();
+		String email = editEmail.getText().toString();
+		String pass  = editPassword.getText().toString();
 		mAuth.signInWithEmailAndPassword(email, pass)
 				.addOnSuccessListener(new OnSuccessListener<AuthResult>()
 				{
@@ -178,11 +118,13 @@ public class LoginActivity extends AppCompatActivity
 								if (snap.exists())
 								{
 									profile = snap.toObject(Profile.class);
+									toastSh(profile.toString());
 									logg("signIn()", profile.toString());
 									openProfile();
 								}
 								else
 								{
+									toastSh("This profile doesn't exist.");
 									logg("signIn()", "This profile doesn't fucking exist... "
 											+ "You should never see this message");
 								}
@@ -197,6 +139,7 @@ public class LoginActivity extends AppCompatActivity
 					public void onFailure(@NonNull Exception e)
 					{
 						// If sign in fails, display a message to the user.
+						toastSh("Authentication failed. " + e);
 						logg("signIn()", "Authentication failed. " + e);
 					}
 				});
@@ -218,17 +161,27 @@ public class LoginActivity extends AppCompatActivity
 
 
 	/**
-	 * Generates a short toast with the given message and dumps it to the console log
+	 * Dumps the given tag and message to the console log
 	 * This is for debugging & development purposes.
 	 */
 	private void logg(String tag, String message)
 	{
-		Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+		toastSh(message);
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, tag, message);
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, "-------------------", "-----------------------------");
+	}
+
+	/**
+	 * Generates a short toast message
+	 *
+	 * @param message - The message to display in the toast
+	 */
+	private void toastSh(String message)
+	{
+		Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
 } // end class
 

@@ -1,29 +1,58 @@
 package com.example.a3130project;
 
-import java.util.Scanner;
+public class PasswordValidator
+{
+	enum Strength
+	{
+		Invalid,
+		Weak,
+		Medium,
+		Strong,
+		Excellent,
+	}
 
-public class PasswordValidator {
+	public static Strength validPassword(String inputPassword)
+	{
+		int rulesPassed = 0;
 
-    public static int validPassword(String InputPassword) {
-        int rulesPassed = 5;
-        int passwordLength = InputPassword.length();
+		if (inputPassword.length() < 6)
+		{
+			return Strength.Invalid;
+		}
+		if (inputPassword.equalsIgnoreCase("password"))
+		{
+			return Strength.Invalid;
+		}
+		if (inputPassword.length() > 8)
+		{
+			rulesPassed++;
+		}
+		if (inputPassword.matches(".*[0-9]{1,}.*"))
+		{
+			rulesPassed++;
+		}
+		if (inputPassword.matches(".*[!@#$%^&*()]{1,}.*"))
+		{
+			rulesPassed++;
+		}
+		if (inputPassword.matches("(.*[A-Z]){1,}.*"))
+		{
+			rulesPassed++;
+		}
 
-        if (passwordLength < 8) {
-            rulesPassed--;
-        }
-
-        if (!(InputPassword.matches(".*[0-9]{1,}.*"))) {
-            rulesPassed--;
-        }
-        if (!(InputPassword.matches(".*[!@#$%^&*()]{1,}.*"))) {
-            rulesPassed--;
-        }
-        if (!(InputPassword.matches("(.*[A-Z]){1,}.*"))) {
-            rulesPassed--;
-        }
-        if (InputPassword.equalsIgnoreCase("password")) {
-            rulesPassed = 0;
-        }
-        return rulesPassed;
-    }
+		switch (rulesPassed)
+		{
+		case 4:
+			return Strength.Excellent;
+		case 3:
+			return Strength.Strong;
+		case 2:
+			return Strength.Medium;
+		case 1:
+			return Strength.Weak;
+		case 0:
+		default:
+			return Strength.Invalid;
+		}
+	}
 }

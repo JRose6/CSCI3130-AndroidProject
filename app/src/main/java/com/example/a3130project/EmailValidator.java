@@ -1,13 +1,19 @@
 package com.example.a3130project;
 
-import java.util.Scanner;
+public class EmailValidator
+{
+	enum Status
+	{
+		Valid,
+		Invalid,
+	}
 
-public class EmailValidator {
-    public static int getEmail(String InputEmail){
-        int passedRules = 0;
-        if (InputEmail.matches("^(.+)@(.+)$")) {
-            passedRules++;
-        }
-        return passedRules;
-    }
+	public static Status getEmail(String InputEmail)
+	{
+		if (InputEmail.matches("^(.+)@(.+)$"))
+		{
+			return Status.Valid;
+		}
+		return Status.Invalid;
+	}
 }
