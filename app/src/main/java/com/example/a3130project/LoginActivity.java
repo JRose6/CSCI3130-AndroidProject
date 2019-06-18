@@ -1,8 +1,10 @@
 package com.example.a3130project;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,9 +17,18 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.a3130project.model.Profile;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -35,8 +46,9 @@ public class LoginActivity extends AppCompatActivity
 
 	private FirebaseAuth mAuth;
 
-	private FirebaseFirestore database;
+	private FirebaseFirestore        database;
 	private FirestoreRecyclerAdapter adapter;
+	private Profile                  profile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -67,7 +79,6 @@ public class LoginActivity extends AppCompatActivity
 		{
 			return true;
 		}
-
 		return false;
 	}
 
@@ -90,19 +101,68 @@ public class LoginActivity extends AppCompatActivity
 				}
 				else
 				{
-					// TODO: validate the email & password with FireBase, and get the userID
-					profileLoggingIn();
+					signIn(); // If this fails... only a toast appears.
 				}
 			}
 		}
 	}
 
-
-	public void profileLoggingIn()
+	/**
+	 * Attempts to authenticate with FireBase using the current contents of the logEmail and
+	 * logPassword textEdits. If the sign-in was successful, it will switch to the
+	 * 'MainProfileLoadActivity'
+	 */
+	public void signIn()
 	{
-		// TODO: Use the userID to get their profile object from FireBase, serialize it and pass
+		String email = logEmail.getText().toString();
+		String pass  = logPassword.getText().toString();
+		mAuth.signInWithEmailAndPassword(email, pass)
+				.addOnSuccessListener(new OnSuccessListener<AuthResult>()
+				{
+					@Override
+					public void onSuccess(AuthResult authResult)
+					{
+						// If sign in fails, display a message to the user.
+						logg("signIn()", "Authentication Succeeded. " + authResult);
+						DocumentReference ref = database.collection("profiles")
+								.document(mAuth.getUid());
+						ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
+						{
+							@Override
+							public void onComplete(@NonNull Task<DocumentSnapshot> task)
+							{
+								DocumentSnapshot snap = task.getResult();
+								if (snap.exists())
+								{
+									profile = snap.toObject(Profile.class);
+									logg("signIn()", profile.toString());
+									openProfile();
+								}
+								else
+								{
+									logg("signIn()", "This profile doesn't fucking exist... "
+											+ "You should never see this message");
+								}
+							}
+						});
+
+					}
+				})
+				.addOnFailureListener(new OnFailureListener()
+				{
+					@Override
+					public void onFailure(@NonNull Exception e)
+					{
+						// If sign in fails, display a message to the user.
+						logg("signIn()", "Authentication failed. " + e);
+					}
+				});
+	}
+
+	public void openProfile()
+	{
 		Intent intent = new Intent(this, MainProfileLoadActivity.class);
-		// intent.putExtra("profile", usersProfileObject);
+		intent.putExtra("profile", profile);
 		startActivity(intent);
 	}
 
@@ -111,6 +171,21 @@ public class LoginActivity extends AppCompatActivity
 	{
 		Intent intent = new Intent(this, RegistrationActivity.class);
 		startActivity(intent);
+	}
+
+
+	/**
+	 * Generates a short toast with the given message and dumps it to the console log
+	 * This is for debugging & development purposes.
+	 */
+	private void logg(String tag, String message)
+	{
+		Toast.makeText(LoginActivity.this, message, Toast.LENGTH_SHORT).show();
+		Log.println(5, "-------------------", "-----------------------------");
+		Log.println(5, "-------------------", "-----------------------------");
+		Log.println(5, tag, message);
+		Log.println(5, "-------------------", "-----------------------------");
+		Log.println(5, "-------------------", "-----------------------------");
 	}
 } // end class
 

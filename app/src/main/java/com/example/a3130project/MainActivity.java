@@ -46,10 +46,10 @@ public class MainActivity extends AppCompatActivity
 	 */
 	static void logg(String tag, String message)
 	{
-		Log.w("", "");
-		Log.w("", "");
-		Log.w(tag, message);
-		Log.w("", "");
-		Log.w("", "");
+		Log.println(5, "", "");
+		Log.println(5, "", "");
+		Log.println(5, tag, message);
+		Log.println(5, "", "");
+		Log.println(5, "", "");
 	}
 } // end class

@@ -3,22 +3,16 @@ package com.example.a3130project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.graphics.Color;
-
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 
-import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.Task;
-
-
 
 import com.example.a3130project.model.Profile;
 import com.google.firebase.auth.AuthResult;
@@ -28,12 +22,10 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
-
-
 public class RegistrationActivity extends AppCompatActivity
 {
 	private EditText firstName, lastName, email, pass, age, allergies, medication;
-	private Button register;
+	private Button       register;
 	private FirebaseAuth mAuth;
 
 	private Profile profile;
@@ -64,12 +56,14 @@ public class RegistrationActivity extends AppCompatActivity
 
 
 	}
+
 	public class OnClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
+			mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText()
+					.toString())
 					.addOnCompleteListener(RegistrationActivity.this, new OnCompleteListener<AuthResult>()
 					{
 						@Override
@@ -77,12 +71,8 @@ public class RegistrationActivity extends AppCompatActivity
 						{
 							if (task.isSuccessful())
 							{
-
 								FirebaseUser user = mAuth.getCurrentUser();
 								createUserProfile(user);
-
-
-
 							}
 							else
 							{
@@ -90,22 +80,19 @@ public class RegistrationActivity extends AppCompatActivity
 								Toast.makeText(RegistrationActivity.this, "Authentication failed."
 										+ task.getException(), Toast.LENGTH_SHORT).show();
 							}
-
-
 							// TODO: error check same email isn't used twice
-
 							//Finishes the activity and return to the parent one.
 							finish();
 						}
-						});
-					}
+					});
+		}
 	}
 
 	private void createUserProfile(FirebaseUser user)
 	{
 
-		profile = new Profile(firstName.getText().toString(), lastName.getText().toString(), age.getText()
-				.toString(), email.getText().toString());
+		profile = new Profile(firstName.getText().toString(), lastName.getText()
+				.toString(), age.getText().toString(), email.getText().toString());
 
 		DocumentReference ref = database.collection("profiles").document(user.getUid());
 
@@ -114,8 +101,7 @@ public class RegistrationActivity extends AppCompatActivity
 			@Override
 			public void onFailure(@NonNull Exception e)
 			{
-				Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(RegistrationActivity.this, "Fail.p2", Toast.LENGTH_SHORT).show();
 			}
 		});
 	}
@@ -124,8 +110,8 @@ public class RegistrationActivity extends AppCompatActivity
 	{
 		Boolean result = false;
 
-		String fName      = firstName.getText().toString();
-		String lName      = lastName.getText().toString();
+		String fName = firstName.getText().toString();
+		String lName = lastName.getText().toString();
 		//String emailInput = email.getText().toString();
 		//String password   = pass.getText().toString();
 		/*

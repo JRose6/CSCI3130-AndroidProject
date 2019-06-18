@@ -82,12 +82,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	    });
 
 
-
-
-
-
-
-
 		logg("onCreate()", "Database...");
 		adapter = setUpMedicationAdapter(database);
 		setUpRecyclerView(recyclerViewMedication, adapter);
@@ -109,8 +103,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		Intent intent = new Intent(this, EditProfileActivity.class);
 		intent.putExtra("userProfile", profile);
 		startActivity(intent);
-
-
 	}
 
 
