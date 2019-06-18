@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.Editable;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -25,7 +26,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity
 {
-	private EditText firstName, lastName, email, pass, age, allergies, medication;
+	private EditText editFirstName, editLastName, editEmail, editPassword, editAge, allergies,
+			medication;
 	private Button       register;
 	private FirebaseAuth mAuth;
 
@@ -40,13 +42,13 @@ public class RegistrationActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
-		firstName = findViewById(R.id.firstName);
-		lastName = findViewById(R.id.lastName);
-		email = findViewById(R.id.emailInput);
-		pass = findViewById(R.id.passwordInput);
+		editFirstName = findViewById(R.id.firstName);
+		editLastName = findViewById(R.id.lastName);
+		editEmail = findViewById(R.id.emailInput);
+		editPassword = findViewById(R.id.passwordInput);
 		register = findViewById(R.id.register);
 
-		age = findViewById(R.id.age);
+		editAge = findViewById(R.id.age);
 		//allergies = findViewById(R.id.allergies);
 		//medication = findViewById(R.id.medication);
 
@@ -57,6 +59,26 @@ public class RegistrationActivity extends AppCompatActivity
 		database = FirebaseFirestore.getInstance();
 
 		register.setOnClickListener(new OnClicker());
+		editPassword.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+			}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+				validatePassword();
+			}
+
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+			}
+		});
+
+		editEmail.addTextChangedListener(new TextWatcher());
 	}
 
 	public class OnClicker implements View.OnClickListener
@@ -72,32 +94,52 @@ public class RegistrationActivity extends AppCompatActivity
 		}
 	}
 
+	public class TextWatcher implements android.text.TextWatcher
+	{
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count, int after)
+		{
+
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count)
+		{
+			validateEmail();
+		}
+
+		@Override
+		public void afterTextChanged(Editable s)
+		{
+
+		}
+	}
+
 	/**
 	 * Attempts to generate a new user in the FireBase authentication database.
 	 * <p>
-	 * This function should only be called after locally verifying that the email and password
+	 * This function should only be called after locally verifying that the editEmail and password
 	 * are valid.
 	 */
 	private void createNewUser()
 	{
-		mAuth.createUserWithEmailAndPassword(email.getText().toString(), pass.getText().toString())
-				.addOnSuccessListener(new OnSuccessListener<AuthResult>()
-				{
-					@Override
-					public void onSuccess(AuthResult authResult)
-					{
-						createNewUserProfile(mAuth.getCurrentUser());
-					}
-				})
-				.addOnFailureListener(new OnFailureListener()
-				{
-					@Override
-					public void onFailure(@NonNull Exception e)
-					{
-						// If sign in fails, display a message to the user.
-						toastSh("Authentication failed. " + e);
-					}
-				});
+		mAuth.createUserWithEmailAndPassword(editEmail.getText().toString(), editPassword.getText()
+				.toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>()
+		{
+			@Override
+			public void onSuccess(AuthResult authResult)
+			{
+				createNewUserProfile(mAuth.getCurrentUser());
+			}
+		}).addOnFailureListener(new OnFailureListener()
+		{
+			@Override
+			public void onFailure(@NonNull Exception e)
+			{
+				// If sign in fails, display a message to the user.
+				toastSh("Authentication failed. " + e);
+			}
+		});
 	}
 
 	/**
@@ -114,12 +156,20 @@ public class RegistrationActivity extends AppCompatActivity
 	 */
 	private void createNewUserProfile(FirebaseUser user)
 	{
-		profile = new Profile(firstName.getText().toString(), lastName.getText()
-				.toString(), age.getText().toString(), email.getText().toString());
+		profile = new Profile(editFirstName.getText().toString(), editLastName.getText()
+				.toString(), editAge.getText().toString(), editEmail.getText().toString());
 
 		DocumentReference ref = database.collection("profiles").document(user.getUid());
 
-		ref.set(profile).addOnFailureListener(new OnFailureListener()
+		ref.set(profile).addOnSuccessListener(new OnSuccessListener<Void>()
+		{
+			@Override
+			public void onSuccess(Void aVoid)
+			{
+				toastSh("New profile generated.");
+				finish();
+			}
+		}).addOnFailureListener(new OnFailureListener()
 		{
 			@Override
 			public void onFailure(@NonNull Exception e)
@@ -131,27 +181,27 @@ public class RegistrationActivity extends AppCompatActivity
 
 	private Boolean validatePassword()
 	{
-		switch (PasswordValidator.validPassword(pass.getText().toString()))
+		switch (PasswordValidator.validPassword(editPassword.getText().toString()))
 		{
 		case Invalid:
 			passValidator.setText("Invalid");
-			passValidator.setTextColor(Color.RED);
+			passValidator.setTextColor(Color.rgb(75,0,0)); // dark red
 			return false;
 		case Weak:
 			passValidator.setText("Weak");
-			passValidator.setTextColor(Color.rgb(250, 150, 50));
+			passValidator.setTextColor(Color.rgb(175, 75, 0)); // red-orange
 			break;
 		case Medium:
 			passValidator.setText("Okay");
-			passValidator.setTextColor(Color.YELLOW);
+			passValidator.setTextColor(Color.rgb(220, 150, 0)); // light red-orange
 			break;
 		case Strong:
 			passValidator.setText("Strong");
-			passValidator.setTextColor(Color.GREEN);
+			passValidator.setTextColor(Color.rgb(0, 100, 0)); // dark green
 			break;
 		case Excellent:
 			passValidator.setText("Excellent");
-			passValidator.setTextColor(Color.GREEN);
+			passValidator.setTextColor(Color.rgb(0, 150, 0)); // light green
 			break;
 		}
 		toastSh(passValidator.getText().toString());
@@ -160,15 +210,15 @@ public class RegistrationActivity extends AppCompatActivity
 
 	private Boolean validateEmail()
 	{
-		switch (EmailValidator.getEmail(email.getText().toString()))
+		switch (EmailValidator.getEmail(editEmail.getText().toString()))
 		{
 		case Valid:
-			emailValidator.setText("VALID EMAIL");
-			emailValidator.setTextColor(Color.GREEN);
+			emailValidator.setText("Valid Email");
+			emailValidator.setTextColor(Color.rgb(0, 150, 0)); // light green
 			return true;
 		case Invalid:
 		default:
-			emailValidator.setText("Invalid email format");
+			emailValidator.setText("Invalid Email format");
 			emailValidator.setTextColor(Color.RED);
 			return false;
 		}

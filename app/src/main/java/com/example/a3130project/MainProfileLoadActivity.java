@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a3130project.model.Medication;
@@ -20,31 +21,26 @@ import com.example.a3130project.model.Profile;
 import com.example.a3130project.viewholder.MedicationViewHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import com.google.firebase.firestore.DocumentReference;
-
 import static com.example.a3130project.MainActivity.logg;
 
 public class MainProfileLoadActivity extends AppCompatActivity
 {
+	private TextView                 textViewFirstName;
+	private TextView                 textViewLastName;
 	private RecyclerView             recyclerViewMedication;
 	private FirebaseFirestore        database;
 	private FirestoreRecyclerAdapter adapter;
-	private Button                   EditProfile;
-	private Profile profile;
-	private DocumentReference profileRef;
-
-
-	private Intent intent;
-	private FirebaseAuth mAuth;
+	private Button                   buttonEditProfile;
+	private Profile                  profile;
+	private Intent                   intent;
 
 
 	@Override
@@ -53,40 +49,50 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
 
-		EditProfile = findViewById(R.id.editprofile);
+		buttonEditProfile = findViewById(R.id.editprofile);
 
 		recyclerViewMedication = findViewById(R.id.medicationList);
+		textViewFirstName = findViewById(R.id.textViewFirstName);
+		textViewLastName = findViewById(R.id.textViewLastName);
 
 		database = FirebaseFirestore.getInstance();
 
-		mAuth = FirebaseAuth.getInstance();
-
-	    profileRef = database.collection("profiles").document(mAuth.getUid());
-
-	    profileRef.get()
-	    .addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
-	    {
-		    @Override
-		    public void onComplete(@NonNull Task<DocumentSnapshot> task)
-		    {
-		    	DocumentSnapshot snap = task.getResult();
-			    if(snap.exists())
-			    {
-				    profile = snap.toObject(Profile.class);
-				    //Toast.makeText(MainProfileLoadActivity.this, profile.toString(), Toast.LENGTH_SHORT).show();
-			    }
-			    else{
-				    Toast.makeText(MainProfileLoadActivity.this, "This profile doesn't fucking exist", Toast.LENGTH_SHORT).show();
-			    }
-		    }
-	    });
-
-
-		logg("onCreate()", "Database...");
 		adapter = setUpMedicationAdapter(database);
 		setUpRecyclerView(recyclerViewMedication, adapter);
 
-		EditProfile.setOnClickListener(new OnClicker());
+		buttonEditProfile.setOnClickListener(new OnClicker());
+	}
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+		if (user != null)
+		{
+			database.collection("profiles")
+					.document(user.getUid())
+					.get()
+					.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+					{
+						@Override
+						public void onSuccess(DocumentSnapshot documentSnapshot)
+						{
+							profile = documentSnapshot.toObject(Profile.class);
+							textViewFirstName.setText(profile.firstName);
+							textViewLastName.setText(profile.lastName);
+						}
+					})
+					.addOnFailureListener(new OnFailureListener()
+					{
+						@Override
+						public void onFailure(@NonNull Exception e)
+						{
+							toastSh("Failed to update profile fields.");
+						}
+					});
+		}
+		getDelegate().onStart();
 	}
 
 	public class OnClicker implements View.OnClickListener
@@ -98,10 +104,11 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		}
 	}
 
+
 	public void launchEditProfile()
 	{
 		Intent intent = new Intent(this, EditProfileActivity.class);
-		intent.putExtra("userProfile", profile);
+		intent.putExtra("profile", profile);
 		startActivity(intent);
 	}
 
@@ -114,6 +121,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		rv.setItemAnimator(new DefaultItemAnimator());
 		rv.setAdapter(adapter);
 	}
+
 
 	// Creates a Firestore adapter to populate a Recycler view.
 	private FirestoreRecyclerAdapter setUpMedicationAdapter(FirebaseFirestore db)
@@ -154,10 +162,20 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			{
 				View view = LayoutInflater.from(group.getContext())
 						.inflate(R.layout.medication_entry, group, false);
-				logg("xxxxxxxxxx MedicationViewHolder()", "GROUP: " + group);
+				logg("MedicationViewHolder()", "GROUP: " + group);
 				return new MedicationViewHolder(view);
 			}
 		};
 		return adapter;
+	}
+
+	/**
+	 * Generates a short toast message
+	 *
+	 * @param message - The message to display in the toast
+	 */
+	private void toastSh(String message)
+	{
+		Toast.makeText(MainProfileLoadActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
 }

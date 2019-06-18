@@ -32,9 +32,6 @@ public class EditProfileActivity extends AppCompatActivity
 	private FirebaseAuth      mAuth;
 
 
-
-
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -52,11 +49,8 @@ public class EditProfileActivity extends AppCompatActivity
 
 		mAuth = FirebaseAuth.getInstance();
 
-
-
-
 		intent = getIntent();
-		profile = (Profile) intent.getSerializableExtra("userProfile");
+		profile = (Profile) intent.getSerializableExtra("profile");
 
 		firstName.setText(profile.firstName);
 		lastName.setText(profile.lastName);
@@ -65,33 +59,27 @@ public class EditProfileActivity extends AppCompatActivity
 		update.setOnClickListener(new OnClicker());
 
 		mainProfile.setOnClickListener(new OnClicker());
-
-
 	}
+
 
 	public class OnClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			switch(v.getId())
+			switch (v.getId())
 			{
 			case R.id.update:
 				updateProfile();
 				break;
 			case R.id.mainprofile:
-				backToMainProfile();
+				finish();  // Back to main profile
 				break;
 			}
 
 		}
 	}
 
-	public void backToMainProfile()
-	{
-		Intent intent = new Intent(this, MainProfileLoadActivity.class);
-		startActivity(intent);
-	}
 
 	public void updateProfile()
 	{
@@ -102,14 +90,14 @@ public class EditProfileActivity extends AppCompatActivity
 		profile.lastName = lastName.getText().toString();
 		profile.age = age.getText().toString();
 
-		profileRef.set(profile)
-				.addOnFailureListener(new OnFailureListener()
-				{
-					@Override
-					public void onFailure(@NonNull Exception e)
-					{
-						Toast.makeText(EditProfileActivity.this, "Failed to update fields", Toast.LENGTH_SHORT).show();
-					}
-				});
+		profileRef.set(profile).addOnFailureListener(new OnFailureListener()
+		{
+			@Override
+			public void onFailure(@NonNull Exception e)
+			{
+				Toast.makeText(EditProfileActivity.this, "Failed to update fields", Toast.LENGTH_SHORT)
+						.show();
+			}
+		});
 	}
 }

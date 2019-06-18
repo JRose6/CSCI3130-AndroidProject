@@ -148,7 +148,6 @@ public class LoginActivity extends AppCompatActivity
 	public void openProfile()
 	{
 		Intent intent = new Intent(this, MainProfileLoadActivity.class);
-		intent.putExtra("profile", profile);
 		startActivity(intent);
 	}
 
