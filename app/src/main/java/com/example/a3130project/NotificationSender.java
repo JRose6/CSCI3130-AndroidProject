@@ -39,8 +39,8 @@ public class NotificationSender {
 
     private static NotificationCompat.Builder getNotificationBuilder(Context ctx){
         NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(ctx, PRIMARY_CHANNEL_ID)
-                .setContentTitle("You've been notified!")
-                .setContentText("This is your notification text.")
+                .setContentTitle("Time For Meds!")
+                .setContentText("It is time for you to take your medication")
                 .setSmallIcon(R.drawable.ic_alarm);
         return notifyBuilder;
     }
@@ -55,7 +55,7 @@ public class NotificationSender {
                     .IMPORTANCE_HIGH);
             notificationChannel.enableLights(true);
             notificationChannel.enableVibration(true);
-            notificationChannel.setDescription("Notification from Mascot");
+            notificationChannel.setDescription("Notification from Pharmacy");
             mNotifyManager.createNotificationChannel(notificationChannel);
         }
     }

@@ -3,11 +3,8 @@ package com.example.a3130project;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import android.app.AlarmManager;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -20,7 +17,6 @@ import android.widget.Toast;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.app.NotificationCompat;
 
-import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 
 public class MainActivity extends AppCompatActivity
 {
@@ -69,12 +65,6 @@ public class MainActivity extends AppCompatActivity
 		welcome.setOnClickListener(new onClicker());
 		NotificationSender.createNotificationChannel(this);
 	}
-	private void createAlarmReceiver(){
-		//scheduleNotification(getNotification("5 second delay"), 1000);
-		NotificationSender.scheduleNotification(this,System.currentTimeMillis());
-
-
-	}
 	public class onClicker implements View.OnClickListener
 	{
 		@Override
@@ -98,7 +88,6 @@ public class MainActivity extends AppCompatActivity
 	}
 	public void launchLogin()
 	{
-
 		Intent intent = new Intent(this, LoginActivity.class);
 		startActivity(intent);
 	}
@@ -112,6 +101,15 @@ public class MainActivity extends AppCompatActivity
 			@Override
 			public boolean onMenuItemClick(MenuItem item) {
 				Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+				startActivity(intent);
+				return false;
+			}
+		});
+		MenuItem item2 = menu.findItem(R.id.action_refill);
+		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				Intent intent = new Intent(getApplicationContext(), RefillActivity.class);
 				startActivity(intent);
 				return false;
 			}
