@@ -3,11 +3,17 @@ package com.example.a3130project;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+<<<<<<< HEAD
+=======
+import android.content.Intent;
+import android.graphics.Color;
+>>>>>>> branch32_merge_1
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
 
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -32,9 +38,12 @@ public class RegistrationActivity extends AppCompatActivity
 
 	FirebaseFirestore database;
 
+	public TextView passValidator, emailValidator;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
+
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
 		firstName = findViewById(R.id.firstName);
@@ -43,10 +52,56 @@ public class RegistrationActivity extends AppCompatActivity
 		pass = findViewById(R.id.passwordInput);
 		register = findViewById(R.id.register);
 
+<<<<<<< HEAD
 		age = findViewById(R.id.age);
 		//allergies = findViewById(R.id.allergies);
 		//medication = findViewById(R.id.medication);
 
+=======
+		passValidator = findViewById(R.id.passwordValid);
+		emailValidator = findViewById(R.id.emailValid);
+
+		firebaseAuth = firebaseAuth.getInstance();
+
+		register.setOnClickListener(new View.OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				String passw = pass.getText().toString();
+				String em = email.getText().toString();
+				int passRules = PasswordValidator.validPassword(passw);
+				int emailRules = EmailValidator.getEmail(em);
+				if(passRules==0){
+					passValidator.setText("NOT STRONG");
+					passValidator.setTextColor(Color.RED);
+				}
+				if(emailRules==0){
+					emailValidator.setText("Invalid email format");
+					emailValidator.setTextColor(Color.RED);
+
+				}
+				if (passRules < 5 && passRules>0) {
+
+					passValidator.setText("NOT STRONG");
+					passValidator.setTextColor(Color.RED);
+
+				}
+				if (passRules == 5) {
+					passValidator.setText("STRONG");
+					passValidator.setTextColor(Color.GREEN);
+
+				}
+				if (emailRules==1){
+					emailValidator.setText("VALID EMAIL");
+					emailValidator.setTextColor(Color.GREEN);
+
+				}
+				if (validateCheck())
+				{
+					String emailInput = email.getText().toString();
+					String password   = pass.getText().toString();
+>>>>>>> branch32_merge_1
 
 		mAuth = FirebaseAuth.getInstance();
 		database = FirebaseFirestore.getInstance();
