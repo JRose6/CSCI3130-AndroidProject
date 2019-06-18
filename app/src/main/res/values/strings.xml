@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">3130Project</string>
     <string name="WelcomeButton">Welcome!</string>
+    <string name="title_activity_test">test</string>
+    <string name="preference_file">com.example.a3130project.PreferenceKey</string>
+    <string name="saved_alarms_allowed">AlarmsAllowed</string>
+    <string name="saved_alarm_delay">AlarmDelay</string>
 </resources>
