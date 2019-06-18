@@ -3,6 +3,11 @@ package com.example.a3130project;
 import androidx.appcompat.app.AppCompatActivity;
 
 
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 
 import android.os.Bundle;
@@ -10,10 +15,45 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.app.NotificationCompat;
+
+import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
+
 public class MainActivity extends AppCompatActivity
 {
+	private NotificationManager mNotifyManager;
+	private static final int NOTIFICATION_ID = 0;
+	private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 	private Button welcome;
+	public void sendNotification() {
+		NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
+		mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
+	}
+	private NotificationCompat.Builder getNotificationBuilder(){
+		NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
+				.setContentTitle("You've been notified!")
+				.setContentText("This is your notification text.")
+				.setSmallIcon(R.drawable.ic_alarm);
+		return notifyBuilder;
+	}
+
+	public void createNotificationChannel() {
+		mNotifyManager = (NotificationManager)
+				getSystemService(NOTIFICATION_SERVICE);
+		if (android.os.Build.VERSION.SDK_INT >=
+				android.os.Build.VERSION_CODES.O) {
+			NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID,
+					"Mascot Notification", NotificationManager
+					.IMPORTANCE_HIGH);
+			notificationChannel.enableLights(true);
+			notificationChannel.enableVibration(true);
+			notificationChannel.setDescription("Notification from Mascot");
+			mNotifyManager.createNotificationChannel(notificationChannel);
+		}
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -24,9 +64,17 @@ public class MainActivity extends AppCompatActivity
 		toolbar.showOverflowMenu();
 		setSupportActionBar(toolbar);
 		welcome = findViewById(R.id.buttonWelcome);
+		Button alarmTest = findViewById(R.id.buttonTestAlarm);
+		alarmTest.setOnClickListener(new AlarmTester());
 		welcome.setOnClickListener(new onClicker());
+		NotificationSender.createNotificationChannel(this);
 	}
+	private void createAlarmReceiver(){
+		//scheduleNotification(getNotification("5 second delay"), 1000);
+		NotificationSender.scheduleNotification(this,System.currentTimeMillis());
 
+
+	}
 	public class onClicker implements View.OnClickListener
 	{
 		@Override
@@ -35,7 +83,19 @@ public class MainActivity extends AppCompatActivity
 			launchLogin();
 		}
 	}
-
+	public class AlarmTester implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			boolean notificationSent =
+					NotificationSender.scheduleNotification(getApplicationContext(),
+							System.currentTimeMillis());
+			if (!notificationSent){
+				Toast.makeText(getApplicationContext(),"Notifications disabled",Toast.LENGTH_SHORT).show();
+			}
+		}
+	}
 	public void launchLogin()
 	{
 
