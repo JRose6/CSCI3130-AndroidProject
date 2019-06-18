@@ -26,7 +26,7 @@ public class EditProfileActivity extends AppCompatActivity
 	private Intent            intent;
 	private Profile           profile;
 
-	private Button update;
+	private Button update, mainProfile;
 
 	private DocumentReference profileRef;
 	private FirebaseAuth      mAuth;
@@ -46,6 +46,8 @@ public class EditProfileActivity extends AppCompatActivity
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);
 		update = findViewById(R.id.update);
+		mainProfile = findViewById(R.id.mainprofile);
+
 		database = FirebaseFirestore.getInstance();
 
 		mAuth = FirebaseAuth.getInstance();
@@ -62,6 +64,7 @@ public class EditProfileActivity extends AppCompatActivity
 
 		update.setOnClickListener(new OnClicker());
 
+		mainProfile.setOnClickListener(new OnClicker());
 
 
 	}
@@ -71,8 +74,23 @@ public class EditProfileActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			updateProfile();
+			switch(v.getId())
+			{
+			case R.id.update:
+				updateProfile();
+				break;
+			case R.id.mainprofile:
+				backToMainProfile();
+				break;
+			}
+
 		}
+	}
+
+	public void backToMainProfile()
+	{
+		Intent intent = new Intent(this, MainProfileLoadActivity.class);
+		startActivity(intent);
 	}
 
 	public void updateProfile()
