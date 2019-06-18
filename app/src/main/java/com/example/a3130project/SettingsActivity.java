@@ -2,8 +2,10 @@ package com.example.a3130project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -42,6 +44,14 @@ public class SettingsActivity extends AppCompatActivity {
                 else{
                     editor.putInt(getString(R.string.saved_alarm_delay),0);
                 }
+                int flag;
+                if(switchAllowAlarms.isChecked()){
+                    flag = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
+                }
+                else{
+                    flag = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
+                }
+
                 editor.commit();
                 finish();
             }
