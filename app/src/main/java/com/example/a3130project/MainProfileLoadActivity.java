@@ -39,6 +39,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private FirebaseFirestore        database;
 	private FirestoreRecyclerAdapter adapter;
 	private Button                   buttonEditProfile;
+	private Button                   buttonLogout;
 	private Profile                  profile;
 	private Intent                   intent;
 
@@ -50,6 +51,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		setContentView(R.layout.activity_main_profile_load);
 
 		buttonEditProfile = findViewById(R.id.editprofile);
+		buttonLogout = findViewById(R.id.buttonLogout);
 
 		recyclerViewMedication = findViewById(R.id.medicationList);
 		textViewFirstName = findViewById(R.id.textViewFirstName);
@@ -61,6 +63,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		setUpRecyclerView(recyclerViewMedication, adapter);
 
 		buttonEditProfile.setOnClickListener(new OnClicker());
+		buttonLogout.setOnClickListener(new OnClicker());
 	}
 
 	@Override
@@ -100,7 +103,15 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			launchEditProfile();
+			if (v.getId() == R.id.editprofile)
+			{
+				launchEditProfile();
+			}
+			else if ( v.getId() == R.id.buttonLogout)
+			{
+				FirebaseAuth.getInstance().signOut();
+				finish();
+			}
 		}
 	}
 

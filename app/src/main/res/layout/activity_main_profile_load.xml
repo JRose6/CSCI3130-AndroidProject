@@ -18,8 +18,8 @@
 
     <TextView
         android:id="@+id/textViewFirstName"
-        android:layout_width="299dp"
-        android:layout_height="32dp"
+        android:layout_width="214dp"
+        android:layout_height="30dp"
         android:layout_marginTop="16dp"
         android:editable="false"
         android:text="~You shouldn't see this ever~"
@@ -52,4 +52,15 @@
         android:text="Edit Profile"
         app:layout_constraintStart_toEndOf="@+id/textViewWelcome"
         app:layout_constraintTop_toTopOf="@+id/textViewWelcome" />
+
+    <Button
+        android:id="@+id/buttonLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="Logout"
+        app:layout_constraintStart_toEndOf="@+id/textViewFirstName"
+        app:layout_constraintTop_toBottomOf="@+id/editprofile" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
