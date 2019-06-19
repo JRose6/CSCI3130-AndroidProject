@@ -107,7 +107,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			{
 				launchEditProfile();
 			}
-			else if ( v.getId() == R.id.buttonLogout)
+			else if (v.getId() == R.id.buttonLogout)
 			{
 				FirebaseAuth.getInstance().signOut();
 				finish();

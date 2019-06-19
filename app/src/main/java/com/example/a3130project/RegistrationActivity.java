@@ -185,7 +185,7 @@ public class RegistrationActivity extends AppCompatActivity
 		{
 		case Invalid:
 			passValidator.setText("Invalid");
-			passValidator.setTextColor(Color.rgb(75,0,0)); // dark red
+			passValidator.setTextColor(Color.rgb(75, 0, 0)); // dark red
 			return false;
 		case Weak:
 			passValidator.setText("Weak");

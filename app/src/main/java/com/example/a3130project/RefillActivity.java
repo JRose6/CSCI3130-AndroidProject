@@ -1,6 +1,7 @@
 package com.example.a3130project;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -13,12 +14,13 @@ import android.widget.TextView;
 public class RefillActivity extends AppCompatActivity
 {
 
-	Button TakeButton;
+	Button   TakeButton;
 	EditText Takeinput;
 	TextView Success;
 
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState)
+	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_refill);
 
@@ -30,17 +32,22 @@ public class RefillActivity extends AppCompatActivity
 
 	}
 
-	public class onClicker implements View.OnClickListener {
+
+	public class onClicker implements View.OnClickListener
+	{
 		@Override
-		public void onClick(View v) {
-			int take = Integer.parseInt(Takeinput.getText().toString());
+		public void onClick(View v)
+		{
+			int take   = Integer.parseInt(Takeinput.getText().toString());
 			int amount = 100;
-			int count = amount;
+			int count  = amount;
 			amount = amount - take;
-			if(amount < 0){
+			if (amount < 0)
+			{
 				Success.setText("You don't have enough medication to take, please refill");
 			}
-			else if(amount <= 0.2*count && (amount >= 0)) {
+			else if (amount <= 0.2 * count && (amount >= 0))
+			{
 
 				AlertDialog.Builder Refill_Alarm = new AlertDialog.Builder(RefillActivity.this);
 
@@ -49,9 +56,11 @@ public class RefillActivity extends AppCompatActivity
 				Refill_Alarm.setTitle("Refill Alert");
 				Refill_Alarm.setMessage("Your medication is below the threshold! Please refill ASAP!");
 
-				Refill_Alarm.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+				Refill_Alarm.setPositiveButton("OK", new DialogInterface.OnClickListener()
+				{
 					@Override
-					public void onClick(DialogInterface dialog, int which) {
+					public void onClick(DialogInterface dialog, int which)
+					{
 
 					}
 				});
@@ -60,7 +69,8 @@ public class RefillActivity extends AppCompatActivity
 				Success.setText("You take " + take + " medication! You have " + amount + " left ");
 			}
 
-			else {
+			else
+			{
 				Success.setText("You take " + take + " medication! You have " + amount + " left ");
 			}
 		}

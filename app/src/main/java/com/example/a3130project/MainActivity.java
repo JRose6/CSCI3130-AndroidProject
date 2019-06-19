@@ -21,34 +21,36 @@ import androidx.core.app.NotificationCompat;
 public class MainActivity extends AppCompatActivity
 {
 	private NotificationManager mNotifyManager;
-	private static final int NOTIFICATION_ID = 0;
+
+	private static final int    NOTIFICATION_ID    = 0;
 	private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-	private Button welcome;
+	private              Button welcome;
 
 
-	public void sendNotification() {
+	public void sendNotification()
+	{
 		NotificationCompat.Builder notifyBuilder = getNotificationBuilder();
 		mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 	}
 
 
-	private NotificationCompat.Builder getNotificationBuilder(){
-		NotificationCompat.Builder notifyBuilder = new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID)
-				.setContentTitle("You've been notified!")
+	private NotificationCompat.Builder getNotificationBuilder()
+	{
+		NotificationCompat.Builder notifyBuilder
+				= new NotificationCompat.Builder(this, PRIMARY_CHANNEL_ID).setContentTitle("You've been notified!")
 				.setContentText("This is your notification text.")
 				.setSmallIcon(R.drawable.ic_alarm);
 		return notifyBuilder;
 	}
 
 
-	public void createNotificationChannel() {
-		mNotifyManager = (NotificationManager)
-				getSystemService(NOTIFICATION_SERVICE);
-		if (android.os.Build.VERSION.SDK_INT >=
-				android.os.Build.VERSION_CODES.O) {
-			NotificationChannel notificationChannel = new NotificationChannel(PRIMARY_CHANNEL_ID,
-					"Mascot Notification", NotificationManager
-					.IMPORTANCE_HIGH);
+	public void createNotificationChannel()
+	{
+		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+		{
+			NotificationChannel notificationChannel
+					= new NotificationChannel(PRIMARY_CHANNEL_ID, "Mascot Notification", NotificationManager.IMPORTANCE_HIGH);
 			notificationChannel.enableLights(true);
 			notificationChannel.enableVibration(true);
 			notificationChannel.setDescription("Notification from Mascot");
@@ -88,11 +90,12 @@ public class MainActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			boolean notificationSent =
-					NotificationSender.scheduleNotification(getApplicationContext(),
-							System.currentTimeMillis());
-			if (!notificationSent){
-				Toast.makeText(getApplicationContext(),"Notifications disabled",Toast.LENGTH_SHORT).show();
+			boolean notificationSent
+					= NotificationSender.scheduleNotification(getApplicationContext(), System.currentTimeMillis());
+			if (!notificationSent)
+			{
+				Toast.makeText(getApplicationContext(), "Notifications disabled", Toast.LENGTH_SHORT)
+						.show();
 			}
 		}
 	}
@@ -106,22 +109,27 @@ public class MainActivity extends AppCompatActivity
 
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
 		getMenuInflater().inflate(R.menu.mainmenu, menu);
 		//U can find item set icon and stuff...
-		MenuItem item= menu.findItem(R.id.action_settings);
-		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+		MenuItem item = menu.findItem(R.id.action_settings);
+		item.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
+		{
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item)
+			{
 				Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
 				startActivity(intent);
 				return false;
 			}
 		});
 		MenuItem item2 = menu.findItem(R.id.action_refill);
-		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
+		{
 			@Override
-			public boolean onMenuItemClick(MenuItem item) {
+			public boolean onMenuItemClick(MenuItem item)
+			{
 				Intent intent = new Intent(getApplicationContext(), RefillActivity.class);
 				startActivity(intent);
 				return false;
@@ -134,6 +142,7 @@ public class MainActivity extends AppCompatActivity
 	/**
 	 * This is a simple logging function to dump a tag and message to the log surrounded by
 	 * empty lines (so it's easier to find)
+	 *
 	 * @param tag
 	 * @param message
 	 */

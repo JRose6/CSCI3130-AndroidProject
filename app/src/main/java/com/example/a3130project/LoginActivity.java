@@ -53,6 +53,12 @@ public class LoginActivity extends AppCompatActivity
 		buttonNewUser.setOnClickListener(new onClicker());
 	}
 
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		editPassword.setText("");
+	}
 
 	private Boolean fieldIsEmpty()
 	{

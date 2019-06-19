@@ -10,7 +10,6 @@ import com.example.a3130project.R;
 
 public class MedicationViewHolder extends RecyclerView.ViewHolder
 {
-
 	public TextView name;
 	public TextView info;
 	public Button   buttonDetails;
@@ -20,6 +19,6 @@ public class MedicationViewHolder extends RecyclerView.ViewHolder
 		super(view);
 		name = view.findViewById(R.id.medicationName);
 		info = view.findViewById(R.id.medicationInfo);
-		buttonDetails= view.findViewById(R.id.buttonDetails);
+		buttonDetails = view.findViewById(R.id.buttonDetails);
 	}
 }
