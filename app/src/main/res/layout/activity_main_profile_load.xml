@@ -37,8 +37,8 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/medicationList"
-        android:layout_width="379dp"
-        android:layout_height="483dp"
+        android:layout_width="373dp"
+        android:layout_height="429dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -62,5 +62,15 @@
         android:text="Logout"
         app:layout_constraintStart_toEndOf="@+id/textViewFirstName"
         app:layout_constraintTop_toBottomOf="@+id/editprofile" />
+
+    <Button
+        android:id="@+id/buttAddMed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="152dp"
+        android:layout_marginTop="28dp"
+        android:text="Button"
+        app:layout_constraintStart_toStartOf="@+id/medicationList"
+        app:layout_constraintTop_toBottomOf="@+id/medicationList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,8 +17,8 @@ public class MedicationViewHolder extends RecyclerView.ViewHolder
 	public MedicationViewHolder(View view)
 	{
 		super(view);
-		name = view.findViewById(R.id.medicationName);
-		info = view.findViewById(R.id.medicationInfo);
+		name = view.findViewById(R.id.viewMedName);
+		info = view.findViewById(R.id.viewMedGenName);
 		buttonDetails = view.findViewById(R.id.buttonDetails);
 	}
 }
