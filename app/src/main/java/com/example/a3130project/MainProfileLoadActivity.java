@@ -40,6 +40,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private FirestoreRecyclerAdapter adapter;
 	private Button                   buttonEditProfile;
 	private Button                   buttonLogout;
+	private Button                   calendar;
+	private Button                   dosage;
 	private Profile                  profile;
 	private Intent                   intent;
 
@@ -50,6 +52,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
 
+		calendar = findViewById(R.id.calendar);
+		dosage = findViewById(R.id.dosage);
 		buttonEditProfile = findViewById(R.id.editprofile);
 		buttonLogout = findViewById(R.id.buttonLogout);
 
@@ -112,9 +116,28 @@ public class MainProfileLoadActivity extends AppCompatActivity
 				FirebaseAuth.getInstance().signOut();
 				finish();
 			}
+			else if(v.getId() == R.id.calendar)
+			{
+				calendarPage();
+			}
+			else if(v.getId() == R.id.dosage)
+			{
+				dosagePage();
+			}
 		}
 	}
 
+	public void calendarPage()
+	{
+		Intent intent = new Intent(this, calendarActivity.class);
+		startActivity(intent);
+	}
+
+	public void dosagePage()
+	{
+		Intent intent = new Intent(this, dosageActivity.class);
+		startActivity(intent);
+	}
 
 	public void launchEditProfile()
 	{
