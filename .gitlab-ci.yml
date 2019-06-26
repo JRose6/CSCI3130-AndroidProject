@@ -21,7 +21,7 @@ before_script:
   - cat "$GOOGLE_SERVICES" > "$(pwd)/app/google-services.json"
   
   
-after_scripts:
+after_script:
   - rm "$(pwd)/app/google-services.json"
 
 stages:
