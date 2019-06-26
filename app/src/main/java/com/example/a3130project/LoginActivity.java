@@ -25,6 +25,7 @@ import android.os.Bundle;
 import android.widget.Toast;
 
 
+
 public class LoginActivity extends AppCompatActivity
 {
 	public EditText editEmail, editPassword;
