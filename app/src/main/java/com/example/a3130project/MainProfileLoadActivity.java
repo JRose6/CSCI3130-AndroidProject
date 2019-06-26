@@ -66,6 +66,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		adapter = setUpMedicationAdapter(database);
 		setUpRecyclerView(recyclerViewMedication, adapter);
 
+		calendar.setOnClickListener(new OnClicker());
+		dosage.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
 		buttonLogout.setOnClickListener(new OnClicker());
 	}
