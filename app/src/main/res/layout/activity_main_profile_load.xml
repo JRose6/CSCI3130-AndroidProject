@@ -68,11 +68,11 @@
         android:id="@+id/buttAddMed"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="152dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginBottom="36dp"
         android:text="Button"
-        app:layout_constraintStart_toStartOf="@+id/medicationList"
-        app:layout_constraintTop_toBottomOf="@+id/medicationList" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/calendar" />
 
     <Button
         android:id="@+id/calendar"
