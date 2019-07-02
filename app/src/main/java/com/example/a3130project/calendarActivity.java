@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.CalendarView;
 import android.widget.TextView;
 
+
 import java.util.Calendar;
 
 public class calendarActivity extends AppCompatActivity
@@ -30,8 +31,8 @@ public class calendarActivity extends AppCompatActivity
 	{
 		@Override
 		public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth) {
-			String date = year + "/" + (month+1) + "/"+ dayOfMonth ;
-			Log.d(TAG, "onSelectedDayChange: yyyy/mm/dd:" + date);
+			String date = dayOfMonth + "/" + (month) + "/"+ year ;
+			Log.d(TAG, "onSelectedDayChange: dd/mm/yy:" + date);
 
 			Intent intent = new Intent(calendarActivity.this, dosageActivity.class);
 			intent.putExtra("date",date);
