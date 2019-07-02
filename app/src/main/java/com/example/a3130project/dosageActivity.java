@@ -1,17 +1,20 @@
 package com.example.a3130project;
 
-import androidx.appcompat.app.AlertDialog;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.DialogInterface;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+
 import android.widget.ListView;
-import android.widget.Toast;
+
+import com.example.a3130project.model.Medication;
 
 import java.util.ArrayList;
+
 
 public class dosageActivity extends AppCompatActivity
 {
@@ -26,58 +29,34 @@ public class dosageActivity extends AppCompatActivity
 
 		listviewMed = findViewById(R.id.listViewMed);
 
-		final ArrayList<String> arr = new ArrayList<>();
+		ArrayList<Medication> Medi = new ArrayList<>();
 
-		arr.add("Advil");
-		arr.add("Ibuprofen");
-		arr.add("Addrerall");
-		arr.add("Lisinopril");
-		arr.add("Hydrocodone");
-		arr.add("Advil");
-		arr.add("Ibuprofen");
-		arr.add("Addrerall");
-		arr.add("Lisinopril");
-		arr.add("Hydrocodone");
-		arr.add("Advil");
-		arr.add("Ibuprofen");
-		arr.add("Addrerall");
-		arr.add("Lisinopril");
-		arr.add("Hydrocodone");
-		arr.add("Advil");
-		arr.add("Ibuprofen");
-		arr.add("Addrerall");
-		arr.add("Lisinopril");
-		arr.add("Hydrocodone");
+		Medication med1 = new Medication("1", "Adderall", "4 doses a day");
+		Medication med2 = new Medication("2", "blah", "4 doses a day");
+		Medication med3 = new Medication("3", "sos", "3 doses a day");
+		Medication med4 = new Medication("4", "Afsf", "1 doses a day");
+		Medication med5 = new Medication("5", "akajd", "12 doses a day");
 
+		Medi.add(med1);
+		Medi.add(med2);
+		Medi.add(med3);
+		Medi.add(med4);
+		Medi.add(med5);
 
-		ArrayAdapter arrAdap = new ArrayAdapter(dosageActivity.this, android.R.layout.simple_list_item_1, arr);
-
-		listviewMed.setAdapter(arrAdap);
-
+		PrescriptionAdapter adapter = new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
+		listviewMed.setAdapter(adapter);
+		//ArrayAdapter arrAdap = new ArrayAdapter(dosageActivity.this, android.R.layout.simple_list_item_1, Med);
+		//listviewMed.setAdapter(arrAdap);
+		/*
+		//if click on that item
 		listviewMed.setOnItemClickListener(new AdapterView.OnItemClickListener()
 		{
 			@Override
 			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 			{
-				AlertDialog.Builder Dosage_Change = new AlertDialog.Builder(dosageActivity.this);
-
-
-
-				Dosage_Change.setCancelable(true);
-				Dosage_Change.setTitle("Dosage Settings");
-				Dosage_Change.setMessage(arr.get(position));
-
-				Dosage_Change.setPositiveButton("OK", new DialogInterface.OnClickListener()
-				{
-					@Override
-					public void onClick(DialogInterface dialog, int which)
-					{
-
-					}
-				});
-
-				Dosage_Change.show();
+				//openDialog();
 			}
-		});
+		});*/
 	}
+
 }
