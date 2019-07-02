@@ -28,6 +28,21 @@ public class dosageActivity extends AppCompatActivity
 		arr.add("Addrerall");
 		arr.add("Lisinopril");
 		arr.add("Hydrocodone");
+		arr.add("Advil");
+		arr.add("Ibuprofen");
+		arr.add("Addrerall");
+		arr.add("Lisinopril");
+		arr.add("Hydrocodone");
+		arr.add("Advil");
+		arr.add("Ibuprofen");
+		arr.add("Addrerall");
+		arr.add("Lisinopril");
+		arr.add("Hydrocodone");
+		arr.add("Advil");
+		arr.add("Ibuprofen");
+		arr.add("Addrerall");
+		arr.add("Lisinopril");
+		arr.add("Hydrocodone");
 
 
 		ArrayAdapter arrAdap = new ArrayAdapter(this, android.R.layout.simple_list_item_1, arr);
