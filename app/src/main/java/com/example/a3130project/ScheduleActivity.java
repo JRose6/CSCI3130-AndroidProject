@@ -1,6 +1,6 @@
 package com.example.a3130project;
 
-import android.content.Intent;
+
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
@@ -15,37 +15,37 @@ public class ScheduleActivity extends AppCompatActivity {
 
     private static final String TAG = "ScheduleActivity";
 
-    private TextView thedate;
+    private TextView dow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dosage);
-        //thedate = (TextView) findViewById(R.id.date);
+        dow = findViewById(R.id.textViewDOW);
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
         switch(day){
             case Calendar.SUNDAY:
-                thedate.setText("Sunday");
+                dow.setText("Sunday");
                 break;
             case Calendar.MONDAY:
-                thedate.setText("Monday");
+                dow.setText("Monday");
                 break;
             case Calendar.TUESDAY:
-                thedate.setText("Tuesday");
+                dow.setText("Tuesday");
                 break;
             case Calendar.WEDNESDAY:
-                thedate.setText("Wednesday");
+                dow.setText("Wednesday");
                 break;
             case Calendar.THURSDAY:
-                thedate.setText("Thursday");
+                dow.setText("Thursday");
                 break;
             case Calendar.FRIDAY  :
-                thedate.setText("Friday");
+                dow.setText("Friday");
                 break;
             case Calendar.SATURDAY:
-                thedate.setText("Saturday");
+                dow.setText("Saturday");
                 break;
 
         }
