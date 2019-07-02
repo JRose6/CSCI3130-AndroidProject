@@ -14,7 +14,6 @@ public class ToolBarCreator
 {
 	public static void createToolbar(final AppCompatActivity activity){
 		Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
-
 		toolbar.showOverflowMenu();
 		activity.setSupportActionBar(toolbar);
 
