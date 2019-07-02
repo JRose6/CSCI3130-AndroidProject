@@ -42,6 +42,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private Button                   buttonLogout;
 	private Button                   calendar;
 	private Button                   dosage;
+	private Button                   buttonAddMed;
 	private Profile                  profile;
 	private Intent                   intent;
 
@@ -56,6 +57,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		dosage = findViewById(R.id.dosage);
 		buttonEditProfile = findViewById(R.id.editprofile);
 		buttonLogout = findViewById(R.id.buttonLogout);
+		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
 		recyclerViewMedication = findViewById(R.id.medicationList);
 		textViewFirstName = findViewById(R.id.textViewFirstName);
@@ -70,6 +72,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		dosage.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
 		buttonLogout.setOnClickListener(new OnClicker());
+		buttonAddMed.setOnClickListener(new OnClicker());
 	}
 
 	@Override
@@ -126,7 +129,17 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			{
 				dosagePage();
 			}
+			else if(v.getId() == R.id.buttonAddPrescription)
+			{
+				medicationPage();
+			}
 		}
+	}
+
+	public void medicationPage()
+	{
+		Intent intent = new Intent(this, All_Meds.class);
+		startActivity(intent);
 	}
 
 	public void calendarPage()

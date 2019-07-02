@@ -14,9 +14,10 @@ public class Profile implements Serializable
 	public String email;
 
 
-	public String[] medications;
+	public String[] prescriptions;
 	public Profile()
 	{
+		prescriptions = new String[5];
 	}
 
 	/**

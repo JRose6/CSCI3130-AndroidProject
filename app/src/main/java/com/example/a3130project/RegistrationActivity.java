@@ -204,7 +204,6 @@ public class RegistrationActivity extends AppCompatActivity
 			passValidator.setTextColor(Color.rgb(0, 150, 0)); // light green
 			break;
 		}
-		toastSh(passValidator.getText().toString());
 		return true;
 	}
 
