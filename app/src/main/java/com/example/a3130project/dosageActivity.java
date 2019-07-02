@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -23,7 +24,7 @@ public class dosageActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dosage);
-
+		ToolBarCreator.createToolbar(this);
 		listviewMed = findViewById(R.id.listViewMed);
 
 		final ArrayList<String> arr = new ArrayList<>();
@@ -79,5 +80,10 @@ public class dosageActivity extends AppCompatActivity
 				Dosage_Change.show();
 			}
 		});
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this,menu);
 	}
 }
