@@ -2,6 +2,7 @@ package com.example.a3130project;
 
 import android.content.Intent;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -51,7 +52,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
-
+		ToolBarCreator.createToolbar(this);
 		calendar = findViewById(R.id.calendar);
 		dosage = findViewById(R.id.dosage);
 		buttonEditProfile = findViewById(R.id.editprofile);
@@ -214,4 +215,10 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	{
 		Toast.makeText(MainProfileLoadActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this,menu);
+	}
+
 }
