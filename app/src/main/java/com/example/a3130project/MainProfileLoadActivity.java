@@ -46,7 +46,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private Profile                  profile;
 	private Intent                   intent;
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -57,6 +56,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		dosage = findViewById(R.id.dosage);
 		buttonEditProfile = findViewById(R.id.editprofile);
 		buttonLogout = findViewById(R.id.buttonLogout);
+
 
 		recyclerViewMedication = findViewById(R.id.medicationList);
 		textViewFirstName = findViewById(R.id.textViewFirstName);
@@ -71,6 +71,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		dosage.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
 		buttonLogout.setOnClickListener(new OnClicker());
+
 	}
 
 	@Override
@@ -132,9 +133,11 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 	public void calendarPage()
 	{
+
 		Intent intent = new Intent(this, calendarActivity.class);
 		startActivity(intent);
 	}
+
 
 	public void dosagePage()
 	{
