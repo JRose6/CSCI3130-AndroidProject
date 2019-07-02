@@ -22,6 +22,7 @@ public class SettingsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+
 		sharedPref
 				= getApplicationContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
 		Button btnConfirm = (Button) findViewById(R.id.btnConfirmSettings);

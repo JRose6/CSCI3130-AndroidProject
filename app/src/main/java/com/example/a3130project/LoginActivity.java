@@ -22,6 +22,7 @@ import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import android.os.Bundle;
+import android.widget.TextView;
 import android.widget.Toast;
 
 
@@ -29,7 +30,7 @@ public class LoginActivity extends AppCompatActivity
 {
 	public EditText editEmail, editPassword;
 	public Button buttonSignIn, buttonNewUser;
-
+	private TextView txtError;
 	private FirebaseAuth mAuth;
 
 	private FirebaseFirestore database;
@@ -40,7 +41,7 @@ public class LoginActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_login);
-
+		txtError = findViewById(R.id.txtErrorMessage);
 		editEmail = findViewById(R.id.email);
 		editPassword = findViewById(R.id.password);
 		buttonSignIn = findViewById(R.id.signIn);
@@ -86,7 +87,7 @@ public class LoginActivity extends AppCompatActivity
 			case R.id.signIn:
 				if (fieldIsEmpty())
 				{
-					toastSh("You are missing e-mail and/or password");
+					txtError.setText("You are missing e-mail and/or password");
 				}
 				else
 				{
@@ -124,13 +125,14 @@ public class LoginActivity extends AppCompatActivity
 								if (snap.exists())
 								{
 									profile = snap.toObject(Profile.class);
-									toastSh(profile.toString());
+									//toastSh(profile.toString());
 									logg("signIn()", profile.toString());
+									txtError.setText("");
 									openProfile();
 								}
 								else
 								{
-									toastSh("This profile doesn't exist.");
+									txtError.setText("This profile doesn't exist.");
 									logg("signIn()", "This profile doesn't fucking exist... "
 											+ "You should never see this message");
 								}
@@ -145,7 +147,7 @@ public class LoginActivity extends AppCompatActivity
 					public void onFailure(@NonNull Exception e)
 					{
 						// If sign in fails, display a message to the user.
-						toastSh("Authentication failed. " + e);
+						txtError.setText("Invalid Username or Password");
 						logg("signIn()", "Authentication failed. " + e);
 					}
 				});
@@ -171,7 +173,6 @@ public class LoginActivity extends AppCompatActivity
 	 */
 	private void logg(String tag, String message)
 	{
-		toastSh(message);
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, tag, message);
