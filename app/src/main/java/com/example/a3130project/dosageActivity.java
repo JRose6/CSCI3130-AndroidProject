@@ -46,18 +46,7 @@ public class dosageActivity extends AppCompatActivity
 
 		PrescriptionAdapter adapter = new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
 		listviewMed.setAdapter(adapter);
-		//ArrayAdapter arrAdap = new ArrayAdapter(dosageActivity.this, android.R.layout.simple_list_item_1, Med);
-		//listviewMed.setAdapter(arrAdap);
-		/*
-		//if click on that item
-		listviewMed.setOnItemClickListener(new AdapterView.OnItemClickListener()
-		{
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-			{
-				//openDialog();
-			}
-		});*/
+
 	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)

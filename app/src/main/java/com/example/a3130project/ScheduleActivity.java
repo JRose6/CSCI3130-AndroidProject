@@ -20,8 +20,8 @@ public class ScheduleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.acitivity_schedule);
-        thedate = (TextView) findViewById(R.id.date);
+        setContentView(R.layout.activity_dosage);
+        //thedate = (TextView) findViewById(R.id.date);
         Calendar calendar = Calendar.getInstance();
         int day = calendar.get(Calendar.DAY_OF_WEEK);
 
