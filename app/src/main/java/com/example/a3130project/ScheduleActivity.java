@@ -5,9 +5,7 @@ import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.google.type.DayOfWeek;
 
-import com.google.type.Date;
 
 import java.util.Calendar;
 
@@ -49,12 +47,6 @@ public class ScheduleActivity extends AppCompatActivity {
                 break;
 
         }
-//        Intent incoming = getIntent();
-//        String date = incoming.getStringExtra("date");
-////        String dow = incoming.getStringExtra("day");
 
-
-
-        ;
     }
 }
