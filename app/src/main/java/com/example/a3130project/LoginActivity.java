@@ -53,6 +53,13 @@ public class LoginActivity extends AppCompatActivity
 		buttonSignIn.setOnClickListener(new onClicker());
 		buttonNewUser.setOnClickListener(new onClicker());
 	}
+	@Override
+	protected void onResume(){
+		super.onResume();
+		if (FirebaseAuth.getInstance().getCurrentUser()!=null){
+			openProfile();
+		}
+	}
 
 	@Override
 	protected void onStart()

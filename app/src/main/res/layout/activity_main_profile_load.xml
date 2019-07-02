@@ -71,15 +71,6 @@
         app:layout_constraintStart_toEndOf="@+id/textViewWelcome"
         app:layout_constraintTop_toTopOf="@+id/textViewWelcome" />
 
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="Logout"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/editprofile" />
 
     <Button
         android:id="@+id/calendar"
@@ -90,18 +81,8 @@
         android:layout_marginBottom="36dp"
         android:text="Calendar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dosage"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.331"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/dosage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="260dp"
-        android:layout_marginBottom="36dp"
-        android:text="Dosage"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

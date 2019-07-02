@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CalendarView;
@@ -21,6 +22,7 @@ public class calendarActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
+		ToolBarCreator.createToolbar(this);
 		mCalendarView = (CalendarView) findViewById(R.id.calendarView);
 		mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
 			@Override
@@ -52,7 +54,10 @@ public class calendarActivity extends AppCompatActivity
 //
 //			;
 	}
-
-
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this,menu);
+	}
 }
 
