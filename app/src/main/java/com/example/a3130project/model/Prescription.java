@@ -24,6 +24,38 @@ public class Prescription implements Serializable
         String dosage = "Dosage not set";
     }
 
+    public void setDocNotes(String docNotes) {
+        this.docNotes = docNotes;
+    }
+
+    public void setDosage(String dosage) {
+        this.dosage = dosage;
+    }
+
+    public void setMedId(String medId) {
+        this.medId = medId;
+    }
+
+    public void setNotes(String notes) {
+        this.notes = notes;
+    }
+
+    public String getMedId() {
+        return medId;
+    }
+
+    public String getDocNotes() {
+        return docNotes;
+    }
+
+    public String getDosage() {
+        return dosage;
+    }
+
+    public String getNotes() {
+        return notes;
+    }
+
     @Override
     public String toString()
     {
