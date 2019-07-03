@@ -1,6 +1,8 @@
 package com.example.a3130project.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Map;
 
 /**
  * Simple POJO class to hold Medication information in Firestore database
@@ -8,9 +10,17 @@ import java.io.Serializable;
 public class Medication implements Serializable
 {
 
-	public String id;
-	public String name;
-	public String info;
+	public String            id;
+	public String            name;
+	public String            genName;
+	public String            manufacturer;
+	public ArrayList<String> sideEffects;
+	public String            info;
+
+	public Medication()
+	{
+		// empty constructor needed for FireStore
+	}
 
 	/**
 	 * Constructs a Medication Object
@@ -26,9 +36,41 @@ public class Medication implements Serializable
 		this.info = info;
 	}
 
+	public String getId()
+	{
+		return id;
+	}
+
+	public String getName()
+	{
+		return name;
+	}
+
+	public String getGenName()
+	{
+		return genName;
+	}
+
+	public String getManufacturer()
+	{
+		return manufacturer;
+	}
+
+	public ArrayList<String> getSideEffects()
+	{
+		return sideEffects;
+	}
+
+	public String getInfo()
+	{
+		return info;
+	}
+
 	@Override
 	public String toString()
 	{
-		return "ID: " + id + " Name: " + name + " Info: " + info;
+		return "Medication{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", genName='"
+				+ genName + '\'' + ", manufacturer='" + manufacturer + '\'' + ", sideEffects="
+				+ sideEffects + ", info='" + info + '\'' + '}';
 	}
 }

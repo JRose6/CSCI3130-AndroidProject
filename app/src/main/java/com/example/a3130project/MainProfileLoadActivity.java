@@ -59,7 +59,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		buttonLogout = findViewById(R.id.buttonLogout);
 		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
-		recyclerViewMedication = findViewById(R.id.medicationList);
+		recyclerViewMedication = findViewById(R.id.medicationRecycler);
 		textViewFirstName = findViewById(R.id.textViewFirstName);
 		textViewLastName = findViewById(R.id.textViewLastName);
 
@@ -191,7 +191,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			                             final Medication model)
 			{
 				holder.name.setText(model.name);
-				holder.info.setText(model.info);
+				holder.genName.setText(model.genName);
 
 				holder.buttonDetails.setOnClickListener(new View.OnClickListener()
 				{

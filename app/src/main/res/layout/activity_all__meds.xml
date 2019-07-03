@@ -7,7 +7,7 @@
     tools:context=".All_Meds">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/medicationList"
+        android:id="@+id/medicationRecycler"
         android:layout_width="379dp"
         android:layout_height="483dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -19,9 +19,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="All Medications"
-        app:layout_constraintBottom_toTopOf="@+id/medicationList"
-        app:layout_constraintEnd_toEndOf="@+id/medicationList"
-        app:layout_constraintStart_toStartOf="@+id/medicationList"
+        app:layout_constraintBottom_toTopOf="@+id/medicationRecycler"
+        app:layout_constraintEnd_toEndOf="@+id/medicationRecycler"
+        app:layout_constraintStart_toStartOf="@+id/medicationRecycler"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
