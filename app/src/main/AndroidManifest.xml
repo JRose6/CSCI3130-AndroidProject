@@ -18,7 +18,6 @@
         <activity android:name=".AllMedications" />
         <activity android:name=".dosageActivity" />
         <activity android:name=".calendarActivity" />
-        <activity android:name=".dosageActivity"/>
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MainProfileLoadActivity" />

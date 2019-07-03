@@ -149,7 +149,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		startActivity(intent);
 	}
 
-
+	/*
 	// Connect the recycler view to the medication view holder & the FireStore adapter
 	private void setUpRecyclerView()
 	{
@@ -165,7 +165,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
 	}
-
+*/
 
 	private void toastSh(String message)
 	{

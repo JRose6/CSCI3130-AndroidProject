@@ -64,8 +64,7 @@ public class dosageActivity extends AppCompatActivity
 		dow = findViewById(R.id.textViewDOW);
 
 
-
-
+		//This is just for testing
 		ArrayList<Medication> Medi = new ArrayList<>();
 
 		Medication med1 = new Medication("1", "Adderall", "4 doses a day");
@@ -114,11 +113,6 @@ public class dosageActivity extends AppCompatActivity
 				break;
 		}*/
 	}
-
-
-
-
-
 
 	public class OnClicker implements View.OnClickListener
 	{
