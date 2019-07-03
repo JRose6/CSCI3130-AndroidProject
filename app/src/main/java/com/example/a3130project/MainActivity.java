@@ -2,20 +2,15 @@ package com.example.a3130project;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.NotificationChannel;
 import android.app.NotificationManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
-
-import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.NotificationCompat;
 
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -33,11 +28,13 @@ public class MainActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if (FirebaseAuth.getInstance().getCurrentUser()==null){
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
 			launchLogin();
 		}
 		setContentView(R.layout.activity_main);
 		ToolBarCreator.createToolbar(this);
+		//ToolBarCreator.createBottomNav(this);
 		welcome = findViewById(R.id.buttonWelcome);
 		Button alarmTest = findViewById(R.id.buttonTestAlarm);
 		alarmTest.setOnClickListener(new AlarmTester());
@@ -62,11 +59,14 @@ public class MainActivity extends AppCompatActivity
 		public void onClick(View v)
 		{
 			boolean notificationSent
-					= NotificationSender.scheduleNotification(getApplicationContext(), System.currentTimeMillis());
-			if (!notificationSent)
+					= NotificationSender.scheduleNotification(getApplicationContext(),
+					                                          System.currentTimeMillis());
+			if ( !notificationSent )
 			{
-				Toast.makeText(getApplicationContext(), "Notifications disabled", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(getApplicationContext(),
+				               "Notifications disabled",
+				               Toast.LENGTH_SHORT)
+				     .show();
 			}
 		}
 	}
@@ -82,19 +82,24 @@ public class MainActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this,menu);
+		return ToolBarCreator.createMenu(this, menu);
 	}
 
+
 	@Override
-	protected void onResume() {
+	protected void onResume()
+	{
 		super.onResume();
-		if (FirebaseAuth.getInstance().getCurrentUser()==null){
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
 			launchLogin();
 		}
 	}
+
+
 	/**
-	 * This is a simple logging function to dump a tag and message to the log surrounded by
-	 * empty lines (so it's easier to find)
+	 * This is a simple logging function to dump a tag and message to the log surrounded by empty
+	 * lines (so it's easier to find)
 	 *
 	 * @param tag
 	 * @param message

@@ -8,9 +8,10 @@ public class EmailValidator
 		Invalid,
 	}
 
+
 	public static Status getEmail(String InputEmail)
 	{
-		if (InputEmail.matches("^(.+)@(.+)$"))
+		if ( InputEmail.matches("^(.+)@(.+)$") )
 		{
 			return Status.Valid;
 		}

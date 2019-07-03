@@ -26,8 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity
 {
-	private EditText editFirstName, editLastName, editEmail, editPassword, editAge, allergies,
-			medication;
+	private EditText editFirstName, editLastName, editEmail, editPassword, editAge;
 	private Button       register;
 	private FirebaseAuth mAuth;
 
@@ -36,6 +35,7 @@ public class RegistrationActivity extends AppCompatActivity
 	FirebaseFirestore database;
 
 	public TextView passValidator, emailValidator;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -49,8 +49,6 @@ public class RegistrationActivity extends AppCompatActivity
 		register = findViewById(R.id.register);
 
 		editAge = findViewById(R.id.age);
-		//allergies = findViewById(R.id.allergies);
-		//medication = findViewById(R.id.medication);
 
 		passValidator = findViewById(R.id.passwordValid);
 		emailValidator = findViewById(R.id.emailValid);
@@ -71,12 +69,13 @@ public class RegistrationActivity extends AppCompatActivity
 		editEmail.addTextChangedListener(new TextWatcher());
 	}
 
+
 	public class OnClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			if (validateEmail() && validatePassword())
+			if ( validateEmail() && validatePassword() )
 			{
 				createNewUser();
 			}
@@ -89,8 +88,8 @@ public class RegistrationActivity extends AppCompatActivity
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count, int after)
 		{
-
 		}
+
 
 		@Override
 		public void onTextChanged(CharSequence s, int start, int before, int count)
@@ -98,12 +97,13 @@ public class RegistrationActivity extends AppCompatActivity
 			validateEmail();
 		}
 
+
 		@Override
 		public void afterTextChanged(Editable s)
 		{
-
 		}
 	}
+
 
 	/**
 	 * Attempts to generate a new user in the FireBase authentication database.
@@ -114,40 +114,45 @@ public class RegistrationActivity extends AppCompatActivity
 	private void createNewUser()
 	{
 		mAuth.createUserWithEmailAndPassword(editEmail.getText().toString(), editPassword.getText()
-				.toString()).addOnSuccessListener(new OnSuccessListener<AuthResult>()
-		{
-			@Override
-			public void onSuccess(AuthResult authResult)
-			{
-				createNewUserProfile(mAuth.getCurrentUser());
-			}
-		}).addOnFailureListener(new OnFailureListener()
-		{
-			@Override
-			public void onFailure(@NonNull Exception e)
-			{
-				// If sign in fails, display a message to the user.
-				toastSh("Authentication failed. " + e);
-			}
-		});
+		                                                                                 .toString())
+		     .addOnSuccessListener(new OnSuccessListener<AuthResult>()
+		     {
+			     @Override
+			     public void onSuccess(AuthResult authResult)
+			     {
+				     createNewUserProfile(mAuth.getCurrentUser());
+			     }
+		     })
+		     .addOnFailureListener(new OnFailureListener()
+		     {
+			     @Override
+			     public void onFailure(@NonNull Exception e)
+			     {
+				     // If sign in fails, display a message to the user.
+				     toastSh("Authentication failed. " + e);
+			     }
+		     });
 	}
+
 
 	/**
 	 * Attempts to generate a new Profile object for a given FireBase user.
 	 * <p>
-	 * The document ID of the profile will set to the userID of the given user.
-	 * This ensures that the profile can be retrieved from FireBase easily at any time.
-	 * FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-	 * DocumentRef ref = database.collection("profiles").document(user.getUid());
+	 * The document ID of the profile will set to the userID of the given user. This ensures that
+	 * the profile can be retrieved from FireBase easily at any time. FirebaseUser user =
+	 * FirebaseAuth.getInstance().getCurrentUser(); DocumentRef ref = database.collection("profiles").document(user.getUid());
 	 * </p>
 	 *
-	 * @param user - The 'user' in the FireBase authentication database to associate with the
-	 *             new profile object.
+	 * @param user - The 'user' in the FireBase authentication database to associate with the new
+	 *             profile object.
 	 */
 	private void createNewUserProfile(FirebaseUser user)
 	{
-		profile = new Profile(editFirstName.getText().toString(), editLastName.getText()
-				.toString(), editAge.getText().toString(), editEmail.getText().toString());
+		profile = new Profile(editFirstName.getText().toString(),
+		                      editLastName.getText()
+		                                  .toString(),
+		                      editAge.getText().toString(),
+		                      editEmail.getText().toString());
 
 		DocumentReference ref = database.collection("profiles").document(user.getUid());
 
@@ -169,15 +174,17 @@ public class RegistrationActivity extends AppCompatActivity
 		});
 	}
 
+
 	private Boolean validatePassword()
 	{
 		boolean valid = true;
-		switch (PasswordValidator.validPassword(editPassword.getText().toString()))
+		switch ( PasswordValidator.validPassword(editPassword.getText().toString()) )
 		{
 		case Invalid:
 			passValidator.setText("Invalid");
 			passValidator.setTextColor(getColor(R.color.darkRed)); // dark red
 			valid = false;
+			break;
 		case Weak:
 			passValidator.setText("Weak");
 			passValidator.setTextColor(getColor(R.color.darkOrangeRed)); // red-orange
@@ -198,13 +205,14 @@ public class RegistrationActivity extends AppCompatActivity
 		return valid;
 	}
 
+
 	private Boolean validateEmail()
 	{
-		switch (EmailValidator.getEmail(editEmail.getText().toString()))
+		switch ( EmailValidator.getEmail(editEmail.getText().toString()) )
 		{
 		case Valid:
 			emailValidator.setText("Valid Email");
-			emailValidator.setTextColor(Color.rgb(0, 150, 0)); // light green
+			emailValidator.setTextColor(getColor(R.color.lightGreen)); // light green
 			return true;
 		case Invalid:
 		default:
@@ -214,12 +222,13 @@ public class RegistrationActivity extends AppCompatActivity
 		}
 	}
 
+
 	/**
-	 * Generates a short toast with the given message and dumps it to the console log
-	 * This is for debugging & development purposes.
+	 * Generates a short toast with the given message. This is for debugging & development
+	 * purposes.
 	 */
 	private void toastSh(String message)
 	{
-		Toast.makeText(RegistrationActivity.this, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }

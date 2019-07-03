@@ -8,14 +8,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.PopupMenu;
 import android.widget.Toast;
 
 import com.example.a3130project.model.Profile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditProfileActivity extends AppCompatActivity
@@ -23,8 +21,9 @@ public class EditProfileActivity extends AppCompatActivity
 
 	private EditText firstName, lastName, age;
 	private FirebaseFirestore database;
-	private Intent            intent;
-	private Profile           profile;
+
+	private Intent  intent;
+	private Profile profile;
 
 	private Button update, mainProfile;
 
@@ -67,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			switch (v.getId())
+			switch ( v.getId() )
 			{
 			case R.id.update:
 				updateProfile();
@@ -95,8 +94,10 @@ public class EditProfileActivity extends AppCompatActivity
 			@Override
 			public void onFailure(@NonNull Exception e)
 			{
-				Toast.makeText(EditProfileActivity.this, "Failed to update fields", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(EditProfileActivity.this,
+				               "Failed to update fields",
+				               Toast.LENGTH_SHORT)
+				     .show();
 			}
 		});
 	}

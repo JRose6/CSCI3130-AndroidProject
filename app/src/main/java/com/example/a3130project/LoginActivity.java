@@ -30,11 +30,12 @@ public class LoginActivity extends AppCompatActivity
 {
 	public EditText editEmail, editPassword;
 	public Button buttonSignIn, buttonNewUser;
-	private TextView txtError;
+	private TextView     txtError;
 	private FirebaseAuth mAuth;
 
 	private FirebaseFirestore database;
 	private Profile           profile;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -54,19 +55,33 @@ public class LoginActivity extends AppCompatActivity
 		buttonNewUser.setOnClickListener(new onClicker());
 	}
 
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
+		if ( FirebaseAuth.getInstance().getCurrentUser() != null )
+		{
+			openProfile();
+		}
+	}
+
+
 	@Override
 	protected void onStart()
 	{
 		super.onStart();
 		editPassword.setText("");
+		editEmail.requestFocus();
 	}
+
 
 	private Boolean fieldIsEmpty()
 	{
 		String email    = editEmail.getText().toString();
 		String password = editPassword.getText().toString();
 
-		if (email.isEmpty() || password.isEmpty())
+		if ( email.isEmpty() || password.isEmpty() )
 		{
 			return true;
 		}
@@ -79,13 +94,13 @@ public class LoginActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			switch (v.getId())
+			switch ( v.getId() )
 			{
 			case R.id.newUser:
 				launchRegistration();
 				break;
 			case R.id.signIn:
-				if (fieldIsEmpty())
+				if ( fieldIsEmpty() )
 				{
 					txtError.setText("You are missing e-mail and/or password");
 				}
@@ -97,6 +112,7 @@ public class LoginActivity extends AppCompatActivity
 		}
 	}
 
+
 	/**
 	 * Attempts to authenticate with FireBase using the current contents of the editEmail and
 	 * editPassword textEdits. If the sign-in was successful, it will switch to the
@@ -107,51 +123,50 @@ public class LoginActivity extends AppCompatActivity
 		String email = editEmail.getText().toString();
 		String pass  = editPassword.getText().toString();
 		mAuth.signInWithEmailAndPassword(email, pass)
-				.addOnSuccessListener(new OnSuccessListener<AuthResult>()
-				{
-					@Override
-					public void onSuccess(AuthResult authResult)
-					{
-						// If sign in fails, display a message to the user.
-						logg("signIn()", "Authentication Succeeded. " + authResult);
-						DocumentReference ref = database.collection("profiles")
-								.document(mAuth.getUid());
-						ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
-						{
-							@Override
-							public void onComplete(@NonNull Task<DocumentSnapshot> task)
-							{
-								DocumentSnapshot snap = task.getResult();
-								if (snap.exists())
-								{
-									profile = snap.toObject(Profile.class);
-									//toastSh(profile.toString());
-									logg("signIn()", profile.toString());
-									txtError.setText("");
-									openProfile();
-								}
-								else
-								{
-									txtError.setText("This profile doesn't exist.");
-									logg("signIn()", "This profile doesn't fucking exist... "
-											+ "You should never see this message");
-								}
-							}
-						});
+		     .addOnSuccessListener(new OnSuccessListener<AuthResult>()
+		     {
+			     @Override
+			     public void onSuccess(AuthResult authResult)
+			     {
+				     logg("signIn()", "Authentication Succeeded. " + authResult);
+				     DocumentReference ref = database.collection("profiles")
+				                                     .document(mAuth.getUid());
+				     ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
+				     {
+					     @Override
+					     public void onComplete(@NonNull Task<DocumentSnapshot> task)
+					     {
+						     DocumentSnapshot snap = task.getResult();
+						     if ( snap.exists() )
+						     {
+							     profile = snap.toObject(Profile.class);
+							     toastSh("Authentication Successful!");
+							     openProfile();
+						     }
+						     else
+						     {
+							     txtError.setText("This profile doesn't exist.");
+							     logg("signIn()", "This profile doesn't fucking exist... "
+							                      + "You should never see this message");
+						     }
+					     }
+				     });
 
-					}
-				})
-				.addOnFailureListener(new OnFailureListener()
-				{
-					@Override
-					public void onFailure(@NonNull Exception e)
-					{
-						// If sign in fails, display a message to the user.
-						txtError.setText("Invalid Username or Password");
-						logg("signIn()", "Authentication failed. " + e);
-					}
-				});
+			     }
+		     })
+		     .addOnFailureListener(new OnFailureListener()
+		     {
+			     @Override
+			     public void onFailure(@NonNull Exception e)
+			     {
+				     // If sign in fails, display a message to the user.
+				     toastSh("Authentication failed.");
+				     txtError.setText("Invalid Username or Password");
+				     logg("signIn()", "Authentication failed. " + e);
+			     }
+		     });
 	}
+
 
 	public void openProfile()
 	{
@@ -168,8 +183,8 @@ public class LoginActivity extends AppCompatActivity
 
 
 	/**
-	 * Dumps the given tag and message to the console log
-	 * This is for debugging & development purposes.
+	 * Dumps the given tag and message to the console log This is for debugging & development
+	 * purposes.
 	 */
 	private void logg(String tag, String message)
 	{
@@ -179,6 +194,7 @@ public class LoginActivity extends AppCompatActivity
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, "-------------------", "-----------------------------");
 	}
+
 
 	/**
 	 * Generates a short toast message

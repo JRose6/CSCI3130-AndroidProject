@@ -1,7 +1,7 @@
 package com.example.a3130project;
 
-
 import androidx.appcompat.app.AppCompatActivity;
+
 
 
 import android.content.Intent;
@@ -17,6 +17,10 @@ import java.text.DateFormat;
 
 
 import android.widget.Button;
+
+import android.os.Bundle;
+import android.view.Menu;
+
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +44,7 @@ public class dosageActivity extends AppCompatActivity
 	private Intent intent;
 
 	private TextView dow;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -75,7 +80,8 @@ public class dosageActivity extends AppCompatActivity
 		Medi.add(med4);
 		Medi.add(med5);
 
-		PrescriptionAdapter adapter = new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
+		PrescriptionAdapter adapter =
+				new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
 		listviewMed.setAdapter(adapter);
 
 
@@ -125,9 +131,10 @@ public class dosageActivity extends AppCompatActivity
 		}
 	}
 
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this,menu);
+		return ToolBarCreator.createMenu(this, menu);
 	}
 }

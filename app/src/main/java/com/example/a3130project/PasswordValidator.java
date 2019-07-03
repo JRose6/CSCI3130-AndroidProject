@@ -11,36 +11,37 @@ public class PasswordValidator
 		Excellent,
 	}
 
+
 	public static Strength validPassword(String inputPassword)
 	{
 		int rulesPassed = 0;
 
-		if (inputPassword.length() < 6)
+		if ( inputPassword.length() < 6 )
 		{
 			return Strength.Invalid;
 		}
-		if (inputPassword.equalsIgnoreCase("password"))
+		if ( inputPassword.equalsIgnoreCase("password") )
 		{
 			return Strength.Invalid;
 		}
-		if (inputPassword.length() > 8)
+		if ( inputPassword.length() > 8 )
 		{
 			rulesPassed++;
 		}
-		if (inputPassword.matches(".*[0-9]{1,}.*"))
+		if ( inputPassword.matches(".*[0-9]{1,}.*") )
 		{
 			rulesPassed++;
 		}
-		if (inputPassword.matches(".*[!@#$%^&*()]{1,}.*"))
+		if ( inputPassword.matches(".*[!@#$%^&*()]{1,}.*") )
 		{
 			rulesPassed++;
 		}
-		if (inputPassword.matches("(.*[A-Z]){1,}.*"))
+		if ( inputPassword.matches("(.*[A-Z]){1,}.*") )
 		{
 			rulesPassed++;
 		}
 
-		switch (rulesPassed)
+		switch ( rulesPassed )
 		{
 		case 4:
 			return Strength.Excellent;

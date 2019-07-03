@@ -19,13 +19,16 @@ public class NotificationSender
 	public static final int    NOTIFICATION_ID    = 0;
 	public static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 
+
 	private NotificationSender() {}
+
 
 	public static boolean scheduleNotification(Context ctx, long time)
 	{
 		SharedPreferences sharedPref
-				= ctx.getSharedPreferences(ctx.getString(R.string.preference_file), Context.MODE_PRIVATE);
-		if (sharedPref.getBoolean(ctx.getString(R.string.saved_alarms_allowed), false))
+				= ctx.getSharedPreferences(ctx.getString(R.string.preference_file),
+				                           Context.MODE_PRIVATE);
+		if ( sharedPref.getBoolean(ctx.getString(R.string.saved_alarms_allowed), false) )
 		{
 			AlarmManager alarmManager = (AlarmManager) ctx.getSystemService(Context.ALARM_SERVICE);
 			Intent       intent       = new Intent(ctx, AlarmBroadCastReceiver.class);
@@ -34,10 +37,11 @@ public class NotificationSender
 			int delay = sharedPref.getInt(ctx.getString(R.string.saved_alarm_delay), 0);
 			PendingIntent pendingIntent
 					= PendingIntent.getBroadcast(ctx, 100, intent, FLAG_CANCEL_CURRENT);
-			alarmManager.set(AlarmManager.RTC_WAKEUP, time + (delay * 1000), pendingIntent);
+			alarmManager.set(AlarmManager.RTC_WAKEUP, time + ( delay * 1000 ), pendingIntent);
 		}
 		return sharedPref.getBoolean(ctx.getString(R.string.saved_alarms_allowed), false);
 	}
+
 
 	public static void sendNotification(Context ctx)
 	{
@@ -45,23 +49,29 @@ public class NotificationSender
 		mNotifyManager.notify(NOTIFICATION_ID, notifyBuilder.build());
 	}
 
+
 	private static NotificationCompat.Builder getNotificationBuilder(Context ctx)
 	{
 		NotificationCompat.Builder notifyBuilder
-				= new NotificationCompat.Builder(ctx, PRIMARY_CHANNEL_ID).setContentTitle("Time For Meds!")
-				.setContentText("It is time for you to take your medication")
-				.setSmallIcon(R.drawable.ic_alarm);
+				= new NotificationCompat.Builder(ctx, PRIMARY_CHANNEL_ID).setContentTitle(
+				"Time For Meds!")
+				                                                         .setContentText(
+						                                                         "It is time for you to take your medication")
+				                                                         .setSmallIcon(R.drawable.ic_alarm);
 		return notifyBuilder;
 	}
+
 
 	public static void createNotificationChannel(Context ctx)
 	{
 		mNotifyManager
 				= (android.app.NotificationManager) ctx.getSystemService(NOTIFICATION_SERVICE);
-		if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O)
+		if ( android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O )
 		{
 			NotificationChannel notificationChannel
-					= new NotificationChannel(PRIMARY_CHANNEL_ID, "Mascot Notification", android.app.NotificationManager.IMPORTANCE_HIGH);
+					= new NotificationChannel(PRIMARY_CHANNEL_ID,
+					                          "Mascot Notification",
+					                          android.app.NotificationManager.IMPORTANCE_HIGH);
 			notificationChannel.enableLights(true);
 			notificationChannel.enableVibration(true);
 			notificationChannel.setDescription("Notification from Pharmacy");

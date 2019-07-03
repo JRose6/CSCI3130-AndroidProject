@@ -1,6 +1,5 @@
 package com.example.a3130project;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,13 +11,33 @@ import com.google.firebase.auth.FirebaseAuth;
 
 public class ToolBarCreator
 {
-	public static void createToolbar(final AppCompatActivity activity){
+	public static void createToolbar(final AppCompatActivity activity)
+	{
 		Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
 		toolbar.showOverflowMenu();
 		activity.setSupportActionBar(toolbar);
-
 	}
-	public static boolean createMenu(final AppCompatActivity activity,Menu menu){
+
+
+	/*
+	public static void createBottomNav(final AppCompatActivity activity){
+		BottomNavigationView bottomNavigationView = (BottomNavigationView) activity.findViewById(R.id.navigationView);
+		bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+			@Override
+			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+				switch (item.getItemId()) {
+				case R.id.action_profile:
+					Intent intent = new Intent(activity, MainProfileLoadActivity.class);
+					activity.startActivity(intent);
+					break;
+				}
+				return true;
+			}
+		});
+	}
+*/
+	public static boolean createMenu(final AppCompatActivity activity, Menu menu)
+	{
 
 		activity.getMenuInflater().inflate(R.menu.mainmenu, menu);
 		//U can find item set icon and stuff...
@@ -28,7 +47,8 @@ public class ToolBarCreator
 			@Override
 			public boolean onMenuItemClick(MenuItem item)
 			{
-				Intent intent = new Intent(activity.getApplicationContext(), SettingsActivity.class);
+				Intent intent =
+						new Intent(activity.getApplicationContext(), SettingsActivity.class);
 				activity.startActivity(intent);
 				return false;
 			}
