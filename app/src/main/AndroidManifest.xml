@@ -13,7 +13,7 @@
         android:theme="@style/AppTheme">
         <activity android:name=".PrescriptionDetails"></activity>
         <activity android:name=".MedicationDetails" />
-        <activity android:name=".All_Meds" />
+        <activity android:name=".AllMeds" />
         <activity android:name=".dosageActivity" />
         <activity android:name=".calendarActivity" />
         <activity android:name=".EditProfileActivity" />

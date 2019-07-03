@@ -138,7 +138,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 	public void medicationPage()
 	{
-		Intent intent = new Intent(this, All_Meds.class);
+		Intent intent = new Intent(this, AllMeds.class);
 		startActivity(intent);
 	}
 

@@ -43,7 +43,7 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 			@Override
 			public void onClick(View v)
 			{
-				/*Intent intent = new Intent(All_Meds.this, PrescriptionDetails.class);
+				/*Intent intent = new Intent(AllMeds.this, PrescriptionDetails.class);
 				intent.putExtra("medication", model);
 				intent.putExtra("actionType", "add");
 				startActivity(intent);*/

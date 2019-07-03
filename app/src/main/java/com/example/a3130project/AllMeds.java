@@ -28,7 +28,7 @@ import com.google.firebase.firestore.Query;
 
 import static com.example.a3130project.MainActivity.logg;
 
-public class All_Meds extends AppCompatActivity
+public class AllMeds extends AppCompatActivity
 {
 
 	private FirebaseFirestore        database       = FirebaseFirestore.getInstance();
