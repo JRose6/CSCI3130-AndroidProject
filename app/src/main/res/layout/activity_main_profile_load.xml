@@ -6,22 +6,42 @@
     android:layout_height="match_parent"
     tools:context=".MainProfileLoadActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+            app:navigationIcon="@mipmap/ic_launcher_round"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:id="@+id/textViewWelcome"
-        android:layout_width="178dp"
-        android:layout_height="47dp"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="249dp"
+        android:layout_height="46dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginTop="8dp"
         android:text="Welcome to your profile!"
+        android:textAlignment="gravity"
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
     <TextView
         android:id="@+id/textViewFirstName"
         android:layout_width="214dp"
         android:layout_height="30dp"
         android:layout_marginTop="16dp"
-        android:editable="false"
         android:text="~You shouldn't see this ever~"
         app:layout_constraintStart_toStartOf="@+id/textViewWelcome"
         app:layout_constraintTop_toBottomOf="@+id/textViewWelcome" />
@@ -38,7 +58,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/prescriptionRecycler"
         android:layout_width="377dp"
-        android:layout_height="405dp"
+        android:layout_height="424dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,54 +68,43 @@
         android:id="@+id/editprofile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:text="Edit Profile"
-        app:layout_constraintStart_toEndOf="@+id/textViewWelcome"
-        app:layout_constraintTop_toTopOf="@+id/textViewWelcome" />
-
-    <Button
-        android:id="@+id/buttonLogout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Logout"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirstName"
-        app:layout_constraintTop_toBottomOf="@+id/editprofile" />
+        android:layout_marginEnd="8dp"
+        android:text="Edit Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewWelcome"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
+
 
     <Button
-
         android:id="@+id/buttonMedList"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginBottom="36dp"
         android:text="Med List"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/calendar" />
+        app:layout_constraintEnd_toStartOf="@+id/dosage"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/calendar"
+        app:layout_constraintTop_toTopOf="@+id/calendar" />
 
     <Button
         android:id="@+id/calendar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="36dp"
+        android:layout_marginTop="16dp"
         android:text="Calendar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/dosage"
-        app:layout_constraintHorizontal_bias="0.331"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toStartOf="@+id/buttonMedList"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/prescriptionRecycler" />
 
     <Button
         android:id="@+id/dosage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="260dp"
-        android:layout_marginBottom="36dp"
         android:text="Dosage"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/buttonMedList"
+        app:layout_constraintTop_toTopOf="@+id/buttonMedList" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

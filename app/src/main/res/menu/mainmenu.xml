@@ -13,5 +13,8 @@
         android:id="@+id/action_refill"
         android:title="Refill"
         app:showAsAction="never"/>
-
+    <item
+        android:id="@+id/logout"
+        android:title="Logout"
+        app:showAsAction="never"/>
 </menu>

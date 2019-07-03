@@ -12,12 +12,6 @@ import static org.junit.Assert.*;
 public class ValidationUnitTests
 {
 	@Test
-	public void addition_isCorrect()
-	{
-		assertEquals(4, 2 + 2);
-	}
-
-	@Test
 	public void password_invalid()
 	{
 		assertEquals(PasswordValidator.validPassword("password"), PasswordValidator.Strength.Invalid);

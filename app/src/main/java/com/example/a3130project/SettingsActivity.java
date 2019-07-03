@@ -1,11 +1,15 @@
 package com.example.a3130project;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -22,6 +26,7 @@ public class SettingsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
+		ToolBarCreator.createToolbar(this);
 		sharedPref
 				= getApplicationContext().getSharedPreferences(getString(R.string.preference_file), Context.MODE_PRIVATE);
 		Button btnConfirm = (Button) findViewById(R.id.btnConfirmSettings);
@@ -59,5 +64,10 @@ public class SettingsActivity extends AppCompatActivity
 				finish();
 			}
 		});
+	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this,menu);
 	}
 }

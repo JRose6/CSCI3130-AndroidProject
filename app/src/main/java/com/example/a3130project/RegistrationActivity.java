@@ -26,8 +26,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity
 {
-	private EditText editFirstName, editLastName, editEmail, editPassword, editAge, allergies,
-			medication;
+	private EditText editFirstName, editLastName, editEmail, editPassword, editAge;
 	private Button       register;
 	private FirebaseAuth mAuth;
 
@@ -49,8 +48,6 @@ public class RegistrationActivity extends AppCompatActivity
 		register = findViewById(R.id.register);
 
 		editAge = findViewById(R.id.age);
-		//allergies = findViewById(R.id.allergies);
-		//medication = findViewById(R.id.medication);
 
 		passValidator = findViewById(R.id.passwordValid);
 		emailValidator = findViewById(R.id.emailValid);
@@ -62,19 +59,9 @@ public class RegistrationActivity extends AppCompatActivity
 		editPassword.addTextChangedListener(new TextWatcher()
 		{
 			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-
-			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count)
 			{
 				validatePassword();
-			}
-
-			@Override
-			public void afterTextChanged(Editable s)
-			{
 			}
 		});
 
@@ -99,7 +86,6 @@ public class RegistrationActivity extends AppCompatActivity
 		@Override
 		public void beforeTextChanged(CharSequence s, int start, int count, int after)
 		{
-
 		}
 
 		@Override
@@ -111,7 +97,6 @@ public class RegistrationActivity extends AppCompatActivity
 		@Override
 		public void afterTextChanged(Editable s)
 		{
-
 		}
 	}
 
@@ -181,30 +166,32 @@ public class RegistrationActivity extends AppCompatActivity
 
 	private Boolean validatePassword()
 	{
+		boolean valid = true;
 		switch (PasswordValidator.validPassword(editPassword.getText().toString()))
 		{
 		case Invalid:
 			passValidator.setText("Invalid");
-			passValidator.setTextColor(Color.rgb(75, 0, 0)); // dark red
-			return false;
+			passValidator.setTextColor(getColor(R.color.darkRed)); // dark red
+			valid = false;
+			break;
 		case Weak:
 			passValidator.setText("Weak");
-			passValidator.setTextColor(Color.rgb(175, 75, 0)); // red-orange
+			passValidator.setTextColor(getColor(R.color.darkOrangeRed)); // red-orange
 			break;
 		case Medium:
 			passValidator.setText("Okay");
-			passValidator.setTextColor(Color.rgb(220, 150, 0)); // light red-orange
+			passValidator.setTextColor(getColor(R.color.lightOrangeRed)); // light red-orange
 			break;
 		case Strong:
 			passValidator.setText("Strong");
-			passValidator.setTextColor(Color.rgb(0, 100, 0)); // dark green
+			passValidator.setTextColor(getColor(R.color.darkGreen)); // dark green
 			break;
 		case Excellent:
 			passValidator.setText("Excellent");
-			passValidator.setTextColor(Color.rgb(0, 150, 0)); // light green
+			passValidator.setTextColor(getColor(R.color.lightGreen)); // light green
 			break;
 		}
-		return true;
+		return valid;
 	}
 
 	private Boolean validateEmail()
@@ -213,7 +200,7 @@ public class RegistrationActivity extends AppCompatActivity
 		{
 		case Valid:
 			emailValidator.setText("Valid Email");
-			emailValidator.setTextColor(Color.rgb(0, 150, 0)); // light green
+			emailValidator.setTextColor(getColor(R.color.lightGreen)); // light green
 			return true;
 		case Invalid:
 		default:
@@ -224,11 +211,11 @@ public class RegistrationActivity extends AppCompatActivity
 	}
 
 	/**
-	 * Generates a short toast with the given message and dumps it to the console log
+	 * Generates a short toast with the given message.
 	 * This is for debugging & development purposes.
 	 */
 	private void toastSh(String message)
 	{
-		Toast.makeText(RegistrationActivity.this, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
 }

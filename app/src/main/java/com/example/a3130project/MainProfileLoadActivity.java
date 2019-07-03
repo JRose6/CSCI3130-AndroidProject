@@ -1,6 +1,7 @@
 package com.example.a3130project;
 
 import android.content.Intent;
+import android.view.Menu;
 import android.view.View;
 
 import androidx.annotation.NonNull;
@@ -25,28 +26,23 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainProfileLoadActivity extends AppCompatActivity
 {
-	private TextView                 textViewFirstName;
-	private TextView                 textViewLastName;
-	private FirebaseFirestore        database;
-	private Button                   buttonEditProfile;
-	private Button                   buttonLogout;
-	private Button                   calendar;
-	private Button                   dosage;
-	private Button                   buttonAddMed;
-	private Profile                  profile;
-	private Intent                   intent;
-
+	private TextView           textViewFirstName;
+	private TextView           textViewLastName;
+	private FirebaseFirestore  database;
+	private Button             buttonEditProfile;
+	private Button             calendar;
+	private Button             dosage;
+	private Button             buttonAddMed;
+	private Profile            profile;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
-
+		ToolBarCreator.createToolbar(this);
 		calendar = findViewById(R.id.calendar);
-		dosage = findViewById(R.id.dosage);
 		buttonEditProfile = findViewById(R.id.editprofile);
-		buttonLogout = findViewById(R.id.buttonLogout);
 		buttonAddMed = findViewById(R.id.buttonMedList);
 
 		textViewFirstName = findViewById(R.id.textViewFirstName);
@@ -55,9 +51,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		database = FirebaseFirestore.getInstance();
 
 		calendar.setOnClickListener(new OnClicker());
-		dosage.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
-		buttonLogout.setOnClickListener(new OnClicker());
+
 		buttonAddMed.setOnClickListener(new OnClicker());
 	}
 
@@ -102,11 +97,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			{
 				launchEditProfile();
 			}
-			else if (v.getId() == R.id.buttonLogout)
-			{
-				FirebaseAuth.getInstance().signOut();
-				finish();
-			}
 			else if(v.getId() == R.id.calendar)
 			{
 				calendarPage();
@@ -134,6 +124,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		startActivity(intent);
 	}
 
+
 	public void dosagePage()
 	{
 		Intent intent = new Intent(this, dosageActivity.class);
@@ -158,6 +149,13 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 	private void toastSh(String message)
 	{
-		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+	    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+	    return ToolBarCreator.createMenu(this, menu);
+	}
+
 }
