@@ -78,7 +78,7 @@
 
 
     <Button
-        android:id="@+id/buttonMedList"
+        android:id="@+id/buttonAddPrescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Med List"
@@ -95,7 +95,7 @@
         android:layout_marginBottom="16dp"
         android:text="Calendar"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonMedList"
+        app:layout_constraintEnd_toStartOf="@+id/buttonAddPrescription"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/prescriptionRecycler" />
@@ -107,7 +107,7 @@
         android:text="Dosage"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/buttonMedList"
-        app:layout_constraintTop_toTopOf="@+id/buttonMedList" />
+        app:layout_constraintStart_toEndOf="@+id/buttonAddPrescription"
+        app:layout_constraintTop_toTopOf="@+id/buttonAddPrescription" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

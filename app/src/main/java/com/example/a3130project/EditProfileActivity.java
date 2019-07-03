@@ -22,8 +22,8 @@ public class EditProfileActivity extends AppCompatActivity
 	private EditText firstName, lastName, age;
 	private FirebaseFirestore database;
 
-	private Intent            intent;
-	private Profile           profile;
+	private Intent  intent;
+	private Profile profile;
 
 	private Button update, mainProfile;
 
@@ -66,7 +66,7 @@ public class EditProfileActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			switch (v.getId())
+			switch ( v.getId() )
 			{
 			case R.id.update:
 				updateProfile();
@@ -94,8 +94,10 @@ public class EditProfileActivity extends AppCompatActivity
 			@Override
 			public void onFailure(@NonNull Exception e)
 			{
-				Toast.makeText(EditProfileActivity.this, "Failed to update fields", Toast.LENGTH_SHORT)
-						.show();
+				Toast.makeText(EditProfileActivity.this,
+				               "Failed to update fields",
+				               Toast.LENGTH_SHORT)
+				     .show();
 			}
 		});
 	}

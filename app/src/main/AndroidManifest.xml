@@ -15,7 +15,7 @@
         tools:ignore="GoogleAppIndexingWarning">
         <activity android:name=".PrescriptionDetails"/>
         <activity android:name=".MedicationDetails" />
-        <activity android:name=".AllMeds" />
+        <activity android:name=".AllMedications" />
         <activity android:name=".dosageActivity" />
         <activity android:name=".calendarActivity" />
         <activity android:name=".dosageActivity"/>

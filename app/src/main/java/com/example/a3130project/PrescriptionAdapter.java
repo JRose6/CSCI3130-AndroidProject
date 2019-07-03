@@ -17,8 +17,8 @@ import com.example.a3130project.model.Medication;
 
 public class PrescriptionAdapter extends ArrayAdapter<Medication>
 {
-	private static final String TAG = "PrescriptionAdapter";
-	private Context mContext;
+	private static final String  TAG = "PrescriptionAdapter";
+	private              Context mContext;
 	int mResource;
 
 
@@ -29,13 +29,14 @@ public class PrescriptionAdapter extends ArrayAdapter<Medication>
 		mResource = resource;
 	}
 
+
 	@NonNull
 	@Override
 	public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent)
 	{
 		String name = getItem(position).getName();
 		String info = getItem(position).getInfo();
-		String id = getItem(position).getId();
+		String id   = getItem(position).getId();
 
 		Medication medication = new Medication(id, name, info);
 

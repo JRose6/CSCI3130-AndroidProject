@@ -14,11 +14,12 @@ public class MedicationViewHolder extends RecyclerView.ViewHolder
 	public TextView genName;
 	public Button   buttonAddPrescription;
 
+
 	public MedicationViewHolder(View view)
 	{
 		super(view);
 		name = view.findViewById(R.id.viewMedName);
 		genName = view.findViewById(R.id.viewMedGenName);
-		buttonAddPrescription = view.findViewById(R.id.buttonMedList);
+		buttonAddPrescription = view.findViewById(R.id.buttonAddPrescription);
 	}
 }

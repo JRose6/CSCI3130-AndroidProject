@@ -26,14 +26,15 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainProfileLoadActivity extends AppCompatActivity
 {
-	private TextView           textViewFirstName;
-	private TextView           textViewLastName;
-	private FirebaseFirestore  database;
-	private Button             buttonEditProfile;
-	private Button             calendar;
-	private Button             dosage;
-	private Button             buttonAddMed;
-	private Profile            profile;
+	private TextView          textViewFirstName;
+	private TextView          textViewLastName;
+	private FirebaseFirestore database;
+	private Button            buttonEditProfile;
+	private Button            calendar;
+	private Button            dosage;
+	private Button            buttonAddMed;
+	private Profile           profile;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -43,7 +44,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		ToolBarCreator.createToolbar(this);
 		calendar = findViewById(R.id.calendar);
 		buttonEditProfile = findViewById(R.id.editprofile);
-		buttonAddMed = findViewById(R.id.buttonMedList);
+		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
 		textViewFirstName = findViewById(R.id.textViewFirstName);
 		textViewLastName = findViewById(R.id.textViewLastName);
@@ -56,67 +57,71 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		buttonAddMed.setOnClickListener(new OnClicker());
 	}
 
+
 	@Override
 	protected void onStart()
 	{
 		super.onStart();
 		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-		if (user != null)
+		if ( user != null )
 		{
 			database.collection("profiles")
-					.document(user.getUid())
-					.get()
-					.addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-					{
-						@Override
-						public void onSuccess(DocumentSnapshot documentSnapshot)
-						{
-							profile = documentSnapshot.toObject(Profile.class);
-							textViewFirstName.setText(profile.firstName);
-							textViewLastName.setText(profile.lastName);
-						}
-					})
-					.addOnFailureListener(new OnFailureListener()
-					{
-						@Override
-						public void onFailure(@NonNull Exception e)
-						{
-							toastSh("Failed to update profile fields.");
-						}
-					});
+			        .document(user.getUid())
+			        .get()
+			        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+			        {
+				        @Override
+				        public void onSuccess(DocumentSnapshot documentSnapshot)
+				        {
+					        profile = documentSnapshot.toObject(Profile.class);
+					        textViewFirstName.setText(profile.firstName);
+					        textViewLastName.setText(profile.lastName);
+				        }
+			        })
+			        .addOnFailureListener(new OnFailureListener()
+			        {
+				        @Override
+				        public void onFailure(@NonNull Exception e)
+				        {
+					        toastSh("Failed to update profile fields.");
+				        }
+			        });
 		}
 		getDelegate().onStart();
 	}
+
 
 	public class OnClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			if (v.getId() == R.id.editprofile)
+			if ( v.getId() == R.id.editprofile )
 			{
 				launchEditProfile();
 			}
-			else if(v.getId() == R.id.calendar)
+			else if ( v.getId() == R.id.calendar )
 			{
 				calendarPage();
 			}
-			else if(v.getId() == R.id.dosage)
+			else if ( v.getId() == R.id.dosage )
 			{
 				dosagePage();
 			}
-			else if(v.getId() == R.id.buttonMedList)
+			else if ( v.getId() == R.id.buttonAddPrescription )
 			{
 				medicationPage();
 			}
 		}
 	}
 
+
 	public void medicationPage()
 	{
-		Intent intent = new Intent(this, AllMeds.class);
+		Intent intent = new Intent(this, AllMedications.class);
 		startActivity(intent);
 	}
+
 
 	public void calendarPage()
 	{
@@ -131,12 +136,14 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		startActivity(intent);
 	}
 
+
 	public void launchEditProfile()
 	{
 		Intent intent = new Intent(this, EditProfileActivity.class);
 		intent.putExtra("profile", profile);
 		startActivity(intent);
 	}
+
 
 	// Connect the recycler view to the medication view holder & the FireStore adapter
 	private void setUpRecyclerView(RecyclerView rv, FirestoreRecyclerAdapter adapter)
@@ -147,15 +154,17 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		rv.setAdapter(adapter);
 	}
 
+
 	private void toastSh(String message)
 	{
-	    Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
 	}
+
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-	    return ToolBarCreator.createMenu(this, menu);
+		return ToolBarCreator.createMenu(this, menu);
 	}
 
 }

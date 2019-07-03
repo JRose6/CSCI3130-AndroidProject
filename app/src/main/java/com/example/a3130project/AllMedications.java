@@ -20,13 +20,13 @@ import com.google.firebase.firestore.Query;
 
 import static com.example.a3130project.MainActivity.logg;
 
-public class AllMeds extends AppCompatActivity
+public class AllMedications extends AppCompatActivity
 {
 
-	private FirebaseFirestore        database       = FirebaseFirestore.getInstance();
-	private CollectionReference      medicationsRef = database.collection("medications");
+	private FirebaseFirestore   database       = FirebaseFirestore.getInstance();
+	private CollectionReference medicationsRef = database.collection("medications");
+	private MedicationAdapter   adapter;
 
-	private MedicationAdapter adapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -37,12 +37,14 @@ public class AllMeds extends AppCompatActivity
 		setUpRecyclerView();
 	}
 
+
 	@Override
 	protected void onStart()
 	{
 		super.onStart();
 		adapter.startListening();
 	}
+
 
 	@Override
 	protected void onStop()
@@ -51,12 +53,14 @@ public class AllMeds extends AppCompatActivity
 		adapter.stopListening();
 	}
 
+
 	// Connect the recycler view to the medication view holder & the FireStore adapter
 	private void setUpRecyclerView()
 	{
 		Query query = medicationsRef.orderBy("name", Query.Direction.DESCENDING);
-		FirestoreRecyclerOptions<Medication> options = new FirestoreRecyclerOptions.Builder<Medication>()
-		                                     .setQuery(query, Medication.class).build();
+		FirestoreRecyclerOptions<Medication> options =
+				new FirestoreRecyclerOptions.Builder<Medication>()
+						.setQuery(query, Medication.class).build();
 
 		adapter = new MedicationAdapter(options);
 
@@ -66,14 +70,16 @@ public class AllMeds extends AppCompatActivity
 		recyclerView.setAdapter(adapter);
 	}
 
+
 	// Creates a Firestore adapter to populate a Recycler view.
 	private FirestoreRecyclerAdapter setUpFirebaseAdapter(FirebaseFirestore db)
 	{
 		toastSh("RecyclerAdapterSetup");
 		Query query = db.collection("medications").orderBy("name").limit(50);
 		FirestoreRecyclerOptions<Medication> options
-				= new FirestoreRecyclerOptions.Builder<Medication>().setQuery(query, Medication.class)
-				.build();
+				=
+				new FirestoreRecyclerOptions.Builder<Medication>().setQuery(query, Medication.class)
+				                                                  .build();
 
 		FirestoreRecyclerAdapter adapter
 				= new FirestoreRecyclerAdapter<Medication, MedicationViewHolder>(options)
@@ -87,11 +93,12 @@ public class AllMeds extends AppCompatActivity
 
 			}
 
+
 			@Override
 			public MedicationViewHolder onCreateViewHolder(ViewGroup group, int i)
 			{
 				View view = LayoutInflater.from(group.getContext())
-						.inflate(R.layout.medication_card, group, false);
+				                          .inflate(R.layout.medication_card, group, false);
 				logg("MedicationViewHolder()", "GROUP: " + group);
 				return new MedicationViewHolder(view);
 			}

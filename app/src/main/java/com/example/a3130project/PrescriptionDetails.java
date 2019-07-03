@@ -17,8 +17,6 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import org.w3c.dom.Document;
-
 public class PrescriptionDetails extends AppCompatActivity
 {
 
@@ -31,6 +29,7 @@ public class PrescriptionDetails extends AppCompatActivity
 	private TextView          docNotes;
 	private Prescription      prescription;
 	private FirebaseFirestore database;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -49,7 +48,7 @@ public class PrescriptionDetails extends AppCompatActivity
 
 		database = FirebaseFirestore.getInstance();
 
-		switch (action)
+		switch ( action )
 		{
 		case "add":
 			// TODO: Add prescription object
@@ -68,20 +67,21 @@ public class PrescriptionDetails extends AppCompatActivity
 		}
 	}
 
+
 	public class OnClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			if (v.getId() == R.id.buttonAddEditPresciption)
+			if ( v.getId() == R.id.buttonAddEditPresciption )
 			{
 				updateDatabase();
 			}
-			else if (v.getId() == R.id.buttonCancel)
+			else if ( v.getId() == R.id.buttonCancel )
 			{
 				finish();
 			}
-			else if (v.getId() == R.id.buttonDetails)
+			else if ( v.getId() == R.id.buttonDetails )
 			{
 				Intent intent = new Intent(PrescriptionDetails.this, MedicationDetails.class);
 				intent.putExtra("medication", med);
@@ -90,11 +90,12 @@ public class PrescriptionDetails extends AppCompatActivity
 		}
 	}
 
+
 	private void updateDatabase()
 	{
 		DocumentReference   ref;
 		CollectionReference collection = database.collection("prescriptions");
-		if (action == "add")
+		if ( action == "add" )
 		{
 			ref = collection.document();
 			prescription.id = ref.getId();
@@ -107,7 +108,7 @@ public class PrescriptionDetails extends AppCompatActivity
 		prescription.dosage = dosage.getText().toString();
 		prescription.notes = notes.getText().toString();
 
-		if (prescription.id != null)
+		if ( prescription.id != null )
 		{
 			ref.set(prescription).addOnFailureListener(new OnFailureListener()
 			{
@@ -131,6 +132,7 @@ public class PrescriptionDetails extends AppCompatActivity
 			});
 		}
 	}
+
 
 	/**
 	 * Generates a short toast message

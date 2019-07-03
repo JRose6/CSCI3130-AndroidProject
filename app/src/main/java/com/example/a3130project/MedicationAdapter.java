@@ -18,6 +18,7 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 		super(options);
 	}
 
+
 	@Override
 	protected void onBindViewHolder(@NonNull MedicationViewHolder medicationHolder,
 	                                int i,
@@ -31,7 +32,7 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 			@Override
 			public void onClick(View v)
 			{
-				/*Intent intent = new Intent(AllMeds.this, PrescriptionDetails.class);
+				/*Intent intent = new Intent(AllMedications.this, PrescriptionDetails.class);
 				intent.putExtra("medication", model);
 				intent.putExtra("actionType", "add");
 				startActivity(intent);*/
@@ -39,11 +40,13 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 		});
 	}
 
+
 	@NonNull
 	@Override
 	public MedicationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
 	{
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.medication_card, parent, false);
+		View v = LayoutInflater.from(parent.getContext())
+		                       .inflate(R.layout.medication_card, parent, false);
 		return new MedicationViewHolder(v);
 	}
 }

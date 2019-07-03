@@ -18,6 +18,7 @@ public class RefillActivity extends AppCompatActivity
 	EditText Takeinput;
 	TextView Success;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
@@ -42,11 +43,11 @@ public class RefillActivity extends AppCompatActivity
 			int amount = 100;
 			int count  = amount;
 			amount = amount - take;
-			if (amount < 0)
+			if ( amount < 0 )
 			{
 				Success.setText("You don't have enough medication to take, please refill");
 			}
-			else if (amount <= 0.2 * count && (amount >= 0))
+			else if ( amount <= 0.2 * count && ( amount >= 0 ) )
 			{
 
 				AlertDialog.Builder Refill_Alarm = new AlertDialog.Builder(RefillActivity.this);
@@ -54,7 +55,8 @@ public class RefillActivity extends AppCompatActivity
 				Refill_Alarm.setCancelable(true);
 
 				Refill_Alarm.setTitle("Refill Alert");
-				Refill_Alarm.setMessage("Your medication is below the threshold! Please refill ASAP!");
+				Refill_Alarm.setMessage(
+						"Your medication is below the threshold! Please refill ASAP!");
 
 				Refill_Alarm.setPositiveButton("OK", new DialogInterface.OnClickListener()
 				{

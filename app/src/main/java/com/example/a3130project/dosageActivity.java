@@ -1,15 +1,9 @@
 package com.example.a3130project;
 
-
 import androidx.appcompat.app.AppCompatActivity;
-
 
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-
 import android.widget.ListView;
 
 import com.example.a3130project.model.Medication;
@@ -21,6 +15,7 @@ public class dosageActivity extends AppCompatActivity
 {
 
 	private ListView listviewMed;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -44,13 +39,16 @@ public class dosageActivity extends AppCompatActivity
 		Medi.add(med4);
 		Medi.add(med5);
 
-		PrescriptionAdapter adapter = new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
+		PrescriptionAdapter adapter =
+				new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
 		listviewMed.setAdapter(adapter);
 
 	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this,menu);
+		return ToolBarCreator.createMenu(this, menu);
 	}
 }
