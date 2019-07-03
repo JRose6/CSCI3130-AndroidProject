@@ -58,6 +58,7 @@ public class LoginActivity extends AppCompatActivity
 	{
 		super.onStart();
 		editPassword.setText("");
+		editEmail.requestFocus();
 	}
 
 	private Boolean fieldIsEmpty()
