@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.widget.CalendarView;
 
 
+
 public class calendarActivity extends AppCompatActivity
 {
 	private static final String       TAG = "CalendarActivity";
@@ -21,42 +22,31 @@ public class calendarActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
-		ToolBarCreator.createToolbar(this);
+
+		//'button'
 		mCalendarView = (CalendarView) findViewById(R.id.calendarView);
-		mCalendarView.setOnDateChangeListener(new CalendarView.OnDateChangeListener()
-		{
-			@Override
-			public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth)
-			{
-				String date = year + "/" + ( month + 1 ) + "/" + dayOfMonth;
-				Log.d(TAG, "onSelectedDayChange: yyyy/mm/dd:" + date);
-				Intent intent = new Intent(calendarActivity.this, dosageActivity.class);
-				intent.putExtra("date", date);
-				startActivity(intent);
+		mCalendarView.setOnDateChangeListener(new dayChange());
 
 
-			}
-		});
-
-
-//		Button addEvent = (Button) findViewById(R.id.buttonAddEvent);
-//		addEvent.setOnClickListener(new View.OnClickListener() {
-//			@Override
-//			public void onClick(View v) {
-//				Calendar calendarEvent = Calendar.getInstance();
-//				Intent intent = new Intent(Intent.ACTION_EDIT);
-//				intent.setType("vnd.android.cursor.item/event");
-//				intent.putExtra("beginTime", calendarEvent.getTimeInMillis());
-//				intent.putExtra("endTime", calendarEvent.getTimeInMillis() + 60 * 60 * 1000);
-//				intent.putExtra("title", "Sample Event");
-//				intent.putExtra("allDay", true);
-//				intent.putExtra("rule", "FREQ=YEARLY");
-//				startActivity(intent);
-//
-//			;
 	}
 
 
+	public class dayChange implements CalendarView.OnDateChangeListener
+	{
+		@Override
+		public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth)
+		{
+			String date = dayOfMonth + "/" + ( month ) + "/" + year;
+			Log.d(TAG, "onSelectedDayChange: dd/mm/yy:" + date);
+
+			Intent intent = new Intent(calendarActivity.this, dosageActivity.class);
+			intent.putExtra("date", date);
+			startActivity(intent);
+
+
+		}
+
+	}
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
