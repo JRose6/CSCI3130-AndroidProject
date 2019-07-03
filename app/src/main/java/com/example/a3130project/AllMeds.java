@@ -1,28 +1,20 @@
 package com.example.a3130project;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.viewholder.MedicationViewHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
@@ -40,7 +32,7 @@ public class AllMeds extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_all__meds);
+		setContentView(R.layout.activity_all_meds);
 
 		setUpRecyclerView();
 	}
@@ -99,7 +91,7 @@ public class AllMeds extends AppCompatActivity
 			public MedicationViewHolder onCreateViewHolder(ViewGroup group, int i)
 			{
 				View view = LayoutInflater.from(group.getContext())
-						.inflate(R.layout.medication_entry, group, false);
+						.inflate(R.layout.medication_card, group, false);
 				logg("MedicationViewHolder()", "GROUP: " + group);
 				return new MedicationViewHolder(view);
 			}

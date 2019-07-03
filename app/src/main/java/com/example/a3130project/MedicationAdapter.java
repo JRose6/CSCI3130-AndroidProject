@@ -26,18 +26,6 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 		medicationHolder.genName.setText(medication.genName);
 		medicationHolder.name.setText(medication.name);
 
-		medicationHolder.buttonDetails.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				// Something
-				/*Intent intent = new Intent(medicationHolder.getClass(), MedicationDetails.class);
-				intent.putExtra("medication", model);
-				startActivity(intent);*/
-			}
-		});
-
 		medicationHolder.buttonAddPrescription.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -55,7 +43,7 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 	@Override
 	public MedicationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
 	{
-		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.medication_entry, parent, false);
+		View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.medication_card, parent, false);
 		return new MedicationViewHolder(v);
 	}
 }

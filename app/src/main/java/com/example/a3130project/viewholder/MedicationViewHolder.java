@@ -12,7 +12,6 @@ public class MedicationViewHolder extends RecyclerView.ViewHolder
 {
 	public TextView name;
 	public TextView genName;
-	public Button   buttonDetails;
 	public Button   buttonAddPrescription;
 
 	public MedicationViewHolder(View view)
@@ -20,7 +19,6 @@ public class MedicationViewHolder extends RecyclerView.ViewHolder
 		super(view);
 		name = view.findViewById(R.id.viewMedName);
 		genName = view.findViewById(R.id.viewMedGenName);
-		buttonDetails = view.findViewById(R.id.buttonDetails);
-		buttonAddPrescription = view.findViewById(R.id.buttonAddPrescription);
+		buttonAddPrescription = view.findViewById(R.id.buttonMedList);
 	}
 }
