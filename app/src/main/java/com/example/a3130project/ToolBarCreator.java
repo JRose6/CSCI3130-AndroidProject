@@ -1,12 +1,15 @@
 package com.example.a3130project;
 
 import android.content.Intent;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class ToolBarCreator
@@ -17,25 +20,49 @@ public class ToolBarCreator
 		toolbar.showOverflowMenu();
 		activity.setSupportActionBar(toolbar);
 	}
+	private static void selectBottomNavItem(final AppCompatActivity activity,BottomNavigationView nav){
+		Log.println(5, "NAV", activity.getClass().toString());
+		String name = activity.getClass().toString();
+		String[] nameSplit = name.split("[.]");
+		name = nameSplit[nameSplit.length-1];
+		Log.println(5, "NAV", name);
 
+		switch (name){
+		case "MainActivity":
+			nav.setSelectedItemId(R.id.action_profile);
+			break;
+		default:
+			nav.setSelectedItemId(R.id.action_calendar);
+			break;
+		}
 
-	/*
+		//nav.setSelectedItemId();
+		return;
+	}
 	public static void createBottomNav(final AppCompatActivity activity){
-		BottomNavigationView bottomNavigationView = (BottomNavigationView) activity.findViewById(R.id.navigationView);
+		BottomNavigationView bottomNavigationView = (BottomNavigationView) activity.findViewById(R.id.nav_view);
+		selectBottomNavItem(activity,bottomNavigationView);
 		bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
 			@Override
 			public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+				Intent intent;
 				switch (item.getItemId()) {
 				case R.id.action_profile:
-					Intent intent = new Intent(activity, MainProfileLoadActivity.class);
-					activity.startActivity(intent);
+					intent = new Intent(activity, MainProfileLoadActivity.class);
 					break;
+				case R.id.action_calendar:
+					intent = new Intent(activity, calendarActivity.class);
+					break;
+				default:
+					intent = new Intent(activity, MainProfileLoadActivity.class);
 				}
+				activity.startActivity(intent);
+
 				return true;
 			}
 		});
 	}
-*/
+
 	public static boolean createMenu(final AppCompatActivity activity, Menu menu)
 	{
 
