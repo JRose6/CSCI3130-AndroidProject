@@ -15,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.dosageActivity;
+
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Profile;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;

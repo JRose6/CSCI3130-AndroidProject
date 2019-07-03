@@ -18,14 +18,12 @@
         <activity android:name=".AllMedications" />
         <activity android:name=".dosageActivity" />
         <activity android:name=".calendarActivity" />
-        <activity android:name=".dosageActivity"/>
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".SettingsActivity" />
         <activity android:name=".MainProfileLoadActivity" />
         <activity android:name=".RegistrationActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RefillActivity" />
-        <activity android:name=".ScheduleActivity"/>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
