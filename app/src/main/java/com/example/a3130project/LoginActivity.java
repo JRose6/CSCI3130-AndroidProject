@@ -112,7 +112,6 @@ public class LoginActivity extends AppCompatActivity
 					@Override
 					public void onSuccess(AuthResult authResult)
 					{
-						// If sign in fails, display a message to the user.
 						logg("signIn()", "Authentication Succeeded. " + authResult);
 						DocumentReference ref = database.collection("profiles")
 								.document(mAuth.getUid());
@@ -125,8 +124,7 @@ public class LoginActivity extends AppCompatActivity
 								if (snap.exists())
 								{
 									profile = snap.toObject(Profile.class);
-									toastSh(profile.toString());
-									logg("signIn()", profile.toString());
+									toastSh("Authentication Successful!");
 									openProfile();
 								}
 								else
@@ -146,7 +144,7 @@ public class LoginActivity extends AppCompatActivity
 					public void onFailure(@NonNull Exception e)
 					{
 						// If sign in fails, display a message to the user.
-						toastSh("Authentication failed. " + e);
+						toastSh("Authentication failed.");
 						logg("signIn()", "Authentication failed. " + e);
 					}
 				});
@@ -172,7 +170,6 @@ public class LoginActivity extends AppCompatActivity
 	 */
 	private void logg(String tag, String message)
 	{
-		toastSh(message);
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, "-------------------", "-----------------------------");
 		Log.println(5, tag, message);
