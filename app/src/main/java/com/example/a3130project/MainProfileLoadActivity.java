@@ -15,20 +15,25 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Profile;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 public class MainProfileLoadActivity extends AppCompatActivity
 {
 	private TextView          textViewFirstName;
 	private TextView          textViewLastName;
-	private FirebaseFirestore database;
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
+	
 	private Button            buttonEditProfile;
 	private Button            calendar;
 	private Button            dosage;
@@ -146,12 +151,19 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 
 	// Connect the recycler view to the medication view holder & the FireStore adapter
-	private void setUpRecyclerView(RecyclerView rv, FirestoreRecyclerAdapter adapter)
+	private void setUpRecyclerView()
 	{
-		RecyclerView.LayoutManager manager = new LinearLayoutManager(getApplicationContext());
-		rv.setLayoutManager(manager);
-		rv.setItemAnimator(new DefaultItemAnimator());
-		rv.setAdapter(adapter);
+		Query query = medicationsRef.orderBy("name", Query.Direction.DESCENDING);
+		FirestoreRecyclerOptions<Medication> options =
+				new FirestoreRecyclerOptions.Builder<Medication>()
+						.setQuery(query, Medication.class).build();
+
+		adapter = new MedicationAdapter(options);
+
+		RecyclerView recyclerView = findViewById(R.id.medicationRecycler);
+		recyclerView.setHasFixedSize(true);
+		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+		recyclerView.setAdapter(adapter);
 	}
 
 

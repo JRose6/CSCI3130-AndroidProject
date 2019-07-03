@@ -24,6 +24,12 @@ public class Prescription implements Serializable
 	public Weekday day;
 
 
+	public Prescription()
+	{
+		// Empty constructor (required for FireStore)
+	}
+
+
 	/**
 	 * Constructs a Prescription Object
 	 *
@@ -32,9 +38,9 @@ public class Prescription implements Serializable
 	public Prescription(String medId)
 	{
 		this.medId = medId;
-		String notes    = "";
-		String docNotes = "";
-		String dosage   = "Dosage not set";
+		notes = "";
+		docNotes = "";
+		dosage = "Dosage not set";
 	}
 
 

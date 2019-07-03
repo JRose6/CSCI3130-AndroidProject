@@ -8,14 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3130project.R;
 
-public class MedicationViewHolder extends RecyclerView.ViewHolder
+public class MedicationHolder extends RecyclerView.ViewHolder
 {
 	public TextView name;
 	public TextView genName;
 	public Button   buttonAddPrescription;
 
 
-	public MedicationViewHolder(View view)
+	public MedicationHolder(View view)
 	{
 		super(view);
 		name = view.findViewById(R.id.viewMedName);

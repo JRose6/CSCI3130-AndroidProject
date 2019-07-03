@@ -7,11 +7,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.example.a3130project.model.Medication;
-import com.example.a3130project.viewholder.MedicationViewHolder;
+import com.example.a3130project.viewholder.MedicationHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, MedicationViewHolder>
+public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, MedicationHolder>
 {
 	public MedicationAdapter(@NonNull FirestoreRecyclerOptions options)
 	{
@@ -20,7 +20,7 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 
 
 	@Override
-	protected void onBindViewHolder(@NonNull MedicationViewHolder medicationHolder,
+	protected void onBindViewHolder(@NonNull MedicationHolder medicationHolder,
 	                                int i,
 	                                @NonNull Medication medication)
 	{
@@ -43,10 +43,10 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 
 	@NonNull
 	@Override
-	public MedicationViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+	public MedicationHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
 	{
 		View v = LayoutInflater.from(parent.getContext())
 		                       .inflate(R.layout.medication_card, parent, false);
-		return new MedicationViewHolder(v);
+		return new MedicationHolder(v);
 	}
 }

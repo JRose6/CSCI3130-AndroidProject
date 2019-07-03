@@ -11,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Toast;
 
 import com.example.a3130project.model.Medication;
-import com.example.a3130project.viewholder.MedicationViewHolder;
+import com.example.a3130project.viewholder.MedicationHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
@@ -68,42 +68,6 @@ public class AllMedications extends AppCompatActivity
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
-	}
-
-
-	// Creates a Firestore adapter to populate a Recycler view.
-	private FirestoreRecyclerAdapter setUpFirebaseAdapter(FirebaseFirestore db)
-	{
-		toastSh("RecyclerAdapterSetup");
-		Query query = db.collection("medications").orderBy("name").limit(50);
-		FirestoreRecyclerOptions<Medication> options
-				=
-				new FirestoreRecyclerOptions.Builder<Medication>().setQuery(query, Medication.class)
-				                                                  .build();
-
-		FirestoreRecyclerAdapter adapter
-				= new FirestoreRecyclerAdapter<Medication, MedicationViewHolder>(options)
-		{
-			// Connect each medication item in the database to the view
-			@Override
-			public void onBindViewHolder(MedicationViewHolder holder,
-			                             int position,
-			                             final Medication model)
-			{
-
-			}
-
-
-			@Override
-			public MedicationViewHolder onCreateViewHolder(ViewGroup group, int i)
-			{
-				View view = LayoutInflater.from(group.getContext())
-				                          .inflate(R.layout.medication_card, group, false);
-				logg("MedicationViewHolder()", "GROUP: " + group);
-				return new MedicationViewHolder(view);
-			}
-		};
-		return adapter;
 	}
 
 
