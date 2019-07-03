@@ -13,7 +13,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, MedicationHolder>
 {
-	public MedicationAdapter(@NonNull FirestoreRecyclerOptions options)
+	public MedicationAdapter(@NonNull FirestoreRecyclerOptions<Medication> options)
 	{
 		super(options);
 	}

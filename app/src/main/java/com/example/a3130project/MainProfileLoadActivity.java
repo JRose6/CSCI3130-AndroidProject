@@ -6,27 +6,19 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Profile;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 public class MainProfileLoadActivity extends AppCompatActivity
 {
@@ -48,7 +40,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		setContentView(R.layout.activity_main_profile_load);
 		ToolBarCreator.createToolbar(this);
 		calendar = findViewById(R.id.calendar);
-		buttonEditProfile = findViewById(R.id.editprofile);
+		buttonEditProfile = findViewById(R.id.buttonEditProfile);
 		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
 		textViewFirstName = findViewById(R.id.textViewFirstName);
@@ -101,7 +93,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			if ( v.getId() == R.id.editprofile )
+			if ( v.getId() == R.id.buttonEditProfile )
 			{
 				launchEditProfile();
 			}
