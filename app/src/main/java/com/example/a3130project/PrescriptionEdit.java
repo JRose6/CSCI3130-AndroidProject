@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -12,6 +14,7 @@ import android.widget.Toast;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -43,38 +46,17 @@ public class PrescriptionEdit extends AppCompatActivity
 		editDosage = findViewById(R.id.editDosage);
 		editUserNotes = findViewById(R.id.editUserNotes);
 		editDocNotes = findViewById(R.id.editDocNotes);
+		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
+		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )
+		editDocNotes.setEnabled(false);
 
 		buttonSaveChanges = findViewById(R.id.buttonSavePrescriptionChanges);
 		buttonMedDetails = findViewById(R.id.buttonMedicationDetails);
 		buttonCancel = findViewById(R.id.buttonCancelPrescriptionEdit);
 
-//		buttonSaveChanges.setOnClickListener(new View.OnClickListener()
-//		{
-//			@Override
-//			public void onClick(View v)
-//			{
-//				toastSh("Save");
-//				updateDatabase();
-//			}
-//		});
-//		buttonMedDetails.setOnClickListener(new View.OnClickListener()
-//		{
-//			@Override
-//			public void onClick(View v)
-//			{
-//				Intent intent = new Intent(PrescriptionEdit.this, MedicationDetails.class);
-//				intent.putExtra("medication", medication);
-//				startActivity(intent);
-//			}
-//		});
-//		buttonCancel.setOnClickListener(new View.OnClickListener()
-//		{
-//			@Override
-//			public void onClick(View v)
-//			{
-//				finish();
-//			}
-//		});
+		buttonSaveChanges.setOnClickListener(new OnClicker());
+		buttonMedDetails.setOnClickListener(new OnClicker());
+		buttonCancel.setOnClickListener(new OnClicker());
 	}
 
 
@@ -111,14 +93,39 @@ public class PrescriptionEdit extends AppCompatActivity
 	}
 
 
-	private void updateDatabase()
+	public class OnClicker implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			switch ( v.getId() )
+			{
+			case R.id.buttonSavePrescriptionChanges:
+				toastSh("Save");
+				updateDatabaseEntry();
+				finish();
+				break;
+			case R.id.buttonMedicationDetails:
+				Intent intent = new Intent(PrescriptionEdit.this, MedicationDetails.class);
+				intent.putExtra("medication", medication);
+				startActivity(intent);
+				break;
+			case R.id.buttonCancelPrescriptionEdit:
+				finish();
+				break;
+			}
+		}
+	}
+
+
+	private void updateDatabaseEntry()
 	{
 		String              profileId         = FirebaseAuth.getInstance().getUid();
 		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptionsRef  = database.collection(prescriptionsPath);
 		DocumentReference   docRef;
 
-		if ( prescription.id == "null" )
+		if ( prescription.id == null || prescription.id.equals("null") )
 		{
 			docRef = prescriptionsRef.document();
 			prescription.id = docRef.getId();
@@ -130,13 +137,25 @@ public class PrescriptionEdit extends AppCompatActivity
 
 		prescription.dosage = editDosage.getText().toString();
 		prescription.notes = editUserNotes.getText().toString();
+		prescription.medId = medication.id;
+		prescription.docNotes = "";
 
-		docRef.set(prescription).addOnFailureListener(new OnFailureListener()
+		docRef.set(prescription).addOnSuccessListener(new OnSuccessListener<Void>()
+		{
+			@Override
+			public void onSuccess(Void aVoid)
+			{
+				Log.w("updateDatabaseEntry().onSuccessListener().onSuccess()",
+				      "oh fuck yea that's goooood shit.");
+			}
+		}).addOnFailureListener(new OnFailureListener()
 		{
 			@Override
 			public void onFailure(Exception e)
 			{
-				toastSh("error adding to database " + e);
+				Log.w("updateDatabaseEntry().onFailureListener().onFailure()",
+				      "Error updating document...", e);
+				toastSh("There was a problem, Try Again" + e);
 			}
 		});
 	}
