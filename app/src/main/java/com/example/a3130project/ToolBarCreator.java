@@ -32,9 +32,9 @@ public class ToolBarCreator {
             toolbar.showOverflowMenu();
         }
         activity.setSupportActionBar(toolbar);
-        toolbar.setNavigationIcon(activity.getDrawable(R.drawable.ic_back));
-        toolbar.setNavigationContentDescription(R.string.back_button_desc);
         if (backButton){
+            toolbar.setNavigationIcon(activity.getDrawable(R.drawable.ic_back));
+            toolbar.setNavigationContentDescription(R.string.back_button_desc);
             toolbar.setNavigationOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
