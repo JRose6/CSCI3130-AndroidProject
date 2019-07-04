@@ -50,38 +50,9 @@ public class dosageActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_dosage);
+		setContentView(R.layout.prescription_item);
 		ToolBarCreator.createToolbar(this);
-		listviewMed = findViewById(R.id.listViewMed);
 
-		back = findViewById(R.id.DosageBACKButton);
-		back.setOnClickListener(new OnClicker());
-
-		intent = getIntent();
-
-		String date2 = (String) intent.getSerializableExtra("date");
-
-		dow = findViewById(R.id.textViewDOW);
-
-
-		//This is just for testing
-		ArrayList<Medication> Medi = new ArrayList<>();
-
-		Medication med1 = new Medication("1", "Adderall", "4 doses a day");
-		Medication med2 = new Medication("2", "blah", "4 doses a day");
-		Medication med3 = new Medication("3", "sos", "3 doses a day");
-		Medication med4 = new Medication("4", "Afsf", "1 doses a day");
-		Medication med5 = new Medication("5", "akajd", "12 doses a day");
-
-		Medi.add(med1);
-		Medi.add(med2);
-		Medi.add(med3);
-		Medi.add(med4);
-		Medi.add(med5);
-
-		PrescriptionAdapter adapter =
-				new PrescriptionAdapter(dosageActivity.this, R.layout.adapter_view_dosages, Medi);
-		listviewMed.setAdapter(adapter);
 
 
 		//Toast.makeText(this, dow1, Toast.LENGTH_SHORT).show();

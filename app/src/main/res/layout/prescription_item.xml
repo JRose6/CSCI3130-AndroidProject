@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    app:cardBackgroundColor="#FFFFE6">
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+
+        <TextView
+            android:id="@+id/MedicationView"
+            android:layout_width="215dp"
+            android:layout_height="41dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="23dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Medication Name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/DosageView"
+            android:layout_width="127dp"
+            android:layout_height="33dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="243dp"
+            android:layout_marginLeft="4dp"
+            android:layout_marginTop="27dp"
+            android:layout_toRightOf="@+id/MedicationView"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Dosage Info"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/DoctorInfoView"
+            android:layout_width="350dp"
+            android:layout_height="54dp"
+            android:layout_below="@id/MedicationView"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="17dp"
+
+            android:layout_marginTop="74dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Doctor Info"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>
