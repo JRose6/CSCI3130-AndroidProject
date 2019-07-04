@@ -68,7 +68,7 @@ public class dosageActivity extends AppCompatActivity
 		setContentView(R.layout.activity_dosage);
 		ToolBarCreator.createToolbar(this);
 		dow = findViewById(R.id.dow);
-
+		newDow = "";
 		intent = getIntent();
 
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -89,30 +89,37 @@ public class dosageActivity extends AppCompatActivity
 		switch(numDOW) {
 			case 1:
 				dow.setText("Sunday");
+				newDow = "Sunday";
 				break;
 			case 2:
 				dow.setText("Monday");
+				newDow = "Monday";
 				break;
 			case 3:
 				dow.setText("Tuesday");
+				newDow = "Tuesday";
 				break;
 			case 4:
 				dow.setText("Wednesday");
+				newDow = "Wednesday";
 				break;
 			case 5:
 				dow.setText("Thursday");
+				newDow = "Thursday";
 				break;
 			case 6:
 				dow.setText("Friday");
+				newDow = "Friday";
 				break;
 			case 7:
 				dow.setText("Saturday");
+				newDow = "Saturday";
 				break;
 			default:
 				break;
 		}
 
-		setUpRecyclerView();
+		setUpRecyclerView(newDow);
 	}
 	@Override
 	protected void onStart()
@@ -128,16 +135,18 @@ public class dosageActivity extends AppCompatActivity
 		adapter.stopListening();
 	}
 
-	private void setUpRecyclerView()
+	private void setUpRecyclerView(String newDow)
 	{
+
 		String              profileId         = FirebaseAuth.getInstance().getUid();
 		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptRef      = database.collection(prescriptionsPath);
-		Query qu = prescriptRef.whereEqualTo("weekdays.Monday",true);
+
+		Query query = prescriptRef.whereEqualTo("weekdays." + newDow,true);
 
 		FirestoreRecyclerOptions<Prescription> options =
 				new FirestoreRecyclerOptions.Builder<Prescription>()
-						.setQuery(qu, Prescription.class).build();
+						.setQuery(query, Prescription.class).build();
 
 		adapter = new CalendarAdapter(options);
 
