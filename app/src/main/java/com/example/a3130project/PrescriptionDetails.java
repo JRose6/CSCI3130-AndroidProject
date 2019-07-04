@@ -19,16 +19,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PrescriptionDetails extends AppCompatActivity
 {
-
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
 	private Intent            intent;
+	private Prescription      prescription;
 	private Medication        med;
 	private String            action;
-	private TextView          medName;
-	private TextView          dosage;
-	private TextView          notes;
-	private TextView          docNotes;
-	private Prescription      prescription;
-	private FirebaseFirestore database;
+
+	private TextView viewMedName;
+	private TextView viewDosage;
+	private TextView notes;
+	private TextView docNotes;
 
 
 	@Override
@@ -37,36 +37,41 @@ public class PrescriptionDetails extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_prescription_details);
 
+		viewMedName = findViewById(R.id.medName);
+		viewDosage = findViewById(R.id.dosage);
+		notes = findViewById(R.id.notes);
+		docNotes = findViewById(R.id.docNotes);
+
 		intent = getIntent();
 		med = (Medication) intent.getSerializableExtra("medication");
 		action = (String) intent.getSerializableExtra("actionType");
 
-		medName = findViewById(R.id.medName);
-		dosage = findViewById(R.id.dosage);
-		notes = findViewById(R.id.notes);
-		docNotes = findViewById(R.id.docNotes);
 
 		database = FirebaseFirestore.getInstance();
+	}
 
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
 		switch ( action )
 		{
 		case "add":
 			// TODO: Add prescription object
-			medName.setText(med.name);
-			dosage.setText("@");
+			viewMedName.setText(med.name);
+			viewDosage.setText("@");
 			notes.setText("@");
 			docNotes.setText("@");
 			break;
 		case "edit":
 			prescription = (Prescription) intent.getSerializableExtra("prescription");
-			medName.setText(med.name);
-			dosage.setText(prescription.dosage);
+			viewMedName.setText(med.name);
+			viewDosage.setText(prescription.dosage);
 			notes.setText(prescription.notes);
 			docNotes.setText(prescription.docNotes);
 			break;
 		}
 	}
-
 
 	public class OnClicker implements View.OnClickListener
 	{
@@ -105,7 +110,7 @@ public class PrescriptionDetails extends AppCompatActivity
 			ref = collection.document(prescription.id);
 		}
 
-		prescription.dosage = dosage.getText().toString();
+		prescription.dosage = viewDosage.getText().toString();
 		prescription.notes = notes.getText().toString();
 
 		if ( prescription.id != null )

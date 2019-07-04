@@ -32,6 +32,8 @@ public class MainActivity extends AppCompatActivity
 		{
 			launchLogin();
 		}
+
+		// TODO: Do these lines ever even get executed if the currentUser == null ?
 		setContentView(R.layout.activity_main);
 		ToolBarCreator.createToolbar(this);
 		ToolBarCreator.createBottomNav(this);
