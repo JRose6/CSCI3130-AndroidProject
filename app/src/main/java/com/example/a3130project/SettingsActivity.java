@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		ToolBarCreator.createToolbar(this,true,SettingsActivity.class);
+		ToolBarCreator.createToolbar(this,true,true);
 		sharedPref
 				= getApplicationContext().getSharedPreferences(getString(R.string.preference_file),
 				                                               Context.MODE_PRIVATE);
@@ -52,16 +52,6 @@ public class SettingsActivity extends AppCompatActivity
 				{
 					editor.putInt(getString(R.string.saved_alarm_delay), 0);
 				}
-				int flag;
-				if ( switchAllowAlarms.isChecked() )
-				{
-					flag = PackageManager.COMPONENT_ENABLED_STATE_ENABLED;
-				}
-				else
-				{
-					flag = PackageManager.COMPONENT_ENABLED_STATE_DISABLED;
-				}
-
 				editor.commit();
 				finish();
 			}

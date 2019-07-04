@@ -49,7 +49,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
-		ToolBarCreator.createToolbar(this,true);
+		ToolBarCreator.createToolbar(this,true,false);
 		ToolBarCreator.createBottomNav(this);
 		buttonEditProfile = findViewById(R.id.buttonEditProfile);
 		buttonAddMed = findViewById(R.id.buttonAddPrescription);

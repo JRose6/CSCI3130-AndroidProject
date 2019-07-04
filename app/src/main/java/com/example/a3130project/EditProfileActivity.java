@@ -38,7 +38,7 @@ public class EditProfileActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
 		ToolBarCreator.createBottomNav(this);
-		ToolBarCreator.createToolbar(this,true,MainProfileLoadActivity.class);
+		ToolBarCreator.createToolbar(this,true,true);
 		firstName = findViewById(R.id.firstName);
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);

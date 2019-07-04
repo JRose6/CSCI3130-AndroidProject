@@ -13,33 +13,36 @@ import androidx.appcompat.widget.Toolbar;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
+/**
+ * Class used for creating and handling the navigation in the application
+ */
 public class ToolBarCreator {
-    private ToolBarCreator() {
-    }
-    private static final int GET_PREVIOUS_PAGE = 1;
-    public static Toolbar createToolbar(final AppCompatActivity activity, boolean showMenu) {
+    private ToolBarCreator() { }
+
+    /**
+     * Method used to create the toolbar on an activity
+     * @param activity Activity object, if calling from activity simply pass this
+     * @param showMenu Whether or not to show the setting menu
+     * @param backButton Whether or not to display the back button
+     * @return Toolbar object
+     */
+    public static Toolbar createToolbar(final AppCompatActivity activity, boolean showMenu, boolean backButton) {
         Toolbar toolbar = (Toolbar) activity.findViewById(R.id.toolbar);
         if (showMenu) {
             toolbar.showOverflowMenu();
         }
         activity.setSupportActionBar(toolbar);
-        return toolbar;
-    }
-    public static Toolbar createToolbar(final AppCompatActivity activity, boolean showMenu, final Class backLocation) {
-        Toolbar toolbar = createToolbar(activity,showMenu);
         toolbar.setNavigationIcon(activity.getDrawable(R.drawable.ic_back));
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (backLocation.equals(SettingsActivity.class)){
+        toolbar.setNavigationContentDescription(R.string.back_button_desc);
+        if (backButton){
+            toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
                     activity.finish();
                 }
-                else{
-                    Intent intent = new Intent(activity,backLocation);
-                    activity.startActivity(intent);
-                }
-            }
-        });
+            });
+
+        }
         return toolbar;
 
     }
@@ -76,6 +79,10 @@ public class ToolBarCreator {
         }
     }
 
+    /**
+     * Creates a bottom navigation drawer on the activity
+     * @param activity Current activity
+     */
     public static void createBottomNav(final AppCompatActivity activity) {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) activity.findViewById(R.id.nav_view);
         selectBottomNavItem(activity, bottomNavigationView);
@@ -106,6 +113,13 @@ public class ToolBarCreator {
         });
     }
 
+    /**
+     * Creates a menu on the toolbar, Called from onCreateOptionsMenu in activity
+     * @param activity The current activity
+     * @param menu The menu object to attach
+     * @param showMenu Boolean indicating if the menu should be shown
+     * @return Boolean indicating success or failure
+     */
     public static boolean createMenu(final AppCompatActivity activity, Menu menu, boolean showMenu) {
         if (!showMenu) {
             return true;
@@ -119,8 +133,7 @@ public class ToolBarCreator {
             public boolean onMenuItemClick(MenuItem item) {
                 Intent intent =
                         new Intent(activity.getApplicationContext(), SettingsActivity.class);
-                intent.putExtra("classFrom",activity.getClass().toString());
-                activity.startActivityForResult(intent,GET_PREVIOUS_PAGE);
+                activity.startActivity(intent);
                 return false;
             }
         });
