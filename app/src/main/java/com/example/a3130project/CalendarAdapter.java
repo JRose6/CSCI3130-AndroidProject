@@ -9,13 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3130project.model.Prescription;
-import com.example.a3130project.viewholder.PrescriptionHolder;
+import com.example.a3130project.viewholder.CalendarHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 import org.w3c.dom.Text;
 
-public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, PrescriptionHolder>
+public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, CalendarHolder>
 {
 
 
@@ -27,22 +27,22 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, Pres
 
 	@Override
 	protected void onBindViewHolder(
-			@NonNull PrescriptionHolder prescriptionHolder, int i,
+			@NonNull CalendarHolder CalendarHolder, int i,
 			@NonNull Prescription prescription)
 	{
-		prescriptionHolder.setPrescription(prescription);
+		CalendarHolder.setPrescription(prescription);
 
-		prescriptionHolder.name.setText(prescription.getMedName());
-		prescriptionHolder.genName.setText(prescription.getMedGenName());
-		prescriptionHolder.dosage.setText(prescription.getDosage());
+		CalendarHolder.textViewMedicationName.setText(prescription.getMedName());
+		CalendarHolder.textViewDoctorInfo.setText(prescription.getDocNotes());
+		CalendarHolder.textViewDosageInfo.setText(prescription.getDosage());
 	}
 	@NonNull
 	@Override
-	public PrescriptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+	public CalendarHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
 	{
 		View v = LayoutInflater.from(parent.getContext())
 		                       .inflate(R.layout.prescription_item, parent, false);
-		return new PrescriptionHolder(v);
+		return new CalendarHolder(v);
 	}
 
 

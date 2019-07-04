@@ -115,6 +115,13 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	}
 
 
+	public void medicationPage()
+	{
+		Intent intent = new Intent(this, AllMedications.class);
+		startActivity(intent);
+	}
+
+
 	private void updateProfileFields()
 	{
 		database.collection("profiles")
@@ -138,13 +145,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 				        toastSh("Failed to update profile fields.");
 			        }
 		        });
-	}
-
-
-	public void medicationPage()
-	{
-		Intent intent = new Intent(this, AllMedications.class);
-		startActivity(intent);
 	}
 
 
