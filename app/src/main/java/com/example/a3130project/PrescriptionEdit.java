@@ -81,14 +81,19 @@ public class PrescriptionEdit extends AppCompatActivity
 			return;
 		}
 
+		// Check for a medication object... if none, check for 'medication_name'
 		medication = (Medication) intent.getSerializableExtra("medication");
-		if ( medication == null ) // Must have a valid medication object
+		String medication_name = (String) intent.getSerializableExtra("medication_name");
+		if ( medication != null ) // Must have a valid medication object
 		{
-			String medication_name = (String) intent.getSerializableExtra("medication_name");
-			if ( medication_name != null ) // Must have a valid medication object
-			{
-				viewMedName.setText(medication_name);
-			}
+			viewMedName.setText(medication.name);
+		}
+		else if ( medication_name != null )
+		{
+			viewMedName.setText(medication_name);
+		}
+		else
+		{
 			toastSh("Didn't pass a medication");
 			finish();
 			return;
@@ -125,6 +130,20 @@ public class PrescriptionEdit extends AppCompatActivity
 	}
 
 
+	private void preparePrescriptionForEntryIntoDatabase()
+	{
+		prescription.dosage = editDosage.getText().toString();
+		prescription.notes = editUserNotes.getText().toString();
+
+		if ( medication != null )
+		{
+			prescription.medId = medication.id;
+			prescription.medName = medication.name;
+			prescription.medGenName = medication.genName;
+		}
+	}
+
+
 	private void updateDatabaseEntry()
 	{
 		String              profileId         = FirebaseAuth.getInstance().getUid();
@@ -142,11 +161,7 @@ public class PrescriptionEdit extends AppCompatActivity
 			docRef = prescriptionsRef.document(prescription.id);
 		}
 
-		prescription.medId = medication.id;
-		prescription.medName = medication.name;
-		prescription.medGenName = medication.genName;
-		prescription.dosage = editDosage.getText().toString();
-		prescription.notes = editUserNotes.getText().toString();
+		preparePrescriptionForEntryIntoDatabase();
 
 		docRef.set(prescription).addOnSuccessListener(new OnSuccessListener<Void>()
 		{
