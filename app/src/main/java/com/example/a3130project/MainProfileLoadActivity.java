@@ -74,6 +74,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		if ( mAuth.getCurrentUser() == null )
 		{ // A user should never be able to open the profile activity if they aren't signed in
 			finish();
+			return;
 		}
 		updateProfileFields();
 		adapter.startListening();
