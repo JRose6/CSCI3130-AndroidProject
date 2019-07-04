@@ -1,19 +1,16 @@
 package com.example.a3130project.model;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Simple POJO class to hold Profile information in Firestore database
  */
 public class Profile implements Serializable
 {
-	public String            firstName;
-	public String            lastName;
-	public String            age;
-	public String            email;
-	public ArrayList<String> prescriptions = new ArrayList<>();
+	public String firstName;
+	public String lastName;
+	public String age;
+	public String email;
 
 
 	public Profile()
@@ -47,7 +44,6 @@ public class Profile implements Serializable
 		       ", lastName='" + lastName + '\'' +
 		       ", age='" + age + '\'' +
 		       ", email='" + email + '\'' +
-		       ", prescriptions=" + prescriptions.toString() +
 		       '}';
 	}
 }

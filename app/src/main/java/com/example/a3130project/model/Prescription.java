@@ -4,24 +4,11 @@ import java.io.Serializable;
 
 public class Prescription implements Serializable
 {
-	// TODO: Make this enum actually print strings
-	enum Weekday
-	{
-		Monday,
-		Tuesday,
-		Wednesday,
-		Thursday,
-		Friday,
-		Saturday,
-		Sunday,
-	}
-
-	public String  id;
-	public String  medId;
-	public String  notes;
-	public String  docNotes;
-	public String  dosage;
-	public Weekday day;
+	public String id;
+	public String medId;
+	public String notes;
+	public String docNotes;
+	public String dosage;
 
 
 	public Prescription()
@@ -38,9 +25,9 @@ public class Prescription implements Serializable
 	public Prescription(String medId)
 	{
 		this.medId = medId;
-		notes = "";
-		docNotes = "";
-		dosage = "Dosage not set";
+		this.notes = "";
+		this.docNotes = "";
+		this.dosage = "Dosage not set";
 	}
 
 
@@ -68,9 +55,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setDay(Weekday day)
+	public String getId()
 	{
-		this.day = day;
+		return id;
 	}
 
 
@@ -95,12 +82,6 @@ public class Prescription implements Serializable
 	public String getNotes()
 	{
 		return notes;
-	}
-
-
-	public Weekday getDay()
-	{
-		return day;
 	}
 
 

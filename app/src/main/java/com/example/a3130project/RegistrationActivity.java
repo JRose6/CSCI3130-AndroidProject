@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Button;
@@ -26,15 +27,18 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class RegistrationActivity extends AppCompatActivity
 {
-	private EditText editFirstName, editLastName, editEmail, editPassword, editAge;
-	private Button       register;
-	private FirebaseAuth mAuth;
+	private FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private Profile           profile;
 
-	private Profile profile;
-
-	FirebaseFirestore database;
-
-	public TextView passValidator, emailValidator;
+	private EditText editFirstName;
+	private EditText editLastName;
+	private EditText editEmail;
+	private EditText editPassword;
+	private EditText editAge;
+	private TextView viewPasswordValid;
+	private TextView viewEmailValid;
+	private Button   buttonRegister;
 
 
 	@Override
@@ -46,27 +50,53 @@ public class RegistrationActivity extends AppCompatActivity
 		editLastName = findViewById(R.id.lastName);
 		editEmail = findViewById(R.id.emailInput);
 		editPassword = findViewById(R.id.passwordInput);
-		register = findViewById(R.id.register);
-
 		editAge = findViewById(R.id.age);
+		viewPasswordValid = findViewById(R.id.passwordValid);
+		viewEmailValid = findViewById(R.id.emailValid);
+		buttonRegister = findViewById(R.id.register);
 
-		passValidator = findViewById(R.id.passwordValid);
-		emailValidator = findViewById(R.id.emailValid);
-
-		mAuth = FirebaseAuth.getInstance();
-		database = FirebaseFirestore.getInstance();
-
-		register.setOnClickListener(new OnClicker());
+		buttonRegister.setOnClickListener(new OnClicker());
 		editPassword.addTextChangedListener(new TextWatcher()
 		{
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count)
 			{
 				validatePassword();
 			}
+
+
+			@Override
+			public void afterTextChanged(Editable s) {}
 		});
 
-		editEmail.addTextChangedListener(new TextWatcher());
+		editEmail.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) { }
+
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+				validateEmail();
+			}
+
+
+			@Override
+			public void afterTextChanged(Editable s) {}
+		});
+	}
+
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		editFirstName.requestFocus();
 	}
 
 
@@ -79,28 +109,6 @@ public class RegistrationActivity extends AppCompatActivity
 			{
 				createNewUser();
 			}
-
-		}
-	}
-
-	public class TextWatcher implements android.text.TextWatcher
-	{
-		@Override
-		public void beforeTextChanged(CharSequence s, int start, int count, int after)
-		{
-		}
-
-
-		@Override
-		public void onTextChanged(CharSequence s, int start, int before, int count)
-		{
-			validateEmail();
-		}
-
-
-		@Override
-		public void afterTextChanged(Editable s)
-		{
 		}
 	}
 
@@ -181,25 +189,25 @@ public class RegistrationActivity extends AppCompatActivity
 		switch ( PasswordValidator.validPassword(editPassword.getText().toString()) )
 		{
 		case Invalid:
-			passValidator.setText("Invalid");
-			passValidator.setTextColor(getColor(R.color.darkRed)); // dark red
+			viewPasswordValid.setText("Invalid");
+			viewPasswordValid.setTextColor(getColor(R.color.darkRed)); // dark red
 			valid = false;
 			break;
 		case Weak:
-			passValidator.setText("Weak");
-			passValidator.setTextColor(getColor(R.color.darkOrangeRed)); // red-orange
+			viewPasswordValid.setText("Weak");
+			viewPasswordValid.setTextColor(getColor(R.color.darkOrangeRed)); // red-orange
 			break;
 		case Medium:
-			passValidator.setText("Okay");
-			passValidator.setTextColor(getColor(R.color.lightOrangeRed)); // light red-orange
+			viewPasswordValid.setText("Okay");
+			viewPasswordValid.setTextColor(getColor(R.color.lightOrangeRed)); // light red-orange
 			break;
 		case Strong:
-			passValidator.setText("Strong");
-			passValidator.setTextColor(getColor(R.color.darkGreen)); // dark green
+			viewPasswordValid.setText("Strong");
+			viewPasswordValid.setTextColor(getColor(R.color.darkGreen)); // dark green
 			break;
 		case Excellent:
-			passValidator.setText("Excellent");
-			passValidator.setTextColor(getColor(R.color.lightGreen)); // light green
+			viewPasswordValid.setText("Excellent");
+			viewPasswordValid.setTextColor(getColor(R.color.lightGreen)); // light green
 			break;
 		}
 		return valid;
@@ -211,13 +219,13 @@ public class RegistrationActivity extends AppCompatActivity
 		switch ( EmailValidator.getEmail(editEmail.getText().toString()) )
 		{
 		case Valid:
-			emailValidator.setText("Valid Email");
-			emailValidator.setTextColor(getColor(R.color.lightGreen)); // light green
+			viewEmailValid.setText("Valid Email");
+			viewEmailValid.setTextColor(getColor(R.color.lightGreen)); // light green
 			return true;
 		case Invalid:
 		default:
-			emailValidator.setText("Invalid Email format");
-			emailValidator.setTextColor(Color.RED);
+			viewEmailValid.setText("Invalid Email format");
+			viewEmailValid.setTextColor(Color.RED);
 			return false;
 		}
 	}

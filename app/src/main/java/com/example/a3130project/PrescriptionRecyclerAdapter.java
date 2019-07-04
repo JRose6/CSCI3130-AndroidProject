@@ -1,6 +1,5 @@
 package com.example.a3130project;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +24,7 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 	private PrescriptionHolder mPrescriptionHolder;
 	private Medication mMedication;
 
-	public PrescriptionRecyclerAdapter(@NonNull FirestoreRecyclerOptions options)
+	public PrescriptionRecyclerAdapter(@NonNull FirestoreRecyclerOptions<Prescription> options)
 	{
 		super(options);
 	}

@@ -6,7 +6,6 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -18,13 +17,12 @@ import android.widget.Toast;
 import com.example.a3130project.dosageActivity;
 
 import com.example.a3130project.model.Medication;
+import com.example.a3130project.model.Prescription;
 import com.example.a3130project.model.Profile;
-import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,15 +30,18 @@ import com.google.firebase.firestore.Query;
 
 public class MainProfileLoadActivity extends AppCompatActivity
 {
-	private TextView          textViewFirstName;
-	private TextView          textViewLastName;
-	private FirebaseFirestore database = FirebaseFirestore.getInstance();
-	
-	private Button            buttonEditProfile;
-	private Button            calendar;
-	private Button            dosage;
-	private Button            buttonAddMed;
-	private Profile           profile;
+	private PrescriptionRecyclerAdapter adapter;
+	private FirebaseFirestore           database = FirebaseFirestore.getInstance();
+	private FirebaseAuth                mAuth    = FirebaseAuth.getInstance();
+	private Profile                     profile;
+
+	private TextView textViewFirstName;
+	private TextView textViewLastName;
+
+	private Button buttonEditProfile;
+	private Button buttonCalendar;
+	private Button buttonDosage;
+	private Button buttonAddMed;
 
 
 	@Override
@@ -49,8 +50,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
 		ToolBarCreator.createToolbar(this);
-		calendar = findViewById(R.id.calendar);
-		buttonEditProfile = findViewById(R.id.editprofile);
+		buttonCalendar = findViewById(R.id.calendar);
+		buttonEditProfile = findViewById(R.id.buttonEditProfile);
 		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
 		textViewFirstName = findViewById(R.id.textViewFirstName);
@@ -58,10 +59,11 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 		database = FirebaseFirestore.getInstance();
 
-		calendar.setOnClickListener(new OnClicker());
+		buttonCalendar.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
-
 		buttonAddMed.setOnClickListener(new OnClicker());
+
+		setUpRecyclerView();
 	}
 
 
@@ -69,32 +71,21 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	protected void onStart()
 	{
 		super.onStart();
-		FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-		if ( user != null )
-		{
-			database.collection("profiles")
-			        .document(user.getUid())
-			        .get()
-			        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-			        {
-				        @Override
-				        public void onSuccess(DocumentSnapshot documentSnapshot)
-				        {
-					        profile = documentSnapshot.toObject(Profile.class);
-					        textViewFirstName.setText(profile.firstName);
-					        textViewLastName.setText(profile.lastName);
-				        }
-			        })
-			        .addOnFailureListener(new OnFailureListener()
-			        {
-				        @Override
-				        public void onFailure(@NonNull Exception e)
-				        {
-					        toastSh("Failed to update profile fields.");
-				        }
-			        });
+		if ( mAuth.getCurrentUser() == null )
+		{ // A user should never be able to open the profile activity if they aren't signed in
+			finish();
 		}
+		updateProfileFields();
+		adapter.startListening();
 		getDelegate().onStart();
+	}
+
+
+	@Override
+	protected void onStop()
+	{
+		super.onStop();
+		adapter.stopListening();
 	}
 
 
@@ -103,7 +94,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			if ( v.getId() == R.id.editprofile )
+			if ( v.getId() == R.id.buttonEditProfile )
 			{
 				launchEditProfile();
 			}
@@ -111,7 +102,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			{
 				calendarPage();
 			}
-			else if ( v.getId() == R.id.dosage )
+			else if ( v.getId() == R.id.editDosage )
 			{
 				dosagePage();
 			}
@@ -120,6 +111,32 @@ public class MainProfileLoadActivity extends AppCompatActivity
 				medicationPage();
 			}
 		}
+	}
+
+
+	private void updateProfileFields()
+	{
+		database.collection("profiles")
+		        .document(mAuth.getCurrentUser().getUid())
+		        .get()
+		        .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+		        {
+			        @Override
+			        public void onSuccess(DocumentSnapshot documentSnapshot)
+			        {
+				        profile = documentSnapshot.toObject(Profile.class);
+				        textViewFirstName.setText(profile.firstName);
+				        textViewLastName.setText(profile.lastName);
+			        }
+		        })
+		        .addOnFailureListener(new OnFailureListener()
+		        {
+			        @Override
+			        public void onFailure(@NonNull Exception e)
+			        {
+				        toastSh("Failed to update profile fields.");
+			        }
+		        });
 	}
 
 
@@ -151,23 +168,31 @@ public class MainProfileLoadActivity extends AppCompatActivity
 		startActivity(intent);
 	}
 
-	/*
+
 	// Connect the recycler view to the medication view holder & the FireStore adapter
 	private void setUpRecyclerView()
 	{
-		Query query = medicationsRef.orderBy("name", Query.Direction.DESCENDING);
-		FirestoreRecyclerOptions<Medication> options =
-				new FirestoreRecyclerOptions.Builder<Medication>()
-						.setQuery(query, Medication.class).build();
+		String              profileId         = FirebaseAuth.getInstance().getUid();
+		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
+		CollectionReference prescriptRef      = database.collection(prescriptionsPath);
+		Query query =
+				prescriptRef.orderBy("id", Query.Direction.DESCENDING);
+		FirestoreRecyclerOptions<Prescription> options =
+				new FirestoreRecyclerOptions.Builder<Prescription>()
+						.setQuery(query, Prescription.class).build();
 
-		adapter = new MedicationAdapter(options);
+		adapter = new PrescriptionRecyclerAdapter(options);
 
-		RecyclerView recyclerView = findViewById(R.id.medicationRecycler);
+		RecyclerView recyclerView = findViewById(R.id.prescriptionRecycler);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);
 	}
-*/
+
+
+	@Override
+	public void onBackPressed() { /* Intentionally empty to disable the back button */ }
+
 
 	private void toastSh(String message)
 	{

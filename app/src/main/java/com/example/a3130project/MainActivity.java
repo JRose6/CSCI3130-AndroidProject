@@ -28,18 +28,19 @@ public class MainActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
-		{
-			launchLogin();
-		}
 		setContentView(R.layout.activity_main);
 		ToolBarCreator.createToolbar(this);
-		//ToolBarCreator.createBottomNav(this);
+		ToolBarCreator.createBottomNav(this);
 		welcome = findViewById(R.id.buttonWelcome);
 		Button alarmTest = findViewById(R.id.buttonTestAlarm);
 		alarmTest.setOnClickListener(new AlarmTester());
 		welcome.setOnClickListener(new onClicker());
 		NotificationSender.createNotificationChannel(this);
+
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
+			launchLogin();
+		}
 	}
 
 
