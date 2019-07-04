@@ -70,6 +70,7 @@ public class PrescriptionEdit extends AppCompatActivity
 		{
 			toastSh("No Intent?");
 			finish();
+			return;
 		}
 
 		prescription = (Prescription) intent.getSerializableExtra("prescription");
@@ -77,16 +78,22 @@ public class PrescriptionEdit extends AppCompatActivity
 		{
 			toastSh("Didn't pass a prescription");
 			finish();
+			return;
 		}
 
 		medication = (Medication) intent.getSerializableExtra("medication");
 		if ( medication == null ) // Must have a valid medication object
 		{
+			String medication_name = (String) intent.getSerializableExtra("medication_name");
+			if ( medication_name != null ) // Must have a valid medication object
+			{
+				viewMedName.setText(medication_name);
+			}
 			toastSh("Didn't pass a medication");
 			finish();
+			return;
 		}
 
-		viewMedName.setText(medication.name);
 		editDosage.setText(prescription.dosage);
 		editUserNotes.setText(prescription.notes);
 		editDocNotes.setText(prescription.docNotes);
