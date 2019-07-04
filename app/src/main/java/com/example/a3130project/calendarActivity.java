@@ -44,12 +44,14 @@ public class calendarActivity extends AppCompatActivity
 			{
 				 DOM = "0" + dayOfMonth;
 			}
+			else
+				DOM = "" + dayOfMonth;
 			if(month < 10)
 			{
 				newMonth = "0" + month;
 			}
-			newMonth = "" + newMonth;
-			DOM = "" + DOM;
+			else
+			    newMonth = "" + month;
 			String date = DOM + "-" + newMonth + "-" + year;
 			Log.d(TAG, "onSelectedDayChange: dd-MM-yyyy" + date);
 

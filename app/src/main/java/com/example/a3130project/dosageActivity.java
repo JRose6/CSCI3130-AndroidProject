@@ -21,6 +21,7 @@ import java.util.Date;
 import java.text.DateFormat;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 
 import android.widget.Button;
@@ -76,7 +77,7 @@ public class dosageActivity extends AppCompatActivity
 		try {
 			nDate = format.parse(newDow);
 
-		} catch ( ParseException e) {
+		} catch (ParseException e) {
 			Toast.makeText(this, "FAIL", Toast.LENGTH_SHORT).show();
 		}
 
