@@ -36,11 +36,6 @@ public class MainActivity extends AppCompatActivity
 		alarmTest.setOnClickListener(new AlarmTester());
 		welcome.setOnClickListener(new onClicker());
 		NotificationSender.createNotificationChannel(this);
-
-		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
-		{
-			launchLogin();
-		}
 	}
 
 

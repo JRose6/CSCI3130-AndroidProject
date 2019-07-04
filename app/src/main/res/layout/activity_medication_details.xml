@@ -6,41 +6,47 @@
     android:layout_height="match_parent"
     tools:context=".MedicationDetails">
 
-    <TextView
-        android:id="@+id/name"
-        android:layout_width="wrap_content"
-        android:layout_height="22dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="92dp"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/genName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="20dp">
 
-    <TextView
-        android:id="@+id/genName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/manufacturer"
-        app:layout_constraintStart_toStartOf="@+id/name"
-        app:layout_constraintTop_toBottomOf="@+id/name" />
+        <TextView
+            android:id="@+id/viewMedNameMedDetails"
+            android:layout_width="match_parent"
+            android:layout_height="88dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/viewGenNameMedDetails"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/manufacturer"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toTopOf="@+id/sideEffects"
-        app:layout_constraintStart_toStartOf="@+id/genName"
-        app:layout_constraintTop_toBottomOf="@+id/genName" />
+        <TextView
+            android:id="@+id/viewGenNameMedDetails"
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/viewManufacturer"
+            app:layout_constraintStart_toStartOf="@+id/viewMedNameMedDetails"
+            app:layout_constraintTop_toBottomOf="@+id/viewMedNameMedDetails" />
 
-    <TextView
-        android:id="@+id/sideEffects"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/manufacturer"
-        app:layout_constraintTop_toBottomOf="@+id/manufacturer" />
+        <TextView
+            android:id="@+id/viewManufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toTopOf="@+id/viewSideEffects"
+            app:layout_constraintStart_toStartOf="@+id/viewGenNameMedDetails"
+            app:layout_constraintTop_toBottomOf="@+id/viewGenNameMedDetails" />
+
+        <TextView
+            android:id="@+id/viewSideEffects"
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/viewManufacturer"
+            app:layout_constraintTop_toBottomOf="@+id/viewManufacturer" />
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

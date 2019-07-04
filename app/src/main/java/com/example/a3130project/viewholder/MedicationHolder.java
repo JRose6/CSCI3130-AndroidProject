@@ -33,7 +33,8 @@ public class MedicationHolder extends RecyclerView.ViewHolder
 			public void onClick(View v)
 			{
 				Intent intent = new Intent(v.getContext(), PrescriptionEdit.class);
-				intent.putExtra("medication", medication);
+				intent.putExtra("medicationName", medication.name);
+				intent.putExtra("medicationGenName", medication.genName);
 				intent.putExtra("prescription", new Prescription());
 				v.getContext().startActivity(intent);
 			}

@@ -1,18 +1,36 @@
 package com.example.a3130project.model;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Prescription implements Serializable
 {
-	public String id;
-	public String medId;
-	public String notes;
-	public String docNotes;
-	public String dosage;
+	public String              id;
+	public String              medName;
+	public String              medGenName;
+	public String              medId;
+	public String              notes;
+	public String              docNotes;
+	public String              dosage;
+	public Map<String, Object> weekdays = new HashMap<String,Object>();
 
 
 	public Prescription()
 	{
+		this.medId = "";
+		this.medName = "";
+		this.medGenName = "";
+		this.notes = "";
+		this.docNotes = "";
+		this.dosage = "";
+		this.weekdays.put("Monday", false);
+		this.weekdays.put("Tuesday", false);
+		this.weekdays.put("Wednesday", false);
+		this.weekdays.put("Thursday", false);
+		this.weekdays.put("Friday", false);
+		this.weekdays.put("Saturday", false);
+		this.weekdays.put("Sunday", false);
 		// Empty constructor (required for FireStore)
 	}
 
@@ -31,33 +49,39 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setDocNotes(String docNotes)
-	{
-		this.docNotes = docNotes;
-	}
-
-
-	public void setDosage(String dosage)
-	{
-		this.dosage = dosage;
-	}
-
-
-	public void setMedId(String medId)
-	{
-		this.medId = medId;
-	}
-
-
-	public void setNotes(String notes)
-	{
-		this.notes = notes;
-	}
-
-
 	public String getId()
 	{
 		return id;
+	}
+
+
+	public void setId(String id)
+	{
+		this.id = id;
+	}
+
+
+	public String getMedName()
+	{
+		return medName;
+	}
+
+
+	public void setMedName(String medName)
+	{
+		this.medName = medName;
+	}
+
+
+	public String getMedGenName()
+	{
+		return medGenName;
+	}
+
+
+	public void setMedGenName(String medGenName)
+	{
+		this.medGenName = medGenName;
 	}
 
 
@@ -67,9 +91,33 @@ public class Prescription implements Serializable
 	}
 
 
+	public void setMedId(String medId)
+	{
+		this.medId = medId;
+	}
+
+
+	public String getNotes()
+	{
+		return notes;
+	}
+
+
+	public void setNotes(String notes)
+	{
+		this.notes = notes;
+	}
+
+
 	public String getDocNotes()
 	{
 		return docNotes;
+	}
+
+
+	public void setDocNotes(String docNotes)
+	{
+		this.docNotes = docNotes;
 	}
 
 
@@ -79,9 +127,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public String getNotes()
+	public void setDosage(String dosage)
 	{
-		return notes;
+		this.dosage = dosage;
 	}
 
 
@@ -97,4 +145,5 @@ public class Prescription implements Serializable
 		       " Dosage: " +
 		       dosage;
 	}
+
 }
