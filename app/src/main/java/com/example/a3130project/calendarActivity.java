@@ -37,8 +37,23 @@ public class calendarActivity extends AppCompatActivity
 		@Override
 		public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth)
 		{
-			String date = dayOfMonth + "/" + ( month ) + "/" + year;
-			Log.d(TAG, "onSelectedDayChange: dd/mm/yy:" + date);
+			month = month + 1;
+			String DOM = "";
+			String newMonth = "";
+			if(dayOfMonth < 10)
+			{
+				 DOM = "0" + dayOfMonth;
+			}
+			else
+				DOM = "" + dayOfMonth;
+			if(month < 10)
+			{
+				newMonth = "0" + month;
+			}
+			else
+			    newMonth = "" + month;
+			String date = DOM + "-" + newMonth + "-" + year;
+			Log.d(TAG, "onSelectedDayChange: dd-MM-yyyy" + date);
 
 			Intent intent = new Intent(calendarActivity.this, dosageActivity.class);
 			intent.putExtra("date", date);
