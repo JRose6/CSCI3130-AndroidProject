@@ -50,7 +50,7 @@ public class dosageActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.prescription_item);
+		setContentView(R.layout.activity_dosage);
 		ToolBarCreator.createToolbar(this);
 
 
