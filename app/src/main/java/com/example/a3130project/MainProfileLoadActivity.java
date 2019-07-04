@@ -20,7 +20,6 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -100,7 +99,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			{
 				calendarPage();
 			}
-			else if ( v.getId() == R.id.dosage )
+			else if ( v.getId() == R.id.editDosage )
 			{
 				dosagePage();
 			}
@@ -171,7 +170,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private void setUpRecyclerView()
 	{
 		String              profileId         = FirebaseAuth.getInstance().getUid();
-		String              prescriptionsPath = profileId + "/prescriptions";
+		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptRef      = database.collection(prescriptionsPath);
 		Query query =
 				prescriptRef.orderBy("id", Query.Direction.DESCENDING);
@@ -181,7 +180,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 		adapter = new PrescriptionRecyclerAdapter(options);
 
-		RecyclerView recyclerView = findViewById(R.id.medicationRecycler);
+		RecyclerView recyclerView = findViewById(R.id.prescriptionRecycler);
 		recyclerView.setHasFixedSize(true);
 		recyclerView.setLayoutManager(new LinearLayoutManager(this));
 		recyclerView.setAdapter(adapter);

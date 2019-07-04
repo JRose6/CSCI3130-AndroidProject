@@ -22,22 +22,11 @@ public class MedicationAdapter extends FirestoreRecyclerAdapter<Medication, Medi
 	@Override
 	protected void onBindViewHolder(@NonNull MedicationHolder medicationHolder,
 	                                int i,
-	                                @NonNull Medication medication)
+	                                @NonNull final Medication medication)
 	{
+		medicationHolder.setMedication(medication);
 		medicationHolder.genName.setText(medication.genName);
 		medicationHolder.name.setText(medication.name);
-
-		medicationHolder.buttonAddPrescription.setOnClickListener(new View.OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				/*Intent intent = new Intent(AllMedications.this, PrescriptionDetails.class);
-				intent.putExtra("medication", model);
-				intent.putExtra("actionType", "add");
-				startActivity(intent);*/
-			}
-		});
 	}
 
 

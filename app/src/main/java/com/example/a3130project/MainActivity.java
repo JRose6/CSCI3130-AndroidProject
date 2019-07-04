@@ -28,12 +28,6 @@ public class MainActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
-		{
-			launchLogin();
-		}
-
-		// TODO: Do these lines ever even get executed if the currentUser == null ?
 		setContentView(R.layout.activity_main);
 		ToolBarCreator.createToolbar(this);
 		ToolBarCreator.createBottomNav(this);
@@ -42,6 +36,11 @@ public class MainActivity extends AppCompatActivity
 		alarmTest.setOnClickListener(new AlarmTester());
 		welcome.setOnClickListener(new onClicker());
 		NotificationSender.createNotificationChannel(this);
+
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
+			launchLogin();
+		}
 	}
 
 

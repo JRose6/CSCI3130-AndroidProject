@@ -13,10 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".PrescriptionEdit"></activity>
         <activity
             android:name=".TestBottom"
-            android:label="@string/title_activity_test_bottom"></activity>
-        <activity android:name=".PrescriptionDetails" />
+            android:label="@string/title_activity_test_bottom" />
         <activity android:name=".MedicationDetails" />
         <activity android:name=".AllMedications" />
         <activity android:name=".dosageActivity" />
