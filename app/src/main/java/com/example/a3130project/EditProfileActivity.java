@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,13 +37,12 @@ public class EditProfileActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
-
-
+		ToolBarCreator.createBottomNav(this);
+		ToolBarCreator.createToolbar(this,true,MainProfileLoadActivity.class);
 		firstName = findViewById(R.id.firstName);
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);
 		update = findViewById(R.id.update);
-		mainProfile = findViewById(R.id.mainprofile);
 
 		database = FirebaseFirestore.getInstance();
 
@@ -57,7 +57,6 @@ public class EditProfileActivity extends AppCompatActivity
 
 		update.setOnClickListener(new OnClicker());
 
-		mainProfile.setOnClickListener(new OnClicker());
 	}
 
 
@@ -66,16 +65,11 @@ public class EditProfileActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			switch ( v.getId() )
-			{
-			case R.id.update:
-				updateProfile();
-				break;
-			case R.id.mainprofile:
-				finish();  // Back to main profile
-				break;
+			switch ( v.getId() ) {
+				case R.id.update:
+					updateProfile();
+					break;
 			}
-
 		}
 	}
 
@@ -101,4 +95,10 @@ public class EditProfileActivity extends AppCompatActivity
 			}
 		});
 	}
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this, menu,true);
+	}
+
 }

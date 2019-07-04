@@ -24,7 +24,7 @@ public class SettingsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		ToolBarCreator.createToolbar(this);
+		ToolBarCreator.createToolbar(this,true,SettingsActivity.class);
 		sharedPref
 				= getApplicationContext().getSharedPreferences(getString(R.string.preference_file),
 				                                               Context.MODE_PRIVATE);
@@ -72,6 +72,6 @@ public class SettingsActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu);
+		return ToolBarCreator.createMenu(this, menu,true);
 	}
 }

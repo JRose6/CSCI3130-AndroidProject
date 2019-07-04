@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
@@ -33,7 +34,8 @@ public class AllMedications extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_meds);
-
+		ToolBarCreator.createToolbar(this,true);
+		ToolBarCreator.createBottomNav(this);
 		setUpRecyclerView();
 	}
 
@@ -70,6 +72,11 @@ public class AllMedications extends AppCompatActivity
 		recyclerView.setAdapter(adapter);
 	}
 
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this, menu,true);
+	}
 
 	/**
 	 * Generates a short toast message

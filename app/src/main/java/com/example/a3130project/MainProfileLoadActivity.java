@@ -49,8 +49,8 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
-		ToolBarCreator.createToolbar(this);
-		buttonCalendar = findViewById(R.id.calendar);
+		ToolBarCreator.createToolbar(this,true);
+		ToolBarCreator.createBottomNav(this);
 		buttonEditProfile = findViewById(R.id.buttonEditProfile);
 		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
@@ -59,9 +59,9 @@ public class MainProfileLoadActivity extends AppCompatActivity
 
 		database = FirebaseFirestore.getInstance();
 
-		buttonCalendar.setOnClickListener(new OnClicker());
+		//buttonCalendar.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
-		buttonAddMed.setOnClickListener(new OnClicker());
+		//buttonAddMed.setOnClickListener(new OnClicker());
 
 		setUpRecyclerView();
 	}
@@ -98,18 +98,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 			if ( v.getId() == R.id.buttonEditProfile )
 			{
 				launchEditProfile();
-			}
-			else if ( v.getId() == R.id.calendar )
-			{
-				calendarPage();
-			}
-			else if ( v.getId() == R.id.editDosage )
-			{
-				dosagePage();
-			}
-			else if ( v.getId() == R.id.buttonAddPrescription )
-			{
-				medicationPage();
 			}
 		}
 	}
@@ -204,7 +192,7 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu);
+		return ToolBarCreator.createMenu(this, menu,true);
 	}
 
 }

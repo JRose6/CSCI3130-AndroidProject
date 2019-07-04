@@ -66,8 +66,8 @@ public class dosageActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dosage);
-		ToolBarCreator.createToolbar(this);
-
+		ToolBarCreator.createToolbar(this,true,calendarActivity.class);
+		ToolBarCreator.createBottomNav(this);
 
 
 		//Toast.makeText(this, dow1, Toast.LENGTH_SHORT).show();
@@ -151,6 +151,6 @@ public class dosageActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu);
+		return ToolBarCreator.createMenu(this, menu,true);
 	}
 }

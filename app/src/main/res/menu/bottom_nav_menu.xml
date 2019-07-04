@@ -2,7 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
     >
-
+    <item
+        android:id="@+id/action_home"
+        android:enabled="true"
+        android:icon="@drawable/ic_home"
+        android:title="Home"
+        app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_profile"
         android:enabled="true"
@@ -15,4 +20,10 @@
         android:enabled="true"
         android:icon="@drawable/ic_date"
         app:showAsAction="ifRoom"/>
+    <item
+    android:id="@+id/action_medication"
+    android:title="Medication"
+    android:enabled="true"
+    android:icon="@drawable/ic_medication"
+    app:showAsAction="ifRoom"/>
 </menu>
