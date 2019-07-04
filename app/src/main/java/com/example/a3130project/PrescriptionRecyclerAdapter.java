@@ -20,10 +20,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescription, PrescriptionHolder>
 {
-	private Prescription mPrescription;
-	private PrescriptionHolder mPrescriptionHolder;
-	private Medication mMedication;
-
 	public PrescriptionRecyclerAdapter(@NonNull FirestoreRecyclerOptions<Prescription> options)
 	{
 		super(options);
@@ -34,8 +30,9 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 	                                int i,
 	                                @NonNull Prescription prescription)
 	{
-		mPrescription = prescription;
-		mPrescriptionHolder = prescriptionHolder;
+		prescriptionHolder.setPrescription(prescription);
+		prescriptionHolder.name.setText(prescription.getMedName());
+		prescriptionHolder.genName.setText(prescription.getMedGenName());
 		prescriptionHolder.dosage.setText(prescription.getDosage());
 		prescriptionHolder.buttonEditPrescription.setOnClickListener(new View.OnClickListener()
 		{
@@ -59,31 +56,5 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 		View v = LayoutInflater.from(parent.getContext())
 		                       .inflate(R.layout.prescription_card, parent, false);
 		return new PrescriptionHolder(v);
-	}
-
-
-	private void setMedicationFields()
-	{
-		FirebaseFirestore db = FirebaseFirestore.getInstance();
-		CollectionReference medsCollection = db.collection("medications");
-		DocumentReference ref = medsCollection.document(mPrescription.id);
-		ref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
-		{
-			@Override
-			public void onSuccess(DocumentSnapshot documentSnapshot)
-			{
-				mMedication = documentSnapshot.toObject(Medication.class);
-				mPrescriptionHolder.genName.setText(mMedication.genName);
-				mPrescriptionHolder.name.setText(mMedication.name);
-			}
-		}).addOnFailureListener(new OnFailureListener()
-		{
-			@Override
-			public void onFailure(@NonNull Exception e)
-			{
-				mPrescriptionHolder.genName.setText("Something went wrong");
-				mPrescriptionHolder.name.setText("!Something went wrong");
-			}
-		});
 	}
 }

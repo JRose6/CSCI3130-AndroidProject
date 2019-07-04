@@ -135,10 +135,11 @@ public class PrescriptionEdit extends AppCompatActivity
 			docRef = prescriptionsRef.document(prescription.id);
 		}
 
+		prescription.medId = medication.id;
+		prescription.medName = medication.name;
+		prescription.medGenName = medication.genName;
 		prescription.dosage = editDosage.getText().toString();
 		prescription.notes = editUserNotes.getText().toString();
-		prescription.medId = medication.id;
-		prescription.docNotes = "";
 
 		docRef.set(prescription).addOnSuccessListener(new OnSuccessListener<Void>()
 		{

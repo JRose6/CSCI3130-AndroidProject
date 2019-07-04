@@ -15,7 +15,7 @@ public class Profile implements Serializable
 
 	public Profile()
 	{
-		// empty constructor (required for firestore)
+		// empty constructor (required for FireStore)
 	}
 
 
