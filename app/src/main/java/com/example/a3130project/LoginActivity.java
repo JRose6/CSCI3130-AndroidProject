@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		ToolBarCreator.createToolbar(this,false);
+		ToolBarCreator.createToolbar(this,false,false);
 
 		setContentView(R.layout.activity_login);
 		txtError = findViewById(R.id.txtErrorMessage);

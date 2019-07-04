@@ -47,7 +47,7 @@ public class PrescriptionEdit extends AppCompatActivity
 		editDosage = findViewById(R.id.editDosage);
 		editUserNotes = findViewById(R.id.editUserNotes);
 		editDocNotes = findViewById(R.id.editDocNotes);
-		ToolBarCreator.createToolbar(this,true,AllMedications.class);
+		ToolBarCreator.createToolbar(this,true,true);
 		ToolBarCreator.createBottomNav(this);
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
 		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )

@@ -23,7 +23,7 @@ public class calendarActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
 		ToolBarCreator.createBottomNav(this);
-		ToolBarCreator.createToolbar(this,true);
+		ToolBarCreator.createToolbar(this,true,false);
 		//'button'
 		mCalendarView = (CalendarView) findViewById(R.id.calendarView);
 		mCalendarView.setOnDateChangeListener(new dayChange());

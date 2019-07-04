@@ -34,7 +34,7 @@ public class AllMedications extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_all_meds);
-		ToolBarCreator.createToolbar(this,true);
+		ToolBarCreator.createToolbar(this,true,false);
 		ToolBarCreator.createBottomNav(this);
 		setUpRecyclerView();
 	}
