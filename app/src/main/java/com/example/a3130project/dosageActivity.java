@@ -133,11 +133,11 @@ public class dosageActivity extends AppCompatActivity
 		String              profileId         = FirebaseAuth.getInstance().getUid();
 		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptRef      = database.collection(prescriptionsPath);
-		Query query =
-				prescriptRef.orderBy("id", Query.Direction.DESCENDING);
+		Query qu = prescriptRef.whereEqualTo("weekdays.Monday",true);
+
 		FirestoreRecyclerOptions<Prescription> options =
 				new FirestoreRecyclerOptions.Builder<Prescription>()
-						.setQuery(query, Prescription.class).build();
+						.setQuery(qu, Prescription.class).build();
 
 		adapter = new CalendarAdapter(options);
 
