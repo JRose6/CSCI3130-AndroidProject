@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		ToolBarCreator.createToolbar(this,true,false);
+		ToolBarCreator.createToolbar(this, true, false);
 		ToolBarCreator.createBottomNav(this);
 		welcome = findViewById(R.id.buttonWelcome);
 		Button alarmTest = findViewById(R.id.buttonTestAlarm);
@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu,true);
+		return ToolBarCreator.createMenu(this, menu, true);
 	}
 
 
@@ -86,10 +86,6 @@ public class MainActivity extends AppCompatActivity
 	protected void onResume()
 	{
 		super.onResume();
-		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
-		{
-			launchLogin();
-		}
 	}
 
 
