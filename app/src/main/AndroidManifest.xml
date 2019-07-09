@@ -13,13 +13,19 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <uses-library android:name="android.test.runner"
+        <activity android:name=".EmployeeProfileActivity"></activity>
+
+        <uses-library
+            android:name="android.test.runner"
             android:required="false" />
-        <uses-library android:name="android.test.base"
+        <uses-library
+            android:name="android.test.base"
             android:required="false" />
-        <uses-library android:name="android.test.mock"
+        <uses-library
+            android:name="android.test.mock"
             android:required="false" />
-        <activity android:name=".PrescriptionEdit"></activity>
+
+        <activity android:name=".PrescriptionEdit" />
         <activity android:name=".MedicationDetails" />
         <activity android:name=".AllMedications" />
         <activity android:name=".dosageActivity" />

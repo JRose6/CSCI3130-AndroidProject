@@ -11,10 +11,16 @@ public class Profile implements Serializable
 	public String lastName;
 	public String age;
 	public String email;
+	public boolean employee;
 
 
 	public Profile()
 	{
+		this.firstName = "";
+		this.lastName = "";
+		this.age = "";
+		this.email = "";
+		this.employee = false;
 		// empty constructor (required for FireStore)
 	}
 
@@ -33,6 +39,7 @@ public class Profile implements Serializable
 		this.lastName = lastName;
 		this.age = age;
 		this.email = email;
+		this.employee = false;
 	}
 
 
