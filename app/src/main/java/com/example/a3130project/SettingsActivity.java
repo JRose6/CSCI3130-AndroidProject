@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -24,7 +23,7 @@ public class SettingsActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_settings);
-		ToolBarCreator.createToolbar(this,true,true);
+		ToolBarCreator.createToolbar(this, true, true);
 		sharedPref
 				= getApplicationContext().getSharedPreferences(getString(R.string.preference_file),
 				                                               Context.MODE_PRIVATE);
@@ -62,6 +61,6 @@ public class SettingsActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu,true);
+		return ToolBarCreator.createMenu(this, menu, true);
 	}
 }

@@ -9,8 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toolbar;
-
 
 public class RefillActivity extends AppCompatActivity
 {
@@ -25,7 +23,7 @@ public class RefillActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_refill);
-		ToolBarCreator.createToolbar(this,true,false);
+		ToolBarCreator.createToolbar(this, true, false);
 		Takeinput = findViewById(R.id.input);
 		TakeButton = findViewById(R.id.ButtonTake);
 		Success = findViewById(R.id.success);

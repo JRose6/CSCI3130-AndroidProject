@@ -13,7 +13,7 @@ public class Prescription implements Serializable
 	public String              notes;
 	public String              docNotes;
 	public String              dosage;
-	public Map<String, Object> weekdays = new HashMap<String,Object>();
+	public Map<String, Object> weekdays = new HashMap<String, Object>();
 
 
 	public Prescription()

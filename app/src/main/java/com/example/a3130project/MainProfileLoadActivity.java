@@ -14,9 +14,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a3130project.dosageActivity;
-
-import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.model.Profile;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -39,9 +36,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	private TextView textViewLastName;
 
 	private Button buttonEditProfile;
-	private Button buttonCalendar;
-	private Button buttonDosage;
-	private Button buttonAddMed;
 
 
 	@Override
@@ -49,19 +43,16 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main_profile_load);
-		ToolBarCreator.createToolbar(this,true,false);
+		ToolBarCreator.createToolbar(this, true, false);
 		ToolBarCreator.createBottomNav(this);
 		buttonEditProfile = findViewById(R.id.buttonEditProfile);
-		buttonAddMed = findViewById(R.id.buttonAddPrescription);
 
 		textViewFirstName = findViewById(R.id.textViewFirstName);
 		textViewLastName = findViewById(R.id.textViewLastName);
 
 		database = FirebaseFirestore.getInstance();
 
-		//buttonCalendar.setOnClickListener(new OnClicker());
 		buttonEditProfile.setOnClickListener(new OnClicker());
-		//buttonAddMed.setOnClickListener(new OnClicker());
 
 		setUpRecyclerView();
 	}
@@ -103,13 +94,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	}
 
 
-	public void medicationPage()
-	{
-		Intent intent = new Intent(this, AllMedications.class);
-		startActivity(intent);
-	}
-
-
 	private void updateProfileFields()
 	{
 		database.collection("profiles")
@@ -133,20 +117,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 				        toastSh("Failed to update profile fields.");
 			        }
 		        });
-	}
-
-
-	public void calendarPage()
-	{
-		Intent intent = new Intent(this, calendarActivity.class);
-		startActivity(intent);
-	}
-
-
-	public void dosagePage()
-	{
-		Intent intent = new Intent(this, dosageActivity.class);
-		startActivity(intent);
 	}
 
 
@@ -192,7 +162,6 @@ public class MainProfileLoadActivity extends AppCompatActivity
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu,true);
+		return ToolBarCreator.createMenu(this, menu, true);
 	}
-
 }

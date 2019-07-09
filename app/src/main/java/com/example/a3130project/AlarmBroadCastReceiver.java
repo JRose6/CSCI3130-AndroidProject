@@ -1,12 +1,10 @@
 package com.example.a3130project;
 
-
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
-
 
 public class AlarmBroadCastReceiver extends BroadcastReceiver
 {

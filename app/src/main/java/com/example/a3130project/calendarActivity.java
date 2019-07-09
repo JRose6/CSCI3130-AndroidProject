@@ -10,7 +10,6 @@ import android.view.Menu;
 import android.widget.CalendarView;
 
 
-
 public class calendarActivity extends AppCompatActivity
 {
 	private static final String       TAG = "CalendarActivity";
@@ -23,7 +22,7 @@ public class calendarActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_calendar);
 		ToolBarCreator.createBottomNav(this);
-		ToolBarCreator.createToolbar(this,true,false);
+		ToolBarCreator.createToolbar(this, true, false);
 		//'button'
 		mCalendarView = (CalendarView) findViewById(R.id.calendarView);
 		mCalendarView.setOnDateChangeListener(new dayChange());
@@ -38,20 +37,20 @@ public class calendarActivity extends AppCompatActivity
 		public void onSelectedDayChange(CalendarView CalendarView, int year, int month, int dayOfMonth)
 		{
 			month = month + 1;
-			String DOM = "";
+			String DOM      = "";
 			String newMonth = "";
-			if(dayOfMonth < 10)
+			if ( dayOfMonth < 10 )
 			{
-				 DOM = "0" + dayOfMonth;
+				DOM = "0" + dayOfMonth;
 			}
 			else
 				DOM = "" + dayOfMonth;
-			if(month < 10)
+			if ( month < 10 )
 			{
 				newMonth = "0" + month;
 			}
 			else
-			    newMonth = "" + month;
+				newMonth = "" + month;
 			String date = DOM + "-" + newMonth + "-" + year;
 			Log.d(TAG, "onSelectedDayChange: dd-MM-yyyy" + date);
 
@@ -63,10 +62,12 @@ public class calendarActivity extends AppCompatActivity
 		}
 
 	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu,true);
+		return ToolBarCreator.createMenu(this, menu, true);
 	}
 }
 

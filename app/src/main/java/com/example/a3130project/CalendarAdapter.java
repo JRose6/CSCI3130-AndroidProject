@@ -3,17 +3,13 @@ package com.example.a3130project;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.viewholder.CalendarHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-
-import org.w3c.dom.Text;
 
 public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, CalendarHolder>
 {

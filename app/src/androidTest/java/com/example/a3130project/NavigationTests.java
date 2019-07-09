@@ -42,89 +42,110 @@ import static org.junit.Assert.*;
 @LargeTest
 public class NavigationTests
 {
-    SharedPreferences.Editor preferencesEditor;
-    SharedPreferences sharedPref;
-    boolean alarms_allowed_old;
-    int alarms_delay;
-    @Before
-    public void updateSharedPrefs(){
-        Context context = InstrumentationRegistry.getTargetContext();
-        sharedPref
-                = context.getSharedPreferences(context.getString(R.string.preference_file),
-                Context.MODE_PRIVATE);
-        alarms_delay = sharedPref.getInt(context.getString(R.string.saved_alarm_delay),
-                0);
-        alarms_allowed_old = sharedPref.getBoolean(context.getString(R.string.saved_alarms_allowed),false);
-        preferencesEditor = sharedPref.edit();
-        preferencesEditor.putBoolean(context.getString(R.string.saved_alarms_allowed),
-                false);
-        preferencesEditor.putInt(context.getString(R.string.saved_alarm_delay), 0);
-        preferencesEditor.commit();
+	SharedPreferences.Editor preferencesEditor;
+	SharedPreferences        sharedPref;
+	boolean                  alarms_allowed_old;
+	int                      alarms_delay;
 
-    }
-    @After
-    public void restoreSharedPrefs() {
-        Context context = InstrumentationRegistry.getTargetContext();
-        preferencesEditor.putBoolean(context.getString(R.string.saved_alarms_allowed),
-                alarms_allowed_old);
-        preferencesEditor.putInt(context.getString(R.string.saved_alarm_delay), alarms_delay);
-        preferencesEditor.commit();
-    }
-    @Rule
-    public IntentsTestRule<MainActivity> intentsTestRule =
-            new IntentsTestRule<>(MainActivity.class);
-    @Test
-    public void useAppContext()
-    {
-        // Context of the app under test.
-        Context appContext = getTargetContext();
-        assertEquals("com.example.a3130project", appContext.getPackageName());
-    }
-    @Test
-    public void perform_settingdrawer_navigation(){
-        onView(withId(R.id.action_home)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText("Settings")).perform(click());
-        intended(hasComponent(SettingsActivity.class.getName()));
-        onView(withContentDescription(R.string.back_button_desc)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText("Refill")).perform(click());
-        intended(hasComponent(RefillActivity.class.getName()));
-        onView(withContentDescription(R.string.back_button_desc)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-    }
-    @Test
-    public void perform_bottomdrawer_navigation(){
-        onView(withId(R.id.action_calendar)).perform(click());
-        intended(hasComponent(calendarActivity.class.getName()));
-        onView(withId(R.id.action_profile)).perform(click());
-        intended(hasComponent(MainProfileLoadActivity.class.getName()));
-        onView(withId(R.id.action_home)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-        onView(withId(R.id.action_medication)).perform(click());
-        intended(hasComponent(AllMedications.class.getName()));
-    }
-    @Test
-    public void perform_settings_update(){
-        final boolean ALARMS_ALLOWED = true;
-        final String ALARM_DELAY = "12";
-        onView(withId(R.id.action_home)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
-        openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-        onView(withText("Settings")).perform(click());
-        intended(hasComponent(SettingsActivity.class.getName()));
 
-        onView(withId(R.id.switchAlarm)).perform(click());
-        onView(withId(R.id.editAlarmDelay)).perform(replaceText(ALARM_DELAY),closeSoftKeyboard());
-        onView(withId(R.id.btnConfirmSettings)).perform(click());
-        Context context = InstrumentationRegistry.getTargetContext();
-        int delay = sharedPref.getInt(context.getString(R.string.saved_alarm_delay),
-                0);
-        boolean allowed = sharedPref.getBoolean(context.getString(R.string.saved_alarms_allowed),false);
-        assertEquals(ALARMS_ALLOWED,allowed);
-        assertEquals(ALARM_DELAY,String.valueOf(delay));
+	@Before
+	public void updateSharedPrefs()
+	{
+		Context context = InstrumentationRegistry.getTargetContext();
+		sharedPref
+				= context.getSharedPreferences(context.getString(R.string.preference_file),
+				                               Context.MODE_PRIVATE);
+		alarms_delay = sharedPref.getInt(context.getString(R.string.saved_alarm_delay),
+		                                 0);
+		alarms_allowed_old =
+				sharedPref.getBoolean(context.getString(R.string.saved_alarms_allowed), false);
+		preferencesEditor = sharedPref.edit();
+		preferencesEditor.putBoolean(context.getString(R.string.saved_alarms_allowed),
+		                             false);
+		preferencesEditor.putInt(context.getString(R.string.saved_alarm_delay), 0);
+		preferencesEditor.commit();
 
-    }
+	}
+
+
+	@After
+	public void restoreSharedPrefs()
+	{
+		Context context = InstrumentationRegistry.getTargetContext();
+		preferencesEditor.putBoolean(context.getString(R.string.saved_alarms_allowed),
+		                             alarms_allowed_old);
+		preferencesEditor.putInt(context.getString(R.string.saved_alarm_delay), alarms_delay);
+		preferencesEditor.commit();
+	}
+
+
+	@Rule
+	public IntentsTestRule<MainActivity> intentsTestRule =
+			new IntentsTestRule<>(MainActivity.class);
+
+
+	@Test
+	public void useAppContext()
+	{
+		// Context of the app under test.
+		Context appContext = getTargetContext();
+		assertEquals("com.example.a3130project", appContext.getPackageName());
+	}
+
+
+	@Test
+	public void perform_settingdrawer_navigation()
+	{
+		onView(withId(R.id.action_home)).perform(click());
+		intended(hasComponent(MainActivity.class.getName()));
+		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+		onView(withText("Settings")).perform(click());
+		intended(hasComponent(SettingsActivity.class.getName()));
+		onView(withContentDescription(R.string.back_button_desc)).perform(click());
+		intended(hasComponent(MainActivity.class.getName()));
+		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+		onView(withText("Refill")).perform(click());
+		intended(hasComponent(RefillActivity.class.getName()));
+		onView(withContentDescription(R.string.back_button_desc)).perform(click());
+		intended(hasComponent(MainActivity.class.getName()));
+	}
+
+
+	@Test
+	public void perform_bottomdrawer_navigation()
+	{
+		onView(withId(R.id.action_calendar)).perform(click());
+		intended(hasComponent(calendarActivity.class.getName()));
+		onView(withId(R.id.action_profile)).perform(click());
+		intended(hasComponent(MainProfileLoadActivity.class.getName()));
+		onView(withId(R.id.action_home)).perform(click());
+		intended(hasComponent(MainActivity.class.getName()));
+		onView(withId(R.id.action_medication)).perform(click());
+		intended(hasComponent(AllMedications.class.getName()));
+	}
+
+
+	@Test
+	public void perform_settings_update()
+	{
+		final boolean ALARMS_ALLOWED = true;
+		final String  ALARM_DELAY    = "12";
+		onView(withId(R.id.action_home)).perform(click());
+		intended(hasComponent(MainActivity.class.getName()));
+		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
+		onView(withText("Settings")).perform(click());
+		intended(hasComponent(SettingsActivity.class.getName()));
+
+		onView(withId(R.id.switchAlarm)).perform(click());
+		onView(withId(R.id.editAlarmDelay)).perform(replaceText(ALARM_DELAY), closeSoftKeyboard());
+		onView(withId(R.id.btnConfirmSettings)).perform(click());
+		Context context = InstrumentationRegistry.getTargetContext();
+		int delay = sharedPref.getInt(context.getString(R.string.saved_alarm_delay),
+		                              0);
+		boolean allowed =
+				sharedPref.getBoolean(context.getString(R.string.saved_alarms_allowed), false);
+		assertEquals(ALARMS_ALLOWED, allowed);
+		assertEquals(ALARM_DELAY, String.valueOf(delay));
+
+	}
 }

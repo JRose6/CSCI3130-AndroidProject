@@ -7,12 +7,11 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.example.a3130project.model.Medication;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MedicationDetails extends AppCompatActivity
 {
-	private Intent            intent;
-	private Medication        medication;
+	private Intent     intent;
+	private Medication medication;
 
 	private TextView viewName;
 	private TextView viewGenName;
