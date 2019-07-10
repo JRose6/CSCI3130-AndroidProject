@@ -31,7 +31,7 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, Cale
 
 		CalendarHolder.textViewMedicationName.setText(prescription.getMedName());
 		CalendarHolder.textViewDoctorInfo.setText(prescription.getDocNotes());
-		CalendarHolder.textViewDosageInfo.setText(prescription.getDosage());
+		CalendarHolder.textViewDosageInfo.setText(String.valueOf(prescription.getDosage()));
 	}
 	@NonNull
 	@Override

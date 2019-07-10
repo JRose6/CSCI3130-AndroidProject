@@ -47,8 +47,8 @@ public class dosageActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dosage);
-		ToolBarCreator.createToolbar(this, true, true);
-		ToolBarCreator.createBottomNav(this);
+		//ToolBarCreator.createToolbar(this, true, true);
+		//ToolBarCreator.createBottomNav(this);
 		dow = findViewById(R.id.dow);
 		newDow = "";
 		intent = getIntent();
