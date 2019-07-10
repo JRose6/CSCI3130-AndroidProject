@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.firebase.auth.FirebaseAuth;

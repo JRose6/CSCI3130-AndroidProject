@@ -1,6 +1,7 @@
 package com.example.a3130project.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  * Simple POJO class to hold Profile information in Firestore database
@@ -12,7 +13,6 @@ public class Profile implements Serializable
 	public String age;
 	public String email;
 	public boolean employee;
-
 
 	public Profile()
 	{

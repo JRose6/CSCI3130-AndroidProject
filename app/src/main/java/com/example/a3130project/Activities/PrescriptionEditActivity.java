@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,10 +8,14 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.DBHandlers;
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,7 +25,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class PrescriptionEdit extends AppCompatActivity
+public class PrescriptionEditActivity extends AppCompatActivity
 {
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
 	private Intent            intent;
@@ -32,22 +36,34 @@ public class PrescriptionEdit extends AppCompatActivity
 	private EditText editDosage;
 	private EditText editUserNotes;
 	private EditText editDocNotes;
+	private EditText editTimeOfDay;
+	private EditText editInitialQuantity;
 	private Button   buttonSaveChanges;
 	private Button   buttonMedDetails;
 	private Button   buttonCancel;
-
+	private CheckBox chkMon, chkTue,chkWed,chkThu, chkFri,chkSat,chkSun;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_prescription_edit);
+		chkMon = findViewById(R.id.chkMonday);
+		chkTue = findViewById(R.id.chkTuesday);
+		chkWed = findViewById(R.id.chkWednesday);
+		chkThu = findViewById(R.id.chkThursday);
+		chkFri = findViewById(R.id.chkFriday);
+		chkSat = findViewById(R.id.chkSaturday);
+		chkSun = findViewById(R.id.chkSunday);
 
 		viewMedName = findViewById(R.id.viewMedName);
 		editDosage = findViewById(R.id.editDosage);
 		editUserNotes = findViewById(R.id.editUserNotes);
 		editDocNotes = findViewById(R.id.editDocNotes);
-		ToolBarCreator.createToolbar(this, true, true);
+
+		editTimeOfDay = findViewById(R.id.editTimeOfDay);
+		editInitialQuantity = findViewById(R.id.editInitialAmount);
+		ToolBarCreator.createToolbar(this,true,true);
 		ToolBarCreator.createBottomNav(this);
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
 		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )
@@ -102,9 +118,22 @@ public class PrescriptionEdit extends AppCompatActivity
 			return;
 		}
 
-		editDosage.setText(prescription.dosage);
-		editUserNotes.setText(prescription.notes);
-		editDocNotes.setText(prescription.docNotes);
+		editDosage.setText(Integer.toString(prescription.getDosage()));
+		editUserNotes.setText(prescription.getNotes());
+		editDocNotes.setText(prescription.getDocNotes());
+		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
+		if (prescription.getTimeOfDay()!=0){
+			int time = prescription.getTimeOfDay()/(60*1000);
+			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(time % 60));
+			editTimeOfDay.setText(timeStr);
+		}
+		chkMon.setChecked(prescription.getMonday());
+		chkTue.setChecked(prescription.getTuesday());
+		chkWed.setChecked(prescription.getWednesday());
+		chkThu.setChecked(prescription.getThursday());
+		chkFri.setChecked(prescription.getFriday());
+		chkSat.setChecked(prescription.getSaturday());
+		chkSun.setChecked(prescription.getSunday());
 	}
 
 
@@ -121,7 +150,7 @@ public class PrescriptionEdit extends AppCompatActivity
 				finish();
 				break;
 			case R.id.buttonMedicationDetails:
-				Intent intent = new Intent(PrescriptionEdit.this, MedicationDetails.class);
+				Intent intent = new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
 				intent.putExtra("medication", medication);
 				startActivity(intent);
 				break;
@@ -135,55 +164,34 @@ public class PrescriptionEdit extends AppCompatActivity
 
 	private void preparePrescriptionForEntryIntoDatabase()
 	{
-		prescription.dosage = editDosage.getText().toString();
-		prescription.notes = editUserNotes.getText().toString();
 
-		if ( medication != null )
-		{
-			prescription.medId = medication.id;
-			prescription.medName = medication.name;
-			prescription.medGenName = medication.genName;
-		}
 	}
 
 
 	private void updateDatabaseEntry()
 	{
-		String              profileId         = FirebaseAuth.getInstance().getUid();
-		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
-		CollectionReference prescriptionsRef  = database.collection(prescriptionsPath);
-		DocumentReference   docRef;
-
-		if ( prescription.id == null || prescription.id.equals("null") )
-		{
-			docRef = prescriptionsRef.document();
-			prescription.id = docRef.getId();
+		prescription.setDosage(Integer.parseInt(editDosage.getText().toString()));
+		prescription.setNotes(editUserNotes.getText().toString());
+		prescription.setRemainingMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
+		prescription.setTotalMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
+		String timeOfDay = editTimeOfDay.getText().toString();
+		String[] timeSplit = timeOfDay.split("[:]");
+		int time = Integer.parseInt(timeSplit[0])*60 + Integer.parseInt(timeSplit[1]);
+		time = time*60*1000;//Milliseconds
+		prescription.setTimeOfDay(time);
+		prescription.setMonday(chkMon.isChecked());
+		prescription.setTuesday(chkTue.isChecked());
+		prescription.setWednesday(chkWed.isChecked());
+		prescription.setThursday(chkThu.isChecked());
+		prescription.setFriday(chkFri.isChecked());
+		prescription.setSaturday(chkSat.isChecked());
+		prescription.setSunday(chkSun.isChecked());
+		if ( medication != null ) {
+			prescription.setMedId(medication.id);
+			prescription.setMedName(medication.name);
+			prescription.setMedGenName(medication.genName);
 		}
-		else
-		{
-			docRef = prescriptionsRef.document(prescription.id);
-		}
-
-		preparePrescriptionForEntryIntoDatabase();
-
-		docRef.set(prescription).addOnSuccessListener(new OnSuccessListener<Void>()
-		{
-			@Override
-			public void onSuccess(Void aVoid)
-			{
-				Log.w("updateDatabaseEntry().onSuccessListener().onSuccess()",
-				      "oh fuck yea that's goooood shit.");
-			}
-		}).addOnFailureListener(new OnFailureListener()
-		{
-			@Override
-			public void onFailure(Exception e)
-			{
-				Log.w("updateDatabaseEntry().onFailureListener().onFailure()",
-				      "Error updating document...", e);
-				toastSh("There was a problem, Try Again" + e);
-			}
-		});
+		DBHandlers.prescriptionInsertUpdate(prescription);
 	}
 
 
@@ -201,6 +209,6 @@ public class PrescriptionEdit extends AppCompatActivity
 	 */
 	private void toastSh(String message)
 	{
-		Toast.makeText(PrescriptionEdit.this, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(PrescriptionEditActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
 }

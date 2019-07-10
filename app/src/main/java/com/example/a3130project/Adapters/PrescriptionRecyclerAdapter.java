@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.viewholder.PrescriptionHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -26,7 +27,7 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 		prescriptionHolder.setPrescription(prescription);
 		prescriptionHolder.name.setText(prescription.getMedName());
 		prescriptionHolder.genName.setText(prescription.getMedGenName());
-		prescriptionHolder.dosage.setText(prescription.getDosage());
+		prescriptionHolder.dosage.setText(Integer.toString(prescription.getDosage()));
 	}
 
 

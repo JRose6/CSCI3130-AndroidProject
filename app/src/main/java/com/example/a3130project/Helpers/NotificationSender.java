@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Helpers;
 
 import android.app.AlarmManager;
 import android.app.NotificationChannel;
@@ -8,6 +8,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 
 import androidx.core.app.NotificationCompat;
+
+import com.example.a3130project.R;
+import com.example.a3130project.Receivers.AlarmBroadCastReceiver;
 
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import static android.content.Context.NOTIFICATION_SERVICE;

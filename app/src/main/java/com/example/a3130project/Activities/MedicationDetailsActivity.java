@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 
-public class MedicationDetails extends AppCompatActivity
+public class MedicationDetailsActivity extends AppCompatActivity
 {
 	private Intent     intent;
 	private Medication medication;
