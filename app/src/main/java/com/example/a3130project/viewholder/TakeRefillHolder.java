@@ -56,7 +56,7 @@ public class TakeRefillHolder extends RecyclerView.ViewHolder {
             switch ( v.getId() )
             {
                 case R.id.btnTakeMed:
-                    prescription.setRemainingMeds(prescription.getTotalMeds()-prescription.getDosage());
+                    prescription.setRemainingMeds(prescription.getRemainingMeds()-prescription.getDosage());
                     break;
                 case R.id.btnRefillMed:
                     prescription.setRemainingMeds(prescription.getTotalMeds());

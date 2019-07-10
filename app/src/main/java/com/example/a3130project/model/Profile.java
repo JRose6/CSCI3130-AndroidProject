@@ -12,7 +12,6 @@ public class Profile implements Serializable
 	public String lastName;
 	public String age;
 	public String email;
-	public ArrayList<Prescription> prescriptions = new ArrayList<>();
 
 	public Profile()
 	{

@@ -17,6 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.a3130project.Activities.EditProfileActivity;
+import com.example.a3130project.Activities.LoginActivity;
 import com.example.a3130project.Adapters.PrescriptionRecyclerAdapter;
 import com.example.a3130project.R;
 
@@ -30,6 +31,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import io.grpc.ExperimentalApi;
 
 public class ProfileFragment extends Fragment
 {
@@ -46,15 +49,21 @@ public class ProfileFragment extends Fragment
 	private Button buttonDosage;
 	private Button buttonAddMed;
 
+
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(
+			@NonNull LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	{
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.activity_main_profile_load,container,false);
+		return inflater.inflate(R.layout.activity_main_profile_load, container, false);
 	}
 
+
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+	{
 		super.onViewCreated(view, savedInstanceState);
 		buttonEditProfile = getActivity().findViewById(R.id.buttonEditProfile);
 		buttonAddMed = getActivity().findViewById(R.id.buttonAddPrescription);
@@ -71,6 +80,7 @@ public class ProfileFragment extends Fragment
 		setUpRecyclerView();
 	}
 
+
 	@Override
 	public void onStart()
 	{
@@ -80,8 +90,7 @@ public class ProfileFragment extends Fragment
 			getActivity().finish();
 			return;
 		}
-		updateProfileFields();
-		adapter.startListening();
+
 	}
 
 
@@ -106,8 +115,6 @@ public class ProfileFragment extends Fragment
 	}
 
 
-
-
 	private void updateProfileFields()
 	{
 		database.collection("profiles")
@@ -118,9 +125,18 @@ public class ProfileFragment extends Fragment
 			        @Override
 			        public void onSuccess(DocumentSnapshot documentSnapshot)
 			        {
-				        profile = documentSnapshot.toObject(Profile.class);
-				        textViewFirstName.setText(profile.firstName);
-				        textViewLastName.setText(profile.lastName);
+				        try
+				        {
+					        profile = documentSnapshot.toObject(Profile.class);
+					        textViewFirstName.setText(profile.firstName);
+					        textViewLastName.setText(profile.lastName);
+
+				        } catch ( Exception e )
+				        {
+					        mAuth.signOut();
+					        Intent intent = new Intent(getActivity(), LoginActivity.class);
+					        startActivity(intent);
+				        }
 			        }
 		        })
 		        .addOnFailureListener(new OnFailureListener()

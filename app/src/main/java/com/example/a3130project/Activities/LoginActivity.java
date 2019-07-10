@@ -69,6 +69,9 @@ public class LoginActivity extends AppCompatActivity
 		{
 			openProfile();
 		}
+		else{
+
+		}
 	}
 
 
@@ -175,8 +178,7 @@ public class LoginActivity extends AppCompatActivity
 
 	public void openProfile()
 	{
-		Intent intent = new Intent(this, ProfileFragment.class);
-		startActivity(intent);
+		finish();
 	}
 
 
