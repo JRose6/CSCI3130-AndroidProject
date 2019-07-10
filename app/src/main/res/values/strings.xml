@@ -6,6 +6,8 @@
     <string name="preference_file">com.example.a3130project.PreferenceKey</string>
     <string name="saved_alarms_allowed">AlarmsAllowed</string>
     <string name="saved_alarm_delay">AlarmDelay</string>
+    <string name="saved_refill_threshold">RefillThreshold</string>
+
     <string name="title_activity_test_bottom">TestBottom</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>

@@ -60,7 +60,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.41"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/edtRefill" />
+        app:layout_constraintTop_toBottomOf="@+id/editRefill" />
 
     <TextView
         android:id="@+id/textView2"
@@ -82,12 +82,12 @@
         android:layout_marginEnd="32dp"
         android:text="Refill Warning"
         android:textSize="18sp"
-        app:layout_constraintEnd_toStartOf="@+id/edtRefill"
+        app:layout_constraintEnd_toStartOf="@+id/editRefill"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <EditText
-        android:id="@+id/edtRefill"
+        android:id="@+id/editRefill"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

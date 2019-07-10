@@ -1,5 +1,6 @@
 package com.example.a3130project.viewholder;
 
+import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
@@ -10,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a3130project.Activities.MedicationDetailsActivity;
 import com.example.a3130project.Activities.PrescriptionEditActivity;
 import com.example.a3130project.DBHandlers;
+import com.example.a3130project.Helpers.PrescriptionHelper;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
@@ -21,11 +23,12 @@ public class TakeRefillHolder extends RecyclerView.ViewHolder {
     private TextView quantity;
     private Button btnTake,btnRefill;
     private Prescription prescription;
-    private Medication medication;
-
+    private Medication   medication;
+    private Context      context;
 
     public TakeRefillHolder(View view) {
         super(view);
+        context = view.getContext();
         name = view.findViewById(R.id.viewMedNamePrescription);
         genName = view.findViewById(R.id.viewMedGenNamePrescription);
         dosage = view.findViewById(R.id.viewPrescriptionDosage);
@@ -56,15 +59,14 @@ public class TakeRefillHolder extends RecyclerView.ViewHolder {
             switch ( v.getId() )
             {
                 case R.id.btnTakeMed:
-                    prescription.setRemainingMeds(prescription.getRemainingMeds()-prescription.getDosage());
+                    PrescriptionHelper.takeDosage(prescription,context);
                     break;
                 case R.id.btnRefillMed:
-                    prescription.setRemainingMeds(prescription.getTotalMeds());
+                    PrescriptionHelper.refill(prescription);
                     break;
             }
             DBHandlers.prescriptionInsertUpdate(prescription);
         }
-
     }
 
     public void setMedication(Medication medication) {

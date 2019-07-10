@@ -124,8 +124,6 @@ public class ProfileFragment extends Fragment
 				        {
 					        profile = documentSnapshot.toObject(Profile.class);
 					        textViewFirstName.setText(profile.firstName);
-					        textViewLastName.setText(profile.lastName);
-
 				        } catch ( Exception e )
 				        {
 					        mAuth.signOut();
