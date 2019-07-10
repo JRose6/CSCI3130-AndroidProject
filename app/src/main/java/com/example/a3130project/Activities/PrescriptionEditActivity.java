@@ -114,21 +114,21 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			return;
 		}
 
-		editDosage.setText(prescription.dosage);
-		editUserNotes.setText(prescription.notes);
-		editDocNotes.setText(prescription.docNotes);
-		if (prescription.timeOfDay!=0){
-			int time = prescription.timeOfDay/(60*1000);
+		editDosage.setText(prescription.getDosage());
+		editUserNotes.setText(prescription.getNotes());
+		editDocNotes.setText(prescription.getDocNotes());
+		if (prescription.getTimeOfDay()!=0){
+			int time = prescription.getTimeOfDay()/(60*1000);
 			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(Math.floor(time / 60) % 60));
 			editTimeOfDay.setText(timeStr);
 		}
-		chkMon.setChecked(prescription.weekdays.get("Monday"));
-		chkTue.setChecked(prescription.weekdays.get("Tuesday"));
-		chkWed.setChecked(prescription.weekdays.get("Wednesday"));
-		chkThu.setChecked(prescription.weekdays.get("Thursday"));
-		chkFri.setChecked(prescription.weekdays.get("Friday"));
-		chkSat.setChecked(prescription.weekdays.get("Saturday"));
-		chkSun.setChecked(prescription.weekdays.get("Sunday"));
+		chkMon.setChecked(prescription.getMonday());
+		chkTue.setChecked(prescription.getTuesday());
+		chkWed.setChecked(prescription.getWednesday());
+		chkThu.setChecked(prescription.getThursday());
+		chkFri.setChecked(prescription.getFriday());
+		chkSat.setChecked(prescription.getSaturday());
+		chkSun.setChecked(prescription.getSunday());
 	}
 
 
@@ -159,24 +159,24 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void preparePrescriptionForEntryIntoDatabase()
 	{
-		prescription.dosage = editDosage.getText().toString();
-		prescription.notes = editUserNotes.getText().toString();
+		prescription.setDosage(editDosage.getText().toString());
+		prescription.setNotes(editUserNotes.getText().toString());
 		String timeOfDay = editTimeOfDay.getText().toString();
 		String[] timeSplit = timeOfDay.split("[:]");
 		int time = Integer.parseInt(timeSplit[0])*60 + Integer.parseInt(timeSplit[1]);
 		time = time*60*1000;//Milliseconds
-		prescription.timeOfDay = time;
-		prescription.weekdays.put("Monday",chkMon.isChecked());
-		prescription.weekdays.put("Tuesday",chkTue.isChecked());
-		prescription.weekdays.put("Wednesday",chkWed.isChecked());
-		prescription.weekdays.put("Thursday",chkThu.isChecked());
-		prescription.weekdays.put("Friday",chkFri.isChecked());
-		prescription.weekdays.put("Saturday",chkSat.isChecked());
-		prescription.weekdays.put("Sunday",chkSun.isChecked());
+		prescription.setTimeOfDay(time);
+		prescription.setMonday(chkMon.isChecked());
+		prescription.setTuesday(chkTue.isChecked());
+		prescription.setWednesday(chkWed.isChecked());
+		prescription.setThursday(chkThu.isChecked());
+		prescription.setFriday(chkFri.isChecked());
+		prescription.setSaturday(chkSat.isChecked());
+		prescription.setSunday(chkSun.isChecked());
 		if ( medication != null ) {
-			prescription.medId = medication.id;
-			prescription.medName = medication.name;
-			prescription.medGenName = medication.genName;
+			prescription.setMedId(medication.id);
+			prescription.setMedName(medication.name);
+			prescription.setMedGenName(medication.genName);
 		}
 	}
 
@@ -188,14 +188,14 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		CollectionReference prescriptionsRef  = database.collection(prescriptionsPath);
 		DocumentReference   docRef;
 
-		if ( prescription.id == null || prescription.id.equals("null") )
+		if ( prescription.getId() == null || prescription.getId().equals("null") )
 		{
 			docRef = prescriptionsRef.document();
-			prescription.id = docRef.getId();
+			prescription.setId(docRef.getId());
 		}
 		else
 		{
-			docRef = prescriptionsRef.document(prescription.id);
+			docRef = prescriptionsRef.document(prescription.getId());
 		}
 
 		preparePrescriptionForEntryIntoDatabase();
@@ -206,7 +206,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			public void onSuccess(Void aVoid)
 			{
 				Log.w("updateDatabaseEntry().onSuccessListener().onSuccess()",
-				      "oh fuck yea that's goooood shit.");
+				      "It Worked!");
 			}
 		}).addOnFailureListener(new OnFailureListener()
 		{

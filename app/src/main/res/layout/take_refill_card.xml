@@ -1,0 +1,67 @@
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="4dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="4dp"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:weightSum="10"
+    app:cardBackgroundColor="#BBA8FF">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <Button
+            android:id="@+id/buttonEditPrescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:text="Edit" />
+
+        <TextView
+            android:id="@+id/viewMedNamePrescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:maxLines="1"
+            android:text="~example name~"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/viewMedGenNamePrescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewMedNamePrescription"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:text="~example generic name~" />
+
+        <TextView
+            android:id="@+id/labelDosage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewMedGenNamePrescription"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:text="Dosage:" />
+
+        <TextView
+            android:id="@+id/viewPrescriptionDosage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/viewMedGenNamePrescription"
+            android:layout_toRightOf="@id/labelDosage"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:text="~the dosage value goes here~" />
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
