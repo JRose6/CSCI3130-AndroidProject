@@ -9,34 +9,32 @@ import androidx.annotation.NonNull;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.viewholder.PrescriptionHolder;
+import com.example.a3130project.viewholder.TakeRefillHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class takeRefillAdapter extends FirestoreRecyclerAdapter<Prescription, PrescriptionHolder>
+public class TakeRefillAdapter extends FirestoreRecyclerAdapter<Prescription, TakeRefillHolder>
 {
-	public takeRefillAdapter(@NonNull FirestoreRecyclerOptions<Prescription> options)
+	public TakeRefillAdapter(@NonNull FirestoreRecyclerOptions<Prescription> options)
 	{
 		super(options);
 	}
 
 	@Override
-	protected void onBindViewHolder(@NonNull PrescriptionHolder prescriptionHolder,
+	protected void onBindViewHolder(@NonNull TakeRefillHolder prescriptionHolder,
 	                                int i,
 	                                @NonNull Prescription prescription)
 	{
 		prescriptionHolder.setPrescription(prescription);
-		prescriptionHolder.name.setText(prescription.getMedName());
-		prescriptionHolder.genName.setText(prescription.getMedGenName());
-		prescriptionHolder.dosage.setText(prescription.getDosage());
 	}
 
 
 	@NonNull
 	@Override
-	public PrescriptionHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
+	public TakeRefillHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)
 	{
 		View v = LayoutInflater.from(parent.getContext())
-		                       .inflate(R.layout.prescription_card, parent, false);
-		return new PrescriptionHolder(v);
+		                       .inflate(R.layout.take_refill_card, parent, false);
+		return new TakeRefillHolder(v);
 	}
 }

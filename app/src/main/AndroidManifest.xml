@@ -13,15 +13,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".Fragments.BlankFragment"></activity>
-        <activity
-            android:name=".Fragments.MedFragment"
-            android:label="@string/title_activity_med_fragment"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".MedPerscriptionFragment"
-            android:label="@string/title_activity_med_perscription_fragment"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <uses-library
             android:name="android.test.runner"
@@ -35,12 +26,9 @@
 
         <activity android:name=".Activities.PrescriptionEditActivity" />
         <activity android:name=".Activities.MedicationDetailsActivity" />
-        <activity android:name=".Fragments.AllMedicationFragment" />
         <activity android:name=".Activities.dosageActivity" />
-        <activity android:name=".Fragments.CalendarFragment" />
         <activity android:name=".Activities.EditProfileActivity" />
         <activity android:name=".Activities.SettingsActivity" />
-        <activity android:name=".Fragments.ProfileFragment" />
         <activity android:name=".Activities.RegistrationActivity" />
         <activity android:name=".Activities.LoginActivity" />
         <activity android:name=".Activities.RefillActivity" />

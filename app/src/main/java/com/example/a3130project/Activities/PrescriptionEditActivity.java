@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.DBHandlers;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
@@ -36,6 +37,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	private EditText editUserNotes;
 	private EditText editDocNotes;
 	private EditText editTimeOfDay;
+	private EditText editInitialQuantity;
 	private Button   buttonSaveChanges;
 	private Button   buttonMedDetails;
 	private Button   buttonCancel;
@@ -59,6 +61,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editUserNotes = findViewById(R.id.editUserNotes);
 		editDocNotes = findViewById(R.id.editDocNotes);
 		editTimeOfDay = findViewById(R.id.editTimeOfDay);
+		editInitialQuantity = findViewById(R.id.editInitialAmount);
 		ToolBarCreator.createToolbar(this,true,true);
 		ToolBarCreator.createBottomNav(this);
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
@@ -114,12 +117,13 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			return;
 		}
 
-		editDosage.setText(prescription.getDosage());
+		editDosage.setText(Integer.toString(prescription.getDosage()));
 		editUserNotes.setText(prescription.getNotes());
 		editDocNotes.setText(prescription.getDocNotes());
+		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
 		if (prescription.getTimeOfDay()!=0){
 			int time = prescription.getTimeOfDay()/(60*1000);
-			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(Math.floor(time / 60) % 60));
+			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(time % 60));
 			editTimeOfDay.setText(timeStr);
 		}
 		chkMon.setChecked(prescription.getMonday());
@@ -159,8 +163,16 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void preparePrescriptionForEntryIntoDatabase()
 	{
-		prescription.setDosage(editDosage.getText().toString());
+
+	}
+
+
+	private void updateDatabaseEntry()
+	{
+		prescription.setDosage(Integer.parseInt(editDosage.getText().toString()));
 		prescription.setNotes(editUserNotes.getText().toString());
+		prescription.setRemainingMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
+		prescription.setTotalMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
 		String timeOfDay = editTimeOfDay.getText().toString();
 		String[] timeSplit = timeOfDay.split("[:]");
 		int time = Integer.parseInt(timeSplit[0])*60 + Integer.parseInt(timeSplit[1]);
@@ -178,46 +190,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			prescription.setMedName(medication.name);
 			prescription.setMedGenName(medication.genName);
 		}
-	}
-
-
-	private void updateDatabaseEntry()
-	{
-		String              profileId         = FirebaseAuth.getInstance().getUid();
-		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
-		CollectionReference prescriptionsRef  = database.collection(prescriptionsPath);
-		DocumentReference   docRef;
-
-		if ( prescription.getId() == null || prescription.getId().equals("null") )
-		{
-			docRef = prescriptionsRef.document();
-			prescription.setId(docRef.getId());
-		}
-		else
-		{
-			docRef = prescriptionsRef.document(prescription.getId());
-		}
-
-		preparePrescriptionForEntryIntoDatabase();
-
-		docRef.set(prescription).addOnSuccessListener(new OnSuccessListener<Void>()
-		{
-			@Override
-			public void onSuccess(Void aVoid)
-			{
-				Log.w("updateDatabaseEntry().onSuccessListener().onSuccess()",
-				      "It Worked!");
-			}
-		}).addOnFailureListener(new OnFailureListener()
-		{
-			@Override
-			public void onFailure(Exception e)
-			{
-				Log.w("updateDatabaseEntry().onFailureListener().onFailure()",
-				      "Error updating document...", e);
-				toastSh("There was a problem, Try Again" + e);
-			}
-		});
+		DBHandlers.prescriptionInsertUpdate(prescription);
 	}
 
 	@Override

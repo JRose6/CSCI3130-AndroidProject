@@ -1,14 +1,16 @@
 package com.example.a3130project.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.a3130project.Fragments.CalendarFragment;
 import com.example.a3130project.Fragments.HomeFragment;
-import com.example.a3130project.Fragments.MedFragment;
+import com.example.a3130project.Fragments.MedTabFragment;
 import com.example.a3130project.Fragments.ProfileFragment;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -61,10 +63,15 @@ public class NavigationActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navigation);
+        if (FirebaseAuth.getInstance().getCurrentUser()== null){
+            Intent intent = new Intent(this,LoginActivity.class);
+            this.startActivity(intent);
+            return;
+        }
         ToolBarCreator.createToolbar(this,true,false);
         mainFragment = new HomeFragment();
         calendarFragment = new CalendarFragment();
-        medicationFragment = new MedFragment();
+        medicationFragment = new MedTabFragment();
         profileFragment = new ProfileFragment();
         active = mainFragment;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();

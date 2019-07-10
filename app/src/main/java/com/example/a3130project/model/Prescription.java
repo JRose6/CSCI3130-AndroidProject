@@ -14,8 +14,10 @@ public class Prescription implements Serializable {
     private String medId;
     private String notes;
     private String docNotes;
-    private String dosage;
+    private int dosage;
     private int timeOfDay;
+    private int totalMeds;
+    private int remainingMeds;
     private Map<String, Boolean> weekdays = new HashMap<>();
 
 
@@ -25,7 +27,7 @@ public class Prescription implements Serializable {
         this.medGenName = "";
         this.notes = "";
         this.docNotes = "";
-        this.dosage = "";
+        this.dosage = 0;
         this.timeOfDay = 0;
         this.weekdays.put("Monday", false);
         this.weekdays.put("Tuesday", false);
@@ -47,7 +49,7 @@ public class Prescription implements Serializable {
         this.medId = medId;
         this.notes = "";
         this.docNotes = "";
-        this.dosage = "Dosage not set";
+        this.dosage = 0;
     }
 
 
@@ -111,12 +113,12 @@ public class Prescription implements Serializable {
     }
 
 
-    public String getDosage() {
+    public int getDosage() {
         return dosage;
     }
 
 
-    public void setDosage(String dosage) {
+    public void setDosage(int dosage) {
         this.dosage = dosage;
     }
 
@@ -193,6 +195,27 @@ public class Prescription implements Serializable {
 
     public void setTimeOfDay(int timeOfDay) {
         this.timeOfDay = timeOfDay;
+    }
+
+    public int getTotalMeds() {
+        return totalMeds;
+    }
+
+    public void setTotalMeds(int totalMeds) {
+        this.totalMeds = totalMeds;
+    }
+
+    public int getRemainingMeds() {
+        return remainingMeds;
+    }
+
+    public void setRemainingMeds(int remainingMeds) {
+        if (remainingMeds<=0){
+            this.remainingMeds=0;
+        }
+        else{
+            this.remainingMeds = remainingMeds;
+        }
     }
 
     @Override

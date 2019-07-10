@@ -1,4 +1,4 @@
-package com.example.a3130project.ui.main;
+package com.example.a3130project.Adapters;
 
 import android.content.Context;
 
@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.a3130project.Fragments.AllMedicationFragment;
+import com.example.a3130project.Fragments.MyMedicationFragment;
 import com.example.a3130project.R;
 
 /**
@@ -29,11 +30,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     @Override
     public Fragment getItem(int position) {
         // getItem is called to instantiate the fragment for the given page.
-        // Return a PlaceholderFragment (defined as a static inner class below).
         if (position==1){
             return new AllMedicationFragment();
         }
-        return PlaceholderFragment.newInstance(position + 1);
+        else{
+
+            return new MyMedicationFragment();
+        }
     }
 
     @Nullable

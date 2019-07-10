@@ -27,7 +27,7 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 		prescriptionHolder.setPrescription(prescription);
 		prescriptionHolder.name.setText(prescription.getMedName());
 		prescriptionHolder.genName.setText(prescription.getMedGenName());
-		prescriptionHolder.dosage.setText(prescription.getDosage());
+		prescriptionHolder.dosage.setText(Integer.toString(prescription.getDosage()));
 	}
 
 
