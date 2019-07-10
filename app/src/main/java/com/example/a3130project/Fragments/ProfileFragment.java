@@ -85,7 +85,7 @@ public class ProfileFragment extends Fragment
 			getActivity().finish();
 			return;
 		}
-
+		updateProfileFields();
 	}
 
 
