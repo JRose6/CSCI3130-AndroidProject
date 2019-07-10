@@ -13,7 +13,8 @@ public class Prescription implements Serializable
 	public String              notes;
 	public String              docNotes;
 	public String              dosage;
-	public Map<String, Object> weekdays = new HashMap<String,Object>();
+	public int				   timeOfDay;
+	public Map<String, Boolean> weekdays = new HashMap<>();
 
 
 	public Prescription()
@@ -24,6 +25,7 @@ public class Prescription implements Serializable
 		this.notes = "";
 		this.docNotes = "";
 		this.dosage = "";
+		this.timeOfDay = 0;
 		this.weekdays.put("Monday", false);
 		this.weekdays.put("Tuesday", false);
 		this.weekdays.put("Wednesday", false);

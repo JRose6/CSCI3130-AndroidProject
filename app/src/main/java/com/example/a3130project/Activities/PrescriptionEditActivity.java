@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,21 +35,30 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	private EditText editDosage;
 	private EditText editUserNotes;
 	private EditText editDocNotes;
+	private EditText editTimeOfDay;
 	private Button   buttonSaveChanges;
 	private Button   buttonMedDetails;
 	private Button   buttonCancel;
-
+	private CheckBox chkMon, chkTue,chkWed,chkThu, chkFri,chkSat,chkSun;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_prescription_edit);
+		chkMon = findViewById(R.id.chkMonday);
+		chkTue = findViewById(R.id.chkTuesday);
+		chkWed = findViewById(R.id.chkWednesday);
+		chkThu = findViewById(R.id.chkThursday);
+		chkFri = findViewById(R.id.chkFriday);
+		chkSat = findViewById(R.id.chkSaturday);
+		chkSun = findViewById(R.id.chkSunday);
 
 		viewMedName = findViewById(R.id.viewMedName);
 		editDosage = findViewById(R.id.editDosage);
 		editUserNotes = findViewById(R.id.editUserNotes);
 		editDocNotes = findViewById(R.id.editDocNotes);
+		editTimeOfDay = findViewById(R.id.editTimeOfDay);
 		ToolBarCreator.createToolbar(this,true,true);
 		ToolBarCreator.createBottomNav(this);
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
@@ -107,6 +117,18 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editDosage.setText(prescription.dosage);
 		editUserNotes.setText(prescription.notes);
 		editDocNotes.setText(prescription.docNotes);
+		if (prescription.timeOfDay!=0){
+			int time = prescription.timeOfDay/(60*1000);
+			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(Math.floor(time / 60) % 60));
+			editTimeOfDay.setText(timeStr);
+		}
+		chkMon.setChecked(prescription.weekdays.get("Monday"));
+		chkTue.setChecked(prescription.weekdays.get("Tuesday"));
+		chkWed.setChecked(prescription.weekdays.get("Wednesday"));
+		chkThu.setChecked(prescription.weekdays.get("Thursday"));
+		chkFri.setChecked(prescription.weekdays.get("Friday"));
+		chkSat.setChecked(prescription.weekdays.get("Saturday"));
+		chkSun.setChecked(prescription.weekdays.get("Sunday"));
 	}
 
 
@@ -139,9 +161,19 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	{
 		prescription.dosage = editDosage.getText().toString();
 		prescription.notes = editUserNotes.getText().toString();
-
-		if ( medication != null )
-		{
+		String timeOfDay = editTimeOfDay.getText().toString();
+		String[] timeSplit = timeOfDay.split("[:]");
+		int time = Integer.parseInt(timeSplit[0])*60 + Integer.parseInt(timeSplit[1]);
+		time = time*60*1000;//Milliseconds
+		prescription.timeOfDay = time;
+		prescription.weekdays.put("Monday",chkMon.isChecked());
+		prescription.weekdays.put("Tuesday",chkTue.isChecked());
+		prescription.weekdays.put("Wednesday",chkWed.isChecked());
+		prescription.weekdays.put("Thursday",chkThu.isChecked());
+		prescription.weekdays.put("Friday",chkFri.isChecked());
+		prescription.weekdays.put("Saturday",chkSat.isChecked());
+		prescription.weekdays.put("Sunday",chkSun.isChecked());
+		if ( medication != null ) {
 			prescription.medId = medication.id;
 			prescription.medName = medication.name;
 			prescription.medGenName = medication.genName;
