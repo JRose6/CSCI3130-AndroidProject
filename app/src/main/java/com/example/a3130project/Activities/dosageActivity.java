@@ -1,6 +1,5 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,37 +8,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import java.text.DateFormat;
-import java.util.GregorianCalendar;
 import java.util.TimeZone;
-import java.util.concurrent.TimeUnit;
 
 
-import android.widget.Button;
-
-import android.os.Bundle;
-import android.view.Menu;
-
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a3130project.model.Medication;
+import com.example.a3130project.Adapters.CalendarAdapter;
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Prescription;
-import com.example.a3130project.model.Profile;
-import com.example.a3130project.viewholder.CalendarHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
@@ -49,7 +34,7 @@ import com.google.firebase.firestore.Query;
 public class dosageActivity extends AppCompatActivity
 {
 	private FirebaseAuth                mAuth    = FirebaseAuth.getInstance();
-	private CalendarAdapter    adapter;
+	private CalendarAdapter adapter;
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
 
 	private static final String TAG = "dosageActivity";

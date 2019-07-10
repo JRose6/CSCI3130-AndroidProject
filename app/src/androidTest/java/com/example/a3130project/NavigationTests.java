@@ -1,16 +1,19 @@
 package com.example.a3130project;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
-import android.preference.PreferenceManager;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
+
+import com.example.a3130project.Activities.RefillActivity;
+import com.example.a3130project.Activities.SettingsActivity;
+import com.example.a3130project.Fragments.AllMedicationFragment;
+import com.example.a3130project.Fragments.CalendarFragment;
+import com.example.a3130project.Fragments.HomeFragment;
+import com.example.a3130project.Fragments.ProfileFragment;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,9 +26,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -71,8 +72,8 @@ public class NavigationTests
         preferencesEditor.commit();
     }
     @Rule
-    public IntentsTestRule<MainActivity> intentsTestRule =
-            new IntentsTestRule<>(MainActivity.class);
+    public IntentsTestRule<HomeFragment> intentsTestRule =
+            new IntentsTestRule<>(HomeFragment.class);
     @Test
     public void useAppContext()
     {
@@ -83,35 +84,35 @@ public class NavigationTests
     @Test
     public void perform_settingdrawer_navigation(){
         onView(withId(R.id.action_home)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        intended(hasComponent(HomeFragment.class.getName()));
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText("Settings")).perform(click());
         intended(hasComponent(SettingsActivity.class.getName()));
         onView(withContentDescription(R.string.back_button_desc)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        intended(hasComponent(HomeFragment.class.getName()));
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText("Refill")).perform(click());
         intended(hasComponent(RefillActivity.class.getName()));
         onView(withContentDescription(R.string.back_button_desc)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        intended(hasComponent(HomeFragment.class.getName()));
     }
     @Test
     public void perform_bottomdrawer_navigation(){
         onView(withId(R.id.action_calendar)).perform(click());
-        intended(hasComponent(calendarActivity.class.getName()));
+        intended(hasComponent(CalendarFragment.class.getName()));
         onView(withId(R.id.action_profile)).perform(click());
-        intended(hasComponent(MainProfileLoadActivity.class.getName()));
+        intended(hasComponent(ProfileFragment.class.getName()));
         onView(withId(R.id.action_home)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        intended(hasComponent(HomeFragment.class.getName()));
         onView(withId(R.id.action_medication)).perform(click());
-        intended(hasComponent(AllMedications.class.getName()));
+        intended(hasComponent(AllMedicationFragment.class.getName()));
     }
     @Test
     public void perform_settings_update(){
         final boolean ALARMS_ALLOWED = true;
         final String ALARM_DELAY = "12";
         onView(withId(R.id.action_home)).perform(click());
-        intended(hasComponent(MainActivity.class.getName()));
+        intended(hasComponent(HomeFragment.class.getName()));
         openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
         onView(withText("Settings")).perform(click());
         intended(hasComponent(SettingsActivity.class.getName()));

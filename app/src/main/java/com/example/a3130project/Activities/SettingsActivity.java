@@ -1,16 +1,18 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Switch;
+
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 
 public class SettingsActivity extends AppCompatActivity
 {

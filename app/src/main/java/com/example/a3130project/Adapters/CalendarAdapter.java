@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,6 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.viewholder.CalendarHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;

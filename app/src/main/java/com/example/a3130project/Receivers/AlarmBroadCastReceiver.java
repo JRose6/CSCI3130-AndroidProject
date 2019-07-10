@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Receivers;
 
 
 import android.content.BroadcastReceiver;
@@ -6,6 +6,9 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+
+import com.example.a3130project.Helpers.NotificationSender;
+import com.example.a3130project.R;
 
 
 public class AlarmBroadCastReceiver extends BroadcastReceiver

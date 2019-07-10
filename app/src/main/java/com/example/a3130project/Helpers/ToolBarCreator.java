@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Helpers;
 
 import android.content.Intent;
 import android.util.Log;
@@ -10,6 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.a3130project.Activities.LoginActivity;
+import com.example.a3130project.Activities.RefillActivity;
+import com.example.a3130project.Activities.SettingsActivity;
+import com.example.a3130project.Fragments.AllMedicationFragment;
+import com.example.a3130project.Fragments.CalendarFragment;
+import com.example.a3130project.Fragments.HomeFragment;
+import com.example.a3130project.Fragments.ProfileFragment;
+import com.example.a3130project.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -54,19 +62,19 @@ public class ToolBarCreator {
         name = nameSplit[nameSplit.length - 1];
         Log.println(5, "NAV", name);
         switch (name) {
-            case "MainProfileLoadActivity":
+            case "ProfileFragment":
                 nav.setSelectedItemId(R.id.action_profile);
                 break;
             case "EditProfileActivity":
                 nav.setSelectedItemId(R.id.action_profile);
                 break;
-            case "MainActivity":
+            case "HomeFragment":
                 nav.setSelectedItemId(R.id.action_home);
                 break;
-            case "AllMedications":
+            case "AllMedicationFragment":
                 nav.setSelectedItemId(R.id.action_medication);
                 break;
-            case "MedicationDetails":
+            case "MedicationDetailsActivity":
                 nav.setSelectedItemId(R.id.action_medication);
                 break;
             case "PrescriptionDetails":
@@ -92,19 +100,19 @@ public class ToolBarCreator {
                 Intent intent;
                 switch (item.getItemId()) {
                     case R.id.action_profile:
-                        intent = new Intent(activity, MainProfileLoadActivity.class);
+                        intent = new Intent(activity, ProfileFragment.class);
                         break;
                     case R.id.action_calendar:
-                        intent = new Intent(activity, calendarActivity.class);
+                        intent = new Intent(activity, CalendarFragment.class);
                         break;
                     case R.id.action_medication:
-                        intent = new Intent(activity, AllMedications.class);
+                        intent = new Intent(activity, AllMedicationFragment.class);
                         break;
                     case R.id.action_home:
-                        intent = new Intent(activity, MainActivity.class);
+                        intent = new Intent(activity, HomeFragment.class);
                         break;
                     default:
-                        intent = new Intent(activity, MainProfileLoadActivity.class);
+                        intent = new Intent(activity, ProfileFragment.class);
                 }
                 activity.startActivity(intent);
 

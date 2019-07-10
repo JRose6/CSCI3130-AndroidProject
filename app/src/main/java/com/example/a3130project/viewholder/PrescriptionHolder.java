@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a3130project.PrescriptionEdit;
+import com.example.a3130project.Activities.PrescriptionEditActivity;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
@@ -35,7 +35,7 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 			@Override
 			public void onClick(View v)
 			{
-				Intent intent = new Intent(v.getContext(), PrescriptionEdit.class);
+				Intent intent = new Intent(v.getContext(), PrescriptionEditActivity.class);
 				intent.putExtra("medication_name", prescription.getMedName());
 				intent.putExtra("prescription", prescription);
 				v.getContext().startActivity(intent);

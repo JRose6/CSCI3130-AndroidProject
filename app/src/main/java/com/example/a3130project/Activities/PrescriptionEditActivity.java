@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -21,7 +23,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class PrescriptionEdit extends AppCompatActivity
+public class PrescriptionEditActivity extends AppCompatActivity
 {
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
 	private Intent            intent;
@@ -121,7 +123,7 @@ public class PrescriptionEdit extends AppCompatActivity
 				finish();
 				break;
 			case R.id.buttonMedicationDetails:
-				Intent intent = new Intent(PrescriptionEdit.this, MedicationDetails.class);
+				Intent intent = new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
 				intent.putExtra("medication", medication);
 				startActivity(intent);
 				break;
@@ -199,6 +201,6 @@ public class PrescriptionEdit extends AppCompatActivity
 	 */
 	private void toastSh(String message)
 	{
-		Toast.makeText(PrescriptionEdit.this, message, Toast.LENGTH_SHORT).show();
+		Toast.makeText(PrescriptionEditActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
 }

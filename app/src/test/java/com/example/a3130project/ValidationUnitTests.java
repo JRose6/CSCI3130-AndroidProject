@@ -1,5 +1,8 @@
 package com.example.a3130project;
 
+import com.example.a3130project.Helpers.EmailValidator;
+import com.example.a3130project.Helpers.PasswordValidator;
+
 import org.junit.Test;
 
 import static org.junit.Assert.*;
