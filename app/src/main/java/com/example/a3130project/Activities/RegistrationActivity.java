@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +14,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.Helpers.EmailValidator;
+import com.example.a3130project.Helpers.PasswordValidator;
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 
@@ -164,12 +168,13 @@ public class RegistrationActivity extends AppCompatActivity
 		                      editEmail.getText().toString());
 
 		DocumentReference ref = database.collection("profiles").document(user.getUid());
-
+		ref.collection("prescription").document();
 		ref.set(profile).addOnSuccessListener(new OnSuccessListener<Void>()
 		{
 			@Override
 			public void onSuccess(Void aVoid)
 			{
+
 				toastSh("New profile generated.");
 				finish();
 			}

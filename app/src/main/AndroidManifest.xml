@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".EmployeeProfileActivity"></activity>
+
 
         <uses-library
             android:name="android.test.runner"
@@ -25,18 +25,18 @@
             android:name="android.test.mock"
             android:required="false" />
 
-        <activity android:name=".PrescriptionEdit" />
-        <activity android:name=".MedicationDetails" />
-        <activity android:name=".AllMedications" />
-        <activity android:name=".dosageActivity" />
-        <activity android:name=".calendarActivity" />
-        <activity android:name=".EditProfileActivity" />
-        <activity android:name=".SettingsActivity" />
-        <activity android:name=".MainProfileLoadActivity" />
-        <activity android:name=".RegistrationActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RefillActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".EmployeeProfileActivity"></activity>
+        <activity android:name=".Activities.PrescriptionEditActivity" />
+        <activity android:name=".Activities.MedicationDetailsActivity" />
+        <activity android:name=".Activities.dosageActivity" />
+        <activity android:name=".Activities.EditProfileActivity" />
+        <activity android:name=".Activities.SettingsActivity" />
+        <activity android:name=".Activities.RegistrationActivity" />
+        <activity android:name=".Activities.LoginActivity" />
+        <activity android:name=".Activities.RefillActivity" />
+        <activity
+            android:name=".Activities.NavigationActivity"
+            android:label="@string/title_activity_navigation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -44,7 +44,7 @@
             </intent-filter>
         </activity>
 
-        <receiver android:name=".AlarmBroadCastReceiver">
+        <receiver android:name=".Receivers.AlarmBroadCastReceiver">
             <intent-filter>
                 <action android:name="android.alarm.receiver" />
             </intent-filter>

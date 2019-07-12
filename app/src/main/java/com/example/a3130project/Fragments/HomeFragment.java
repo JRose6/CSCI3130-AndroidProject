@@ -1,43 +1,59 @@
-package com.example.a3130project;
+package com.example.a3130project.Fragments;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.app.NotificationManager;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.Menu;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
+import com.example.a3130project.Activities.LoginActivity;
+import com.example.a3130project.Helpers.NotificationSender;
+import com.example.a3130project.R;
 
 
-public class MainActivity extends AppCompatActivity
+public class HomeFragment extends Fragment
 {
 	private NotificationManager mNotifyManager;
 
 	private static final int    NOTIFICATION_ID    = 0;
 	private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
 	private              Button welcome;
-
-
 	@Override
-	protected void onCreate(Bundle savedInstanceState)
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+		// Defines the xml file for the fragment
+		return inflater.inflate(R.layout.activity_main, parent, false);
+	}
+
+
+/*	@Override
+	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+<<<<<<< HEAD:app/src/main/java/com/example/a3130project/MainActivity.java
 		setContentView(R.layout.activity_main);
 		ToolBarCreator.createToolbar(this, true, false);
 		ToolBarCreator.createBottomNav(this);
 		welcome = findViewById(R.id.buttonWelcome);
 		Button alarmTest = findViewById(R.id.buttonTestAlarm);
+=======
+		getActivity().setContentView(R.layout.activity_main);
+		//ToolBarCreator.createToolbar(this,true,false);
+		//ToolBarCreator.createBottomNav(getActivity());
+		welcome = getActivity().findViewById(R.id.buttonWelcome);
+		Button alarmTest = getActivity().findViewById(R.id.buttonTestAlarm);
+>>>>>>> group3_i3:app/src/main/java/com/example/a3130project/Fragments/HomeFragment.java
 		alarmTest.setOnClickListener(new AlarmTester());
 		welcome.setOnClickListener(new onClicker());
-		NotificationSender.createNotificationChannel(this);
+		NotificationSender.createNotificationChannel(getActivity());
 	}
-
+*/
 
 	public class onClicker implements View.OnClickListener
 	{
@@ -55,11 +71,11 @@ public class MainActivity extends AppCompatActivity
 		public void onClick(View v)
 		{
 			boolean notificationSent
-					= NotificationSender.scheduleNotification(getApplicationContext(),
+					= NotificationSender.scheduleNotification(getActivity().getApplicationContext(),
 					                                          System.currentTimeMillis());
 			if ( !notificationSent )
 			{
-				Toast.makeText(getApplicationContext(),
+				Toast.makeText(getActivity().getApplicationContext(),
 				               "Notifications disabled",
 				               Toast.LENGTH_SHORT)
 				     .show();
@@ -70,24 +86,9 @@ public class MainActivity extends AppCompatActivity
 
 	public void launchLogin()
 	{
-		Intent intent = new Intent(this, LoginActivity.class);
+		Intent intent = new Intent(getActivity(), LoginActivity.class);
 		startActivity(intent);
 	}
-
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu)
-	{
-		return ToolBarCreator.createMenu(this, menu, true);
-	}
-
-
-	@Override
-	protected void onResume()
-	{
-		super.onResume();
-	}
-
 
 	/**
 	 * This is a simple logging function to dump a tag and message to the log surrounded by empty

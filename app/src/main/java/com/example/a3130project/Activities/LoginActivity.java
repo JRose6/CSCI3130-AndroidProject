@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.a3130project.Fragments.ProfileFragment;
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -69,6 +72,9 @@ public class LoginActivity extends AppCompatActivity
 		{
 			openProfile();
 		}
+		else{
+
+		}
 	}
 
 
@@ -121,7 +127,7 @@ public class LoginActivity extends AppCompatActivity
 	/**
 	 * Attempts to authenticate with FireBase using the current contents of the editEmail and
 	 * editPassword textEdits. If the sign-in was successful, it will switch to the
-	 * 'MainProfileLoadActivity'
+	 * 'ProfileFragment'
 	 */
 	public void signIn()
 	{
@@ -175,12 +181,7 @@ public class LoginActivity extends AppCompatActivity
 
 	public void openProfile()
 	{
-		if ( profile == null )
-			return;
-		Intent intent;
-		intent = new Intent(this, MainProfileLoadActivity.class);
-		intent.putExtra("profile", profile);
-		startActivity(intent);
+		finish();
 	}
 
 
