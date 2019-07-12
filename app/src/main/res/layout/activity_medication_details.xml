@@ -48,5 +48,14 @@
             app:layout_constraintStart_toStartOf="@+id/viewManufacturer"
             app:layout_constraintTop_toBottomOf="@+id/viewManufacturer" />
 
+        <TextView
+            android:id="@+id/viewMainDiseases"
+            android:layout_width="match_parent"
+            android:layout_height="197dp"
+            android:text="TextView"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/viewManufacturer"
+            app:layout_constraintTop_toBottomOf="@+id/viewManufacturer" />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

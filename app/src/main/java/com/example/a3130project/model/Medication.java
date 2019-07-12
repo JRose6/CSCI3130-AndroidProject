@@ -14,6 +14,7 @@ public class Medication implements Serializable
 	public String            genName;
 	public String            manufacturer;
 	public ArrayList<String> sideEffects;
+	public ArrayList<String> mainDiseases;
 	public String            info;
 
 
@@ -66,7 +67,9 @@ public class Medication implements Serializable
 	{
 		return sideEffects;
 	}
-
+	public ArrayList<String> getMainDiseases(){
+		return mainDiseases;
+	}
 
 	public String getInfo()
 	{
@@ -79,6 +82,6 @@ public class Medication implements Serializable
 	{
 		return "Medication{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", genName='"
 		       + genName + '\'' + ", manufacturer='" + manufacturer + '\'' + ", sideEffects="
-		       + sideEffects + ", info='" + info + '\'' + '}';
+		       + sideEffects + "mainDiseases=" + mainDiseases + ", info='" + info + '\'' + '}';
 	}
 }
