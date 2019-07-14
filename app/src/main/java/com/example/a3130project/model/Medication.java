@@ -15,7 +15,7 @@ public class Medication implements Serializable
 	public String            manufacturer;
 	public ArrayList<String> sideEffects;
 	public ArrayList<String> mainDiseases;
-	public String            info;
+
 
 
 	public Medication()
@@ -29,13 +29,17 @@ public class Medication implements Serializable
 	 *
 	 * @param id   - Medication number (9-digit number)
 	 * @param name - Medication name (2-48 characters)
-	 * @param info - Brief information about the medication
+
 	 */
-	public Medication(String id, String name, String info)
+	public Medication(String id, String name, String genName, String manufacturer, ArrayList<String> sideEffects, ArrayList<String> mainDiseases)
 	{
 		this.id = id;
 		this.name = name;
-		this.info = info;
+		this.genName = genName;
+		this.manufacturer = manufacturer;
+		this.sideEffects = sideEffects;
+		this.mainDiseases = mainDiseases;
+
 	}
 
 
@@ -71,10 +75,7 @@ public class Medication implements Serializable
 		return mainDiseases;
 	}
 
-	public String getInfo()
-	{
-		return info;
-	}
+
 
 
 	@Override
@@ -82,6 +83,6 @@ public class Medication implements Serializable
 	{
 		return "Medication{" + "id='" + id + '\'' + ", name='" + name + '\'' + ", genName='"
 		       + genName + '\'' + ", manufacturer='" + manufacturer + '\'' + ", sideEffects="
-		       + sideEffects + "mainDiseases=" + mainDiseases + ", info='" + info + '\'' + '}';
+		       + sideEffects + '\'' + "mainDiseases=" + mainDiseases + '\'' + '}';
 	}
 }

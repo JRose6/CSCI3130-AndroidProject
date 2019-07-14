@@ -72,13 +72,13 @@ public class EmployeeProfileActivity extends AppCompatActivity
 			mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
 			String diseases[] = mainDiseases1.split(",");
 			String TEST = Arrays.toString(diseases);
-			Toast.makeText(EmployeeProfileActivity.this, TEST, Toast.LENGTH_SHORT).show();
+
 
 			String Side_Eff = sideEff.getText().toString();
 			Side_Eff = Side_Eff.replaceAll("\\s", "");
 			String side_Eff[] = Side_Eff.split(",");
 			String TEST2 = Arrays.toString(diseases);
-			Toast.makeText(EmployeeProfileActivity.this, TEST2, Toast.LENGTH_SHORT).show();
+
 		}
 	}
 }
