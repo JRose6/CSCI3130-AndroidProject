@@ -74,20 +74,17 @@ public class EmployeeProfileActivity extends AppCompatActivity
 
 			ArrayList <String> DIS = new ArrayList<String>(Arrays.asList(diseases));
 
-
-
-
 			String Side_Eff = sideEff.getText().toString();
 			Side_Eff = Side_Eff.replaceAll("\\s", "");
 			String side_Eff[] = Side_Eff.split(",");
 
 			ArrayList <String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
 
-
 			DocumentReference ref = database.collection("medications").document();
 			String id = ref.getId();
 
 			medication = new Medication(id,name.getText().toString(), genName.getText().toString(), manufact.getText().toString(), SIDE, DIS);
+			ref.set(medication);
 		}
 	}
 }
