@@ -1,16 +1,19 @@
 package com.example.a3130project;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.SystemClock;
-import android.preference.PreferenceManager;
 
 import androidx.test.InstrumentationRegistry;
-import androidx.test.espresso.intent.Intents;
 import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
+
+import com.example.a3130project.Activities.RefillActivity;
+import com.example.a3130project.Activities.SettingsActivity;
+import com.example.a3130project.Fragments.AllMedicationFragment;
+import com.example.a3130project.Fragments.CalendarFragment;
+import com.example.a3130project.Fragments.HomeFragment;
+import com.example.a3130project.Fragments.ProfileFragment;
 
 import org.junit.After;
 import org.junit.Before;
@@ -23,9 +26,7 @@ import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
-import static androidx.test.espresso.action.ViewActions.pressBack;
 import static androidx.test.espresso.action.ViewActions.replaceText;
-import static androidx.test.espresso.action.ViewActions.typeText;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
@@ -148,4 +149,5 @@ public class NavigationTests
 		assertEquals(ALARM_DELAY, String.valueOf(delay));
 
 	}
+
 }

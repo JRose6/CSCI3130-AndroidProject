@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 
 public class RefillActivity extends AppCompatActivity
 {

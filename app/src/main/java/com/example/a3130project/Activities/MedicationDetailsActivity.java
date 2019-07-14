@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -6,9 +6,10 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 
-public class MedicationDetails extends AppCompatActivity
+public class MedicationDetailsActivity extends AppCompatActivity
 {
 	private Intent     intent;
 	private Medication medication;
@@ -17,6 +18,7 @@ public class MedicationDetails extends AppCompatActivity
 	private TextView viewGenName;
 	private TextView viewManufacturer;
 	private TextView viewSideEffects;
+	private TextView viewMainDiseases;
 
 
 	@Override
@@ -29,6 +31,7 @@ public class MedicationDetails extends AppCompatActivity
 		viewGenName = findViewById(R.id.viewGenNameMedDetails);
 		viewManufacturer = findViewById(R.id.viewManufacturer);
 		viewSideEffects = findViewById(R.id.viewSideEffects);
+		viewMainDiseases = findViewById(R.id.viewMainDiseases);
 	}
 
 
@@ -44,9 +47,10 @@ public class MedicationDetails extends AppCompatActivity
 		if ( medication == null )
 			finish();
 
-		viewName.setText(medication.name);
-		viewGenName.setText(medication.genName);
-		viewManufacturer.setText(medication.manufacturer);
-		viewSideEffects.setText(medication.sideEffects.toString());
+		viewName.setText("Name:\n" + medication.name);
+		viewGenName.setText("General Name:\n" + medication.genName);
+		viewManufacturer.setText("Manufacturer:\n" + medication.manufacturer);
+		viewSideEffects.setText("Side Effects:\n" + medication.sideEffects.toString());
+		viewMainDiseases.setText("Main Diseases:\n" + medication.mainDiseases.toString());
 	}
 }

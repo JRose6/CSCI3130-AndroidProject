@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -17,6 +17,9 @@ import java.util.TimeZone;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.a3130project.Adapters.CalendarAdapter;
+import com.example.a3130project.R;
+import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Prescription;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -45,8 +48,8 @@ public class dosageActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dosage);
-		ToolBarCreator.createToolbar(this, true, true);
-		ToolBarCreator.createBottomNav(this);
+		//ToolBarCreator.createToolbar(this, true, true);
+		//ToolBarCreator.createBottomNav(this);
 		dow = findViewById(R.id.dow);
 		newDow = "";
 		intent = getIntent();

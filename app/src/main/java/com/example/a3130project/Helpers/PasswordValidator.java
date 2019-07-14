@@ -1,8 +1,8 @@
-package com.example.a3130project;
+package com.example.a3130project.Helpers;
 
 public class PasswordValidator
 {
-	enum Strength
+	public enum Strength
 	{
 		Invalid,
 		Weak,
