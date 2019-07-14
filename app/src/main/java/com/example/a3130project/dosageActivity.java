@@ -39,6 +39,7 @@ public class dosageActivity extends AppCompatActivity
 	Calendar calendar;
 
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
