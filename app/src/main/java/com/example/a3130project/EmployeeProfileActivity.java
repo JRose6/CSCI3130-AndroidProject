@@ -11,26 +11,28 @@ import android.widget.Toast;
 
 
 import com.example.a3130project.Helpers.ToolBarCreator;
+import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Profile;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
 
 public class EmployeeProfileActivity extends AppCompatActivity
 {
-	private EditText medName, normName, mainDiseases, manufact, sideEff;
+	private EditText genName, name, mainDiseases, manufact, sideEff;
 	private Button addMedi;
 
 
 
 	private FirebaseFirestore database;
-	private Intent intent;
-	private Profile profile;
+	private Intent            intent;
+	private Profile           profile;
+	private Medication        medication;
 	private DocumentReference profileRef;
-	private FirebaseAuth mAuth;
+	private FirebaseAuth      mAuth;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -38,13 +40,12 @@ public class EmployeeProfileActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_employee_profile);
 
-		medName = findViewById(R.id.genNameEmp);
-		normName = findViewById(R.id.nameEmp);
+		genName = findViewById(R.id.genNameEmp);
+		name = findViewById(R.id.nameEmp);
 		mainDiseases = findViewById(R.id.mainDiseasesEmp);
 		manufact = findViewById(R.id.manuEmp);
 		sideEff = findViewById(R.id.sideEffectsEmp);
 		addMedi = findViewById(R.id.addMedEmp);
-
 
 		database = FirebaseFirestore.getInstance();
 
@@ -52,7 +53,6 @@ public class EmployeeProfileActivity extends AppCompatActivity
 
 		intent = getIntent();
 		profile = (Profile) intent.getSerializableExtra("profile");
-
 
 		//ToolBarCreator.createBottomNav(this);
 
@@ -71,14 +71,23 @@ public class EmployeeProfileActivity extends AppCompatActivity
 			String mainDiseases1 = mainDiseases.getText().toString();
 			mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
 			String diseases[] = mainDiseases1.split(",");
-			String TEST = Arrays.toString(diseases);
+
+			ArrayList <String> DIS = new ArrayList<String>(Arrays.asList(diseases));
+
+
 
 
 			String Side_Eff = sideEff.getText().toString();
 			Side_Eff = Side_Eff.replaceAll("\\s", "");
 			String side_Eff[] = Side_Eff.split(",");
-			String TEST2 = Arrays.toString(diseases);
 
+			ArrayList <String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
+
+
+			DocumentReference ref = database.collection("medications").document();
+			String id = ref.getId();
+
+			medication = new Medication(id,name.getText().toString(), genName.getText().toString(), manufact.getText().toString(), SIDE, DIS);
 		}
 	}
 }
