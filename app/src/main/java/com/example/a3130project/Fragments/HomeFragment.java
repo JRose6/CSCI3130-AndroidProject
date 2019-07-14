@@ -24,10 +24,11 @@ public class HomeFragment extends Fragment
 
 	private static final int    NOTIFICATION_ID    = 0;
 	private static final String PRIMARY_CHANNEL_ID = "primary_notification_channel";
-	private              Button welcome;
+	private              Button testAlarm;
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		// Defines the xml file for the fragment
+
 		return inflater.inflate(R.layout.activity_main, parent, false);
 	}
 

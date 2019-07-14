@@ -78,6 +78,13 @@
         android:text="Update"
         app:layout_constraintStart_toStartOf="@+id/age"
         app:layout_constraintTop_toBottomOf="@+id/age" />
+    <Button
+        android:id="@+id/TESTING"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="EMPLOYEE"
+        app:layout_constraintBottom_toBottomOf="@id/update"
+        app:layout_constraintEnd_toStartOf="@id/update"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/nav_view"
@@ -92,4 +99,6 @@
         app:menu="@menu/bottom_nav_menu2"
         android:theme="@style/BottomNavigationTheme"
         />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

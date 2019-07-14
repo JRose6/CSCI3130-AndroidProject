@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a3130project.EmployeeProfileActivity;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
@@ -28,7 +29,7 @@ public class EditProfileActivity extends AppCompatActivity
 	private Intent  intent;
 	private Profile profile;
 
-	private Button update, mainProfile;
+	private Button update, TESTING;
 
 	private DocumentReference profileRef;
 	private FirebaseAuth      mAuth;
@@ -46,6 +47,9 @@ public class EditProfileActivity extends AppCompatActivity
 		age = findViewById(R.id.age);
 		update = findViewById(R.id.update);
 
+		//TODO: GET RID OFF TESTING BUTTON
+		TESTING = findViewById(R.id.TESTING);
+
 		database = FirebaseFirestore.getInstance();
 
 		mAuth = FirebaseAuth.getInstance();
@@ -59,6 +63,9 @@ public class EditProfileActivity extends AppCompatActivity
 
 		update.setOnClickListener(new OnClicker());
 
+		//TODO: GET RID OF THIS FUNCTION IN ONCLICKER
+		TESTING.setOnClickListener(new OnClicker());
+
 	}
 
 
@@ -71,9 +78,21 @@ public class EditProfileActivity extends AppCompatActivity
 				case R.id.update:
 					updateProfile();
 					break;
+			case R.id.TESTING:
+					employeePAGE();
+					break;
 			}
 		}
 	}
+	//TODO: get rid of
+	public void employeePAGE()
+	{
+		Intent intent = new Intent(this, EmployeeProfileActivity.class);
+		startActivity(intent);
+	}
+
+
+
 
 
 	public void updateProfile()
