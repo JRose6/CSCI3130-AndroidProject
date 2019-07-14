@@ -46,11 +46,6 @@ public class EmployeeProfileActivity extends AppCompatActivity
 		addMedi = findViewById(R.id.addMedEmp);
 
 
-		String mainDiseases1 = mainDiseases.getText().toString();
-		String diseases[] = mainDiseases1.split(",");
-
-
-
 		database = FirebaseFirestore.getInstance();
 
 		mAuth = FirebaseAuth.getInstance();
@@ -65,9 +60,6 @@ public class EmployeeProfileActivity extends AppCompatActivity
 
 		addMedi.setOnClickListener(new OnClicker());
 
-		String TEST = Arrays.toString(diseases);
-		Toast.makeText(this, TEST, Toast.LENGTH_LONG).show();
-
 	}
 
 	public class OnClicker implements View.OnClickListener
@@ -75,10 +67,16 @@ public class EmployeeProfileActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
+			//TODO: Fix spaces in array storing of variables
 			String mainDiseases1 = mainDiseases.getText().toString();
 			String diseases[] = mainDiseases1.split(",");
 			String TEST = Arrays.toString(diseases);
 			Toast.makeText(EmployeeProfileActivity.this, TEST, Toast.LENGTH_SHORT).show();
+
+			String Side_Eff = sideEff.getText().toString();
+			String side_Eff[] = Side_Eff.split(",");
+			String TEST2 = Arrays.toString(diseases);
+			Toast.makeText(EmployeeProfileActivity.this, TEST2, Toast.LENGTH_SHORT).show();
 		}
 	}
 }
