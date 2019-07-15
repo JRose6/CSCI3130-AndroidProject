@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.a3130project.Activities.EditProfileActivity;
 import com.example.a3130project.Activities.LoginActivity;
 import com.example.a3130project.Adapters.PrescriptionRecyclerAdapter;
@@ -43,7 +44,7 @@ public class ProfileFragment extends Fragment
 	private TextView textViewFirstName;
 	private TextView textViewLastName;
 
-	private Button buttonEditProfile,buttonAddMed;
+	private Button buttonEditProfile, buttonAddMed;
 
 
 	@Nullable

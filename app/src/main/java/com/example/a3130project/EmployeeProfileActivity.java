@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
-
-import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Profile;
 import com.google.firebase.auth.FirebaseAuth;
@@ -26,13 +23,13 @@ public class EmployeeProfileActivity extends AppCompatActivity
 	private Button addMedi;
 
 
-
 	private FirebaseFirestore database;
 	private Intent            intent;
 	private Profile           profile;
 	private Medication        medication;
 	private DocumentReference profileRef;
 	private FirebaseAuth      mAuth;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -54,13 +51,10 @@ public class EmployeeProfileActivity extends AppCompatActivity
 		intent = getIntent();
 		profile = (Profile) intent.getSerializableExtra("profile");
 
-		//ToolBarCreator.createBottomNav(this);
-
-		//ToolBarCreator.createToolbar(this, true, false);
-
 		addMedi.setOnClickListener(new OnClicker());
 
 	}
+
 
 	public class OnClicker implements View.OnClickListener
 	{
@@ -72,18 +66,23 @@ public class EmployeeProfileActivity extends AppCompatActivity
 			mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
 			String diseases[] = mainDiseases1.split(",");
 
-			ArrayList <String> DIS = new ArrayList<String>(Arrays.asList(diseases));
+			ArrayList<String> DIS = new ArrayList<String>(Arrays.asList(diseases));
 
 			String Side_Eff = sideEff.getText().toString();
 			Side_Eff = Side_Eff.replaceAll("\\s", "");
 			String side_Eff[] = Side_Eff.split(",");
 
-			ArrayList <String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
+			ArrayList<String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
 
 			DocumentReference ref = database.collection("medications").document();
-			String id = ref.getId();
+			String            id  = ref.getId();
 
-			medication = new Medication(id,name.getText().toString(), genName.getText().toString(), manufact.getText().toString(), SIDE, DIS);
+			medication = new Medication(id,
+			                            name.getText().toString(),
+			                            genName.getText().toString(),
+			                            manufact.getText().toString(),
+			                            SIDE,
+			                            DIS);
 			ref.set(medication);
 		}
 	}

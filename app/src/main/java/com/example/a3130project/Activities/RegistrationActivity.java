@@ -50,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_registration);
-		ToolBarCreator.createToolbar(this,false,true);
+		ToolBarCreator.createToolbar(this, false, true);
 		editFirstName = findViewById(R.id.firstName);
 		editLastName = findViewById(R.id.lastName);
 		editEmail = findViewById(R.id.emailInput);

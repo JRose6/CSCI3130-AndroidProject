@@ -22,17 +22,23 @@ public class CalendarFragment extends Fragment
 	private static final String       TAG = "CalendarActivity";
 	private              CalendarView mCalendarView;
 
+
 	@Override
-	public void onViewCreated(View view,Bundle savedInstanceState){
-		super.onViewCreated(view,savedInstanceState);
+	public void onViewCreated(View view, Bundle savedInstanceState)
+	{
+		super.onViewCreated(view, savedInstanceState);
 		mCalendarView = (CalendarView) getActivity().findViewById(R.id.calendarView);
 		mCalendarView.setOnDateChangeListener(new dayChange());
 	}
+
+
 	@Override
-	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
+	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
+	{
 		// Defines the xml file for the fragment
 		return inflater.inflate(R.layout.activity_calendar, parent, false);
 	}
+
 
 	public class dayChange implements CalendarView.OnDateChangeListener
 	{

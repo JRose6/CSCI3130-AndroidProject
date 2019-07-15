@@ -41,7 +41,7 @@ public class EditProfileActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
 		ToolBarCreator.createBottomNav(this);
-		ToolBarCreator.createToolbar(this,true,true);
+		ToolBarCreator.createToolbar(this, true, true);
 		firstName = findViewById(R.id.firstName);
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);
@@ -74,25 +74,25 @@ public class EditProfileActivity extends AppCompatActivity
 		@Override
 		public void onClick(View v)
 		{
-			switch ( v.getId() ) {
-				case R.id.update:
-					updateProfile();
-					break;
+			switch ( v.getId() )
+			{
+			case R.id.update:
+				updateProfile();
+				break;
 			case R.id.TESTING:
-					employeePAGE();
-					break;
+				employeePAGE();
+				break;
 			}
 		}
 	}
+
+
 	//TODO: get rid of
 	public void employeePAGE()
 	{
 		Intent intent = new Intent(this, EmployeeProfileActivity.class);
 		startActivity(intent);
 	}
-
-
-
 
 
 	public void updateProfile()
@@ -116,10 +116,12 @@ public class EditProfileActivity extends AppCompatActivity
 			}
 		});
 	}
+
+
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
-		return ToolBarCreator.createMenu(this, menu,true);
+		return ToolBarCreator.createMenu(this, menu, true);
 	}
 
 }

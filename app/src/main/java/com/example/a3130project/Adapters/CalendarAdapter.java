@@ -22,6 +22,7 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, Cale
 		super(options);
 	}
 
+
 	@Override
 	protected void onBindViewHolder(
 			@NonNull CalendarHolder CalendarHolder, int i,
@@ -33,6 +34,8 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, Cale
 		CalendarHolder.textViewDoctorInfo.setText(prescription.getDocNotes());
 		CalendarHolder.textViewDosageInfo.setText(String.valueOf(prescription.getDosage()));
 	}
+
+
 	@NonNull
 	@Override
 	public CalendarHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType)

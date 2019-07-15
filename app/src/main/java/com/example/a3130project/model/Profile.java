@@ -8,11 +8,12 @@ import java.util.ArrayList;
  */
 public class Profile implements Serializable
 {
-	public String firstName;
-	public String lastName;
-	public String age;
-	public String email;
+	public String  firstName;
+	public String  lastName;
+	public String  age;
+	public String  email;
 	public boolean employee;
+
 
 	public Profile()
 	{

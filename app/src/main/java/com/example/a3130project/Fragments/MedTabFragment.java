@@ -16,23 +16,29 @@ import android.view.ViewGroup;
 
 import com.example.a3130project.Adapters.SectionsPagerAdapter;
 
-public class MedTabFragment extends Fragment {
-    @Nullable
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        return inflater.inflate(R.layout.activity_med_fragment, container, false);
-    }
+public class MedTabFragment extends Fragment
+{
+	@Nullable
+	@Override
+	public View onCreateView(
+			@NonNull LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	{
+		super.onCreateView(inflater, container, savedInstanceState);
+		return inflater.inflate(R.layout.activity_med_fragment, container, false);
+	}
 
-    @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(),
-                getActivity().getSupportFragmentManager());
-        ViewPager viewPager = getActivity().findViewById(R.id.view_pager);
-        viewPager.setAdapter(sectionsPagerAdapter);
-        TabLayout tabs = getActivity().findViewById(R.id.tabs);
-        tabs.setupWithViewPager(viewPager);
-    }
+
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+	{
+		super.onViewCreated(view, savedInstanceState);
+		SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(getActivity(),
+		                                                                     getActivity().getSupportFragmentManager());
+		ViewPager viewPager = getActivity().findViewById(R.id.view_pager);
+		viewPager.setAdapter(sectionsPagerAdapter);
+		TabLayout tabs = getActivity().findViewById(R.id.tabs);
+		tabs.setupWithViewPager(viewPager);
+	}
 
 }

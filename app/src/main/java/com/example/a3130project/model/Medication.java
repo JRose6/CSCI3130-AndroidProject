@@ -17,7 +17,6 @@ public class Medication implements Serializable
 	public ArrayList<String> mainDiseases;
 
 
-
 	public Medication()
 	{
 		// empty constructor needed for FireStore
@@ -29,7 +28,6 @@ public class Medication implements Serializable
 	 *
 	 * @param id   - Medication number (9-digit number)
 	 * @param name - Medication name (2-48 characters)
-
 	 */
 	public Medication(String id, String name, String genName, String manufacturer, ArrayList<String> sideEffects, ArrayList<String> mainDiseases)
 	{
@@ -71,11 +69,12 @@ public class Medication implements Serializable
 	{
 		return sideEffects;
 	}
-	public ArrayList<String> getMainDiseases(){
+
+
+	public ArrayList<String> getMainDiseases()
+	{
 		return mainDiseases;
 	}
-
-
 
 
 	@Override

@@ -41,7 +41,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	private Button   buttonSaveChanges;
 	private Button   buttonMedDetails;
 	private Button   buttonCancel;
-	private CheckBox chkMon, chkTue,chkWed,chkThu, chkFri,chkSat,chkSun;
+	private CheckBox chkMon, chkTue, chkWed, chkThu, chkFri, chkSat, chkSun;
+
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -63,7 +64,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 		editTimeOfDay = findViewById(R.id.editTimeOfDay);
 		editInitialQuantity = findViewById(R.id.editInitialAmount);
-		ToolBarCreator.createToolbar(this,true,true);
+		ToolBarCreator.createToolbar(this, true, true);
 		ToolBarCreator.createBottomNav(this);
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
 		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )
@@ -122,9 +123,10 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editUserNotes.setText(prescription.getNotes());
 		editDocNotes.setText(prescription.getDocNotes());
 		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
-		if (prescription.getTimeOfDay()!=0){
-			int time = prescription.getTimeOfDay()/(60*1000);
-			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(time % 60));
+		if ( prescription.getTimeOfDay() != 0 )
+		{
+			int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
+			String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
 			editTimeOfDay.setText(timeStr);
 		}
 		chkMon.setChecked(prescription.getMonday());
@@ -150,7 +152,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 				finish();
 				break;
 			case R.id.buttonMedicationDetails:
-				Intent intent = new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
+				Intent intent =
+						new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
 				intent.putExtra("medication", medication);
 				startActivity(intent);
 				break;
@@ -174,10 +177,10 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		prescription.setNotes(editUserNotes.getText().toString());
 		prescription.setRemainingMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
 		prescription.setTotalMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
-		String timeOfDay = editTimeOfDay.getText().toString();
+		String   timeOfDay = editTimeOfDay.getText().toString();
 		String[] timeSplit = timeOfDay.split("[:]");
-		int time = Integer.parseInt(timeSplit[0])*60 + Integer.parseInt(timeSplit[1]);
-		time = time*60*1000;//Milliseconds
+		int      time      = Integer.parseInt(timeSplit[0]) * 60 + Integer.parseInt(timeSplit[1]);
+		time = time * 60 * 1000;//Milliseconds
 		prescription.setTimeOfDay(time);
 		prescription.setMonday(chkMon.isChecked());
 		prescription.setTuesday(chkTue.isChecked());
@@ -186,7 +189,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		prescription.setFriday(chkFri.isChecked());
 		prescription.setSaturday(chkSat.isChecked());
 		prescription.setSunday(chkSun.isChecked());
-		if ( medication != null ) {
+		if ( medication != null )
+		{
 			prescription.setMedId(medication.id);
 			prescription.setMedName(medication.name);
 			prescription.setMedGenName(medication.genName);

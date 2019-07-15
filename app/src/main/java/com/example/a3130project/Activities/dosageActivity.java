@@ -42,14 +42,11 @@ public class dosageActivity extends AppCompatActivity
 	Calendar calendar;
 
 
-
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dosage);
-		//ToolBarCreator.createToolbar(this, true, true);
-		//ToolBarCreator.createBottomNav(this);
 		dow = findViewById(R.id.dow);
 		newDow = "";
 		intent = getIntent();

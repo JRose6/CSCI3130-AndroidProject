@@ -27,17 +27,23 @@ public class AllMedicationFragment extends Fragment
 
 	private FirebaseFirestore   database       = FirebaseFirestore.getInstance();
 	private CollectionReference medicationsRef = database.collection("medications");
-	private MedicationAdapter adapter;
+	private MedicationAdapter   adapter;
+
 
 	@Nullable
 	@Override
-	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+	public View onCreateView(
+			@NonNull LayoutInflater inflater,
+			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
+	{
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.activity_all_meds, container,false);
+		return inflater.inflate(R.layout.activity_all_meds, container, false);
 	}
 
+
 	@Override
-	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+	{
 		super.onViewCreated(view, savedInstanceState);
 		setUpRecyclerView();
 

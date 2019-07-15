@@ -13,41 +13,52 @@ import com.example.a3130project.Fragments.MyMedicationFragment;
 import com.example.a3130project.R;
 
 /**
- * A [FragmentPagerAdapter] that returns a fragment corresponding to
- * one of the sections/tabs/pages.
+ * A [FragmentPagerAdapter] that returns a fragment corresponding to one of the
+ * sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+public class SectionsPagerAdapter extends FragmentPagerAdapter
+{
 
-    @StringRes
-    private static final int[] TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
-    private final Context mContext;
+	@StringRes
+	private static final int[]   TAB_TITLES = new int[]{R.string.tab_text_1, R.string.tab_text_2};
+	private final        Context mContext;
 
-    public SectionsPagerAdapter(Context context, FragmentManager fm) {
-        super(fm);
-        mContext = context;
-    }
 
-    @Override
-    public Fragment getItem(int position) {
-        // getItem is called to instantiate the fragment for the given page.
-        if (position==1){
-            return new AllMedicationFragment();
-        }
-        else{
+	public SectionsPagerAdapter(Context context, FragmentManager fm)
+	{
+		super(fm);
+		mContext = context;
+	}
 
-            return new MyMedicationFragment();
-        }
-    }
 
-    @Nullable
-    @Override
-    public CharSequence getPageTitle(int position) {
-        return mContext.getResources().getString(TAB_TITLES[position]);
-    }
+	@Override
+	public Fragment getItem(int position)
+	{
+		// getItem is called to instantiate the fragment for the given page.
+		if ( position == 1 )
+		{
+			return new AllMedicationFragment();
+		}
+		else
+		{
 
-    @Override
-    public int getCount() {
-        // Show 2 total pages.
-        return 2;
-    }
+			return new MyMedicationFragment();
+		}
+	}
+
+
+	@Nullable
+	@Override
+	public CharSequence getPageTitle(int position)
+	{
+		return mContext.getResources().getString(TAB_TITLES[position]);
+	}
+
+
+	@Override
+	public int getCount()
+	{
+		// Show 2 total pages.
+		return 2;
+	}
 }

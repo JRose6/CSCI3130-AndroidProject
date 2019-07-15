@@ -22,70 +22,80 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class NavigationActivity extends AppCompatActivity {
-    private TextView mTextMessage;
-    FragmentManager fragmentManager = getSupportFragmentManager();
-    Fragment mainFragment, calendarFragment, medicationFragment,profileFragment;
-    Fragment active;
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+public class NavigationActivity extends AppCompatActivity
+{
+	private TextView mTextMessage;
+	FragmentManager fragmentManager = getSupportFragmentManager();
+	Fragment        mainFragment, calendarFragment, medicationFragment, profileFragment;
+	Fragment active;
+	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
+			= new BottomNavigationView.OnNavigationItemSelectedListener()
+	{
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            FragmentTransaction ft = fragmentManager.beginTransaction();
-            Fragment newFrag;
-            switch (item.getItemId()) {
-                case R.id.action_home:
-                    newFrag = mainFragment;
-                    break;
-                case R.id.action_calendar:
-                    newFrag = calendarFragment;
-                    break;
-                case R.id.action_medication:
-                    newFrag = medicationFragment;
-                    break;
-                case R.id.action_profile:
-                    newFrag = profileFragment;
-                    break;
-                default:
-                    return false;
-            }
-            ft.addToBackStack(null);
-            ft.hide(active);
-            ft.show(newFrag);
-            ft.commit();
-            active = newFrag;
-            return true;
-        }
-    };
+		@Override
+		public boolean onNavigationItemSelected(@NonNull MenuItem item)
+		{
+			FragmentTransaction ft = fragmentManager.beginTransaction();
+			Fragment            newFrag;
+			switch ( item.getItemId() )
+			{
+			case R.id.action_home:
+				newFrag = mainFragment;
+				break;
+			case R.id.action_calendar:
+				newFrag = calendarFragment;
+				break;
+			case R.id.action_medication:
+				newFrag = medicationFragment;
+				break;
+			case R.id.action_profile:
+				newFrag = profileFragment;
+				break;
+			default:
+				return false;
+			}
+			ft.addToBackStack(null);
+			ft.hide(active);
+			ft.show(newFrag);
+			ft.commit();
+			active = newFrag;
+			return true;
+		}
+	};
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
-        if (FirebaseAuth.getInstance().getCurrentUser()== null){
-            Intent intent = new Intent(this,LoginActivity.class);
-            this.startActivity(intent);
-            return;
-        }
-        ToolBarCreator.createToolbar(this,true,false);
-        mainFragment = new HomeFragment();
-        calendarFragment = new CalendarFragment();
-        medicationFragment = new MedTabFragment();
-        profileFragment = new ProfileFragment();
-        active = mainFragment;
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment_container, mainFragment).show(mainFragment);
-        fragmentTransaction.add(R.id.fragment_container, calendarFragment).hide(calendarFragment);
-        fragmentTransaction.add(R.id.fragment_container, medicationFragment).hide(medicationFragment);
-        fragmentTransaction.add(R.id.fragment_container, profileFragment).hide(profileFragment);
-        fragmentTransaction.commit();
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu)
-    {
-        return ToolBarCreator.createMenu(this, menu,true);
-    }
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_navigation);
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
+			Intent intent = new Intent(this, LoginActivity.class);
+			this.startActivity(intent);
+			return;
+		}
+		ToolBarCreator.createToolbar(this, true, false);
+		mainFragment = new HomeFragment();
+		calendarFragment = new CalendarFragment();
+		medicationFragment = new MedTabFragment();
+		profileFragment = new ProfileFragment();
+		active = mainFragment;
+		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+		fragmentTransaction.add(R.id.fragment_container, mainFragment).show(mainFragment);
+		fragmentTransaction.add(R.id.fragment_container, calendarFragment).hide(calendarFragment);
+		fragmentTransaction.add(R.id.fragment_container, medicationFragment)
+		                   .hide(medicationFragment);
+		fragmentTransaction.add(R.id.fragment_container, profileFragment).hide(profileFragment);
+		fragmentTransaction.commit();
+		BottomNavigationView navView = findViewById(R.id.nav_view);
+		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+	}
+
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu)
+	{
+		return ToolBarCreator.createMenu(this, menu, true);
+	}
 }

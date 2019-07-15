@@ -8,12 +8,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 
-public class CalendarHolder extends RecyclerView.ViewHolder {
+public class CalendarHolder extends RecyclerView.ViewHolder
+{
 
-	public TextView textViewMedicationName;
-	public TextView textViewDosageInfo;
-	public TextView textViewDoctorInfo;
+	public  TextView     textViewMedicationName;
+	public  TextView     textViewDosageInfo;
+	public  TextView     textViewDoctorInfo;
 	private Prescription prescription;
+
 
 	public CalendarHolder(View view)
 	{
@@ -23,6 +25,7 @@ public class CalendarHolder extends RecyclerView.ViewHolder {
 		textViewDosageInfo = itemView.findViewById(R.id.DosageView);
 		textViewDoctorInfo = itemView.findViewById(R.id.DoctorInfoView);
 	}
+
 
 	public void setPrescription(Prescription prescription)
 	{

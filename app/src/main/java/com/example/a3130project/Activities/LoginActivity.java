@@ -72,7 +72,8 @@ public class LoginActivity extends AppCompatActivity
 		{
 			openProfile();
 		}
-		else{
+		else
+		{
 
 		}
 	}

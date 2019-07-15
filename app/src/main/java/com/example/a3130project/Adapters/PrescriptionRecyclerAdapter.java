@@ -19,6 +19,7 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 		super(options);
 	}
 
+
 	@Override
 	protected void onBindViewHolder(@NonNull PrescriptionHolder prescriptionHolder,
 	                                int i,
