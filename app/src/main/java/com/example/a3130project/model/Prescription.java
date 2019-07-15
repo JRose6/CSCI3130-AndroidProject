@@ -30,6 +30,8 @@ public class Prescription implements Serializable {
         this.docNotes = "";
         this.dosage = 0;
         this.timeOfDay = 0;
+        this.totalMeds = 0;
+        this.remainingMeds = 0;
         this.weekdays.put("Monday", false);
         this.weekdays.put("Tuesday", false);
         this.weekdays.put("Wednesday", false);
