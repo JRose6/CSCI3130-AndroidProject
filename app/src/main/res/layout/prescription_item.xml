@@ -44,7 +44,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
-            android:id="@+id/DoctorInfoView"
+            android:id="@+id/UserInfoView"
             android:layout_width="350dp"
             android:layout_height="54dp"
             android:layout_below="@id/MedicationView"
@@ -55,7 +55,7 @@
             android:layout_marginTop="74dp"
             android:ellipsize="end"
             android:maxLines="1"
-            android:text="Doctor Info"
+            android:text="User Info"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
