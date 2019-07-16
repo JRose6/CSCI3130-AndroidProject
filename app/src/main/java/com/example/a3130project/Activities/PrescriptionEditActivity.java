@@ -125,8 +125,9 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editUserNotes.setText(prescription.getNotes());
 		editDocNotes.setText(prescription.getDocNotes());
 		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
+
 		if (prescription.getTimeOfDay()!=0){
-			editTimeOfDay.setText(TimeHelper.TimeSwitch(prescription));;
+			editTimeOfDay.setText(TimeHelper.TimeSwitch(prescription));
 		}
 		chkMon.setChecked(prescription.getMonday());
 		chkTue.setChecked(prescription.getTuesday());

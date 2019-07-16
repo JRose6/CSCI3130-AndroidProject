@@ -71,6 +71,7 @@ public class dosageActivity extends AppCompatActivity
 		calendar.setTime(nDate);
 		int numDOW = calendar.get(Calendar.DAY_OF_WEEK);
 
+
 		switch ( numDOW )
 		{
 		case 1:
@@ -97,8 +98,9 @@ public class dosageActivity extends AppCompatActivity
 		default:
 			break;
 		}
-
-		dow.setText(newDow);
+		int DayDOW = calendar.get(Calendar.DAY_OF_MONTH);
+		int YearDOW = calendar.get(Calendar.YEAR);
+		dow.setText(newDow + " " + DayDOW + ", " + YearDOW);
 		setUpRecyclerView(newDow);
 	}
 
