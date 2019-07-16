@@ -340,8 +340,6 @@ public class Prescription implements Serializable
             }
             else if
         }
->>>>>>> group3_i3
-
     }
 */
 }

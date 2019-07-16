@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".EmployeeProfileActivity">
+    tools:context=".Fragments.EmployeeProfileActivity">
 
     <EditText
         android:id="@+id/manuEmp"
         android:layout_width="310dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="8dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="32dp"
         android:ems="10"
         android:hint="Manufacturer"
@@ -18,22 +18,20 @@
         app:layout_constraintBottom_toTopOf="@+id/addMedEmp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/sideEffectsEmp" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/sideEffectsEmp"
         android:layout_width="310dp"
         android:layout_height="45dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
         android:hint="Side Effects (split by comma)"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/manuEmp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.486" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
         android:id="@+id/nameEmp"
@@ -51,15 +49,18 @@
     <EditText
         android:id="@+id/genNameEmp"
         android:layout_width="310dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="144dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:layout_marginBottom="16dp"
         android:ems="10"
         android:hint="Medical Name"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/nameEmp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.495"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
     <EditText
         android:id="@+id/mainDiseasesEmp"
@@ -78,11 +79,10 @@
         android:id="@+id/addMedEmp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="200dp"
+        android:layout_marginBottom="120dp"
         android:text="Add Medi. to DB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

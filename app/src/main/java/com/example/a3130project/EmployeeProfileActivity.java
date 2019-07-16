@@ -19,16 +19,14 @@ import java.util.Arrays;
 
 public class EmployeeProfileActivity extends AppCompatActivity
 {
-	private EditText genName, name, mainDiseases, manufact, sideEff;
-	private Button addMedi;
-
-
-	private FirebaseFirestore database;
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
 	private Intent            intent;
-	private Profile           profile;
-	private Medication        medication;
-	private DocumentReference profileRef;
-	private FirebaseAuth      mAuth;
+
+	private Profile    profile;
+	private Medication medication;
+	private EditText   genName, name, mainDiseases, manufact, sideEff;
+	private Button addMedi;
 
 
 	@Override
@@ -37,6 +35,9 @@ public class EmployeeProfileActivity extends AppCompatActivity
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_employee_profile);
 
+		intent = getIntent();
+		profile = (Profile) intent.getSerializableExtra("profile");
+
 		genName = findViewById(R.id.genNameEmp);
 		name = findViewById(R.id.nameEmp);
 		mainDiseases = findViewById(R.id.mainDiseasesEmp);
@@ -44,15 +45,7 @@ public class EmployeeProfileActivity extends AppCompatActivity
 		sideEff = findViewById(R.id.sideEffectsEmp);
 		addMedi = findViewById(R.id.addMedEmp);
 
-		database = FirebaseFirestore.getInstance();
-
-		mAuth = FirebaseAuth.getInstance();
-
-		intent = getIntent();
-		profile = (Profile) intent.getSerializableExtra("profile");
-
 		addMedi.setOnClickListener(new OnClicker());
-
 	}
 
 

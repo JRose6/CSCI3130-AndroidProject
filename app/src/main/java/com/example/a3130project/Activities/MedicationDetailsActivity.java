@@ -2,7 +2,6 @@ package com.example.a3130project.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -33,6 +32,7 @@ public class MedicationDetailsActivity extends AppCompatActivity
 		viewSideEffects = findViewById(R.id.viewSideEffects);
 		viewMainDiseases = findViewById(R.id.viewMainDiseases);
 /*
+		viewMainDiseases = findViewById(R.id.mainDiseasesEmp);
 		intent = getIntent();
 		if ( intent == null )
 			finish();
@@ -47,10 +47,11 @@ public class MedicationDetailsActivity extends AppCompatActivity
 			                 public void onSuccess(DocumentSnapshot documentSnapshot)
 			                 {
 				                 medication = documentSnapshot.toObject(Medication.class);
-				                 viewName.setText(medication.name);
-				                 viewGenName.setText(medication.genName);
-				                 viewManufacturer.setText(medication.manufacturer);
-				                 viewSideEffects.setText(medication.sideEffects.toString());
+				                 viewName.setText("Name:\n" + medication.name);
+				                 viewGenName.setText("General Name:\n" + medication.genName);
+				                 viewManufacturer.setText("Manufacturer:\n" + medication.manufacturer);
+				                 viewSideEffects.setText("Side Effects:\n" + medication.sideEffects.toString());
+				                 viewMainDiseases.setText("Main Diseases:\n" + medication.mainDiseases.toString());
 				                 if ( medication == null )
 					                 finish();
 			                 }

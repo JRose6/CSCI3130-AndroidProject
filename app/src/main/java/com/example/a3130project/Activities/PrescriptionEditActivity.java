@@ -19,9 +19,9 @@ import com.example.a3130project.model.Prescription;
 
 public class PrescriptionEditActivity extends AppCompatActivity
 {
-	private Intent            intent;
-	private Prescription      prescription;
-	private Medication        medication;
+	private Intent       intent;
+	private Prescription prescription;
+	private Medication   medication;
 
 	private TextView viewMedName;
 	private EditText editDosage;
@@ -54,7 +54,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 		editTimeOfDay = findViewById(R.id.editTimeOfDay);
 		editInitialQuantity = findViewById(R.id.editInitialAmount);
-		ToolBarCreator.createToolbar(this,true,true);
+		ToolBarCreator.createToolbar(this, true, true);
 
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
 		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )

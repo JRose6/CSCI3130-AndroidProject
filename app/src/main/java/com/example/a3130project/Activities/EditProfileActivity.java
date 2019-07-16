@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.example.a3130project.EmployeeProfileActivity;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
@@ -23,17 +22,16 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class EditProfileActivity extends AppCompatActivity
 {
-
-	private EditText firstName, lastName, age;
-	private FirebaseFirestore database;
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private FirebaseAuth      mAuth = FirebaseAuth.getInstance();
+	private EditText          firstName, lastName, age;
 
 	private Intent  intent;
 	private Profile profile;
 
-	private Button update, TESTING;
+	private Button update;
 
 	private DocumentReference profileRef;
-	private FirebaseAuth      mAuth;
 
 
 	@Override
@@ -41,18 +39,12 @@ public class EditProfileActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
-		ToolBarCreator.createToolbar(this,true,true);
+		ToolBarCreator.createToolbar(this, true, true);
 		firstName = findViewById(R.id.firstName);
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);
 		update = findViewById(R.id.update);
 
-		//TODO: GET RID OFF TESTING BUTTON
-		TESTING = findViewById(R.id.TESTING);
-
-		database = FirebaseFirestore.getInstance();
-
-		mAuth = FirebaseAuth.getInstance();
 
 		intent = getIntent();
 		profile = (Profile) intent.getSerializableExtra("profile");
@@ -62,10 +54,6 @@ public class EditProfileActivity extends AppCompatActivity
 		age.setText(profile.age);
 
 		update.setOnClickListener(new OnClicker());
-
-		//TODO: GET RID OF THIS FUNCTION IN ONCLICKER
-		TESTING.setOnClickListener(new OnClicker());
-
 	}
 
 
@@ -79,19 +67,8 @@ public class EditProfileActivity extends AppCompatActivity
 			case R.id.update:
 				updateProfile();
 				break;
-			case R.id.TESTING:
-				employeePAGE();
-				break;
 			}
 		}
-	}
-
-
-	//TODO: get rid of
-	public void employeePAGE()
-	{
-		Intent intent = new Intent(this, EmployeeProfileActivity.class);
-		startActivity(intent);
 	}
 
 
