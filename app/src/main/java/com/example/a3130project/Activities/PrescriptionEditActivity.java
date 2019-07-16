@@ -4,26 +4,18 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.a3130project.DBHandlers;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PrescriptionEditActivity extends AppCompatActivity
 {
@@ -62,8 +54,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 		editTimeOfDay = findViewById(R.id.editTimeOfDay);
 		editInitialQuantity = findViewById(R.id.editInitialAmount);
-		ToolBarCreator.createToolbar(this, true, true);
-		ToolBarCreator.createBottomNav(this);
+		ToolBarCreator.createToolbar(this,true,true);
+
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
 		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )
 		editDocNotes.setEnabled(false);

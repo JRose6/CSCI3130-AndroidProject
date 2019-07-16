@@ -1,21 +1,23 @@
 <resources>
-    <string name="app_name">3130Project</string>
+    <string name="app_name">Medication Management</string>
     <string name="WelcomeButton">Welcome!</string>
-    <string name="title_activity_edit_profile">EditProfileActivity</string>
+    <string name="title_activity_edit_profile">Edit Profile</string>
     <string name="title_activity_test">test</string>
     <string name="preference_file">com.example.a3130project.PreferenceKey</string>
     <string name="saved_alarms_allowed">AlarmsAllowed</string>
     <string name="saved_alarm_delay">AlarmDelay</string>
+    <string name="saved_refill_threshold">RefillThreshold</string>
+
     <string name="title_activity_test_bottom">TestBottom</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
     <string name="back_button_desc">BackButtonDescription</string>
-    <string name="title_activity_navigation">NavigationActivity</string>
-    <string name="title_activity_med_perscription_fragment">MedPerscriptionFragment</string>
+    <string name="title_activity_navigation">Medication Management</string>
+    <string name="title_activity_med_perscription_fragment">Manage Prescriptions</string>
     <string name="tab_text_1">My Meds</string>
     <string name="tab_text_2">All Meds</string>
-    <string name="title_activity_med_fragment">MedFragment</string>
+    <string name="title_activity_med_fragment">Manage Meds</string>
     <string name="mon">Monday</string>
     <string name="tue">Tuesday</string>
     <string name="wed">Wednesday</string>

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import com.example.a3130project.Activities.LoginActivity;
-import com.example.a3130project.Activities.RefillActivity;
 import com.example.a3130project.Activities.SettingsActivity;
 import com.example.a3130project.Fragments.AllMedicationFragment;
 import com.example.a3130project.Fragments.CalendarFragment;
@@ -57,10 +56,8 @@ public class ToolBarCreator
 					activity.finish();
 				}
 			});
-
 		}
 		return toolbar;
-
 	}
 
 
@@ -165,18 +162,6 @@ public class ToolBarCreator
 			{
 				Intent intent =
 						new Intent(activity.getApplicationContext(), SettingsActivity.class);
-				activity.startActivity(intent);
-				return false;
-			}
-		});
-
-		MenuItem item2 = menu.findItem(R.id.action_refill);
-		item2.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener()
-		{
-			@Override
-			public boolean onMenuItemClick(MenuItem item)
-			{
-				Intent intent = new Intent(activity.getApplicationContext(), RefillActivity.class);
 				activity.startActivity(intent);
 				return false;
 			}

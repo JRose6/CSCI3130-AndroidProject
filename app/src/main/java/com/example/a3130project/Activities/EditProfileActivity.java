@@ -16,6 +16,7 @@ import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -40,8 +41,7 @@ public class EditProfileActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_edit_profile);
-		ToolBarCreator.createBottomNav(this);
-		ToolBarCreator.createToolbar(this, true, true);
+		ToolBarCreator.createToolbar(this,true,true);
 		firstName = findViewById(R.id.firstName);
 		lastName = findViewById(R.id.lastName);
 		age = findViewById(R.id.age);
@@ -114,6 +114,13 @@ public class EditProfileActivity extends AppCompatActivity
 				               Toast.LENGTH_SHORT)
 				     .show();
 			}
+		}).addOnSuccessListener(new OnSuccessListener<Void>()
+		{
+			@Override
+			public void onSuccess(Void aVoid)
+			{
+				finish();
+			}
 		});
 	}
 
@@ -123,5 +130,4 @@ public class EditProfileActivity extends AppCompatActivity
 	{
 		return ToolBarCreator.createMenu(this, menu, true);
 	}
-
 }

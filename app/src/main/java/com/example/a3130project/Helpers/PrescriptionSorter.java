@@ -4,8 +4,6 @@ import android.os.SystemClock;
 
 import com.example.a3130project.model.Prescription;
 
-import java.time.DayOfWeek;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 

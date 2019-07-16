@@ -17,7 +17,7 @@ import com.example.a3130project.Helpers.ToolBarCreator;
 public class SettingsActivity extends AppCompatActivity
 {
 	private Switch   switchAllowAlarms;
-	private EditText editAlarmDelay;
+	private EditText editAlarmDelay, editRefill;
 	SharedPreferences sharedPref;
 
 
@@ -33,10 +33,13 @@ public class SettingsActivity extends AppCompatActivity
 		Button btnConfirm = (Button) findViewById(R.id.btnConfirmSettings);
 		switchAllowAlarms = (Switch) findViewById(R.id.switchAlarm);
 		editAlarmDelay = (EditText) findViewById(R.id.editAlarmDelay);
+		editRefill = findViewById(R.id.editRefill);
 		switchAllowAlarms.setChecked(sharedPref.getBoolean(getString(R.string.saved_alarms_allowed),
 		                                                   false));
 		editAlarmDelay.setText(String.valueOf(sharedPref.getInt(getString(R.string.saved_alarm_delay),
 		                                                        0)));
+		editRefill.setText(String.valueOf(sharedPref.getInt(getString(R.string.saved_refill_threshold),
+		                                                    0)));
 		btnConfirm.setOnClickListener(new View.OnClickListener()
 		{
 			@Override
@@ -53,6 +56,16 @@ public class SettingsActivity extends AppCompatActivity
 				else
 				{
 					editor.putInt(getString(R.string.saved_alarm_delay), 0);
+				}
+				value = editRefill.getEditableText().toString();
+				if ( value.length() != 0 )
+				{
+					editor.putInt(getString(R.string.saved_refill_threshold),
+					              Integer.parseInt(value));
+				}
+				else
+				{
+					editor.putInt(getString(R.string.saved_refill_threshold), 0);
 				}
 				editor.commit();
 				finish();

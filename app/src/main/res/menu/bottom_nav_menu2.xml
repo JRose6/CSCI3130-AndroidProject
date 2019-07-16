@@ -6,24 +6,26 @@
         android:id="@+id/action_home"
         android:enabled="true"
         android:icon="@drawable/ic_home"
-        android:title="Home"
-        app:showAsAction="ifRoom" />
+        android:title="Home"/>
     <item
         android:id="@+id/action_profile"
         android:enabled="true"
         android:icon="@drawable/ic_action_profile"
-        android:title="Profile"
-        app:showAsAction="ifRoom" />
+        android:title="Profile"/>
     <item
         android:id="@+id/action_calendar"
         android:title="Calendar"
         android:enabled="true"
-        android:icon="@drawable/ic_date"
-        app:showAsAction="ifRoom"/>
+        android:icon="@drawable/ic_date"/>
     <item
-    android:id="@+id/action_medication"
-    android:title="Medication"
-    android:enabled="true"
-    android:icon="@drawable/ic_medication"
-    app:showAsAction="ifRoom"/>
+        android:id="@+id/action_medication"
+        android:title="Medication"
+        android:enabled="true"
+        android:icon="@drawable/ic_medication"/>
+    <item
+        android:id="@+id/action_add_medication"
+        android:title="Add Medication"
+        android:enabled="true"
+        android:icon="@drawable/ic_add_med"/>
+
 </menu>

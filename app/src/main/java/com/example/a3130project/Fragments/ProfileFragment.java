@@ -60,7 +60,7 @@ public class ProfileFragment extends Fragment
 		textViewLastName = getActivity().findViewById(R.id.textViewLastName);
 
 		database = FirebaseFirestore.getInstance();
-
+		updateProfileFields();
 		buttonEditProfile.setOnClickListener(new OnClicker());
 	}
 
@@ -76,6 +76,12 @@ public class ProfileFragment extends Fragment
 		}
 		updateProfileFields();
 	}
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+	}
+
 
 
 	@Override

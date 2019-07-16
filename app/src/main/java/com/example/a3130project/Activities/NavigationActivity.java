@@ -9,8 +9,12 @@ import com.example.a3130project.Fragments.MedTabFragment;
 import com.example.a3130project.Fragments.ProfileFragment;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
+import com.example.a3130project.model.Profile;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.annotation.NonNull;
@@ -20,18 +24,17 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.TextView;
 
 public class NavigationActivity extends AppCompatActivity
 {
-	private TextView mTextMessage;
 	FragmentManager fragmentManager = getSupportFragmentManager();
 	Fragment        mainFragment, calendarFragment, medicationFragment, profileFragment;
 	Fragment active;
+
+
 	private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
 			= new BottomNavigationView.OnNavigationItemSelectedListener()
 	{
-
 		@Override
 		public boolean onNavigationItemSelected(@NonNull MenuItem item)
 		{
@@ -69,6 +72,7 @@ public class NavigationActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_navigation);
+
 		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
 		{
 			Intent intent = new Intent(this, LoginActivity.class);
@@ -89,7 +93,28 @@ public class NavigationActivity extends AppCompatActivity
 		fragmentTransaction.add(R.id.fragment_container, profileFragment).hide(profileFragment);
 		fragmentTransaction.commit();
 		BottomNavigationView navView = findViewById(R.id.nav_view);
+		MenuItem             item    = navView.getMenu().findItem(R.id.action_add_medication);
+		item.setVisible(false);
+		setAddMedVisibility(item);
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+	}
+
+
+	private void setAddMedVisibility(final MenuItem item)
+	{
+		FirebaseAuth mAuth = FirebaseAuth.getInstance();
+		FirebaseFirestore.getInstance().collection("profiles")
+		                 .document(mAuth.getCurrentUser().getUid())
+		                 .get()
+		                 .addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+		                 {
+			                 @Override
+			                 public void onSuccess(DocumentSnapshot documentSnapshot)
+			                 {
+				                 Profile profile = documentSnapshot.toObject(Profile.class);
+				                 item.setVisible(profile.employee);
+			                 }
+		                 });
 	}
 
 

@@ -8,12 +8,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
 
-import com.example.a3130project.Activities.RefillActivity;
 import com.example.a3130project.Activities.SettingsActivity;
-import com.example.a3130project.Fragments.AllMedicationFragment;
-import com.example.a3130project.Fragments.CalendarFragment;
-import com.example.a3130project.Fragments.HomeFragment;
-import com.example.a3130project.Fragments.ProfileFragment;
 
 import org.junit.After;
 import org.junit.Before;

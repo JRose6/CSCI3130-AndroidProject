@@ -29,11 +29,8 @@ import com.google.firebase.firestore.Query;
 
 public class dosageActivity extends AppCompatActivity
 {
-	private FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
 	private CalendarAdapter   adapter;
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
-
-	private static final String TAG = "dosageActivity";
 
 	private Intent   intent;
 	private TextView dow;
@@ -47,6 +44,7 @@ public class dosageActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dosage);
+		ToolBarCreator.createToolbar(this, true, true);
 		dow = findViewById(R.id.dow);
 		newDow = "";
 		intent = getIntent();
@@ -104,6 +102,14 @@ public class dosageActivity extends AppCompatActivity
 	protected void onStart()
 	{
 		super.onStart();
+		adapter.startListening();
+	}
+
+
+	@Override
+	protected void onResume()
+	{
+		super.onResume();
 		adapter.startListening();
 	}
 

@@ -14,27 +14,24 @@ import com.example.a3130project.model.Prescription;
 
 public class PrescriptionHolder extends RecyclerView.ViewHolder
 {
-	public  TextView     name;
-	public  TextView     genName;
-	public  TextView     dosage;
-	public  Button       buttonEditPrescription;
+	private  TextView     name;
+	private  TextView     genName;
+	private  TextView     dosage;
+	private Button       buttonEditPrescription;
 	private Prescription prescription;
 	private Medication   medication;
 
 
-	public PrescriptionHolder(View view)
-	{
+	public PrescriptionHolder(View view) {
 		super(view);
 		name = view.findViewById(R.id.viewMedNamePrescription);
 		genName = view.findViewById(R.id.viewMedGenNamePrescription);
 		dosage = view.findViewById(R.id.viewPrescriptionDosage);
 		buttonEditPrescription = view.findViewById(R.id.buttonEditPrescription);
 
-		buttonEditPrescription.setOnClickListener(new View.OnClickListener()
-		{
+		buttonEditPrescription.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onClick(View v)
-			{
+			public void onClick(View v) {
 				Intent intent = new Intent(v.getContext(), PrescriptionEditActivity.class);
 				intent.putExtra("medication_name", prescription.getMedName());
 				intent.putExtra("prescription", prescription);
@@ -43,10 +40,11 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 		});
 	}
 
-
-	public void setPrescription(Prescription prescription)
-	{
+	public void setPrescription(Prescription prescription) {
 		this.prescription = prescription;
+		name.setText(prescription.getMedName());
+		genName.setText(prescription.getMedGenName());
+		dosage.setText(String.valueOf(prescription.getDosage()));
 	}
 
 

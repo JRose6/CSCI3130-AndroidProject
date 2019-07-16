@@ -7,10 +7,17 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 
 import com.example.a3130project.R;
+import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.viewholder.PrescriptionHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QuerySnapshot;
 
 public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescription, PrescriptionHolder>
 {
@@ -21,14 +28,11 @@ public class PrescriptionRecyclerAdapter extends FirestoreRecyclerAdapter<Prescr
 
 
 	@Override
-	protected void onBindViewHolder(@NonNull PrescriptionHolder prescriptionHolder,
+	protected void onBindViewHolder(@NonNull final PrescriptionHolder prescriptionHolder,
 	                                int i,
 	                                @NonNull Prescription prescription)
 	{
 		prescriptionHolder.setPrescription(prescription);
-		prescriptionHolder.name.setText(prescription.getMedName());
-		prescriptionHolder.genName.setText(prescription.getMedGenName());
-		prescriptionHolder.dosage.setText(Integer.toString(prescription.getDosage()));
 	}
 
 

@@ -1,6 +1,5 @@
 package com.example.a3130project.model;
 
-import com.example.a3130project.R;
 import com.google.firebase.firestore.Exclude;
 
 import java.io.Serializable;
@@ -41,7 +40,7 @@ public class Prescription implements Serializable
 		this.weekdays.put("Friday", false);
 		this.weekdays.put("Saturday", false);
 		this.weekdays.put("Sunday", false);
-		// Empty constructor (required for FireStore)
+		// Default constructor (required for FireStore)
 	}
 
 
@@ -194,7 +193,6 @@ public class Prescription implements Serializable
 		return this.weekdays.get("Thursday");
 	}
 
-
 	public void setFriday(Boolean monday)
 	{
 		this.weekdays.put("Friday", monday);
@@ -296,4 +294,54 @@ public class Prescription implements Serializable
 		       dosage;
 	}
 
+/*
+    public int compareTo(Prescription b){
+        Date             today     = new Date();
+        String[]         weekdays  = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
+        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
+        String           day   = formatter.format(today);
+        int dayIndex=-1;
+        for(int i=0;i<weekdays.length;i++){
+            if (day.equalsIgnoreCase(weekdays[i])){
+                dayIndex=i;
+            }
+        }
+        int count=dayIndex;
+        int comp = 0;
+        do{
+            comp = compareDays(b,count,weekdays);
+            if (comp!=0){
+                break;
+            }
+            if (count==weekdays.length-1){
+                count=0;
+            }else{
+                count++;
+            }
+        }while(dayIndex!=count);
+        return comp;
+    }
+    private int compareDays(Prescription b,int day,String []weekdays){
+        boolean other = b.getWeekdays().get(weekdays[day]);
+        boolean me = this.getWeekdays().get(weekdays[day]);
+        if (me && !other){
+            return -1;
+        }
+        else if(!me && other){
+            return 1;
+        }
+        else if (!me && !other){
+            return 0;
+        }
+        else if (me && other){
+            long time= System.currentTimeMillis();
+            if (this.getTimeOfDay() == b.getTimeOfDay()){
+                return 0;
+            }
+            else if
+        }
+>>>>>>> group3_i3
+
+    }
+*/
 }
