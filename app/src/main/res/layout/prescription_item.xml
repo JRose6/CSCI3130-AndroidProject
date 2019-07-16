@@ -9,7 +9,6 @@
     app:cardBackgroundColor="#FFFFE6">
 
 
-
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,12 +17,12 @@
 
         <TextView
             android:id="@+id/MedicationView"
-            android:layout_width="215dp"
-            android:layout_height="41dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="23dp"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="8dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="Medication Name"
@@ -31,13 +30,13 @@
 
         <TextView
             android:id="@+id/DosageView"
-            android:layout_width="127dp"
-            android:layout_height="33dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="243dp"
-            android:layout_marginLeft="4dp"
-            android:layout_marginTop="27dp"
+            android:layout_marginStart="218dp"
+            android:layout_marginLeft="21dp"
+            android:layout_marginTop="14dp"
             android:layout_toRightOf="@+id/MedicationView"
             android:ellipsize="end"
             android:maxLines="1"
@@ -58,6 +57,18 @@
             android:maxLines="1"
             android:text="Doctor Info"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/PillsPresItem"
+            android:layout_width="77dp"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/MedicationView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="25dp"
+            android:layout_marginBottom="5dp"
+            android:layout_toEndOf="@+id/DosageView"
+            android:text="Pills" />
 
     </RelativeLayout>
 
