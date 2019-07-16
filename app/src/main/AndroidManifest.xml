@@ -32,7 +32,6 @@
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.RegistrationActivity" />
         <activity android:name=".Activities.LoginActivity" />
-        <activity android:name=".Activities.RefillActivity" />
         <activity
             android:name=".Activities.NavigationActivity"
             android:label="@string/title_activity_navigation"

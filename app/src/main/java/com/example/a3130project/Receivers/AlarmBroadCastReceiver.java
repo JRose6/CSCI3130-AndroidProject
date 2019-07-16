@@ -8,6 +8,7 @@ import android.util.Log;
 
 import com.example.a3130project.Helpers.NotificationSender;
 import com.example.a3130project.R;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 
 public class AlarmBroadCastReceiver extends BroadcastReceiver
@@ -28,8 +29,13 @@ public class AlarmBroadCastReceiver extends BroadcastReceiver
 			{
 				NotificationSender.sendNotification(context);
 				NotificationSender.scheduleNotification(context,
-				                                        System.currentTimeMillis() + ( 60 * 1000 ));
+				                                        nextNotification());
 			}
 		}
+	}
+	private long nextNotification(){
+		FirebaseFirestore database = FirebaseFirestore.getInstance();
+
+		return System.currentTimeMillis() + ( 60 * 1000 );
 	}
 }

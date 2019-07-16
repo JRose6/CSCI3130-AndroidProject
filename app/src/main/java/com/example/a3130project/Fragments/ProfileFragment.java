@@ -69,10 +69,10 @@ public class ProfileFragment extends Fragment
 		textViewLastName = getActivity().findViewById(R.id.textViewLastName);
 
 		database = FirebaseFirestore.getInstance();
-
+		updateProfileFields();
 		buttonEditProfile.setOnClickListener(new OnClicker());
-
 		setUpRecyclerView();
+		adapter.startListening();
 	}
 
 
@@ -87,6 +87,13 @@ public class ProfileFragment extends Fragment
 		}
 		updateProfileFields();
 	}
+	@Override
+	public void onResume()
+	{
+		super.onResume();
+		adapter.startListening();
+	}
+
 
 
 	@Override
@@ -124,6 +131,8 @@ public class ProfileFragment extends Fragment
 				        {
 					        profile = documentSnapshot.toObject(Profile.class);
 					        textViewFirstName.setText(profile.firstName);
+					        textViewLastName.setText(profile.lastName);
+
 				        } catch ( Exception e )
 				        {
 					        mAuth.signOut();

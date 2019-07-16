@@ -64,7 +64,6 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editTimeOfDay = findViewById(R.id.editTimeOfDay);
 		editInitialQuantity = findViewById(R.id.editInitialAmount);
 		ToolBarCreator.createToolbar(this,true,true);
-		ToolBarCreator.createBottomNav(this);
 		// TODO: Doctors & pharmacists should be able to edit the 'dr.notes' field.
 		// if ( user.type != Profile.Type.Doctor && user.type != Profile.Type.Pharmacist )
 		editDocNotes.setEnabled(false);
@@ -151,7 +150,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 				break;
 			case R.id.buttonMedicationDetails:
 				Intent intent = new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
-				intent.putExtra("medication", medication);
+				Log.d("MEDID",prescription.getMedId());
+				intent.putExtra("medId", prescription.getMedId());
 				startActivity(intent);
 				break;
 			case R.id.buttonCancelPrescriptionEdit:

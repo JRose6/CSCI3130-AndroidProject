@@ -1,12 +1,9 @@
 package com.example.a3130project.Helpers;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
-import com.example.a3130project.Activities.RefillActivity;
 import com.example.a3130project.DBHandlers;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
