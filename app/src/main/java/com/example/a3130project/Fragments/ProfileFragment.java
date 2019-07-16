@@ -7,8 +7,6 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.view.ViewGroup;
@@ -18,28 +16,21 @@ import android.widget.Toast;
 
 import com.example.a3130project.Activities.EditProfileActivity;
 import com.example.a3130project.Activities.LoginActivity;
-import com.example.a3130project.Adapters.PrescriptionRecyclerAdapter;
 import com.example.a3130project.R;
 
-import com.example.a3130project.model.Prescription;
 import com.example.a3130project.model.Profile;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
-import io.grpc.ExperimentalApi;
 
 public class ProfileFragment extends Fragment
 {
-	private PrescriptionRecyclerAdapter adapter;
-	private FirebaseFirestore           database = FirebaseFirestore.getInstance();
-	private FirebaseAuth                mAuth    = FirebaseAuth.getInstance();
-	private Profile                     profile;
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
+	private Profile           profile;
 
 	private TextView textViewFirstName;
 	private TextView textViewLastName;
@@ -72,8 +63,6 @@ public class ProfileFragment extends Fragment
 		database = FirebaseFirestore.getInstance();
 
 		buttonEditProfile.setOnClickListener(new OnClicker());
-
-		setUpRecyclerView();
 	}
 
 
@@ -94,7 +83,6 @@ public class ProfileFragment extends Fragment
 	public void onStop()
 	{
 		super.onStop();
-		adapter.stopListening();
 	}
 
 
@@ -151,27 +139,6 @@ public class ProfileFragment extends Fragment
 		Intent intent = new Intent(getActivity(), EditProfileActivity.class);
 		intent.putExtra("profile", profile);
 		startActivity(intent);
-	}
-
-
-	// Connect the recycler view to the medication view holder & the FireStore adapter
-	private void setUpRecyclerView()
-	{
-		String              profileId         = FirebaseAuth.getInstance().getUid();
-		String              prescriptionsPath = "profiles/" + profileId + "/prescriptions";
-		CollectionReference prescriptRef      = database.collection(prescriptionsPath);
-		Query query =
-				prescriptRef.orderBy("id", Query.Direction.DESCENDING);
-		FirestoreRecyclerOptions<Prescription> options =
-				new FirestoreRecyclerOptions.Builder<Prescription>()
-						.setQuery(query, Prescription.class).build();
-
-		adapter = new PrescriptionRecyclerAdapter(options);
-
-		RecyclerView recyclerView = getActivity().findViewById(R.id.prescriptionRecycler);
-		recyclerView.setHasFixedSize(true);
-		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-		recyclerView.setAdapter(adapter);
 	}
 
 
