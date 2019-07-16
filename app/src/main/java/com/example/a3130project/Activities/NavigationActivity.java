@@ -3,14 +3,15 @@ package com.example.a3130project.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.example.a3130project.Fragments.AllMedicationFragment;
 import com.example.a3130project.Fragments.CalendarFragment;
+import com.example.a3130project.Fragments.EmployeeProfileActivity;
 import com.example.a3130project.Fragments.HomeFragment;
 import com.example.a3130project.Fragments.MedTabFragment;
 import com.example.a3130project.Fragments.ProfileFragment;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
-import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +31,7 @@ import android.widget.TextView;
 public class NavigationActivity extends AppCompatActivity {
     private TextView mTextMessage;
     FragmentManager fragmentManager = getSupportFragmentManager();
-    Fragment mainFragment, calendarFragment, medicationFragment,profileFragment;
+    Fragment mainFragment, calendarFragment, medicationFragment,profileFragment,addMedFragment;
     Fragment active;
 
 
@@ -54,6 +55,9 @@ public class NavigationActivity extends AppCompatActivity {
                     break;
                 case R.id.action_profile:
                     newFrag = profileFragment;
+                    break;
+                case R.id.action_add_medication:
+                    newFrag = addMedFragment;
                     break;
                 default:
                     return false;
@@ -82,12 +86,14 @@ public class NavigationActivity extends AppCompatActivity {
         calendarFragment = new CalendarFragment();
         medicationFragment = new MedTabFragment();
         profileFragment = new ProfileFragment();
+        addMedFragment = new EmployeeProfileActivity();
         active = mainFragment;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.add(R.id.fragment_container, mainFragment).show(mainFragment);
         fragmentTransaction.add(R.id.fragment_container, calendarFragment).hide(calendarFragment);
         fragmentTransaction.add(R.id.fragment_container, medicationFragment).hide(medicationFragment);
         fragmentTransaction.add(R.id.fragment_container, profileFragment).hide(profileFragment);
+        fragmentTransaction.add(R.id.fragment_container, addMedFragment).hide(addMedFragment);
         fragmentTransaction.commit();
         BottomNavigationView navView = findViewById(R.id.nav_view);
         MenuItem item = navView.getMenu().findItem(R.id.action_add_medication);

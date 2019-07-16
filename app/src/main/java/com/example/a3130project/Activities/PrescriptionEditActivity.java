@@ -150,7 +150,6 @@ public class PrescriptionEditActivity extends AppCompatActivity
 				break;
 			case R.id.buttonMedicationDetails:
 				Intent intent = new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
-				Log.d("MEDID",prescription.getMedId());
 				intent.putExtra("medId", prescription.getMedId());
 				startActivity(intent);
 				break;

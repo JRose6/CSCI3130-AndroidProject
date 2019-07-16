@@ -24,6 +24,7 @@ public class MedicationDetailsActivity extends AppCompatActivity
 	private TextView viewGenName;
 	private TextView viewManufacturer;
 	private TextView viewSideEffects;
+	private TextView viewMainDiseases;
 
 
 	@Override
@@ -36,6 +37,8 @@ public class MedicationDetailsActivity extends AppCompatActivity
 		viewGenName = findViewById(R.id.viewGenNameMedDetails);
 		viewManufacturer = findViewById(R.id.viewManufacturer);
 		viewSideEffects = findViewById(R.id.viewSideEffects);
+		viewMainDiseases = findViewById(R.id.mainDiseasesEmp);
+
 		intent = getIntent();
 		if ( intent == null )
 			finish();
@@ -50,22 +53,15 @@ public class MedicationDetailsActivity extends AppCompatActivity
 			                 public void onSuccess(DocumentSnapshot documentSnapshot)
 			                 {
 				                 medication = documentSnapshot.toObject(Medication.class);
-				                 viewName.setText(medication.name);
-				                 viewGenName.setText(medication.genName);
-				                 viewManufacturer.setText(medication.manufacturer);
-				                 viewSideEffects.setText(medication.sideEffects.toString());
+				                 viewName.setText("Name:\n" + medication.name);
+				                 viewGenName.setText("General Name:\n" + medication.genName);
+				                 viewManufacturer.setText("Manufacturer:\n" + medication.manufacturer);
+				                 viewSideEffects.setText("Side Effects:\n" + medication.sideEffects.toString());
+				                 viewMainDiseases.setText("Main Diseases:\n" + medication.mainDiseases.toString());
 				                 if ( medication == null )
 					                 finish();
 			                 }
 		                 });
 	}
 
-
-	@Override
-	protected void onStart()
-	{
-		super.onStart();
-
-
-	}
 }

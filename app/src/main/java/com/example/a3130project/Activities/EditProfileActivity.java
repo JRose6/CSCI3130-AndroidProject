@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.a3130project.Fragments.AllMedicationFragment;
+import com.example.a3130project.Fragments.EmployeeProfileActivity;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
@@ -29,7 +31,7 @@ public class EditProfileActivity extends AppCompatActivity
 	private Intent  intent;
 	private Profile profile;
 
-	private Button update, mainProfile;
+	private Button update, TESTING;
 
 	private DocumentReference profileRef;
 	private FirebaseAuth      mAuth;
@@ -46,6 +48,7 @@ public class EditProfileActivity extends AppCompatActivity
 		age = findViewById(R.id.age);
 		update = findViewById(R.id.update);
 
+
 		database = FirebaseFirestore.getInstance();
 
 		mAuth = FirebaseAuth.getInstance();
@@ -58,6 +61,7 @@ public class EditProfileActivity extends AppCompatActivity
 		age.setText(profile.age);
 
 		update.setOnClickListener(new OnClicker());
+
 
 	}
 
@@ -74,7 +78,6 @@ public class EditProfileActivity extends AppCompatActivity
 			}
 		}
 	}
-
 
 	public void updateProfile()
 	{
