@@ -1,21 +1,31 @@
 package com.example.a3130project.Activities;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.a3130project.DBHandlers;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PrescriptionEditActivity extends AppCompatActivity
 {
@@ -81,41 +91,20 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		}
 
 		prescription = (Prescription) intent.getSerializableExtra("prescription");
-		if ( prescription == null ) // Must have a valid prescription object
+		if ( prescription == null ) // Must have a valid prescription object (to edit)
 		{
 			finish();
 			return;
 		}
 
-		// Check for a medication object... if none, check for 'medication_name'
 		medication = (Medication) intent.getSerializableExtra("medication");
-		if ( medication != null ) // Must have a valid medication object
+		if ( medication == null ) // Must have a valid medication object (for medication name)
 		{
-			viewMedName.setText("No medication given... error");
-		}
-		else
-		{
-			finish();
-			return;
+			retrieveMedicationFromDB(prescription.getMedId());
 		}
 
-		editDosage.setText(Integer.toString(prescription.getDosage()));
-		editUserNotes.setText(prescription.getNotes());
-		editDocNotes.setText(prescription.getDocNotes());
-		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
-		if ( prescription.getTimeOfDay() != 0 )
-		{
-			int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
-			String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
-			editTimeOfDay.setText(timeStr);
-		}
-		chkMon.setChecked(prescription.getMonday());
-		chkTue.setChecked(prescription.getTuesday());
-		chkWed.setChecked(prescription.getWednesday());
-		chkThu.setChecked(prescription.getThursday());
-		chkFri.setChecked(prescription.getFriday());
-		chkSat.setChecked(prescription.getSaturday());
-		chkSun.setChecked(prescription.getSunday());
+		// Fill all the edit fields with the values from the given prescription
+		initializeFieldsWithPrescriptionInfo();
 	}
 
 
@@ -161,8 +150,12 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			prescription.setMedId(medication.id);
 			prescription.setMedName(medication.name);
 			prescription.setMedGenName(medication.genName);
+			DBHandlers.prescriptionInsertUpdate(prescription);
 		}
-		DBHandlers.prescriptionInsertUpdate(prescription);
+		else
+		{
+			Toast.makeText(this, "Failed to save.", Toast.LENGTH_SHORT).show();
+		}
 	}
 
 
@@ -170,5 +163,53 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		return ToolBarCreator.createMenu(this, menu, true);
+	}
+
+
+	private void initializeFieldsWithPrescriptionInfo()
+	{
+		viewMedName.setText(medication.name);
+
+		editDosage.setText(Integer.toString(prescription.getDosage()));
+		editUserNotes.setText(prescription.getNotes());
+		editDocNotes.setText(prescription.getDocNotes());
+
+		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
+		if ( prescription.getTimeOfDay() != 0 )
+		{
+			int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
+			String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
+			editTimeOfDay.setText(timeStr);
+		}
+		chkMon.setChecked(prescription.getMonday());
+		chkTue.setChecked(prescription.getTuesday());
+		chkWed.setChecked(prescription.getWednesday());
+		chkThu.setChecked(prescription.getThursday());
+		chkFri.setChecked(prescription.getFriday());
+		chkSat.setChecked(prescription.getSaturday());
+		chkSun.setChecked(prescription.getSunday());
+	}
+
+
+	private void retrieveMedicationFromDB(String medicationID)
+	{
+		CollectionReference medicationsRef =
+				FirebaseFirestore.getInstance().collection("medications");
+		DocumentReference docRef = medicationsRef.document(medicationID);
+		docRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>()
+		{
+			@Override
+			public void onSuccess(DocumentSnapshot documentSnapshot)
+			{
+				medication = documentSnapshot.toObject(Medication.class);
+			}
+		}).addOnFailureListener(new OnFailureListener()
+		{
+			@Override
+			public void onFailure(@NonNull Exception e)
+			{
+				Log.w("PrescriptionEditActivity", "onFailure: FAILED TO RETRIEVE MEDICATION.");
+			}
+		});
 	}
 }

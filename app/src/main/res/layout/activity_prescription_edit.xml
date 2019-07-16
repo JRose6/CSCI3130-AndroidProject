@@ -16,207 +16,250 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/viewMedName"
                 android:layout_width="wrap_content"
-                android:layout_height="26dp"
-                android:hint="you should never see this"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="parent" />
-
-            <EditText
-                android:id="@+id/editDosage"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="36dp"
+                android:layout_marginTop="16dp"
                 android:layout_marginEnd="8dp"
-                android:hint="~ dosage ~"
+                android:hint="~medication name~"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/editUserNotes"
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:hint="~ input user notes ~"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTimeOfDay" />
-
-            <EditText
-                android:id="@+id/editDocNotes"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:hint="doctors notes will go here... user cannot edit"
-                android:inputType="textMultiLine"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editUserNotes" />
-
-            <Button
-                android:id="@+id/buttonSavePrescriptionChanges"
+            <TextView
+                android:id="@+id/labelInitialQuantity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="44dp"
-                android:layout_marginTop="8dp"
-                android:text="Save Changes"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                android:layout_marginTop="12dp"
+                android:text="Initial Quantity:"
+                app:layout_constraintStart_toStartOf="@+id/labelDosage"
+                app:layout_constraintTop_toTopOf="@id/editInitialAmount" />
 
-            <Button
-                android:id="@+id/buttonCancelPrescriptionEdit"
-                android:layout_width="88dp"
+            <EditText
+                android:id="@+id/editInitialAmount"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="8dp"
-                android:text="@android:string/cancel"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:ems="10"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/buttonSavePrescriptionChanges"
-                app:layout_constraintTop_toBottomOf="@+id/constraintLayout2" />
+                app:layout_constraintStart_toEndOf="@+id/labelInitialQuantity"
+                app:layout_constraintTop_toBottomOf="@id/editDosage" />
 
+            <TextView
+                android:id="@+id/labelDosage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="12dp"
+                android:text="Dosage:"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editDosage" />
+
+            <EditText
+                android:id="@+id/editDosage"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelDosage"
+                app:layout_constraintTop_toBottomOf="@+id/viewMedName" />
+
+            <TextView
+                android:id="@+id/labelTimeOfDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Time of Day (HH:MM):"
+                app:layout_constraintStart_toStartOf="@+id/labelInitialQuantity"
+                app:layout_constraintTop_toTopOf="@+id/editTimeOfDay" />
 
             <EditText
                 android:id="@+id/editTimeOfDay"
                 android:layout_width="0dp"
-                android:layout_height="45dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:layout_marginTop="68dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginEnd="8dp"
                 android:ems="10"
-                android:hint="Time of Day HH:MM"
-                android:inputType="textPersonName"
+                android:inputType="time"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editDosage" />
+                app:layout_constraintStart_toEndOf="@+id/labelTimeOfDay"
+                app:layout_constraintTop_toBottomOf="@+id/editInitialAmount" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
-                android:id="@+id/constraintLayout2"
+            <TextView
+                android:id="@+id/labelUserNotes"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Notes:"
+                app:layout_constraintStart_toStartOf="@+id/labelTimeOfDay"
+                app:layout_constraintTop_toTopOf="@+id/editUserNotes" />
+
+            <EditText
+                android:id="@+id/editUserNotes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelUserNotes"
+                app:layout_constraintTop_toBottomOf="@+id/editTimeOfDay" />
+
+            <TextView
+                android:id="@+id/labelDocNotes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:text="Dr. Notes"
+                app:layout_constraintStart_toStartOf="@+id/labelUserNotes"
+                app:layout_constraintTop_toTopOf="@+id/editDocNotes" />
+
+            <EditText
+                android:id="@+id/editDocNotes"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginEnd="8dp"
+                android:hint="Regular users cannot edit these"
+                android:inputType="textMultiLine"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/labelDocNotes"
+                app:layout_constraintTop_toBottomOf="@+id/editUserNotes" />
+
+            <TextView
+                android:id="@+id/labelDaysOfWeek"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="Which Days of the week do you take this medication?"
+                app:layout_constraintStart_toStartOf="@+id/labelDocNotes"
+                app:layout_constraintTop_toBottomOf="@+id/editDocNotes" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/layoutDaysOfWeek"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4">
-
-                <CheckBox
-                    android:id="@+id/chkSaturday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:gravity="center"
-                    android:text="Saturday"
-                    app:layout_constraintStart_toEndOf="@+id/chkWednesday"
-                    app:layout_constraintTop_toBottomOf="@+id/chkFriday" />
-
-                <CheckBox
-                    android:id="@+id/chkSunday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:gravity="center"
-                    android:text="Sunday"
-                    app:layout_constraintStart_toEndOf="@+id/chkWednesday"
-                    app:layout_constraintTop_toBottomOf="@+id/chkSaturday" />
-
-                <CheckBox
-                    android:id="@+id/chkFriday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:text="Friday"
-                    app:layout_constraintStart_toEndOf="@+id/chkWednesday"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <CheckBox
-                    android:id="@+id/chkThursday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="Thursday"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chkWednesday" />
-
-                <CheckBox
-                    android:id="@+id/chkWednesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="Wednesday"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chkTuesday" />
-
-                <CheckBox
-                    android:id="@+id/chkTuesday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
-                    android:gravity="center"
-                    android:text="Tuesday"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/chkMonday" />
+                app:layout_constraintTop_toBottomOf="@+id/labelDaysOfWeek">
 
                 <CheckBox
                     android:id="@+id/chkMonday"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="8dp"
                     android:layout_marginTop="8dp"
                     android:gravity="center"
-                    android:text="Monday"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
+                    android:text="M"
+                    app:layout_constraintEnd_toStartOf="@+id/chkTuesday"
+                    app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <CheckBox
+                    android:id="@+id/chkTuesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="T"
+                    app:layout_constraintEnd_toStartOf="@+id/chkWednesday"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chkMonday"
+                    app:layout_constraintTop_toTopOf="@+id/chkMonday" />
+
+                <CheckBox
+                    android:id="@+id/chkWednesday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="W"
+                    app:layout_constraintEnd_toStartOf="@+id/chkThursday"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chkTuesday"
+                    app:layout_constraintTop_toTopOf="@+id/chkTuesday" />
+
+                <CheckBox
+                    android:id="@+id/chkThursday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="T"
+                    app:layout_constraintEnd_toStartOf="@+id/chkFriday"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chkWednesday"
+                    app:layout_constraintTop_toTopOf="@+id/chkWednesday" />
+
+                <CheckBox
+                    android:id="@+id/chkFriday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="F"
+                    app:layout_constraintEnd_toStartOf="@+id/chkSaturday"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chkThursday"
+                    app:layout_constraintTop_toTopOf="@+id/chkThursday" />
+
+                <CheckBox
+                    android:id="@+id/chkSaturday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="S"
+                    app:layout_constraintEnd_toStartOf="@+id/chkSunday"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chkFriday"
+                    app:layout_constraintTop_toTopOf="@+id/chkFriday" />
+
+                <CheckBox
+                    android:id="@+id/chkSunday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="S"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/chkSaturday"
+                    app:layout_constraintTop_toTopOf="@+id/chkSaturday" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <TextView
-                android:id="@+id/textView4"
+
+            <Button
+                android:id="@+id/buttonSavePrescriptionChanges"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Which Days of the week do you take this medication?"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="20dp"
+                android:text="Save Changes"
+                app:layout_constraintEnd_toStartOf="@+id/buttonCancelPrescriptionEdit"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editDocNotes" />
+                app:layout_constraintTop_toBottomOf="@+id/layoutDaysOfWeek" />
 
-            <EditText
-                android:id="@+id/editInitialAmount"
-                android:layout_width="0dp"
-                android:layout_height="45dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:ems="10"
-                android:hint="Initial Quantity"
-                android:inputType="number"
+            <Button
+                android:id="@+id/buttonCancelPrescriptionEdit"
+                android:layout_width="88dp"
+                android:layout_height="wrap_content"
+                android:text="@android:string/cancel"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editDosage" />
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/buttonSavePrescriptionChanges"
+                app:layout_constraintTop_toTopOf="@+id/buttonSavePrescriptionChanges" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

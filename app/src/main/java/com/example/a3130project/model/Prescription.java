@@ -142,9 +142,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setMonday(Boolean monday)
+	public void setMonday(Boolean b)
 	{
-		this.weekdays.put("Monday", monday);
+		this.weekdays.put("Monday", b);
 	}
 
 
@@ -155,9 +155,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setTuesday(Boolean monday)
+	public void setTuesday(Boolean b)
 	{
-		this.weekdays.put("Tuesday", monday);
+		this.weekdays.put("Tuesday", b);
 	}
 
 
@@ -168,9 +168,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setWednesday(Boolean monday)
+	public void setWednesday(Boolean b)
 	{
-		this.weekdays.put("Wednesday", monday);
+		this.weekdays.put("Wednesday", b);
 	}
 
 
@@ -181,9 +181,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setThursday(Boolean monday)
+	public void setThursday(Boolean b)
 	{
-		this.weekdays.put("Thursday", monday);
+		this.weekdays.put("Thursday", b);
 	}
 
 
@@ -193,9 +193,9 @@ public class Prescription implements Serializable
 		return this.weekdays.get("Thursday");
 	}
 
-	public void setFriday(Boolean monday)
+	public void setFriday(Boolean b)
 	{
-		this.weekdays.put("Friday", monday);
+		this.weekdays.put("Friday", b);
 	}
 
 
@@ -206,9 +206,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setSaturday(Boolean monday)
+	public void setSaturday(Boolean b)
 	{
-		this.weekdays.put("Saturday", monday);
+		this.weekdays.put("Saturday", b);
 	}
 
 
@@ -219,9 +219,9 @@ public class Prescription implements Serializable
 	}
 
 
-	public void setSunday(Boolean monday)
+	public void setSunday(Boolean b)
 	{
-		this.weekdays.put("Sunday", monday);
+		this.weekdays.put("Sunday", b);
 	}
 
 
