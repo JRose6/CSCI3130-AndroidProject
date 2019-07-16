@@ -6,6 +6,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 
+import com.example.a3130project.Helpers.TimeHelper;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 import com.example.a3130project.viewholder.CalendarHolder;
@@ -33,9 +34,7 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, Cale
 		CalendarHolder.textViewUserInfo.setText(prescription.getNotes());
 
 		if (prescription.getTimeOfDay()!=0){
-			int time = prescription.getTimeOfDay()/(60*1000);
-			String timeStr = ((int)Math.floor(time / 60))+":"+((int)(time % 60));
-			CalendarHolder.textViewTOD.setText(timeStr);
+			CalendarHolder.textViewTOD.setText(TimeHelper.TimeSwitch(prescription));
 		}
 		//CalendarHolder.textViewTOD.setText(String.valueOf(prescription.getTimeOfDay()));
 		CalendarHolder.textViewDosageInfo.setText(String.valueOf(prescription.getDosage()));

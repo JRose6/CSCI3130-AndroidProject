@@ -194,6 +194,7 @@ public class Prescription implements Serializable {
         return timeOfDay;
     }
 
+
     public void setTimeOfDay(int timeOfDay) {
         this.timeOfDay = timeOfDay;
     }
