@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a3130project.Activities.MedicationDetailsActivity;
 import com.example.a3130project.Activities.PrescriptionEditActivity;
 import com.example.a3130project.DBHandlers;
 import com.example.a3130project.Helpers.PrescriptionHelper;
@@ -16,34 +15,42 @@ import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 
-public class TakeRefillHolder extends RecyclerView.ViewHolder {
-    private TextView name;
-    private TextView genName;
-    private TextView dosage;
-    private TextView quantity;
-    private Button btnTake,btnRefill;
-    private Prescription prescription;
-    private Medication   medication;
-    private Context      context;
+public class TakeRefillHolder extends RecyclerView.ViewHolder
+{
+	private static boolean editable = false;
 
-    public TakeRefillHolder(View view) {
-        super(view);
-        context = view.getContext();
-        name = view.findViewById(R.id.viewMedNamePrescription);
-        genName = view.findViewById(R.id.viewMedGenNamePrescription);
-        dosage = view.findViewById(R.id.viewPrescriptionDosage);
-        quantity = view.findViewById(R.id.txtQuantity);
-        btnTake = view.findViewById(R.id.btnTakeMed);
-        btnRefill = view.findViewById(R.id.btnRefillMed);
-        View.OnClickListener clicker = new OnClicker();
-        btnTake.setOnClickListener(clicker);
-        btnRefill.setOnClickListener(clicker);
-    }
+	private TextView     name;
+	private TextView     genName;
+	private TextView     dosage;
+	private TextView     quantity;
+	private Button       buttonTake;
+	private Button       buttonRefill;
+	private Button       buttonEdit;
+	private Prescription prescription;
+	private Medication   medication;
+	private Context      context;
+
+
+	public TakeRefillHolder(View view)
+	{
+		super(view);
+		context = view.getContext();
+		name = view.findViewById(R.id.viewMedNamePrescription);
+		genName = view.findViewById(R.id.viewMedGenNamePrescription);
+		dosage = view.findViewById(R.id.viewPrescriptionDosage);
+		quantity = view.findViewById(R.id.viewQuantity);
+		buttonTake = view.findViewById(R.id.buttonTakeMed);
+		buttonRefill = view.findViewById(R.id.buttonRefillMed);
+		buttonEdit = view.findViewById(R.id.buttonEditPrescription);
+		View.OnClickListener clicker = new OnClicker();
+		buttonTake.setOnClickListener(clicker);
+		buttonRefill.setOnClickListener(clicker);
+		buttonEdit.setVisibility(( editable ? View.VISIBLE : View.INVISIBLE ));
+	}
 
 
 	public void setPrescription(Prescription prescription)
 	{
-
 		this.prescription = prescription;
 		name.setText(prescription.getMedName());
 		genName.setText(prescription.getMedGenName());
@@ -52,27 +59,43 @@ public class TakeRefillHolder extends RecyclerView.ViewHolder {
 		                 prescription.getTotalMeds());
 	}
 
-    class OnClicker implements View.OnClickListener
-    {
-        @Override
-        public void onClick(View v)
-        {
-            switch ( v.getId() )
-            {
-                case R.id.btnTakeMed:
-                    PrescriptionHelper.takeDosage(prescription,context);
-                    break;
-                case R.id.btnRefillMed:
-                    PrescriptionHelper.refill(prescription);
-                    break;
-            }
-            DBHandlers.prescriptionInsertUpdate(prescription);
-        }
-    }
+
+	class OnClicker implements View.OnClickListener
+	{
+		@Override
+		public void onClick(View v)
+		{
+			switch ( v.getId() )
+			{
+			case R.id.buttonTakeMed:
+				PrescriptionHelper.takeDosage(prescription, context);
+				break;
+			case R.id.buttonRefillMed:
+				PrescriptionHelper.refill(prescription);
+				break;
+			case R.id.buttonEditPrescription:
+				Intent intent = new Intent(v.getContext(), PrescriptionEditActivity.class);
+				intent.putExtra("medication", medication);
+				intent.putExtra("prescription", new Prescription());
+				v.getContext().startActivity(intent);
+				break;
+			}
+			DBHandlers.prescriptionInsertUpdate(prescription);
+		}
+	}
 
 
 	public void setMedication(Medication medication)
 	{
 		this.medication = medication;
+	}
+
+	public void setEditable(Boolean allowEdit)
+	{
+		editable = allowEdit;
+		if ( allowEdit )
+			buttonEdit.setVisibility(View.VISIBLE);
+		else
+			buttonEdit.setVisibility(View.INVISIBLE);
 	}
 }

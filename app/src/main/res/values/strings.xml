@@ -15,8 +15,8 @@
     <string name="back_button_desc">BackButtonDescription</string>
     <string name="title_activity_navigation">Medication Management</string>
     <string name="title_activity_med_perscription_fragment">Manage Prescriptions</string>
-    <string name="tab_text_1">My Meds</string>
-    <string name="tab_text_2">All Meds</string>
+    <string name="tab_text_1">My Prescriptions</string>
+    <string name="tab_text_2">All Medications</string>
     <string name="title_activity_med_fragment">Manage Meds</string>
     <string name="mon">Monday</string>
     <string name="tue">Tuesday</string>

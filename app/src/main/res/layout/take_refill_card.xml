@@ -11,21 +11,18 @@
     android:weightSum="10"
     app:cardBackgroundColor="#BBA8FF">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp">
 
         <Button
-            android:id="@+id/btnTakeMed"
+            android:id="@+id/buttonEditPrescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:text="Take"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            android:layout_toLeftOf="@id/buttonTakeMed"
+            android:layout_alignParentTop="true"
+            android:text="Edit" />
 
         <TextView
             android:id="@+id/viewMedNamePrescription"
@@ -33,13 +30,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
             android:maxLines="1"
             android:text="~example name~"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
 
         <TextView
             android:id="@+id/viewMedGenNamePrescription"
@@ -47,10 +40,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewMedNamePrescription"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="8dp"
-            android:text="~example generic name~"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewMedNamePrescription" />
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:text="~example generic name~" />
 
         <TextView
             android:id="@+id/labelDosage"
@@ -58,51 +50,56 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewMedGenNamePrescription"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:text="Dosage:"
-            app:layout_constraintEnd_toStartOf="@+id/viewPrescriptionDosage"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/viewMedGenNamePrescription" />
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:text="Dosage:" />
 
         <TextView
             android:id="@+id/viewPrescriptionDosage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewMedGenNamePrescription"
-            android:layout_marginStart="16dp"
             android:layout_toRightOf="@id/labelDosage"
-            android:text="~dosage~"
-            app:layout_constraintStart_toEndOf="@+id/labelDosage"
-            app:layout_constraintTop_toBottomOf="@+id/viewMedGenNamePrescription" />
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="8dp"
+            android:text="~the dosage value goes here~" />
 
         <Button
-            android:id="@+id/btnRefillMed"
+            android:id="@+id/buttonTakeMed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:text="Refill"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/viewMedGenNamePrescription" />
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:text="Take" />
+
+
+        <Button
+            android:id="@+id/buttonRefillMed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/buttonTakeMed"
+            android:text="Refill"  />
 
         <TextView
-            android:id="@+id/textView5"
+            android:id="@+id/labelQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
             android:text="Quantity:"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/labelDosage" />
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/labelDosage" />
 
         <TextView
-            android:id="@+id/txtQuantity"
+            android:id="@+id/viewQuantity"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="14dp"
-            app:layout_constraintStart_toEndOf="@+id/textView5"
-            app:layout_constraintTop_toBottomOf="@+id/viewPrescriptionDosage" />
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="8dp"
+            android:layout_below="@id/viewPrescriptionDosage"
+            android:layout_toRightOf="@id/labelQuantity"
+            android:text="~Total Quantity goes here
+            ~"/>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </RelativeLayout>
 </androidx.cardview.widget.CardView>

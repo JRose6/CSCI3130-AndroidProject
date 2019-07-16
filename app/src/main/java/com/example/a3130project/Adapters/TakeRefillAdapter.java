@@ -14,6 +14,8 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class TakeRefillAdapter extends FirestoreRecyclerAdapter<Prescription, TakeRefillHolder>
 {
+	private static boolean editable = false;
+
 	public TakeRefillAdapter(@NonNull FirestoreRecyclerOptions<Prescription> options)
 	{
 		super(options);
@@ -25,6 +27,7 @@ public class TakeRefillAdapter extends FirestoreRecyclerAdapter<Prescription, Ta
 	                                int i,
 	                                @NonNull Prescription prescription)
 	{
+		prescriptionHolder.setEditable(editable);
 		prescriptionHolder.setPrescription(prescription);
 	}
 
@@ -36,5 +39,10 @@ public class TakeRefillAdapter extends FirestoreRecyclerAdapter<Prescription, Ta
 		View v = LayoutInflater.from(parent.getContext())
 		                       .inflate(R.layout.take_refill_card, parent, false);
 		return new TakeRefillHolder(v);
+	}
+
+	public static void setEditable(boolean edit)
+	{
+		editable = edit;
 	}
 }
