@@ -27,7 +27,6 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class PrescriptionEditActivity extends AppCompatActivity
 {
-	private FirebaseFirestore database = FirebaseFirestore.getInstance();
 	private Intent            intent;
 	private Prescription      prescription;
 	private Medication        medication;
@@ -39,7 +38,6 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	private EditText editTimeOfDay;
 	private EditText editInitialQuantity;
 	private Button   buttonSaveChanges;
-	private Button   buttonMedDetails;
 	private Button   buttonCancel;
 	private CheckBox chkMon, chkTue, chkWed, chkThu, chkFri, chkSat, chkSun;
 
@@ -71,11 +69,9 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editDocNotes.setEnabled(false);
 
 		buttonSaveChanges = findViewById(R.id.buttonSavePrescriptionChanges);
-		buttonMedDetails = findViewById(R.id.buttonMedicationDetails);
 		buttonCancel = findViewById(R.id.buttonCancelPrescriptionEdit);
 
 		buttonSaveChanges.setOnClickListener(new OnClicker());
-		buttonMedDetails.setOnClickListener(new OnClicker());
 		buttonCancel.setOnClickListener(new OnClicker());
 	}
 
@@ -88,7 +84,6 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		intent = getIntent();
 		if ( intent == null ) // Must be called with an Intent()
 		{
-			toastSh("No Intent?");
 			finish();
 			return;
 		}
@@ -96,25 +91,18 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		prescription = (Prescription) intent.getSerializableExtra("prescription");
 		if ( prescription == null ) // Must have a valid prescription object
 		{
-			toastSh("Didn't pass a prescription");
 			finish();
 			return;
 		}
 
 		// Check for a medication object... if none, check for 'medication_name'
 		medication = (Medication) intent.getSerializableExtra("medication");
-		String medication_name = (String) intent.getSerializableExtra("medication_name");
 		if ( medication != null ) // Must have a valid medication object
 		{
-			viewMedName.setText(medication.name);
-		}
-		else if ( medication_name != null )
-		{
-			viewMedName.setText(medication_name);
+			viewMedName.setText("No medication given... error");
 		}
 		else
 		{
-			toastSh("Didn't pass a medication");
 			finish();
 			return;
 		}
@@ -147,27 +135,14 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			switch ( v.getId() )
 			{
 			case R.id.buttonSavePrescriptionChanges:
-				toastSh("Save");
 				updateDatabaseEntry();
 				finish();
-				break;
-			case R.id.buttonMedicationDetails:
-				Intent intent =
-						new Intent(PrescriptionEditActivity.this, MedicationDetailsActivity.class);
-				intent.putExtra("medication", medication);
-				startActivity(intent);
 				break;
 			case R.id.buttonCancelPrescriptionEdit:
 				finish();
 				break;
 			}
 		}
-	}
-
-
-	private void preparePrescriptionForEntryIntoDatabase()
-	{
-
 	}
 
 
@@ -180,7 +155,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		String   timeOfDay = editTimeOfDay.getText().toString();
 		String[] timeSplit = timeOfDay.split("[:]");
 		int      time      = Integer.parseInt(timeSplit[0]) * 60 + Integer.parseInt(timeSplit[1]);
-		time = time * 60 * 1000;//Milliseconds
+		time = time * 60 * 1000; // Milliseconds
 		prescription.setTimeOfDay(time);
 		prescription.setMonday(chkMon.isChecked());
 		prescription.setTuesday(chkTue.isChecked());
@@ -203,16 +178,5 @@ public class PrescriptionEditActivity extends AppCompatActivity
 	public boolean onCreateOptionsMenu(Menu menu)
 	{
 		return ToolBarCreator.createMenu(this, menu, true);
-	}
-
-
-	/**
-	 * Generates a short toast message
-	 *
-	 * @param message - The message to display in the toast
-	 */
-	private void toastSh(String message)
-	{
-		Toast.makeText(PrescriptionEditActivity.this, message, Toast.LENGTH_SHORT).show();
 	}
 }

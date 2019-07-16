@@ -35,7 +35,7 @@ public class ProfileFragment extends Fragment
 	private TextView textViewFirstName;
 	private TextView textViewLastName;
 
-	private Button buttonEditProfile, buttonAddMed;
+	private Button buttonEditProfile;
 
 
 	@Nullable
@@ -55,7 +55,6 @@ public class ProfileFragment extends Fragment
 
 		super.onViewCreated(view, savedInstanceState);
 		buttonEditProfile = getActivity().findViewById(R.id.buttonEditProfile);
-		buttonAddMed = getActivity().findViewById(R.id.buttonAddPrescription);
 
 		textViewFirstName = getActivity().findViewById(R.id.textViewFirstName);
 		textViewLastName = getActivity().findViewById(R.id.textViewLastName);
