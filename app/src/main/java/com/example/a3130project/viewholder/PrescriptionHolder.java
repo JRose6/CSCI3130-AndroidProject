@@ -15,7 +15,7 @@ import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
 
-public class TakeRefillHolder extends RecyclerView.ViewHolder
+public class PrescriptionHolder extends RecyclerView.ViewHolder
 {
 	private static boolean editable = false;
 
@@ -31,7 +31,7 @@ public class TakeRefillHolder extends RecyclerView.ViewHolder
 	private Context      context;
 
 
-	public TakeRefillHolder(View view)
+	public PrescriptionHolder(View view)
 	{
 		super(view);
 		context = view.getContext();

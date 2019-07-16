@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a3130project.Adapters.TakeRefillAdapter;
+import com.example.a3130project.Adapters.PrescriptionAdapter;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -24,8 +24,8 @@ import com.google.firebase.firestore.Query;
 public class MyPrescriptionsFragment extends Fragment
 {
 
-	private FirebaseFirestore database = FirebaseFirestore.getInstance();
-	private TakeRefillAdapter adapter;
+	private FirebaseFirestore   database = FirebaseFirestore.getInstance();
+	private PrescriptionAdapter adapter;
 
 
 	@Nullable
@@ -76,7 +76,7 @@ public class MyPrescriptionsFragment extends Fragment
 				new FirestoreRecyclerOptions.Builder<Prescription>()
 						.setQuery(query, Prescription.class).build();
 
-		adapter = new TakeRefillAdapter(options);
+		adapter = new PrescriptionAdapter(options);
 
 		RecyclerView recyclerView = getActivity().findViewById(R.id.myMedicationRecycler);
 		recyclerView.setHasFixedSize(true);
