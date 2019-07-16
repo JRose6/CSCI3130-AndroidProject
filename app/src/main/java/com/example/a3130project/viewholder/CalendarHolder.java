@@ -14,7 +14,8 @@ public class CalendarHolder extends RecyclerView.ViewHolder {
 	public TextView textViewDosageInfo;
 	public TextView textViewUserInfo;
 
-	public TextView textViewPills;
+
+	public TextView textViewTOD;
 
 	private Prescription prescription;
 
@@ -25,6 +26,7 @@ public class CalendarHolder extends RecyclerView.ViewHolder {
 		textViewMedicationName = itemView.findViewById(R.id.MedicationView);
 		textViewDosageInfo = itemView.findViewById(R.id.DosageView);
 		textViewUserInfo = itemView.findViewById(R.id.UserInfoView);
+		textViewTOD = itemView.findViewById(R.id.TODInfo);
 
 
 	}

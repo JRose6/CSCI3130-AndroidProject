@@ -45,17 +45,31 @@
 
         <TextView
             android:id="@+id/UserInfoView"
-            android:layout_width="350dp"
-            android:layout_height="54dp"
+            android:layout_width="173dp"
+            android:layout_height="38dp"
             android:layout_below="@id/MedicationView"
             android:layout_alignParentStart="true"
             android:layout_alignParentTop="true"
-            android:layout_marginStart="17dp"
+            android:layout_marginStart="31dp"
 
-            android:layout_marginTop="74dp"
+            android:layout_marginTop="55dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:text="User Info"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+        <TextView
+            android:id="@+id/TODInfo"
+            android:layout_width="173dp"
+            android:layout_height="37dp"
+            android:layout_below="@+id/PillsPresItem"
+
+            android:layout_marginStart="11dp"
+            android:layout_marginTop="18dp"
+            android:layout_toEndOf="@+id/UserInfoView"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Time Of Day"
             android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
         <TextView
@@ -68,7 +82,8 @@
             android:layout_marginEnd="25dp"
             android:layout_marginBottom="5dp"
             android:layout_toEndOf="@+id/DosageView"
-            android:text="Pills" />
+            android:text="Pills"
+            android:textColor="#020202" />
 
     </RelativeLayout>
 
