@@ -25,7 +25,7 @@ public class MedTabFragment extends Fragment
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.activity_med_fragment, container, false);
+		return inflater.inflate(R.layout.fragment_med_tabs, container, false);
 	}
 
 

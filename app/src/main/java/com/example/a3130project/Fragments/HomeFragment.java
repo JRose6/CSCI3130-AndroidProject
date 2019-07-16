@@ -6,7 +6,6 @@ import android.app.NotificationManager;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +31,7 @@ public class HomeFragment extends Fragment
 	{
 		// Defines the xml file for the fragment
 
-		return inflater.inflate(R.layout.activity_main, parent, false);
+		return inflater.inflate(R.layout.fragment_home, parent, false);
 	}
 
 
@@ -41,13 +40,13 @@ public class HomeFragment extends Fragment
 	{
 		super.onCreate(savedInstanceState);
 <<<<<<< HEAD:app/src/main/java/com/example/a3130project/MainActivity.java
-		setContentView(R.layout.activity_main);
+		setContentView(R.layout.fragment_home);
 		ToolBarCreator.createToolbar(this, true, false);
 		ToolBarCreator.createBottomNav(this);
 		welcome = findViewById(R.id.buttonWelcome);
 		Button alarmTest = findViewById(R.id.buttonTestAlarm);
 =======
-		getActivity().setContentView(R.layout.activity_main);
+		getActivity().setContentView(R.layout.fragment_home);
 		//ToolBarCreator.createToolbar(this,true,false);
 		//ToolBarCreator.createBottomNav(getActivity());
 		welcome = getActivity().findViewById(R.id.buttonWelcome);

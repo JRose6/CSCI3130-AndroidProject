@@ -3,12 +3,10 @@ package com.example.a3130project.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
@@ -36,7 +34,7 @@ public class CalendarFragment extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState)
 	{
 		// Defines the xml file for the fragment
-		return inflater.inflate(R.layout.activity_calendar, parent, false);
+		return inflater.inflate(R.layout.fragment_calendar, parent, false);
 	}
 
 

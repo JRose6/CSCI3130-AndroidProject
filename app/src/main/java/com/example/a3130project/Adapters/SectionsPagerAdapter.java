@@ -9,7 +9,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
 import com.example.a3130project.Fragments.AllMedicationFragment;
-import com.example.a3130project.Fragments.MyMedicationFragment;
+import com.example.a3130project.Fragments.MyPrescriptionsFragment;
 import com.example.a3130project.R;
 
 /**
@@ -42,7 +42,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter
 		else
 		{
 
-			return new MyMedicationFragment();
+			return new MyPrescriptionsFragment();
 		}
 	}
 

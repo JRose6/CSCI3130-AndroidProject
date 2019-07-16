@@ -45,7 +45,7 @@ public class ProfileFragment extends Fragment
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.activity_main_profile_load, container, false);
+		return inflater.inflate(R.layout.fragment_profile, container, false);
 	}
 
 

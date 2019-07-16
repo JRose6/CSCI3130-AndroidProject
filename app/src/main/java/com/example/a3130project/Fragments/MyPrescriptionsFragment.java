@@ -12,20 +12,16 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.a3130project.Adapters.MedicationAdapter;
-import com.example.a3130project.Adapters.PrescriptionRecyclerAdapter;
 import com.example.a3130project.Adapters.TakeRefillAdapter;
 import com.example.a3130project.R;
-import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
-import com.example.a3130project.viewholder.TakeRefillHolder;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class MyMedicationFragment extends Fragment
+public class MyPrescriptionsFragment extends Fragment
 {
 
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
@@ -39,7 +35,7 @@ public class MyMedicationFragment extends Fragment
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.activity_my_meds, container, false);
+		return inflater.inflate(R.layout.fragment_my_prescriptions, container, false);
 	}
 
 

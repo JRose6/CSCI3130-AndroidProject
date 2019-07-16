@@ -19,7 +19,7 @@ public class BlankFragment extends Fragment
 			@Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
 	{
 		super.onCreateView(inflater, container, savedInstanceState);
-		return inflater.inflate(R.layout.activity_blank, container, false);
+		return inflater.inflate(R.layout.fragment_blank, container, false);
 
 	}
 }
