@@ -103,7 +103,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		{
 			retrieveMedicationFromDB(prescription.getMedId());
 		}
-		else{
+		else
+		{
 			initializeFieldsWithPrescriptionInfo();
 		}
 
@@ -118,11 +119,13 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			switch ( v.getId() )
 			{
 			case R.id.buttonSavePrescriptionChanges:
-				try{
+				try
+				{
 
-				updateDatabaseEntry();
-				finish();
-				}catch(Exception e){
+					updateDatabaseEntry();
+					finish();
+				} catch ( Exception e )
+				{
 					Toast.makeText(getBaseContext(), "Errors on form!", Toast.LENGTH_LONG).show();
 				}
 				break;
@@ -186,7 +189,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
 		if ( prescription.getTimeOfDay() != 0 )
 		{
-			editTimeOfDay.setText(TimeHelper.TimeSwitch(prescription));
+			editTimeOfDay.setText(TimeHelper.getTimeString(prescription));
 		}
 		chkMon.setChecked(prescription.getMonday());
 		chkTue.setChecked(prescription.getTuesday());
@@ -200,7 +203,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void retrieveMedicationFromDB(String medicationID)
 	{
-		Log.d("MEDID", "MedicationID "+medicationID);
+		Log.d("MEDID", "MedicationID " + medicationID);
 		CollectionReference medicationsRef =
 				FirebaseFirestore.getInstance().collection("medications");
 		DocumentReference docRef = medicationsRef.document(medicationID);

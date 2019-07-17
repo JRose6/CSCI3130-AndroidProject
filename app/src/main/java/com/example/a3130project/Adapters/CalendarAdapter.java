@@ -36,7 +36,7 @@ public class CalendarAdapter extends FirestoreRecyclerAdapter<Prescription, Cale
 
 		if ( prescription.getTimeOfDay() != 0 )
 		{
-			CalendarHolder.textViewTOD.setText(TimeHelper.TimeSwitch(prescription));
+			CalendarHolder.textViewTOD.setText(TimeHelper.getTimeString(prescription));
 		}
 		//CalendarHolder.textViewTOD.setText(String.valueOf(prescription.getTimeOfDay()));
 		CalendarHolder.textViewDosageInfo.setText(String.valueOf(prescription.getDosage()));

@@ -32,15 +32,15 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity
 {
-	public  EditText     editEmail;
-	public  EditText     editPassword;
-	public  Button       buttonSignIn;
-	public  Button       buttonNewUser;
-	private TextView     txtError;
-	private FirebaseAuth mAuth;
-
-	private        FirebaseFirestore database;
+	private        FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private        FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
 	private static Profile           profile;
+
+	public  EditText editEmail;
+	public  EditText editPassword;
+	public  Button   buttonSignIn;
+	public  Button   buttonNewUser;
+	private TextView txtError;
 
 
 	@Override
@@ -56,9 +56,6 @@ public class LoginActivity extends AppCompatActivity
 		buttonSignIn = findViewById(R.id.signIn);
 		buttonNewUser = findViewById(R.id.newUser);
 
-		database = FirebaseFirestore.getInstance();
-		mAuth = FirebaseAuth.getInstance();
-
 		buttonSignIn.setOnClickListener(new onClicker());
 		buttonNewUser.setOnClickListener(new onClicker());
 	}
@@ -71,10 +68,6 @@ public class LoginActivity extends AppCompatActivity
 		if ( mAuth.getCurrentUser() != null )
 		{
 			openProfile();
-		}
-		else
-		{
-
 		}
 	}
 
@@ -182,6 +175,7 @@ public class LoginActivity extends AppCompatActivity
 
 	public void openProfile()
 	{
+		startActivity(new Intent(this, NavigationActivity.class));
 		finish();
 	}
 
