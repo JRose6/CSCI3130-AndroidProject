@@ -31,16 +31,18 @@
         <activity android:name=".Activities.EditProfileActivity" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.RegistrationActivity" />
-        <activity android:name=".Activities.LoginActivity" />
-        <activity
-            android:name=".Activities.NavigationActivity"
-            android:label="@string/title_activity_navigation"
-            android:configChanges="orientation|screenSize|keyboardHidden" >
+        <activity android:name=".Activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".Activities.NavigationActivity"
+            android:label="@string/title_activity_navigation"
+            android:configChanges="orientation|screenSize|keyboardHidden" >
+
         </activity>
 
         <receiver android:name=".Receivers.AlarmBroadCastReceiver">
