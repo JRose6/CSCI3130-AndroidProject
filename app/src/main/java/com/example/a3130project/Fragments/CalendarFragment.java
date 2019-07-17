@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CalendarView;
 
-import com.example.a3130project.Activities.dosageActivity;
+import com.example.a3130project.Activities.DosageActivity;
 import com.example.a3130project.R;
 
 
@@ -61,7 +61,7 @@ public class CalendarFragment extends Fragment
 			String date = DOM + "-" + newMonth + "-" + year;
 			Log.d(TAG, "onSelectedDayChange: dd-MM-yyyy " + date);
 
-			Intent intent = new Intent(getActivity(), dosageActivity.class);
+			Intent intent = new Intent(getActivity(), DosageActivity.class);
 			intent.putExtra("date", date);
 			startActivity(intent);
 		}

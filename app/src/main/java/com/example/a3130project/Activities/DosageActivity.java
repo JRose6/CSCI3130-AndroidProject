@@ -27,7 +27,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-public class dosageActivity extends AppCompatActivity
+public class DosageActivity extends AppCompatActivity
 {
 	private CalendarAdapter   adapter;
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
