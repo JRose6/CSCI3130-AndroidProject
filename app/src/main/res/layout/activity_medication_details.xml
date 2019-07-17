@@ -36,49 +36,111 @@
         app:layout_constraintVertical_bias="0.0">
 
         <TextView
+            android:id="@+id/headerName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="headerName"
+            android:textStyle="bold"
+            android:textColor="@color/darkGreen"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"/>
+        />
+
+        <TextView
             android:id="@+id/viewMedNameMedDetails"
             android:layout_width="match_parent"
-            android:layout_height="88dp"
+            android:layout_height="48dp"
             android:text="TextView"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/viewGenNameMedDetails"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
+
+
+        <TextView
+            android:id="@+id/headerGenName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="headerGenName"
+            android:textColor="@color/darkGreen"
+            android:textStyle="bold"
+
+            android:textAppearance="@android:style/TextAppearance.Material.Large"/>
+        />
 
         <TextView
             android:id="@+id/viewGenNameMedDetails"
             android:layout_width="match_parent"
-            android:layout_height="91dp"
+            android:layout_height="56dp"
             android:text="TextView"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/viewManufacturer"
             app:layout_constraintStart_toStartOf="@+id/viewMedNameMedDetails"
             app:layout_constraintTop_toBottomOf="@+id/viewMedNameMedDetails" />
 
         <TextView
+            android:id="@+id/headerManufacturer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="headerManufacturer"
+            android:textColor="@color/darkGreen"
+            android:textStyle="bold"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"
+            />
+        />
+
+        <TextView
             android:id="@+id/viewManufacturer"
             android:layout_width="match_parent"
-            android:layout_height="130dp"
+            android:layout_height="57dp"
             android:text="TextView"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/viewSideEffects"
             app:layout_constraintStart_toStartOf="@+id/viewGenNameMedDetails"
             app:layout_constraintTop_toBottomOf="@+id/viewGenNameMedDetails" />
 
         <TextView
+            android:id="@+id/headerSideEffects"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="headerSideEffects"
+            android:textColor="@color/darkGreen"
+            android:textStyle="bold"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"/>
+
+        <TextView
             android:id="@+id/viewSideEffects"
             android:layout_width="match_parent"
-            android:layout_height="197dp"
+            android:layout_height="57dp"
             android:text="TextView"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/viewManufacturer"
-            app:layout_constraintTop_toBottomOf="@+id/viewManufacturer" />
+            app:layout_constraintTop_toBottomOf="@+id/viewManufacturer"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
+
+        <TextView
+            android:id="@+id/headerMainDiseases"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="headerMainDiseases"
+            android:textStyle="bold"
+            android:textColor="@color/darkGreen"
+            android:textAppearance="@android:style/TextAppearance.Material.Large"/>
+        />
 
         <TextView
             android:id="@+id/viewMainDiseases"
             android:layout_width="match_parent"
-            android:layout_height="197dp"
-            android:text="TextView"
+            android:layout_height="77dp"
+            android:text="MainDiseases"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/viewManufacturer"
-            app:layout_constraintTop_toBottomOf="@+id/viewManufacturer" />
+            app:layout_constraintTop_toBottomOf="@+id/viewManufacturer"
+            android:textStyle="bold"
+            android:textAppearance="@android:style/TextAppearance.Material.Medium"/>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

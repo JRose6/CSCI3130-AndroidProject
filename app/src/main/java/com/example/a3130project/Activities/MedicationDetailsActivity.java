@@ -14,6 +14,11 @@ public class MedicationDetailsActivity extends AppCompatActivity
 	private Medication medication;
 
 	private TextView viewName;
+	private TextView headerName;
+	private TextView headerGenName;
+	private TextView headerManufacturer;
+	private TextView headerSideEffects;
+	private TextView headerMainDiseases;
 	private TextView viewGenName;
 	private TextView viewManufacturer;
 	private TextView viewSideEffects;
@@ -31,6 +36,12 @@ public class MedicationDetailsActivity extends AppCompatActivity
 		viewManufacturer = findViewById(R.id.viewManufacturer);
 		viewSideEffects = findViewById(R.id.viewSideEffects);
 		viewMainDiseases = findViewById(R.id.viewMainDiseases);
+		headerGenName = findViewById(R.id.headerGenName);
+		headerName = findViewById(R.id.headerName);
+		headerMainDiseases = findViewById(R.id.headerMainDiseases);
+		headerManufacturer = findViewById(R.id.headerManufacturer);
+		headerSideEffects = findViewById(R.id.headerSideEffects);
+
 /*
 		viewMainDiseases = findViewById(R.id.mainDiseasesEmp);
 		intent = getIntent();
@@ -73,11 +84,16 @@ public class MedicationDetailsActivity extends AppCompatActivity
 		}
 		else
 		{
-			viewName.setText("Name:\n" + medication.name);
-			viewGenName.setText("General Name:\n" + medication.genName);
-			viewManufacturer.setText("Manufacturer:\n" + medication.manufacturer);
-			viewSideEffects.setText("Side Effects:\n" + medication.sideEffects.toString());
-			viewMainDiseases.setText("Main Diseases:\n" + medication.mainDiseases.toString());
+			viewName.setText(medication.name);
+			headerName.setText("Name: ");
+			headerSideEffects.setText("Side Effects: ");
+			headerManufacturer.setText("Manufacturer: ");
+			headerMainDiseases.setText("Main Diseases: ");
+			headerGenName.setText("Gen Name: ");
+			viewGenName.setText(medication.genName);
+			viewManufacturer.setText(medication.manufacturer);
+			viewSideEffects.setText(medication.sideEffects.toString());
+			viewMainDiseases.setText(medication.mainDiseases.toString());
 		}
 	}
 }
