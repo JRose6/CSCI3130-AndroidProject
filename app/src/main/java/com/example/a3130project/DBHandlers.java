@@ -17,6 +17,10 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DBHandlers
 {
+	/**
+	 * Inserts or updates a prescription object if
+	 * @param prescription
+	 */
 	public static void prescriptionInsertUpdate(Prescription prescription)
 	{
 		String profileId         = FirebaseAuth.getInstance().getUid();

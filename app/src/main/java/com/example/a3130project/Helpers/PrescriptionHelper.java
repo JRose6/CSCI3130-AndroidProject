@@ -10,11 +10,24 @@ import com.example.a3130project.model.Prescription;
 
 public class PrescriptionHelper
 {
+	/**
+	 * Takes one dosage from the remiaining medication
+	 * @param p The prescription object
+	 * @return The prescription object
+	 */
 	public static Prescription takeDosage(Prescription p){
 		p.setRemainingMeds(p.getRemainingMeds()-p.getDosage());
 		DBHandlers.prescriptionInsertUpdate(p);
 		return p;
 	}
+
+
+	/**
+	 * Takes one dosage from remaining medication and sends a message if below the set threshold
+	 * @param p The prescription to take
+	 * @param ctx The application context
+	 * @return The prescription object
+	 */
 	public static Prescription takeDosage(Prescription p, Context ctx){
 	p.setRemainingMeds(p.getRemainingMeds()-p.getDosage());
 	DBHandlers.prescriptionInsertUpdate(p);
@@ -22,7 +35,14 @@ public class PrescriptionHelper
 		sendThresholdNotification(ctx);
 	}
 	return p;
-}
+	}
+
+
+	/**
+	 * Refills the prescription object to the initial capacity
+	 * @param p The prescription object
+	 * @return The precription object
+	 */
 	public static Prescription refill(Prescription p){
 		p.setRemainingMeds(p.getTotalMeds());
 		DBHandlers.prescriptionInsertUpdate(p);
@@ -37,6 +57,7 @@ public class PrescriptionHelper
 				ctx.getString(R.string.saved_refill_threshold),
 				-1);
 	}
+
 	private static void sendThresholdNotification(Context ctx){
 		AlertDialog.Builder Refill_Alarm = new AlertDialog.Builder(ctx);
 

@@ -1,5 +1,8 @@
 package com.example.a3130project.Helpers;
 
+/**
+ * Computes the strength of a password
+ */
 public class PasswordValidator
 {
 	public enum Strength
@@ -12,6 +15,11 @@ public class PasswordValidator
 	}
 
 
+	/**
+	 * Validates the password
+	 * @param inputPassword The password to validate
+	 * @return Enumeration indicating the strength of the password
+	 */
 	public static Strength validPassword(String inputPassword)
 	{
 		int rulesPassed = 0;

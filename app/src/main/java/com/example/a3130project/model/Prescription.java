@@ -193,6 +193,7 @@ public class Prescription implements Serializable
 		return this.weekdays.get("Thursday");
 	}
 
+
 	public void setFriday(Boolean b)
 	{
 		this.weekdays.put("Friday", b);
@@ -268,6 +269,11 @@ public class Prescription implements Serializable
 	}
 
 
+	/**
+	 * Sets the remaining medication if < 0 set to 0, medication can not be less than 0
+	 *
+	 * @param remainingMeds The remaining medication
+	 */
 	public void setRemainingMeds(int remainingMeds)
 	{
 		if ( remainingMeds <= 0 )
@@ -293,53 +299,4 @@ public class Prescription implements Serializable
 		       " Dosage: " +
 		       dosage;
 	}
-
-/*
-    public int compareTo(Prescription b){
-        Date             today     = new Date();
-        String[]         weekdays  = {"Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"};
-        SimpleDateFormat formatter = new SimpleDateFormat("EEEE");
-        String           day   = formatter.format(today);
-        int dayIndex=-1;
-        for(int i=0;i<weekdays.length;i++){
-            if (day.equalsIgnoreCase(weekdays[i])){
-                dayIndex=i;
-            }
-        }
-        int count=dayIndex;
-        int comp = 0;
-        do{
-            comp = compareDays(b,count,weekdays);
-            if (comp!=0){
-                break;
-            }
-            if (count==weekdays.length-1){
-                count=0;
-            }else{
-                count++;
-            }
-        }while(dayIndex!=count);
-        return comp;
-    }
-    private int compareDays(Prescription b,int day,String []weekdays){
-        boolean other = b.getWeekdays().get(weekdays[day]);
-        boolean me = this.getWeekdays().get(weekdays[day]);
-        if (me && !other){
-            return -1;
-        }
-        else if(!me && other){
-            return 1;
-        }
-        else if (!me && !other){
-            return 0;
-        }
-        else if (me && other){
-            long time= System.currentTimeMillis();
-            if (this.getTimeOfDay() == b.getTimeOfDay()){
-                return 0;
-            }
-            else if
-        }
-    }
-*/
 }

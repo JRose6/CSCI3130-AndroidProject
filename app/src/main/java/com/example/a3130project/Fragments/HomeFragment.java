@@ -1,5 +1,7 @@
 package com.example.a3130project.Fragments;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.app.NotificationManager;
@@ -35,7 +37,16 @@ public class HomeFragment extends Fragment
 	}
 
 
-/*	@Override
+	@Override
+	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
+	{
+		super.onViewCreated(view, savedInstanceState);
+		Button alarmTest = view.findViewById(R.id.buttonTestAlarm);
+		alarmTest.setOnClickListener(new AlarmTester());
+		NotificationSender.createNotificationChannel(getActivity());
+
+	}
+	/*	@Override
 	public void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);

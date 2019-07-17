@@ -66,7 +66,9 @@ public class AllMedicationFragment extends Fragment
 	}
 
 
-	// Connect the recycler view to the medication view holder & the FireStore adapter
+	/**
+	 * Connect the recycler view to the medication view holder & the firestore adapter
+	 */
 	private void setUpRecyclerView()
 	{
 		Query query = medicationsRef.orderBy("name", Query.Direction.DESCENDING);
@@ -81,7 +83,6 @@ public class AllMedicationFragment extends Fragment
 		recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 		recyclerView.setAdapter(adapter);
 	}
-
 
 	/**
 	 * Generates a short toast message

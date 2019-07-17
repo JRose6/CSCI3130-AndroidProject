@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.a3130project.Fragments.CalendarFragment;
-import com.example.a3130project.Fragments.EmployeeProfileActivity;
+import com.example.a3130project.Fragments.AddMedicationFragment;
 import com.example.a3130project.Fragments.HomeFragment;
 import com.example.a3130project.Fragments.MedTabFragment;
 import com.example.a3130project.Fragments.ProfileFragment;
@@ -89,7 +89,7 @@ public class NavigationActivity extends AppCompatActivity
 		calendarFragment = new CalendarFragment();
 		medicationFragment = new MedTabFragment();
 		profileFragment = new ProfileFragment();
-		addMedFragment = new EmployeeProfileActivity();
+		addMedFragment = new AddMedicationFragment();
 		active = mainFragment;
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.add(R.id.fragment_container, mainFragment).show(mainFragment);

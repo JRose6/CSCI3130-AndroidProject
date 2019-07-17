@@ -15,6 +15,9 @@ import com.example.a3130project.Receivers.AlarmBroadCastReceiver;
 import static android.app.PendingIntent.FLAG_CANCEL_CURRENT;
 import static android.content.Context.NOTIFICATION_SERVICE;
 
+/**
+ * Static class for sending notification
+ */
 public class NotificationSender
 {
 	private static android.app.NotificationManager mNotifyManager;
@@ -26,6 +29,12 @@ public class NotificationSender
 	private NotificationSender() {}
 
 
+	/**
+	 *
+	 * @param ctx The application context
+	 * @param time The time to send the notification
+	 * @return A boolean if the notification was allowed to be sent
+	 */
 	public static boolean scheduleNotification(Context ctx, long time)
 	{
 		SharedPreferences sharedPref
@@ -46,6 +55,10 @@ public class NotificationSender
 	}
 
 
+	/**
+	 * Sends a notification
+	 * @param ctx The application context
+	 */
 	public static void sendNotification(Context ctx)
 	{
 		NotificationCompat.Builder notifyBuilder = getNotificationBuilder(ctx);
@@ -65,6 +78,10 @@ public class NotificationSender
 	}
 
 
+	/**
+	 * Creates a notification channel
+	 * @param ctx The application context
+	 */
 	public static void createNotificationChannel(Context ctx)
 	{
 		mNotifyManager

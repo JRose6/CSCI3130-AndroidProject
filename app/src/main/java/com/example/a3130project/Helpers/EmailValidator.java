@@ -8,7 +8,11 @@ public class EmailValidator
 		Invalid,
 	}
 
-
+	/**
+	 * Validates if an email has an @ symbol and characters before & after
+	 * @param InputEmail The email address to validate
+	 * @return enumeration if the email passed
+	 */
 	public static Status getEmail(String InputEmail)
 	{
 		if ( InputEmail.matches("^(.+)@(.+)$") )
