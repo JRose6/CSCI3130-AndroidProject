@@ -20,7 +20,6 @@ public class DBHandlers
 	public static void prescriptionInsertUpdate(Prescription prescription)
 	{
 		String profileId         = FirebaseAuth.getInstance().getUid();
-		String prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptionsRef = FirebaseFirestore.getInstance()
 		                                                        .collection("profiles")
 		                                                        .document(profileId)
