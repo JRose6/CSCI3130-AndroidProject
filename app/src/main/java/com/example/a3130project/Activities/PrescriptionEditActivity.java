@@ -14,7 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a3130project.DBHandlers;
+import com.example.a3130project.Helpers.DBHandlers;
+import com.example.a3130project.Helpers.TimeHelper;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class PrescriptionEditActivity extends AppCompatActivity
 {
@@ -172,13 +174,10 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editDosage.setText(Integer.toString(prescription.getDosage()));
 		editUserNotes.setText(prescription.getNotes());
 		editDocNotes.setText(prescription.getDocNotes());
-
 		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
 		if ( prescription.getTimeOfDay() != 0 )
 		{
-			int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
-			String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
-			editTimeOfDay.setText(timeStr);
+			editTimeOfDay.setText(TimeHelper.TimeSwitch(prescription));
 		}
 		chkMon.setChecked(prescription.getMonday());
 		chkTue.setChecked(prescription.getTuesday());
