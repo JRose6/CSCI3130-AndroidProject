@@ -19,11 +19,13 @@ public class DBHandlers
 {
 	/**
 	 * Inserts or updates a prescription object if
+	 *
 	 * @param prescription
 	 */
 	public static void prescriptionInsertUpdate(Prescription prescription)
 	{
 		String profileId         = FirebaseAuth.getInstance().getUid();
+		String prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptionsRef = FirebaseFirestore.getInstance()
 		                                                        .collection(prescriptionsPath);
 		DocumentReference docRef;
