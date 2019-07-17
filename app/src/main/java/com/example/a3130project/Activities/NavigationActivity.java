@@ -119,6 +119,8 @@ public class NavigationActivity extends AppCompatActivity
 	private void setAddMedVisibility(final MenuItem item)
 	{
 		FirebaseAuth mAuth = FirebaseAuth.getInstance();
+		if (mAuth.getCurrentUser()==null)
+			return;
 		FirebaseFirestore.getInstance().collection("profiles")
 		                 .document(mAuth.getCurrentUser().getUid())
 		                 .get()

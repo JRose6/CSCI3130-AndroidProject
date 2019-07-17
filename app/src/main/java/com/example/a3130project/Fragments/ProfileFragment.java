@@ -106,6 +106,8 @@ public class ProfileFragment extends Fragment
 
 	private void updateProfileFields()
 	{
+		if (mAuth.getCurrentUser()==null)
+			return;
 		database.collection("profiles")
 		        .document(mAuth.getCurrentUser().getUid())
 		        .get()
