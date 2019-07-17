@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import com.example.a3130project.DBHandlers;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Prescription;
 
@@ -15,13 +14,12 @@ public class PrescriptionHelper
 	 * @param p The prescription object
 	 * @return The prescription object
 	 */
-	public static Prescription takeDosage(Prescription p){
-		p.setRemainingMeds(p.getRemainingMeds()-p.getDosage());
+	public static Prescription takeDosage(Prescription p)
+	{
+		p.setRemainingMeds(p.getRemainingMeds() - p.getDosage());
 		DBHandlers.prescriptionInsertUpdate(p);
 		return p;
 	}
-
-
 	/**
 	 * Takes one dosage from remaining medication and sends a message if below the set threshold
 	 * @param p The prescription to take
@@ -48,17 +46,21 @@ public class PrescriptionHelper
 		DBHandlers.prescriptionInsertUpdate(p);
 		return p;
 	}
-	private static boolean belowThreshold(Prescription p, Context ctx){
+
+
+	private static boolean belowThreshold(Prescription p, Context ctx)
+	{
 		SharedPreferences sharedPref
 				= ctx
-				          .getSharedPreferences(ctx.getString(R.string.preference_file),
-				                                               Context.MODE_PRIVATE);
+				.getSharedPreferences(ctx.getString(R.string.preference_file),
+				                      Context.MODE_PRIVATE);
 		return p.getRemainingMeds() < sharedPref.getInt(
 				ctx.getString(R.string.saved_refill_threshold),
 				-1);
 	}
 
-	private static void sendThresholdNotification(Context ctx){
+	private static void sendThresholdNotification(Context ctx)
+	{
 		AlertDialog.Builder Refill_Alarm = new AlertDialog.Builder(ctx);
 
 		Refill_Alarm.setCancelable(true);

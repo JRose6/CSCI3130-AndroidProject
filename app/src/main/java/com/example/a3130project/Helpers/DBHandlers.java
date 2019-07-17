@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Helpers;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -25,9 +25,7 @@ public class DBHandlers
 	{
 		String profileId         = FirebaseAuth.getInstance().getUid();
 		CollectionReference prescriptionsRef = FirebaseFirestore.getInstance()
-		                                                        .collection("profiles")
-		                                                        .document(profileId)
-		                                                        .collection("prescriptions");
+		                                                        .collection(prescriptionsPath);
 		DocumentReference docRef;
 		if ( prescription.getId() == null || prescription.getId().equals("null") )
 		{

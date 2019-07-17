@@ -59,7 +59,7 @@ public class CalendarFragment extends Fragment
 			else
 				newMonth = "" + month;
 			String date = DOM + "-" + newMonth + "-" + year;
-			Log.d(TAG, "onSelectedDayChange: dd-MM-yyyy" + date);
+			Log.d(TAG, "onSelectedDayChange: dd-MM-yyyy " + date);
 
 			Intent intent = new Intent(getActivity(), dosageActivity.class);
 			intent.putExtra("date", date);

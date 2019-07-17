@@ -10,11 +10,12 @@ import com.example.a3130project.model.Prescription;
 
 public class CalendarHolder extends RecyclerView.ViewHolder
 {
-
-	public  TextView     textViewMedicationName;
-	public  TextView     textViewDosageInfo;
-	public  TextView     textViewDoctorInfo;
 	private Prescription prescription;
+
+	public TextView textViewMedicationName;
+	public TextView textViewDosageInfo;
+	public TextView textViewUserInfo;
+	public TextView textViewTOD;
 
 
 	public CalendarHolder(View view)
@@ -23,7 +24,8 @@ public class CalendarHolder extends RecyclerView.ViewHolder
 
 		textViewMedicationName = itemView.findViewById(R.id.MedicationView);
 		textViewDosageInfo = itemView.findViewById(R.id.DosageView);
-		textViewDoctorInfo = itemView.findViewById(R.id.DoctorInfoView);
+		textViewUserInfo = itemView.findViewById(R.id.UserInfoView);
+		textViewTOD = itemView.findViewById(R.id.TODInfo);
 	}
 
 

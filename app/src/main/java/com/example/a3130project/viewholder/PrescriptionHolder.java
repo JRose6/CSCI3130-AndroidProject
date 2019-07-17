@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.a3130project.Activities.PrescriptionEditActivity;
-import com.example.a3130project.DBHandlers;
+import com.example.a3130project.Helpers.DBHandlers;
 import com.example.a3130project.Helpers.PrescriptionHelper;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
@@ -134,6 +134,7 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 	{
 		this.medication = medication;
 	}
+
 
 	public void setEditable(Boolean allowEdit)
 	{
