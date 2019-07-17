@@ -2,6 +2,7 @@ package com.example.a3130project.viewholder;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,6 +24,8 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 	private TextView     genName;
 	private TextView     dosage;
 	private TextView     quantity;
+	private TextView     txtM,txtT,txtW,txtR,txtF,txtS1,txtS2;
+	private TextView     txtTime;
 	private Button       buttonTake;
 	private Button       buttonRefill;
 	private Button       buttonEdit;
@@ -39,12 +42,22 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 		genName = view.findViewById(R.id.viewMedGenNamePrescription);
 		dosage = view.findViewById(R.id.viewPrescriptionDosage);
 		quantity = view.findViewById(R.id.viewQuantity);
+		txtM = view.findViewById(R.id.txtM);
+		txtT = view.findViewById(R.id.txtT);
+		txtW = view.findViewById(R.id.txtW);
+		txtR = view.findViewById(R.id.txtR2);
+		txtF = view.findViewById(R.id.txtF2);
+		txtS1 = view.findViewById(R.id.txtS1);
+		txtS2 = view.findViewById(R.id.txtS2);
+		txtTime = view.findViewById(R.id.txtMedTime);
 		buttonTake = view.findViewById(R.id.buttonTakeMed);
 		buttonRefill = view.findViewById(R.id.buttonRefillMed);
 		buttonEdit = view.findViewById(R.id.buttonEditPrescription);
+
 		View.OnClickListener clicker = new OnClicker();
 		buttonTake.setOnClickListener(clicker);
 		buttonRefill.setOnClickListener(clicker);
+		buttonEdit.setOnClickListener(clicker);
 		buttonEdit.setVisibility(( editable ? View.VISIBLE : View.INVISIBLE ));
 	}
 
@@ -57,6 +70,37 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 		dosage.setText(String.valueOf(prescription.getDosage()));
 		quantity.setText(prescription.getRemainingMeds() + "/" +
 		                 prescription.getTotalMeds());
+		Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
+		if (prescription.getMonday()){
+			txtM.setTypeface(boldTypeface);
+		}
+
+		if (prescription.getTuesday()){
+			txtT.setTypeface(boldTypeface);
+		}
+
+		if (prescription.getWednesday()){
+			txtW.setTypeface(boldTypeface);
+		}
+
+		if (prescription.getThursday()){
+			txtR.setTypeface(boldTypeface);
+		}
+
+		if (prescription.getFriday()){
+			txtF.setTypeface(boldTypeface);
+		}
+
+		if (prescription.getSaturday()){
+			txtS1.setTypeface(boldTypeface);
+		}
+
+		if (prescription.getSunday()){
+			txtS2.setTypeface(boldTypeface);
+		}
+		int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
+		String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
+		txtTime.setText(timeStr);
 	}
 
 
@@ -69,18 +113,19 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 			{
 			case R.id.buttonTakeMed:
 				PrescriptionHelper.takeDosage(prescription, context);
+				DBHandlers.prescriptionInsertUpdate(prescription);
 				break;
 			case R.id.buttonRefillMed:
 				PrescriptionHelper.refill(prescription);
+				DBHandlers.prescriptionInsertUpdate(prescription);
 				break;
 			case R.id.buttonEditPrescription:
 				Intent intent = new Intent(v.getContext(), PrescriptionEditActivity.class);
 				intent.putExtra("medication", medication);
-				intent.putExtra("prescription", new Prescription());
+				intent.putExtra("prescription", prescription);
 				v.getContext().startActivity(intent);
 				break;
 			}
-			DBHandlers.prescriptionInsertUpdate(prescription);
 		}
 	}
 

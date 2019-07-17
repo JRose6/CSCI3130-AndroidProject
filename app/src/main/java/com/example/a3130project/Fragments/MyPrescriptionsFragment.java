@@ -44,23 +44,7 @@ public class MyPrescriptionsFragment extends Fragment
 	{
 		super.onViewCreated(view, savedInstanceState);
 		setUpRecyclerView();
-
-	}
-
-
-	@Override
-	public void onStart()
-	{
-		super.onStart();
 		adapter.startListening();
-	}
-
-
-	@Override
-	public void onStop()
-	{
-		super.onStop();
-		adapter.stopListening();
 	}
 
 

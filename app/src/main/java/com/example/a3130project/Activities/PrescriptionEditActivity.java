@@ -101,9 +101,10 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		{
 			retrieveMedicationFromDB(prescription.getMedId());
 		}
+		else{
+			initializeFieldsWithPrescriptionInfo();
+		}
 
-		// Fill all the edit fields with the values from the given prescription
-		initializeFieldsWithPrescriptionInfo();
 	}
 
 
@@ -192,6 +193,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void retrieveMedicationFromDB(String medicationID)
 	{
+		Log.d("MEDID", "MedicationID "+medicationID);
 		CollectionReference medicationsRef =
 				FirebaseFirestore.getInstance().collection("medications");
 		DocumentReference docRef = medicationsRef.document(medicationID);
@@ -201,6 +203,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			public void onSuccess(DocumentSnapshot documentSnapshot)
 			{
 				medication = documentSnapshot.toObject(Medication.class);
+				initializeFieldsWithPrescriptionInfo();
 			}
 		}).addOnFailureListener(new OnFailureListener()
 		{
