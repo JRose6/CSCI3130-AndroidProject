@@ -10,7 +10,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.example.a3130project.Fragments.ProfileFragment;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Profile;
@@ -20,7 +19,6 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -32,15 +30,15 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity
 {
-	public  EditText     editEmail;
-	public  EditText     editPassword;
-	public  Button       buttonSignIn;
-	public  Button       buttonNewUser;
-	private TextView     txtError;
-	private FirebaseAuth mAuth;
-
-	private        FirebaseFirestore database;
+	private        FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private        FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
 	private static Profile           profile;
+
+	public  EditText editEmail;
+	public  EditText editPassword;
+	public  Button   buttonSignIn;
+	public  Button   buttonNewUser;
+	private TextView txtError;
 
 
 	@Override
@@ -56,9 +54,6 @@ public class LoginActivity extends AppCompatActivity
 		buttonSignIn = findViewById(R.id.signIn);
 		buttonNewUser = findViewById(R.id.newUser);
 
-		database = FirebaseFirestore.getInstance();
-		mAuth = FirebaseAuth.getInstance();
-
 		buttonSignIn.setOnClickListener(new onClicker());
 		buttonNewUser.setOnClickListener(new onClicker());
 	}
@@ -71,10 +66,6 @@ public class LoginActivity extends AppCompatActivity
 		if ( mAuth.getCurrentUser() != null )
 		{
 			openProfile();
-		}
-		else
-		{
-
 		}
 	}
 
@@ -182,7 +173,7 @@ public class LoginActivity extends AppCompatActivity
 
 	public void openProfile()
 	{
-		startActivity(new Intent(this,NavigationActivity.class));
+		startActivity(new Intent(this, NavigationActivity.class));
 		finish();
 	}
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.a3130project.Activities.PrescriptionEditActivity;
 import com.example.a3130project.Helpers.DBHandlers;
 import com.example.a3130project.Helpers.PrescriptionHelper;
+import com.example.a3130project.Helpers.TimeHelper;
 import com.example.a3130project.R;
 import com.example.a3130project.model.Medication;
 import com.example.a3130project.model.Prescription;
@@ -20,11 +21,11 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 {
 	private static boolean editable = false;
 
-	private TextView     name;
-	private TextView     genName;
-	private TextView     dosage;
-	private TextView     quantity;
-	private TextView     txtM,txtT,txtW,txtR,txtF,txtS1,txtS2;
+	private TextView name;
+	private TextView genName;
+	private TextView dosage;
+	private TextView quantity;
+	private TextView txtM, txtT, txtW, txtR, txtF, txtS1, txtS2;
 	private TextView     txtTime;
 	private Button       buttonTake;
 	private Button       buttonRefill;
@@ -70,37 +71,8 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 		dosage.setText(String.valueOf(prescription.getDosage()));
 		quantity.setText(prescription.getRemainingMeds() + "/" +
 		                 prescription.getTotalMeds());
-		Typeface boldTypeface = Typeface.defaultFromStyle(Typeface.BOLD);
-		if (prescription.getMonday()){
-			txtM.setTypeface(boldTypeface);
-		}
-
-		if (prescription.getTuesday()){
-			txtT.setTypeface(boldTypeface);
-		}
-
-		if (prescription.getWednesday()){
-			txtW.setTypeface(boldTypeface);
-		}
-
-		if (prescription.getThursday()){
-			txtR.setTypeface(boldTypeface);
-		}
-
-		if (prescription.getFriday()){
-			txtF.setTypeface(boldTypeface);
-		}
-
-		if (prescription.getSaturday()){
-			txtS1.setTypeface(boldTypeface);
-		}
-
-		if (prescription.getSunday()){
-			txtS2.setTypeface(boldTypeface);
-		}
-		int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
-		String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
-		txtTime.setText(timeStr);
+		highlightDaysOfWeek();
+		txtTime.setText(TimeHelper.getTimeString(prescription));
 	}
 
 
@@ -129,6 +101,20 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 				break;
 			}
 		}
+	}
+
+
+	private void highlightDaysOfWeek()
+	{
+		Typeface tf_bold = Typeface.defaultFromStyle(Typeface.BOLD);
+		Typeface tf_norm = Typeface.defaultFromStyle(Typeface.NORMAL);
+		txtM.setTypeface(prescription.getMonday() ? tf_bold : tf_norm);
+		txtT.setTypeface(prescription.getTuesday() ? tf_bold : tf_norm);
+		txtW.setTypeface(prescription.getWednesday() ? tf_bold : tf_norm);
+		txtR.setTypeface(prescription.getThursday() ? tf_bold : tf_norm);
+		txtF.setTypeface(prescription.getFriday() ? tf_bold : tf_norm);
+		txtS1.setTypeface(prescription.getSaturday() ? tf_bold : tf_norm);
+		txtS2.setTypeface(prescription.getSunday() ? tf_bold : tf_norm);
 	}
 
 
