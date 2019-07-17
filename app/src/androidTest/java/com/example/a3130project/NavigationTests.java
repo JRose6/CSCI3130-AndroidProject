@@ -8,6 +8,7 @@ import androidx.test.espresso.intent.rule.IntentsTestRule;
 import androidx.test.filters.LargeTest;
 import androidx.test.runner.AndroidJUnit4;
 
+import com.example.a3130project.Activities.NavigationActivity;
 import com.example.a3130project.Activities.SettingsActivity;
 
 import org.junit.After;
@@ -22,8 +23,10 @@ import static androidx.test.espresso.Espresso.openActionBarOverflowOrOptionsMenu
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.replaceText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.intent.Intents.intended;
 import static androidx.test.espresso.intent.matcher.IntentMatchers.hasComponent;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
@@ -76,8 +79,8 @@ public class NavigationTests
 
 
 	@Rule
-	public IntentsTestRule<MainActivity> intentsTestRule =
-			new IntentsTestRule<>(MainActivity.class);
+	public IntentsTestRule<NavigationActivity> intentsTestRule =
+			new IntentsTestRule<>(NavigationActivity.class);
 
 
 	@Test
@@ -93,17 +96,10 @@ public class NavigationTests
 	public void perform_settingdrawer_navigation()
 	{
 		onView(withId(R.id.action_home)).perform(click());
-		intended(hasComponent(MainActivity.class.getName()));
+		onView(withId(R.id.buttonTestAlarm)).check(matches(isDisplayed()));
 		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
 		onView(withText("Settings")).perform(click());
 		intended(hasComponent(SettingsActivity.class.getName()));
-		onView(withContentDescription(R.string.back_button_desc)).perform(click());
-		intended(hasComponent(MainActivity.class.getName()));
-		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
-		onView(withText("Refill")).perform(click());
-		intended(hasComponent(RefillActivity.class.getName()));
-		onView(withContentDescription(R.string.back_button_desc)).perform(click());
-		intended(hasComponent(MainActivity.class.getName()));
 	}
 
 
@@ -111,13 +107,19 @@ public class NavigationTests
 	public void perform_bottomdrawer_navigation()
 	{
 		onView(withId(R.id.action_calendar)).perform(click());
-		intended(hasComponent(calendarActivity.class.getName()));
+		//onView(withId(R.id.calendarView)).check(matches(isDisplayed()));
+
 		onView(withId(R.id.action_profile)).perform(click());
-		intended(hasComponent(MainProfileLoadActivity.class.getName()));
+		onView(withId(R.id.buttonEditProfile)).check(matches(isDisplayed()));
+
 		onView(withId(R.id.action_home)).perform(click());
-		intended(hasComponent(MainActivity.class.getName()));
+		onView(withId(R.id.buttonTestAlarm)).check(matches(isDisplayed()));
+
 		onView(withId(R.id.action_medication)).perform(click());
-		intended(hasComponent(AllMedications.class.getName()));
+		onView(withId(R.id.myMedicationRecycler)).check(matches(isDisplayed()));
+		onView(withText(R.string.tab_text_2)).perform(click());
+		onView(withId(R.id.medicationRecycler)).check(matches(isDisplayed()));
+
 	}
 
 
@@ -127,7 +129,6 @@ public class NavigationTests
 		final boolean ALARMS_ALLOWED = true;
 		final String  ALARM_DELAY    = "12";
 		onView(withId(R.id.action_home)).perform(click());
-		intended(hasComponent(MainActivity.class.getName()));
 		openActionBarOverflowOrOptionsMenu(InstrumentationRegistry.getTargetContext());
 		onView(withText("Settings")).perform(click());
 		intended(hasComponent(SettingsActivity.class.getName()));

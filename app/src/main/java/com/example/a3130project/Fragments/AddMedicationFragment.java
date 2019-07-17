@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.fragment.app.Fragment;
 
@@ -20,7 +21,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class EmployeeProfileActivity extends Fragment
+public class AddMedicationFragment extends Fragment
 {
 	private EditText genName, name, mainDiseases, manufact, sideEff;
 	private Button addMedi;
@@ -57,32 +58,64 @@ public class EmployeeProfileActivity extends Fragment
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState) {
 		// Defines the xml file for the fragment
 		super.onCreateView(inflater,parent,savedInstanceState);
-		return inflater.inflate(R.layout.activity_employee_profile, parent, false);
+		return inflater.inflate(R.layout.add_medication, parent, false);
 	}
 
+
+	/**
+	 * Handles the processing of the created medication
+	 */
 	public class OnClicker implements View.OnClickListener
 	{
 		@Override
 		public void onClick(View v)
 		{
-			//TODO: Fix spaces in array storing of variables
-			String mainDiseases1 = mainDiseases.getText().toString();
-			mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
-			String diseases[] = mainDiseases1.split(",");
+			try
+			{
 
-			ArrayList<String> DIS = new ArrayList<String>(Arrays.asList(diseases));
+				String mainDiseases1 = mainDiseases.getText().toString();
+				mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
+				String diseases[] = mainDiseases1.split(",");
 
-			String Side_Eff = sideEff.getText().toString();
-			Side_Eff = Side_Eff.replaceAll("\\s", "");
-			String side_Eff[] = Side_Eff.split(",");
+				ArrayList<String> DIS = new ArrayList<String>(Arrays.asList(diseases));
 
-			ArrayList <String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
+				String Side_Eff = sideEff.getText().toString();
+				Side_Eff = Side_Eff.replaceAll("\\s", "");
+				String side_Eff[] = Side_Eff.split(",");
 
-			DocumentReference ref = database.collection("medications").document();
-			String id = ref.getId();
+				ArrayList<String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
 
-			medication = new Medication(id,name.getText().toString(), genName.getText().toString(), manufact.getText().toString(), SIDE, DIS);
-			ref.set(medication);
-		}
+				DocumentReference ref = database.collection("medications").document();
+				String            id  = ref.getId();
+
+				medication = new Medication(id,
+				                            name.getText().toString(),
+				                            genName.getText().toString(),
+				                            manufact.getText().toString(),
+				                            SIDE,
+				                            DIS);
+				ref.set(medication);
+				Toast.makeText(getActivity(), "Medication Saved Successfully!", Toast.LENGTH_LONG)
+				     .show();
+				clearFields();
+
+			}catch ( Exception e ){
+				Toast.makeText(getActivity(), "Error on form!", Toast.LENGTH_LONG)
+				     .show();
+			}
+			}
+
+	}
+
+
+	/**
+	 * Clears the fields after insert
+	 */
+	private void clearFields(){
+		name.setText("");
+		genName.setText("");
+		manufact.setText("");
+		sideEff.setText("");
+		mainDiseases.setText("");
 	}
 }

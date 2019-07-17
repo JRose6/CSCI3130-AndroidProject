@@ -14,7 +14,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.a3130project.DBHandlers;
+import com.example.a3130project.Helpers.DBHandlers;
+import com.example.a3130project.Helpers.TimeHelper;
 import com.example.a3130project.R;
 import com.example.a3130project.Helpers.ToolBarCreator;
 import com.example.a3130project.model.Medication;
@@ -25,6 +26,7 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+
 
 public class PrescriptionEditActivity extends AppCompatActivity
 {
@@ -101,9 +103,10 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		{
 			retrieveMedicationFromDB(prescription.getMedId());
 		}
+		else{
+			initializeFieldsWithPrescriptionInfo();
+		}
 
-		// Fill all the edit fields with the values from the given prescription
-		initializeFieldsWithPrescriptionInfo();
 	}
 
 
@@ -115,8 +118,13 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			switch ( v.getId() )
 			{
 			case R.id.buttonSavePrescriptionChanges:
+				try{
+
 				updateDatabaseEntry();
 				finish();
+				}catch(Exception e){
+					Toast.makeText(getBaseContext(), "Errors on form!", Toast.LENGTH_LONG).show();
+				}
 				break;
 			case R.id.buttonCancelPrescriptionEdit:
 				finish();
@@ -128,6 +136,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void updateDatabaseEntry()
 	{
+
 		prescription.setDosage(Integer.parseInt(editDosage.getText().toString()));
 		prescription.setNotes(editUserNotes.getText().toString());
 		prescription.setRemainingMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
@@ -155,6 +164,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		{
 			Toast.makeText(this, "Failed to save.", Toast.LENGTH_SHORT).show();
 		}
+
+
 	}
 
 
@@ -172,13 +183,10 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		editDosage.setText(Integer.toString(prescription.getDosage()));
 		editUserNotes.setText(prescription.getNotes());
 		editDocNotes.setText(prescription.getDocNotes());
-
 		editInitialQuantity.setText(Integer.toString(prescription.getTotalMeds()));
 		if ( prescription.getTimeOfDay() != 0 )
 		{
-			int    time    = prescription.getTimeOfDay() / ( 60 * 1000 );
-			String timeStr = ( (int) Math.floor(time / 60) ) + ":" + ( (int) ( time % 60 ) );
-			editTimeOfDay.setText(timeStr);
+			editTimeOfDay.setText(TimeHelper.TimeSwitch(prescription));
 		}
 		chkMon.setChecked(prescription.getMonday());
 		chkTue.setChecked(prescription.getTuesday());
@@ -192,6 +200,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void retrieveMedicationFromDB(String medicationID)
 	{
+		Log.d("MEDID", "MedicationID "+medicationID);
 		CollectionReference medicationsRef =
 				FirebaseFirestore.getInstance().collection("medications");
 		DocumentReference docRef = medicationsRef.document(medicationID);
@@ -201,6 +210,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			public void onSuccess(DocumentSnapshot documentSnapshot)
 			{
 				medication = documentSnapshot.toObject(Medication.class);
+				initializeFieldsWithPrescriptionInfo();
 			}
 		}).addOnFailureListener(new OnFailureListener()
 		{

@@ -14,7 +14,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
 public class PrescriptionAdapter extends FirestoreRecyclerAdapter<Prescription, PrescriptionHolder>
 {
-	private static boolean editable = true;
+	private static boolean editable = false;
 
 	public PrescriptionAdapter(@NonNull FirestoreRecyclerOptions<Prescription> options)
 	{

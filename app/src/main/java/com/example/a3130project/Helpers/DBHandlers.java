@@ -1,4 +1,4 @@
-package com.example.a3130project;
+package com.example.a3130project.Helpers;
 
 import android.util.Log;
 import android.widget.Toast;
@@ -17,14 +17,17 @@ import com.google.firebase.firestore.FirebaseFirestore;
 
 public class DBHandlers
 {
+	/**
+	 * Inserts or updates a prescription object if
+	 *
+	 * @param prescription
+	 */
 	public static void prescriptionInsertUpdate(Prescription prescription)
 	{
 		String profileId         = FirebaseAuth.getInstance().getUid();
 		String prescriptionsPath = "profiles/" + profileId + "/prescriptions";
 		CollectionReference prescriptionsRef = FirebaseFirestore.getInstance()
-		                                                        .collection("profiles")
-		                                                        .document(profileId)
-		                                                        .collection("prescriptions");
+		                                                        .collection(prescriptionsPath);
 		DocumentReference docRef;
 		if ( prescription.getId() == null || prescription.getId().equals("null") )
 		{

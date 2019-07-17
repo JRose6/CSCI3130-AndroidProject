@@ -4,7 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.example.a3130project.Fragments.CalendarFragment;
-import com.example.a3130project.Fragments.EmployeeProfileActivity;
+import com.example.a3130project.Fragments.AddMedicationFragment;
 import com.example.a3130project.Fragments.HomeFragment;
 import com.example.a3130project.Fragments.MedTabFragment;
 import com.example.a3130project.Fragments.ProfileFragment;
@@ -77,19 +77,13 @@ public class NavigationActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_navigation);
-
-		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
-		{
-			Intent intent = new Intent(this, LoginActivity.class);
-			this.startActivity(intent);
-			return;
-		}
 		ToolBarCreator.createToolbar(this, true, false);
+
 		mainFragment = new HomeFragment();
 		calendarFragment = new CalendarFragment();
 		medicationFragment = new MedTabFragment();
 		profileFragment = new ProfileFragment();
-		addMedFragment = new EmployeeProfileActivity();
+		addMedFragment = new AddMedicationFragment();
 		active = mainFragment;
 		FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
 		fragmentTransaction.add(R.id.fragment_container, mainFragment).show(mainFragment);
@@ -102,8 +96,23 @@ public class NavigationActivity extends AppCompatActivity
 		BottomNavigationView navView    = findViewById(R.id.nav_view);
 		MenuItem             itemAddMed = navView.getMenu().findItem(R.id.action_add_medication);
 		itemAddMed.setVisible(false);
-		setAddMedVisibility(itemAddMed);
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
+			Intent intent = new Intent(this, LoginActivity.class);
+			this.startActivity(intent);
+			return;
+		}
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+	}
+
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		BottomNavigationView navView    = findViewById(R.id.nav_view);
+		MenuItem             itemAddMed = navView.getMenu().findItem(R.id.action_add_medication);
+		setAddMedVisibility(itemAddMed);
 	}
 
 

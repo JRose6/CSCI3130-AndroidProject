@@ -2,6 +2,8 @@ package com.example.a3130project;
 
 import com.example.a3130project.Helpers.EmailValidator;
 import com.example.a3130project.Helpers.PasswordValidator;
+import com.example.a3130project.Helpers.PrescriptionHelper;
+import com.example.a3130project.model.Prescription;
 
 import org.junit.Test;
 
@@ -59,5 +61,27 @@ public class ValidationUnitTests
 	public void email_invalid(){
 		assertEquals(EmailValidator.Status.Invalid,EmailValidator.getEmail("userdal.ca"));
 	}
-
+	@Test
+	public void take_dosage(){
+		Prescription p = new Prescription();
+		p.setDosage(2);
+		p.setRemainingMeds(10);
+		PrescriptionHelper.takeDosage(p);
+		assertEquals(8,p.getRemainingMeds());
+		PrescriptionHelper.takeDosage(p);
+		PrescriptionHelper.takeDosage(p);
+		PrescriptionHelper.takeDosage(p);
+		PrescriptionHelper.takeDosage(p);
+		PrescriptionHelper.takeDosage(p);
+		assertEquals(0,p.getRemainingMeds());
+	}
+	@Test
+	public void refill_prescription(){
+		Prescription p = new Prescription();
+		p.setDosage(2);
+		p.setRemainingMeds(0);
+		p.setTotalMeds(20);
+		PrescriptionHelper.refill(p);
+		assertEquals(20, p.getRemainingMeds());
+	}
 }

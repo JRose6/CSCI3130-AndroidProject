@@ -36,7 +36,7 @@ public class dosageActivity extends AppCompatActivity
 	private TextView dow;
 	private String   newDow;
 	private Date     nDate;
-	Calendar calendar;
+	private Calendar calendar;
 
 
 	@Override
@@ -51,7 +51,6 @@ public class dosageActivity extends AppCompatActivity
 
 		SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
 		newDow = (String) intent.getSerializableExtra("date");
-
 		try
 		{
 			nDate = format.parse(newDow);
@@ -65,6 +64,7 @@ public class dosageActivity extends AppCompatActivity
 		calendar = Calendar.getInstance(TimeZone.getTimeZone("GMT-3"));
 		calendar.setTime(nDate);
 		int numDOW = calendar.get(Calendar.DAY_OF_WEEK);
+
 
 		switch ( numDOW )
 		{
@@ -92,8 +92,9 @@ public class dosageActivity extends AppCompatActivity
 		default:
 			break;
 		}
-
-		dow.setText(newDow);
+		int DayDOW  = calendar.get(Calendar.DAY_OF_MONTH);
+		int YearDOW = calendar.get(Calendar.YEAR);
+		dow.setText(newDow + " " + DayDOW + ", " + YearDOW);
 		setUpRecyclerView(newDow);
 	}
 
