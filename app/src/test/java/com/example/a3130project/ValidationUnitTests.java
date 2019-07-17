@@ -81,7 +81,7 @@ public class ValidationUnitTests
 		p.setDosage(2);
 		p.setRemainingMeds(0);
 		p.setTotalMeds(20);
-		PrescriptionHelper.refill(p);
+		p = PrescriptionHelper.refill(p);
 		assertEquals(20, p.getRemainingMeds());
 	}
 }

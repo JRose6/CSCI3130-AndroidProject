@@ -17,7 +17,6 @@ public class PrescriptionHelper
 	public static Prescription takeDosage(Prescription p)
 	{
 		p.setRemainingMeds(p.getRemainingMeds() - p.getDosage());
-		DBHandlers.prescriptionInsertUpdate(p);
 		return p;
 	}
 	/**
@@ -28,7 +27,6 @@ public class PrescriptionHelper
 	 */
 	public static Prescription takeDosage(Prescription p, Context ctx){
 	p.setRemainingMeds(p.getRemainingMeds()-p.getDosage());
-	DBHandlers.prescriptionInsertUpdate(p);
 	if (belowThreshold(p,ctx)){
 		sendThresholdNotification(ctx);
 	}
@@ -43,7 +41,6 @@ public class PrescriptionHelper
 	 */
 	public static Prescription refill(Prescription p){
 		p.setRemainingMeds(p.getTotalMeds());
-		DBHandlers.prescriptionInsertUpdate(p);
 		return p;
 	}
 

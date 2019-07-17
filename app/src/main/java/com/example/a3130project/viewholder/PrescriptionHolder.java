@@ -112,10 +112,14 @@ public class PrescriptionHolder extends RecyclerView.ViewHolder
 			switch ( v.getId() )
 			{
 			case R.id.buttonTakeMed:
-				PrescriptionHelper.takeDosage(prescription, context);
+				prescription = PrescriptionHelper.takeDosage(prescription, context);
+				DBHandlers.prescriptionInsertUpdate(prescription);
+
 				break;
 			case R.id.buttonRefillMed:
-				PrescriptionHelper.refill(prescription);
+				prescription = PrescriptionHelper.refill(prescription);
+				DBHandlers.prescriptionInsertUpdate(prescription);
+
 				break;
 			case R.id.buttonEditPrescription:
 				Intent intent = new Intent(v.getContext(), PrescriptionEditActivity.class);
