@@ -22,10 +22,6 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/buttonRefillMed"
             android:layout_alignEnd="@+id/buttonRefillMed"
-
-            android:layout_marginTop="1dp"
-            android:layout_marginEnd="-2dp"
-            android:layout_marginRight="-92dp"
             android:text="Edit" />
 
         <TextView
@@ -105,84 +101,112 @@
             android:text="~Total Quantity goes here
             ~" />
 
-        <TextView
-            android:id="@+id/txtM"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutDays"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="-4dp"
-            android:layout_marginTop="9dp"
-            android:text="M" />
+            android:layout_below="@id/labelQuantity"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="6dp"
+            android:padding="1dp"
+            tools:layout_editor_absoluteX="10dp"
+            tools:layout_editor_absoluteY="10dp">
 
-        <TextView
-            android:id="@+id/txtT"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="10dp"
-            android:text="T" />
+            <TextView
+                android:id="@+id/txtM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="M"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtT"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtS1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="71dp"
-            android:layout_marginTop="10dp"
-            android:text="S" />
+            <TextView
+                android:id="@+id/txtT"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="T"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtW"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtM"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtS2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="84dp"
-            android:layout_marginTop="10dp"
-            android:text="S" />
+            <TextView
+                android:id="@+id/txtW"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="W"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtR2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtT"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtF2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="58dp"
-            android:layout_marginTop="10dp"
-            android:text="F" />
+            <TextView
+                android:id="@+id/txtR2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="R"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtF2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtW"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtR2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="44dp"
-            android:layout_marginTop="10dp"
-            android:text="R" />
+            <TextView
+                android:id="@+id/txtF2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="F"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtS1"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtR2"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/txtW"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/labelQuantity"
-            android:layout_alignStart="@+id/labelQuantity"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="10dp"
-            android:text="W" />
+            <TextView
+                android:id="@+id/txtS1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="S"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/txtS2"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtF2"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/txtS2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="4dp"
+                android:text="S"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/txtS1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/txtMedTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@+id/viewQuantity"
+            android:layout_toRightOf="@id/layoutDays"
             android:layout_marginStart="9dp"
             android:layout_marginTop="9dp"
-            android:layout_toEndOf="@+id/txtS2"
             android:text="time" />
 
     </RelativeLayout>
