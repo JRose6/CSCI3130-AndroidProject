@@ -126,6 +126,8 @@ public class RegistrationActivity extends AppCompatActivity
 	 */
 	private void createNewUser()
 	{
+		try{
+
 		mAuth.createUserWithEmailAndPassword(editEmail.getText().toString(), editPassword.getText()
 		                                                                                 .toString())
 		     .addOnSuccessListener(new OnSuccessListener<AuthResult>()
@@ -145,6 +147,11 @@ public class RegistrationActivity extends AppCompatActivity
 				     toastSh("Authentication failed. " + e);
 			     }
 		     });
+
+		}
+		catch(Exception e){
+			Toast.makeText(this, "Errors on form!", Toast.LENGTH_LONG).show();
+		}
 	}
 
 

@@ -70,26 +70,40 @@ public class AddMedicationFragment extends Fragment
 		@Override
 		public void onClick(View v)
 		{
-			String mainDiseases1 = mainDiseases.getText().toString();
-			mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
-			String diseases[] = mainDiseases1.split(",");
+			try
+			{
 
-			ArrayList<String> DIS = new ArrayList<String>(Arrays.asList(diseases));
+				String mainDiseases1 = mainDiseases.getText().toString();
+				mainDiseases1 = mainDiseases1.replaceAll("\\s", "");
+				String diseases[] = mainDiseases1.split(",");
 
-			String Side_Eff = sideEff.getText().toString();
-			Side_Eff = Side_Eff.replaceAll("\\s", "");
-			String side_Eff[] = Side_Eff.split(",");
+				ArrayList<String> DIS = new ArrayList<String>(Arrays.asList(diseases));
 
-			ArrayList <String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
+				String Side_Eff = sideEff.getText().toString();
+				Side_Eff = Side_Eff.replaceAll("\\s", "");
+				String side_Eff[] = Side_Eff.split(",");
 
-			DocumentReference ref = database.collection("medications").document();
-			String id = ref.getId();
+				ArrayList<String> SIDE = new ArrayList<String>(Arrays.asList(side_Eff));
 
-			medication = new Medication(id,name.getText().toString(), genName.getText().toString(), manufact.getText().toString(), SIDE, DIS);
-			ref.set(medication);
-			Toast.makeText(getActivity(),"Medication Saved Successfully!",Toast.LENGTH_LONG).show();
-			clearFields();
-		}
+				DocumentReference ref = database.collection("medications").document();
+				String            id  = ref.getId();
+
+				medication = new Medication(id,
+				                            name.getText().toString(),
+				                            genName.getText().toString(),
+				                            manufact.getText().toString(),
+				                            SIDE,
+				                            DIS);
+				ref.set(medication);
+				Toast.makeText(getActivity(), "Medication Saved Successfully!", Toast.LENGTH_LONG)
+				     .show();
+				clearFields();
+
+			}catch ( Exception e ){
+				Toast.makeText(getActivity(), "Error on form!", Toast.LENGTH_LONG)
+				     .show();
+			}
+			}
 
 	}
 

@@ -77,14 +77,8 @@ public class NavigationActivity extends AppCompatActivity
 	{
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_navigation);
-
-		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
-		{
-			Intent intent = new Intent(this, LoginActivity.class);
-			this.startActivity(intent);
-			return;
-		}
 		ToolBarCreator.createToolbar(this, true, false);
+
 		mainFragment = new HomeFragment();
 		calendarFragment = new CalendarFragment();
 		medicationFragment = new MedTabFragment();
@@ -102,8 +96,23 @@ public class NavigationActivity extends AppCompatActivity
 		BottomNavigationView navView    = findViewById(R.id.nav_view);
 		MenuItem             itemAddMed = navView.getMenu().findItem(R.id.action_add_medication);
 		itemAddMed.setVisible(false);
-		setAddMedVisibility(itemAddMed);
+		if ( FirebaseAuth.getInstance().getCurrentUser() == null )
+		{
+			Intent intent = new Intent(this, LoginActivity.class);
+			this.startActivity(intent);
+			return;
+		}
 		navView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+	}
+
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		BottomNavigationView navView    = findViewById(R.id.nav_view);
+		MenuItem             itemAddMed = navView.getMenu().findItem(R.id.action_add_medication);
+		setAddMedVisibility(itemAddMed);
 	}
 
 

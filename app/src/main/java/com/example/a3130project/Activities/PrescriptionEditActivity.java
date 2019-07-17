@@ -116,8 +116,13 @@ public class PrescriptionEditActivity extends AppCompatActivity
 			switch ( v.getId() )
 			{
 			case R.id.buttonSavePrescriptionChanges:
+				try{
+
 				updateDatabaseEntry();
 				finish();
+				}catch(Exception e){
+					Toast.makeText(getBaseContext(), "Errors on form!", Toast.LENGTH_LONG).show();
+				}
 				break;
 			case R.id.buttonCancelPrescriptionEdit:
 				finish();
@@ -129,6 +134,7 @@ public class PrescriptionEditActivity extends AppCompatActivity
 
 	private void updateDatabaseEntry()
 	{
+
 		prescription.setDosage(Integer.parseInt(editDosage.getText().toString()));
 		prescription.setNotes(editUserNotes.getText().toString());
 		prescription.setRemainingMeds(Integer.parseInt(editInitialQuantity.getText().toString()));
@@ -156,6 +162,8 @@ public class PrescriptionEditActivity extends AppCompatActivity
 		{
 			Toast.makeText(this, "Failed to save.", Toast.LENGTH_SHORT).show();
 		}
+
+
 	}
 
 

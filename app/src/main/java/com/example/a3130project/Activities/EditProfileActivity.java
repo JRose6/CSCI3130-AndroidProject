@@ -74,6 +74,7 @@ public class EditProfileActivity extends AppCompatActivity
 
 	public void updateProfile()
 	{
+		try{
 
 		profileRef = database.collection("profiles").document(mAuth.getUid());
 
@@ -99,6 +100,13 @@ public class EditProfileActivity extends AppCompatActivity
 				finish();
 			}
 		});
+
+		}catch(Exception e){
+			Toast.makeText(EditProfileActivity.this,
+			               "Errors on form!",
+			               Toast.LENGTH_LONG)
+			     .show();
+		}
 	}
 
 
