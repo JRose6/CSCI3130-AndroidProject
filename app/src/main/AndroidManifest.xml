@@ -27,7 +27,7 @@
 
         <activity android:name=".Activities.PrescriptionEditActivity" />
         <activity android:name=".Activities.MedicationDetailsActivity" />
-        <activity android:name=".Activities.dosageActivity" />
+        <activity android:name=".Activities.DosageActivity" />
         <activity android:name=".Activities.EditProfileActivity" />
         <activity android:name=".Activities.SettingsActivity" />
         <activity android:name=".Activities.RegistrationActivity" />
