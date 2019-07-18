@@ -30,15 +30,15 @@ import android.widget.Toast;
 
 public class LoginActivity extends AppCompatActivity
 {
-	private        FirebaseFirestore database = FirebaseFirestore.getInstance();
-	private        FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
-	private static Profile           profile;
+	private static Profile profile;
 
-	public  EditText editEmail;
-	public  EditText editPassword;
-	public  Button   buttonSignIn;
-	public  Button   buttonNewUser;
-	private TextView txtError;
+	private FirebaseFirestore database = FirebaseFirestore.getInstance();
+	private FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
+	public  EditText          editEmail;
+	public  EditText          editPassword;
+	public  Button            buttonSignIn;
+	public  Button            buttonNewUser;
+	private TextView          txtError;
 
 
 	@Override
@@ -131,7 +131,6 @@ public class LoginActivity extends AppCompatActivity
 			     @Override
 			     public void onSuccess(AuthResult authResult)
 			     {
-				     logg("signIn()", "Authentication Succeeded. " + authResult);
 				     DocumentReference ref = database.collection("profiles")
 				                                     .document(mAuth.getUid());
 				     ref.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>()
@@ -149,8 +148,6 @@ public class LoginActivity extends AppCompatActivity
 						     else
 						     {
 							     txtError.setText("This profile doesn't exist.");
-							     logg("signIn()", "This profile doesn't fucking exist... "
-							                      + "You should never see this message");
 						     }
 					     }
 				     });
@@ -165,12 +162,14 @@ public class LoginActivity extends AppCompatActivity
 				     // If sign in fails, display a message to the user.
 				     toastSh("Authentication failed.");
 				     txtError.setText("Invalid Username or Password");
-				     logg("signIn()", "Authentication failed. " + e);
 			     }
 		     });
 	}
 
 
+	/**
+	 * Starts the Navigation activity & finishes the current activity.
+	 */
 	public void openProfile()
 	{
 		startActivity(new Intent(this, NavigationActivity.class));
@@ -178,24 +177,12 @@ public class LoginActivity extends AppCompatActivity
 	}
 
 
+	/**
+	 * Starts the RegistrationActivity so that the user can register an account
+	 */
 	public void launchRegistration()
 	{
-		Intent intent = new Intent(this, RegistrationActivity.class);
-		startActivity(intent);
-	}
-
-
-	/**
-	 * Dumps the given tag and message to the console log This is for debugging & development
-	 * purposes.
-	 */
-	private void logg(String tag, String message)
-	{
-		Log.println(5, "-------------------", "-----------------------------");
-		Log.println(5, "-------------------", "-----------------------------");
-		Log.println(5, tag, message);
-		Log.println(5, "-------------------", "-----------------------------");
-		Log.println(5, "-------------------", "-----------------------------");
+		startActivity(new Intent(this, RegistrationActivity.class));
 	}
 
 

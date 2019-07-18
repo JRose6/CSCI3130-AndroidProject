@@ -23,15 +23,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class EditProfileActivity extends AppCompatActivity
 {
 	private FirebaseFirestore database = FirebaseFirestore.getInstance();
-	private FirebaseAuth      mAuth = FirebaseAuth.getInstance();
-	private EditText          firstName, lastName, age;
+	private FirebaseAuth      mAuth    = FirebaseAuth.getInstance();
 
-	private Intent  intent;
-	private Profile profile;
-
-	private Button update;
-
-	private DocumentReference profileRef;
+	private Intent   intent;
+	private Profile  profile;
+	private Button   update;
+	private EditText firstName, lastName, age;
 
 
 	@Override
@@ -72,36 +69,42 @@ public class EditProfileActivity extends AppCompatActivity
 	}
 
 
+	/**
+	 * Attempts to update the user's profile in the database with the values currently contained in
+	 * each of the edit fields. Will display a short Toast message if it fails to update. If the
+	 * update was successful, the activity will finish();
+	 */
 	public void updateProfile()
 	{
-		try{
-
-		profileRef = database.collection("profiles").document(mAuth.getUid());
-
-		profile.firstName = firstName.getText().toString();
-		profile.lastName = lastName.getText().toString();
-		profile.age = age.getText().toString();
-
-		profileRef.set(profile).addOnFailureListener(new OnFailureListener()
+		try
 		{
-			@Override
-			public void onFailure(@NonNull Exception e)
-			{
-				Toast.makeText(EditProfileActivity.this,
-				               "Failed to update fields",
-				               Toast.LENGTH_SHORT)
-				     .show();
-			}
-		}).addOnSuccessListener(new OnSuccessListener<Void>()
-		{
-			@Override
-			public void onSuccess(Void aVoid)
-			{
-				finish();
-			}
-		});
+			DocumentReference profileRef = database.collection("profiles").document(mAuth.getUid());
 
-		}catch(Exception e){
+			profile.firstName = firstName.getText().toString();
+			profile.lastName = lastName.getText().toString();
+			profile.age = age.getText().toString();
+
+			profileRef.set(profile).addOnFailureListener(new OnFailureListener()
+			{
+				@Override
+				public void onFailure(@NonNull Exception e)
+				{
+					Toast.makeText(EditProfileActivity.this,
+					               "Failed to update fields",
+					               Toast.LENGTH_SHORT)
+					     .show();
+				}
+			}).addOnSuccessListener(new OnSuccessListener<Void>()
+			{
+				@Override
+				public void onSuccess(Void aVoid)
+				{
+					finish();
+				}
+			});
+
+		} catch ( Exception e )
+		{
 			Toast.makeText(EditProfileActivity.this,
 			               "Errors on form!",
 			               Toast.LENGTH_LONG)
@@ -110,6 +113,12 @@ public class EditProfileActivity extends AppCompatActivity
 	}
 
 
+	/**
+	 * Creates the options menu for this activity
+	 *
+	 * @param menu
+	 * @return success or failure
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu)
 	{

@@ -123,6 +123,11 @@ public class DosageActivity extends AppCompatActivity
 	}
 
 
+	/**
+	 * Set up a recycler view to show prescriptions matching the provided day.
+	 *
+	 * @param newDow string representing a weekday that is used to construct the query
+	 */
 	private void setUpRecyclerView(String newDow)
 	{
 
